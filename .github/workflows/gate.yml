@@ -42,3 +42,6 @@ jobs:
       - name: organ 7 (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
         run: |
           if [ -f data/organ-7/record.json ]; then node tools/measure-7.mjs --check && node tools/judge-7.mjs --check && node tools/order.mjs --organ 7; elif [ -f data/organ-7/prereg.json ]; then echo "organ 7 sealed, being measured"; else echo "organ 7 built, not yet sealed"; fi
+      - name: the trace of a real case on the page is the run itself
+        run: |
+          if [ -f data/trace.json ]; then node tools/trace.mjs --check; else echo "no trace yet"; fi

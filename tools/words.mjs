@@ -44,7 +44,18 @@ export function blocks(R = records()) {
     const r = R['1'].r;
     out.verdict1 = '<p class="answer"><b>The verdict.</b> The billing department’s node, seeing 7 of the 20 columns, ' + (pass(R, '1', 'A2') ? 'beat' : 'did not beat') + ' the 14B that saw all 20 beyond the noise (' + format(r.local.vs.a, 3) + ' against ' + format(r.local.vs.b, 3) + ', bound ' + format(r.local.vs.low95, 3) + '), and it ' + (pass(R, '1', 'A3') ? 'held within 0.02 of' : 'fell more than 0.02 behind') + ' the frontier model (' + format(r.frontier.vs.b, 3) + ', bound ' + format(r.frontier.vs.low95, 3) + '). ' + (R['1'].v.every((v) => v.pass) ? 'Every sealed rule held.' : R['1'].v.filter((v) => !v.pass).map((v) => v.id).join(', ') + ' failed as sealed, and is kept.') + '</p>';
   } else out.verdict1 = '<p class="answer"><b>Sealed, being measured.</b> This fills in from the record when it is judged.</p>';
-  return { ...out, ...later(R), ...copy(R, { pass, format }) };
+  return { ...out, trace: traced(), ...later(R), ...copy(R, { pass, format }) };
+}
+
+/** how it works, traced from a real run (data/trace.json, written after organ 2 is measured) */
+export function traced() {
+  if (!has('data/trace.json')) return '<p class="dim">The trace of a real case through the mesh is written from the run once organ 2 is measured.</p>';
+  const t = JSON.parse(read('data/trace.json')), esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const one = (d, x) => '<h4>' + (d === 'telco' ? 'One real telecom customer' : 'One real shop session') + ', from the test cases</h4><ol class="steps">'
+    + x.steps.map((s) => '<li><b>' + esc(s.silo) + '</b> sees only ' + Object.entries(s.sees).map(([k, v]) => esc(k) + ' ' + v).join(', ') + '. ' + (s.state !== 'live' ? 'It was cut at its gate, so it says nothing.' : (s.fired.length ? 'Its rules that fire: ' + s.fired.map(esc).join('; ') + '.' : 'None of its rules fire.') + ' Its score: <b>' + s.score + '</b>.') + '</li>').join('')
+    + '<li><b>The coupling</b> weighs the scores (standardised): ' + x.weights.map((w) => esc(w.silo) + ' × ' + w.weight).join(', ') + '. Only the ' + esc(x.crossed) + ' crossed.</li>'
+    + '<li><b>The answer:</b> ' + Math.round(x.probability * 100) + '% likely ' + (d === 'telco' ? 'to leave' : 'to buy') + '. What really happened: ' + (x.outcome ? (d === 'telco' ? 'they left' : 'they bought') : (d === 'telco' ? 'they stayed' : 'they did not buy')) + '.</li></ol>';
+  return one('telco', t.telco) + one('shop', t.shop);
 }
 
 /** the verdict paragraphs of the organs after the gate */
