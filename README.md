@@ -18,6 +18,12 @@ more than the sum?** That is organ 2, sealed before it ran and allowed to fail.
 |---|---|---|---|---|
 | 1 | **One specialist body** | one department’s node against a 14B and a frontier model | sealed, being measured | being asked |
 | 2 | **The composition proof** | specialists compose into more than the sum, before anything scales | sealed, being measured | being asked |
+| 2b | **The composition fix** | taken only if organ 2 finds composition does not net: nodes grown to complement | not taken unless needed | — |
+| 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built; sealed only after organ 2 is judged | — |
+| 4 | **Growing by working** | each node sharpens as its records arrive | built; sealed only after organ 2 is judged | — |
+| 5 | **The wisp** | routing that learns from outcomes; a node gone bad is pruned | built; sealed only after organ 2 is judged | — |
+| 6 | **Scale** | cut finer, more nodes: the composed answer keeps climbing | built; sealed only after organ 2 is judged | — |
+| 7 | **Sovereign spread** | owned by contributors, carried by cards, revocable, scores only | built; sealed only after organ 2 is judged | — |
 <!-- /geo:organs -->
 
 ## Run it yourself

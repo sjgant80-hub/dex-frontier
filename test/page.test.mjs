@@ -26,8 +26,8 @@ test('every element the script reaches for is on the page, and every in-page lin
   const wanted = [...script.matchAll(/\$\('([^']+)'\)/g)].map((m) => m[1]);
   assert.ok(wanted.length > 20);
   for (const id of wanted) assert.ok(ids.has(id), 'the page has #' + id);
-  for (const [, a] of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.has(a), 'a link to #' + a + ' has a target');
-  for (const sec of ['what', 'start', 'try', 'how', 'one', 'compose', 'next', 'blueprint', 'business', 'paper', 'faq', 'words']) assert.ok(ids.has(sec), 'section ' + sec);
+  for (const [, a] of html.matchAll(/href="#([a-z0-9-]+)"/g)) assert.ok(ids.has(a), 'a link to #' + a + ' has a target');
+  for (const sec of ['what', 'start', 'try', 'how', 'one', 'compose', 'next', 'fix', 'breed', 'grow', 'wisp', 'scale', 'spread', 'blueprint', 'business', 'paper', 'faq', 'words']) assert.ok(ids.has(sec), 'section ' + sec);
 });
 
 test('the page says what the records say: every generated number, word and block is current', () => {

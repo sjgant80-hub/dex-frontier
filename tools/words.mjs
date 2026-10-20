@@ -10,7 +10,7 @@ import { copy } from './copy.mjs';
 const ROOT = new URL('../', import.meta.url);
 const read = (p) => readFileSync(new URL(p, ROOT), 'utf8');
 const has = (p) => existsSync(new URL(p, ROOT));
-export const ORGANS = ['1', '2'];
+export const ORGANS = ['1', '2', '2b', '3', '4', '5', '6', '7'];
 
 /** every judged organ's record and verdict */
 export function records() {
@@ -51,7 +51,22 @@ export function blocks(R = records()) {
     const r = R['1'].r;
     out.verdict1 = '<p class="answer"><b>The verdict.</b> The billing department’s node, seeing 7 of the 20 columns, ' + (pass(R, '1', 'A2') ? 'beat' : 'did not beat') + ' the 14B that saw all 20 beyond the noise (' + format(r.local.vs.a, 3) + ' against ' + format(r.local.vs.b, 3) + ', bound ' + format(r.local.vs.low95, 3) + '), and it ' + (pass(R, '1', 'A3') ? 'held within 0.02 of' : 'fell more than 0.02 behind') + ' the frontier model (' + format(r.frontier.vs.b, 3) + ', bound ' + format(r.frontier.vs.low95, 3) + '). ' + (R['1'].v.every((v) => v.pass) ? 'Every sealed rule held.' : R['1'].v.filter((v) => !v.pass).map((v) => v.id).join(', ') + ' failed as sealed, and is kept.') + '</p>';
   } else out.verdict1 = '<p class="answer"><b>Sealed, being measured.</b> This fills in from the record when it is judged.</p>';
-  return { ...out, ...copy(R, { pass, format }) };
+  return { ...out, ...later(R), ...copy(R, { pass, format }) };
+}
+
+/** the verdict paragraphs of the organs after the gate */
+function later(R) {
+  const f = (x) => format(x, 3), held = (k) => R[k].v.filter((v) => !v.pass).map((v) => v.id), tail = (k) => (held(k).length ? ' ' + held(k).join(', ') + ' failed as sealed, and is kept.' : ' Every sealed rule held.');
+  const P = (k, s) => '<p class="answer"><b>The verdict.</b> ' + s + tail(k) + '</p>';
+  const wait = (k) => '<p class="dim">' + (k === '2b' ? 'Not taken: it runs only if organ 2 finds that composition does not net.' : 'Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.') + '</p>';
+  const out = {};
+  out.verdict2b = R['2b'] ? P('2b', 'Co-grown, the mesh scored ' + f(R['2b'].r.telco.coAuc) + ' (telecom) and ' + f(R['2b'].r.shop.coAuc) + ' (shop), against ' + f(R['2b'].r.telco.vsBest.b) + ' and ' + f(R['2b'].r.shop.vsBest.b) + ' for the best single node. It ' + (pass(R, '2b', 'H2') ? 'beat the best node beyond the noise in both domains: composition, retaken, holds.' : 'did not beat the best node beyond the noise in both domains.')) : wait('2b');
+  out.verdict3 = R['3'] ? P('3', R['3'].r.telco.silos.concat(R['3'].r.shop.silos).reduce((a, s) => a + s.born, 0) + ' children were born through the gate and ' + R['3'].r.telco.silos.concat(R['3'].r.shop.silos).reduce((a, s) => a + s.refused, 0) + ' were refused. On TEST the bred mesh scored ' + f(R['3'].r.telco.bredMeshAuc) + ' and ' + f(R['3'].r.shop.bredMeshAuc) + ', against ' + f(R['3'].r.telco.firstMeshAuc) + ' and ' + f(R['3'].r.shop.firstMeshAuc) + ' for organ 2’s mesh.') : wait('3');
+  out.verdict4 = R['4'] ? P('4', 'As records arrived, the mesh went from ' + f(R['4'].r.telco.firstToLast.from) + ' to ' + f(R['4'].r.telco.firstToLast.to) + ' on the telecom test cases and from ' + f(R['4'].r.shop.firstToLast.from) + ' to ' + f(R['4'].r.shop.firstToLast.to) + ' on the shop’s.') : wait('4');
+  out.verdict5 = R['5'] ? P('5', 'When the strongest node went bad half-way, the frozen mesh fell to ' + f(R['5'].r.telco.broken.frozenLate) + ' (telecom) and ' + f(R['5'].r.shop.broken.frozenLate) + ' (shop) on the rest of the stream; the wisp, learning and pruning, held ' + f(R['5'].r.telco.broken.wispLate) + ' and ' + f(R['5'].r.shop.broken.wispLate) + '. With no break, learning scored ' + f(R['5'].r.telco.calm.learningLate) + ' and ' + f(R['5'].r.shop.calm.learningLate) + ' against ' + f(R['5'].r.telco.calm.frozenLate) + ' and ' + f(R['5'].r.shop.calm.frozenLate) + ' frozen.') : wait('5');
+  out.verdict6 = R['6'] ? P('6', 'Cut finer, ' + R['6'].r.telco.live.length + ' and ' + R['6'].r.shop.live.length + ' nodes went live. The fine mesh scored ' + f(R['6'].r.telco.fineAuc) + ' and ' + f(R['6'].r.shop.fineAuc) + ', against ' + f(R['6'].r.telco.coarseAuc) + ' and ' + f(R['6'].r.shop.coarseAuc) + ' for organ 2’s coarse mesh and ' + f(R['6'].r.telco.vsMonolith.b) + ' and ' + f(R['6'].r.shop.vsMonolith.b) + ' for every record pooled.') : wait('6');
+  out.verdict7 = R['7'] ? P('7', 'Every live node went out as a card and came back to grow the identical node; a card from an untrusted maker and a changed card were refused. One answer crosses as ' + R['7'].r.telco.answer.numbers + ' scores (' + R['7'].r.telco.answer.bytes + ' bytes) for the telecom mesh and ' + R['7'].r.shop.answer.numbers + ' (' + R['7'].r.shop.answer.bytes + ' bytes) for the shop’s.') : wait('7');
+  return out;
 }
 
 /** the page with every generated number, word and block written in */

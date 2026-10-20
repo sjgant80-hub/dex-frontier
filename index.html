@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6dKcox2t1Ub46nNF6GNdRmXhADoN+mr+fOwr578spHo=' 'sha256-xxmfrt7P9Q4C8Xa0miEayS4TwTT3bfuTegTxBuB7lao='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6dKcox2t1Ub46nNF6GNdRmXhADoN+mr+fOwr578spHo=' 'sha256-iffa3G5KY2bEfjRk0Jas1hQbdddLDmYZs3jmMdUobMc='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Self-Growing DEX Frontier</title>
 <meta name="description" content="A frontier mind grown, not poured: specialist nodes grown from seeds on each department’s own records, coupled into one answer, records never shared. The composition proof was sealed before it ran: 0 of 0 sealed rules held." />
@@ -227,6 +227,48 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
   <div id="r-next" role="status" aria-live="polite"></div>
 </section>
 
+<section id="fix" aria-labelledby="fix-h">
+  <h2 id="fix-h"><span class="n">06b</span>Organ 2b · The composition fix</h2>
+  <p class="lede">Taken only if organ 2 found that composition does not net. A node grown on its own finds what predicts best by itself, so a weaker silo can mostly repeat what the strongest already knows. Grown to complement the mesh instead, does it add?</p>
+  <!-- w:verdict2b --><p class="dim">Not taken: it runs only if organ 2 finds that composition does not net.</p><!-- /w:verdict2b -->
+  <div id="r2b" role="status" aria-live="polite"></div>
+</section>
+
+<section id="breed" aria-labelledby="breed-h">
+  <h2 id="breed-h"><span class="n">06c</span>Organ 3 · Breeding</h2>
+  <p class="lede">μ ⋈κ f 𝟙: two nodes of one silo breed a child that carries both lineages, and the child is born only if it beats both parents on cases neither grew on. Does a breeding population grow a better mesh?</p>
+  <!-- w:verdict3 --><p class="dim">Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.</p><!-- /w:verdict3 -->
+  <div id="r3" role="status" aria-live="polite"></div>
+</section>
+
+<section id="grow" aria-labelledby="grow-h">
+  <h2 id="grow-h"><span class="n">06d</span>Organ 4 · Growing by working</h2>
+  <p class="lede">Records arrive over time. At each step every node grows again from everything it has seen. Does the mesh sharpen as it works?</p>
+  <!-- w:verdict4 --><p class="dim">Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.</p><!-- /w:verdict4 -->
+  <div id="r4" role="status" aria-live="polite"></div>
+</section>
+
+<section id="wisp" aria-labelledby="wisp-h">
+  <h2 id="wisp-h"><span class="n">06e</span>Organ 5 · The wisp: routing that learns</h2>
+  <p class="lede">Cases stream in and their outcomes follow. The coupling keeps learning from them: routes that keep paying strengthen, routes that stop paying weaken, and a node that adds nothing is pruned. What happens when a node goes bad?</p>
+  <!-- w:verdict5 --><p class="dim">Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.</p><!-- /w:verdict5 -->
+  <div id="r5" role="status" aria-live="polite"></div>
+</section>
+
+<section id="scale" aria-labelledby="scale-h">
+  <h2 id="scale-h"><span class="n">06f</span>Organ 6 · Scale</h2>
+  <p class="lede">Cut finer, the way a bigger company holds its records: more silos, more nodes, each knowing less on its own. Does the composed answer keep climbing as nodes join?</p>
+  <!-- w:verdict6 --><p class="dim">Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.</p><!-- /w:verdict6 -->
+  <div id="r6" role="status" aria-live="polite"></div>
+</section>
+
+<section id="spread" aria-labelledby="spread-h">
+  <h2 id="spread-h"><span class="n">06g</span>Organ 7 · Sovereign spread</h2>
+  <p class="lede">Each node belongs to the contributor who sealed it. It travels as a card. The mesh keeps a ledger of what each node is worth, a contributor can revoke without touching anyone else, and what crosses is a score.</p>
+  <!-- w:verdict7 --><p class="dim">Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.</p><!-- /w:verdict7 -->
+  <div id="r7" role="status" aria-live="polite"></div>
+</section>
+
 <section id="blueprint" aria-labelledby="bp-h">
   <h2 id="bp-h"><span class="n">07</span>Blueprint</h2>
   <div class="tw"><table><thead><tr><th>Part</th><th>File</th><th>What it does</th><th>Gate</th></tr></thead><tbody>
@@ -415,15 +457,34 @@ function render2() {
     + '<details><summary>Organ 2 — sealed rules and verdict</summary>' + rulesTable(S.pre2, S.ver2) + '</details>';
 }
 
+const T = (head, rows) => '<div class="tw"><table><thead><tr>' + head.map((h) => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' + rows.map((r) => '<tr>' + r.map((c) => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+const both = (f) => ['telco', 'shop'].map((d) => [d === 'telco' ? 'Telco' : 'Shop', ...f(d)]);
+const LB = (x) => f3(x.a) + ' vs ' + f3(x.b) + ' (bound ' + sg(x.low95) + ')';
+const LATER = {
+  '2b': (r) => T(['Domain', 'Mesh', 'Co-grown mesh', 'Organ 2’s mesh', 'vs best node', 'vs every record pooled'], both((d) => [r[d].mesh.map(esc).join(', '), '<b>' + f3(r[d].coAuc) + '</b>', f3(r[d].soloAuc), LB(r[d].vsBest), LB(r[d].vsMonolith)])) + '<p class="dim">' + ['telco', 'shop'].map((d) => r[d].steps.map((s) => esc(s.silo) + ': ' + s.how + (s.how === 'co-grown' ? ', adds ' + f3(s.addsOnGate) + ' on GATE, ' + (s.joined ? 'joined' : 'stayed out') : '')).join(' · ')).join(' | ') + '</p>',
+  3: (r) => T(['Domain', 'Children born / refused', 'Bred mesh', 'Organ 2’s mesh', 'The bred mesh’s lead'], both((d) => [r[d].silos.reduce((a, s) => a + s.born, 0) + ' / ' + r[d].silos.reduce((a, s) => a + s.refused, 0), '<b>' + f3(r[d].bredMeshAuc) + '</b>', f3(r[d].firstMeshAuc), sg(r[d].vsFirst.lead) + ' (bound ' + sg(r[d].vsFirst.low95) + ')'])) + '<p class="dim">GATE best, generation by generation: ' + ['telco', 'shop'].map((d) => r[d].silos.map((s) => esc(s.silo) + ' ' + s.gateHistory.map(f3).join(' → ')).join('; ')).join(' | ') + '</p>',
+  4: (r) => T(['Domain', 'Records seen → mesh TEST AUC, step by step'], both((d) => [r[d].steps.map((s) => gb(s.rowsSeen) + ' → <b>' + f3(s.testAuc) + '</b>').join(' · ')])),
+  5: (r) => T(['Domain', 'No break: frozen / learning (second half)', 'After the break: frozen / the wisp', 'Broken node', 'Pruned'], both((d) => [f3(r[d].calm.frozenLate) + ' / ' + f3(r[d].calm.learningLate), f3(r[d].broken.frozenLate) + ' / <b>' + f3(r[d].broken.wispLate) + '</b>', esc(r[d].brokenNode), r[d].broken.prunedInWindow ? 'window ' + r[d].broken.prunedInWindow + ' (' + r[d].broken.windowsAfterBreak + ' after the break)' : 'never'])),
+  6: (r) => T(['Domain', 'Fine nodes live', 'As they join (TEST AUC)', 'Fine mesh', 'Coarse mesh', 'vs every record pooled'], both((d) => [r[d].live.length + ' of ' + r[d].fine.length, r[d].curve.map((c) => f3(c.testAuc)).join(' → '), '<b>' + f3(r[d].fineAuc) + '</b>', f3(r[d].coarseAuc), LB(r[d].vsMonolith)])),
+  7: (r) => T(['Domain', 'Cards out and back', 'The ledger (share of the mesh)', 'Revoked: TEST AUC without each', 'One answer'], both((d) => [r[d].cards.every((c) => c.roundTrip && c.sameOrganism) ? '✓ every node, identical' : '✗', r[d].ledger.map((x) => esc(x.node) + ' ' + Math.round(x.share * 100) + '%').join(', '), r[d].revoked.map((x) => esc(x.node) + ' ' + f3(x.testAuc)).join(', '), r[d].answer.numbers + ' scores, ' + r[d].answer.bytes + ' bytes'])),
+};
+
 async function records() {
   const st = await get('data/organs.json').catch(() => ({}));
-  for (const k of ['1', '2']) {
-    S['pre' + k] = await get('data/organ-' + k + '/prereg.json').catch(() => null);
+  for (const k of ['1', '2', '2b', '3', '4', '5', '6', '7']) {
+    S['pre' + k] = st[k] ? await get('data/organ-' + k + '/prereg.json').catch(() => null) : null;
     if (st[k] === 'measured') { S['rec' + k] = await get('data/organ-' + k + '/record.json').catch(() => null); S['ver' + k] = await get('data/organ-' + k + '/verdict.json').catch(() => null); }
   }
   render1(); render2();
-  const names = { 3: 'Breeding: a bred child must beat both parents on cases neither saw', 4: 'Self-growing: each node sharpens as real work arrives', 5: 'Routing that learns from outcomes', 6: 'Scale: more silos, more nodes, the composed score climbing', 7: 'Sovereign spread: each node owned by its contributor, carried by cards' };
-  $('r-next').innerHTML = '<div class="tw"><table><thead><tr><th>Organ</th><th>What it must show</th><th>State</th></tr></thead><tbody>' + [3, 4, 5, 6, 7].map((k) => '<tr><td>' + k + '</td><td>' + names[k] + '</td><td>' + esc(st[k] || 'sealed only after organ 2 is judged') + '</td></tr>').join('') + '</tbody></table></div>';
+  for (const k of ['2b', '3', '4', '5', '6', '7']) {
+    const el = $('r' + k);
+    if (S['rec' + k] && S['ver' + k]) el.innerHTML = LATER[k](S['rec' + k]) + '<details><summary>Organ ' + k + ' — sealed rules and verdict</summary>' + rulesTable(S['pre' + k], S['ver' + k]) + '</details>';
+    else if (S['pre' + k]) el.innerHTML = '<details><summary>Organ ' + k + ' — the rules sealed before it was measured</summary>' + rulesTable(S['pre' + k], { verdicts: [] }) + '</details>';
+    else el.innerHTML = '<p class="dim">' + (k === '2b' ? 'Not taken: it runs only if organ 2 finds that composition does not net.' : 'Built and waiting: by the spec’s order it is sealed only after the composition proof is judged.') + '</p>';
+  }
+  const names = { '2b': 'The composition fix (only if organ 2 needs it)', 3: 'Breeding: a bred child must beat both parents on cases neither saw', 4: 'Self-growing: each node sharpens as real work arrives', 5: 'Routing that learns from outcomes', 6: 'Scale: more silos, more nodes, the composed score climbing', 7: 'Sovereign spread: each node owned by its contributor, carried by cards' };
+  const state = (k) => (st[k] === 'measured' && S['ver' + k] ? S['ver' + k].verdicts.filter((v) => v.pass).length + ' of ' + S['ver' + k].verdicts.length + ' sealed rules held' : st[k] === 'sealed' ? 'sealed, being measured' : 'built, sealed only after organ 2 is judged');
+  $('r-next').innerHTML = T(['Organ', 'What it must show', 'State'], ['2b', '3', '4', '5', '6', '7'].map((k) => ['<a href="#' + { '2b': 'fix', 3: 'breed', 4: 'grow', 5: 'wisp', 6: 'scale', 7: 'spread' }[k] + '">' + k + '</a>', names[k], esc(state(k))]));
 }
 
 $('b2-go').addEventListener('click', growAll);

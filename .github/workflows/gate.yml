@@ -24,3 +24,21 @@ jobs:
         run: node tools/words.mjs --check && node tools/geo.mjs --check
       - name: the page's security policy pins exactly its scripts, and lets it connect nowhere but its own site
         run: node tools/csp.mjs --check
+      - name: organ 2b (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-2b/record.json ]; then node tools/measure-2b.mjs --check && node tools/judge-2b.mjs --check && node tools/order.mjs --organ 2b; elif [ -f data/organ-2b/prereg.json ]; then echo "organ 2b sealed, being measured"; else echo "organ 2b built, not yet sealed"; fi
+      - name: organ 3 (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-3/record.json ]; then node tools/measure-3.mjs --check && node tools/judge-3.mjs --check && node tools/order.mjs --organ 3; elif [ -f data/organ-3/prereg.json ]; then echo "organ 3 sealed, being measured"; else echo "organ 3 built, not yet sealed"; fi
+      - name: organ 4 (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-4/record.json ]; then node tools/measure-4.mjs --check && node tools/judge-4.mjs --check && node tools/order.mjs --organ 4; elif [ -f data/organ-4/prereg.json ]; then echo "organ 4 sealed, being measured"; else echo "organ 4 built, not yet sealed"; fi
+      - name: organ 5 (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-5/record.json ]; then node tools/measure-5.mjs --check && node tools/judge-5.mjs --check && node tools/order.mjs --organ 5; elif [ -f data/organ-5/prereg.json ]; then echo "organ 5 sealed, being measured"; else echo "organ 5 built, not yet sealed"; fi
+      - name: organ 6 (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-6/record.json ]; then node tools/measure-6.mjs --check && node tools/judge-6.mjs --check && node tools/order.mjs --organ 6; elif [ -f data/organ-6/prereg.json ]; then echo "organ 6 sealed, being measured"; else echo "organ 6 built, not yet sealed"; fi
+      - name: organ 7 (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-7/record.json ]; then node tools/measure-7.mjs --check && node tools/judge-7.mjs --check && node tools/order.mjs --organ 7; elif [ -f data/organ-7/prereg.json ]; then echo "organ 7 sealed, being measured"; else echo "organ 7 built, not yet sealed"; fi
