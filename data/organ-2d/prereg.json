@@ -1,0 +1,57 @@
+{
+ "kind": "dex-frontier.organ-2d.prereg",
+ "v": 1,
+ "organ": "organ 2d, a different composition mechanism — every additive mesh trailed the model that pools every record by 0.02–0.03: if the coupling can learn interactions between the nodes’ scores, do specialists then compose into more than their best one, and close on the pooled model?",
+ "why": "Organs 2, 2b and 2c: telco composes narrowly (0.822 vs its best node 0.813, twice); the shop composed once (2b, 0.818 vs 0.810) and not in 2 or 2c; every additive mesh trailed every record pooled (telco 0.846, shop 0.827). Pooling has interactions across silos that a weighted sum of scores cannot represent.",
+ "scenario": "Organ 2’s live nodes, unchanged (telco: account, services, customer; shop: analytics, browsing). The coupling is gradient-boosted trees (living-seed’s src/baseline.mjs, mutation-gated: depth 2, 100 trees, learning rate 0.1, 16 quantile cuts, L2 1 on leaves, settings fixed here before any run) over the nodes’ scores, learned on GATE only. Its only inputs are scores: no record column. Sham: the same trees taught shuffled GATE outcomes (seed 13). On TEST: against the best single node, organ 2’s linear coupling of the same nodes, and boosted trees on every column pooled.",
+ "rules": [
+  {
+   "id": "K1",
+   "kind": "property",
+   "claim": "the coupling reads only the live nodes’ scores, learns on GATE only (scrambling TEST changes nothing), is the same twice, and taught shuffled outcomes it scores under 0.6 on TEST",
+   "seenBeforeSeal": "organs 2, 2b and 2c’s records and verdicts"
+  },
+  {
+   "id": "K2",
+   "kind": "prediction",
+   "claim": "in both domains the nonlinear mesh beats the best single node on TEST: bound above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "K3",
+   "kind": "prediction",
+   "claim": "INTERACTIONS ADD: in both domains the nonlinear coupling beats organ 2’s linear coupling of the same nodes: bound above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "K4",
+   "kind": "prediction",
+   "claim": "in both domains the nonlinear mesh is within 0.02 of every record pooled: bound above −0.02",
+   "seenBeforeSeal": "no"
+  }
+ ],
+ "disclosure": "The fourth attempt at the gate, designed after organs 2, 2b and 2c were judged, knowing their numbers; every earlier verdict stands. Four attempts at one gate are themselves a reason to read a pass with care. What earns this one its place is that it is a different mechanism (interactions), aimed at the gap every earlier attempt left, and that nothing here is chosen on TEST. The expectation written before the run: trees learned on 1,232 and 1,901 GATE cases may overfit; K2 and K3 are genuinely open, K4 more so.",
+ "judgedBy": "tools/judge-2d.mjs (pinned below)",
+ "files": {
+  "src/silos.mjs": "2de9959bacfdd2c9a4b771226cd1ae1521fc1175211704ea60fcb0815c534894",
+  "src/node.mjs": "9c0eb1965d1c0fb7d4c8a97608767b5188bd132621152ad4b621d53d6d6261b8",
+  "src/compose.mjs": "1e244b5f9f1b442c609a84f98b77093d52dd4f36a00593fa7af78b3aee3a3b89",
+  "src/stats.mjs": "688e483063a2327d7b6afb9e196dca48c690ff5d33875783fdeb4c3acd293b38",
+  "vendor/living-seed/src/genome.mjs": "45feb26823b80647b2b50a8ea395ad3b7abbae1f3cf0a9b793a14d1d41b6bb25",
+  "vendor/living-seed/src/germinate.mjs": "9ea0b23879a211c87c7a6fa2ad2ea7a7b49c6743631382d62d6e919c8ae1c520",
+  "vendor/living-seed/vendor/seed-library/seedlib.mjs": "f1904ed31b48794ac3454453d5853e799509dcdf8b8695ffea8bcedfd6f60e72",
+  "vendor/living-seed/vendor/seed-library/sha256.mjs": "8ebd4260e8b79fbdf9824ecbe6d6cde621cc003f1d358255101c01bb26763233",
+  "vendor/living-seed/vendor/keys/keys.mjs": "636969fdaaac7eab1868c6670cc7a85da1c22d65498f25e8a2ce5ad3487113e0",
+  "vendor/living-seed/vendor/keys/canon.mjs": "6ebe4f961ff0a2ce8693de89193921c8b5372c4e08d4941361212dd4cba29d21",
+  "data/telco-churn.csv": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "data/online_shoppers_intention.csv": "d8e130ba51532985f93281a73ce299e6ce150cb915769a7962a11e595eadd6a1",
+  "tools/mesh.mjs": "0e912d9790262495b44af90f372fa8b1c0797c1aaedafa35b7f3ffc24500a9ff",
+  "tools/organ.mjs": "9be59e72be9537c8672bbfcca0d7ce61d49c7b7687c17b503a44c19b2d1ad765",
+  "tools/order.mjs": "90e50ce914dc112240314d6c29193f3a07c5ed7d66f37a0fc6bbac77b0da9861",
+  "tools/measure-1.mjs": "5d4477b853b4d53afab49e6cb8b04942e7c3f8eeb67064b04adbbeb402b99e3f",
+  "vendor/living-seed/src/baseline.mjs": "b4f7ddb958edfa19ef2d33e33173aab41146437195b7e89e1f7c60021d23ad4c",
+  "tools/measure-2d.mjs": "06b392bc62cc498131de5dbfce3f17a1ce482892d79a47192d8ac504b71e069b",
+  "tools/judge-2d.mjs": "a380cfb4b0e76eeadcf9cd77483e1219976e4d483ae4ae03e16a4218c5a5b5e2",
+  "tools/seal-2d.mjs": "782a7cc6cfd1b657366c03ac879c7a697764564cd68b6e274cf0059885cff061"
+ }
+}
