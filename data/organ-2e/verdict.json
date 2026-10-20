@@ -1,0 +1,29 @@
+{
+ "kind": "dex-frontier.organ-2e.verdict",
+ "v": 1,
+ "prereg": "bec5a5bf63397539",
+ "record": "c88c4f9e82cee112",
+ "verdicts": [
+  {
+   "id": "L1",
+   "kind": "property",
+   "claim": "each domain’s choice is made out of fold on GATE alone — scrambling every TEST record leaves both out-of-fold scores and the choice unchanged — and is the same twice",
+   "pass": true,
+   "saw": "telco: out of fold on GATE linear 0.819271, trees 0.810551 → linear; shop: out of fold on GATE linear 0.918629, trees 0.933893 → trees; the choice never read TEST: true; the same twice: true"
+  },
+  {
+   "id": "L2",
+   "kind": "prediction",
+   "claim": "THE GATE: in both domains the mesh, coupled as it chose, beats the best single node on TEST: bound above 0",
+   "pass": true,
+   "saw": "telco: the mesh, linear-coupled, against the best single node (telco-account): 0.82205 vs 0.813196, lead 0.008854, bound 0.001105; shop: the mesh, trees-coupled, against the best single node (shop-analytics): 0.830184 vs 0.809854, lead 0.020329, bound 0.01252"
+  },
+  {
+   "id": "L3",
+   "kind": "prediction",
+   "claim": "in both domains the mesh is within 0.02 of every record pooled: bound above −0.02",
+   "pass": false,
+   "saw": "telco: against every record pooled: 0.82205 vs 0.84632, lead -0.02427, bound -0.033332 against −0.02; shop: against every record pooled: 0.830184 vs 0.826773, lead 0.00341, bound -0.005652 against −0.02"
+  }
+ ]
+}
