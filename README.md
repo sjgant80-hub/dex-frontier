@@ -21,12 +21,13 @@ more than the sum?** That is organ 2, sealed before it ran and allowed to fail.
 | 2b | **The composition fix** | taken only if organ 2 finds composition does not net: nodes grown to complement | 3 of 5 sealed rules held | fixed mesh 0.813 / 0.818 vs best node 0.813 / 0.810 |
 | 2c | **The composition fix, third take** | co-grown the way the mesh couples; every silo offers both its nodes | 1 of 4 sealed rules held | mesh 0.822 / 0.809 vs best node 0.813 / 0.810 |
 | 2d | **A nonlinear coupling** | trees over the nodes’ scores learn interactions | 1 of 4 sealed rules held | mesh 0.817 / 0.830 vs best node 0.813 / 0.810; shop level with every record pooled (0.827) |
-| 2e | **The mesh chooses its coupling** | linear or trees, chosen out of fold on GATE alone: THE GATE | 2 of 3 sealed rules held | linear / trees chosen; mesh 0.822 / 0.830 vs best node 0.813 / 0.810 — beyond the noise in both |
-| 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built; sealed only after organ 2 is judged | — |
-| 4 | **Growing by working** | each node sharpens as its records arrive | built; sealed only after organ 2 is judged | — |
-| 5 | **The wisp** | routing that learns from outcomes; a node gone bad is pruned | built; sealed only after organ 2 is judged | — |
-| 6 | **Scale** | cut finer, more nodes: the composed answer keeps climbing | built; sealed only after organ 2 is judged | — |
-| 7 | **Sovereign spread** | owned by contributors, carried by cards, revocable, scores only | built; sealed only after organ 2 is judged | — |
+| 2e | **The mesh chooses its coupling** | linear or trees, chosen out of fold on GATE alone: the first of the gate’s three tests | 2 of 3 sealed rules held | linear / trees chosen; mesh 0.822 / 0.830 vs best node 0.813 / 0.810 — beyond the noise in both |
+| 2f | **The gate retaken in full** | all three of the gate’s tests at once, on two datasets no attempt had touched | sealed, being measured | — |
+| 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built and held until composition wins the gate | — |
+| 4 | **Growing by working** | each node sharpens as its records arrive | built and held until composition wins the gate | — |
+| 5 | **The wisp** | routing that learns from outcomes; a node gone bad is pruned | built and held until composition wins the gate | — |
+| 6 | **Scale** | cut finer, more nodes: the composed answer keeps climbing | built and held until composition wins the gate | — |
+| 7 | **Sovereign spread** | owned by contributors, carried by cards, revocable, scores only | built and held until composition wins the gate | — |
 <!-- /geo:organs -->
 
 ## Run it yourself

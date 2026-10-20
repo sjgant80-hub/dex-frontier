@@ -11,12 +11,13 @@ Code: https://github.com/sjgant80-hub/dex-frontier (MIT, no licence fee)
 - Organ 2b · The composition fix: taken only if organ 2 finds composition does not net: nodes grown to complement. 3 of 5 sealed rules held; fixed mesh 0.813 / 0.818 vs best node 0.813 / 0.810.
 - Organ 2c · The composition fix, third take: co-grown the way the mesh couples; every silo offers both its nodes. 1 of 4 sealed rules held; mesh 0.822 / 0.809 vs best node 0.813 / 0.810.
 - Organ 2d · A nonlinear coupling: trees over the nodes’ scores learn interactions. 1 of 4 sealed rules held; mesh 0.817 / 0.830 vs best node 0.813 / 0.810; shop level with every record pooled (0.827).
-- Organ 2e · The mesh chooses its coupling: linear or trees, chosen out of fold on GATE alone: THE GATE. 2 of 3 sealed rules held; linear / trees chosen; mesh 0.822 / 0.830 vs best node 0.813 / 0.810 — beyond the noise in both.
-- Organ 3 · Breeding: a bred child beats both parents on cases neither saw; the population grows a better mesh. built; sealed only after organ 2 is judged; —.
-- Organ 4 · Growing by working: each node sharpens as its records arrive. built; sealed only after organ 2 is judged; —.
-- Organ 5 · The wisp: routing that learns from outcomes; a node gone bad is pruned. built; sealed only after organ 2 is judged; —.
-- Organ 6 · Scale: cut finer, more nodes: the composed answer keeps climbing. built; sealed only after organ 2 is judged; —.
-- Organ 7 · Sovereign spread: owned by contributors, carried by cards, revocable, scores only. built; sealed only after organ 2 is judged; —.
+- Organ 2e · The mesh chooses its coupling: linear or trees, chosen out of fold on GATE alone: the first of the gate’s three tests. 2 of 3 sealed rules held; linear / trees chosen; mesh 0.822 / 0.830 vs best node 0.813 / 0.810 — beyond the noise in both.
+- Organ 2f · The gate retaken in full: all three of the gate’s tests at once, on two datasets no attempt had touched. sealed, being measured; —.
+- Organ 3 · Breeding: a bred child beats both parents on cases neither saw; the population grows a better mesh. built and held until composition wins the gate; —.
+- Organ 4 · Growing by working: each node sharpens as its records arrive. built and held until composition wins the gate; —.
+- Organ 5 · The wisp: routing that learns from outcomes; a node gone bad is pruned. built and held until composition wins the gate; —.
+- Organ 6 · Scale: cut finer, more nodes: the composed answer keeps climbing. built and held until composition wins the gate; —.
+- Organ 7 · Sovereign spread: owned by contributors, carried by cards, revocable, scores only. built and held until composition wins the gate; —.
 
 ## Questions
 - What is it? A way to build one AI from many departments without pooling their records. Each department grows a small specialist from its own records, on its own machine, from a signed seed of a few hundred bytes. A specialist that cannot prove itself on cases it never trained on is cut. The live ones answer together: each scores the case from what it knows, and a coupling learned from outcomes weighs their scores into one answer.

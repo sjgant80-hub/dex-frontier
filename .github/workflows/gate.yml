@@ -57,3 +57,6 @@ jobs:
       - name: organ 2e (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
         run: |
           if [ -f data/organ-2e/record.json ]; then node tools/measure-2e.mjs --check && node tools/judge-2e.mjs --check && node tools/order.mjs --organ 2e; elif [ -f data/organ-2e/prereg.json ]; then echo "organ 2e sealed, being measured"; else echo "organ 2e built, not yet sealed"; fi
+      - name: organ 2f, the gate retaken in full on fresh cases (re-derived, re-judged, seal first, once it is measured)
+        run: |
+          if [ -f data/organ-2f/record.json ]; then node tools/measure-2f.mjs --check && node tools/judge-2f.mjs --check && node tools/order.mjs --organ 2f; elif [ -f data/organ-2f/prereg.json ]; then echo "organ 2f sealed, being measured"; else echo "organ 2f built, not yet sealed"; fi
