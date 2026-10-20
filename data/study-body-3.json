@@ -1,0 +1,673 @@
+{
+ "kind": "dex-frontier.study-body-3",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read",
+ "telco": {
+  "departments": [
+   {
+    "department": "telco-customer",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.661938,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.676787,
+      "live": true,
+      "stages": 2,
+      "rules": 8
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.666685,
+      "live": true,
+      "stages": 1,
+      "rules": 4
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.675331,
+      "live": true,
+      "stages": 1,
+      "rules": 5
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.664337,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     }
+    ]
+   },
+   {
+    "department": "telco-services",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.729309,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.764953,
+      "live": true,
+      "stages": 3,
+      "rules": 8
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.777894,
+      "live": true,
+      "stages": 5,
+      "rules": 19
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.748337,
+      "live": true,
+      "stages": 2,
+      "rules": 7
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.757524,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     }
+    ]
+   },
+   {
+    "department": "telco-account",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.813515,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.824418,
+      "live": true,
+      "stages": 2,
+      "rules": 12
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.822115,
+      "live": true,
+      "stages": 4,
+      "rules": 18
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.818264,
+      "live": true,
+      "stages": 3,
+      "rules": 14
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.806616,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     }
+    ]
+   }
+  ],
+  "three": {
+   "fielded": [
+    "deep-quantile",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.837115
+  },
+  "four": {
+   "fielded": [
+    "deep-quantile",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.837115
+  },
+  "five": {
+   "fielded": [
+    "deep-quantile",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.837115
+  }
+ },
+ "shop": {
+  "departments": [
+   {
+    "department": "shop-browsing",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.664534,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.66317,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.662192,
+      "live": true,
+      "stages": 2,
+      "rules": 11
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.660204,
+      "live": true,
+      "stages": 1,
+      "rules": 5
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.659301,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     }
+    ]
+   },
+   {
+    "department": "shop-analytics",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.917962,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.915473,
+      "live": true,
+      "stages": 2,
+      "rules": 9
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.915473,
+      "live": true,
+      "stages": 2,
+      "rules": 9
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.91202,
+      "live": true,
+      "stages": 2,
+      "rules": 11
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.91202,
+      "live": true,
+      "stages": 2,
+      "rules": 11
+     }
+    ]
+   },
+   {
+    "department": "shop-context",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.586547,
+      "live": false
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.619993,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.577678,
+      "live": false,
+      "stages": 3,
+      "rules": 17
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.599783,
+      "live": false,
+      "stages": 5,
+      "rules": 19
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.585728,
+      "live": false,
+      "stages": 2,
+      "rules": 12
+     }
+    ]
+   }
+  ],
+  "three": {
+   "fielded": [
+    "six",
+    "six",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.934507
+  },
+  "four": {
+   "fielded": [
+    "six",
+    "six",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.934507
+  },
+  "five": {
+   "fielded": [
+    "six",
+    "six",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.934507
+  }
+ },
+ "bank": {
+  "departments": [
+   {
+    "department": "bank-profile",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.603577,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.608987,
+      "live": true,
+      "stages": 4,
+      "rules": 13
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.608225,
+      "live": true,
+      "stages": 2,
+      "rules": 10
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.615833,
+      "live": true,
+      "stages": 5,
+      "rules": 22
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.624062,
+      "live": true,
+      "stages": 3,
+      "rules": 15
+     }
+    ]
+   },
+   {
+    "department": "bank-credit",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.563186,
+      "live": false
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.569346,
+      "live": false,
+      "stages": 1,
+      "rules": 4
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.571404,
+      "live": false,
+      "stages": 1,
+      "rules": 5
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.571256,
+      "live": false,
+      "stages": 2,
+      "rules": 7
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.573313,
+      "live": false,
+      "stages": 1,
+      "rules": 6
+     }
+    ]
+   },
+   {
+    "department": "bank-campaign",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.690794,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.720823,
+      "live": true,
+      "stages": 3,
+      "rules": 14
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.737188,
+      "live": true,
+      "stages": 8,
+      "rules": 32
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.724047,
+      "live": true,
+      "stages": 4,
+      "rules": 14
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.729833,
+      "live": true,
+      "stages": 6,
+      "rules": 21
+     }
+    ]
+   },
+   {
+    "department": "bank-economy",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.764541,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.780457,
+      "live": true,
+      "stages": 3,
+      "rules": 13
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.776332,
+      "live": true,
+      "stages": 1,
+      "rules": 6
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.773675,
+      "live": true,
+      "stages": 2,
+      "rules": 7
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.784376,
+      "live": true,
+      "stages": 5,
+      "rules": 21
+     }
+    ]
+   }
+  ],
+  "three": {
+   "fielded": [
+    "deep-quantile",
+    "deep-values",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.784294
+  },
+  "four": {
+   "fielded": [
+    "pairs-quantile",
+    "deep-values",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.782107
+  },
+  "five": {
+   "fielded": [
+    "pairs-values",
+    "pairs-values",
+    "deep-values",
+    "pairs-values"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.786946
+  }
+ },
+ "adult": {
+  "departments": [
+   {
+    "department": "adult-person",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.803683,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.823457,
+      "live": true,
+      "stages": 7,
+      "rules": 29
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.821591,
+      "live": true,
+      "stages": 8,
+      "rules": 35
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.813368,
+      "live": true,
+      "stages": 2,
+      "rules": 8
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.822571,
+      "live": true,
+      "stages": 6,
+      "rules": 22
+     }
+    ]
+   },
+   {
+    "department": "adult-work",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.740705,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.779433,
+      "live": true,
+      "stages": 8,
+      "rules": 29
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.777016,
+      "live": true,
+      "stages": 8,
+      "rules": 32
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.779139,
+      "live": true,
+      "stages": 8,
+      "rules": 31
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.775885,
+      "live": true,
+      "stages": 8,
+      "rules": 37
+     }
+    ]
+   },
+   {
+    "department": "adult-employer",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.57087,
+      "live": false
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.576453,
+      "live": false,
+      "stages": 2,
+      "rules": 10
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.576453,
+      "live": false,
+      "stages": 2,
+      "rules": 10
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.576435,
+      "live": false,
+      "stages": 2,
+      "rules": 8
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.576453,
+      "live": false,
+      "stages": 2,
+      "rules": 8
+     }
+    ]
+   },
+   {
+    "department": "adult-tax",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.632076,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.632076,
+      "live": true,
+      "stages": 1,
+      "rules": 4
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.632076,
+      "live": true,
+      "stages": 1,
+      "rules": 4
+     },
+     {
+      "body": "pairs-quantile",
+      "gate": 0.632076,
+      "live": true,
+      "stages": 1,
+      "rules": 5
+     },
+     {
+      "body": "pairs-values",
+      "gate": 0.632076,
+      "live": true,
+      "stages": 1,
+      "rules": 5
+     }
+    ]
+   }
+  ],
+  "three": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile",
+    "six"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.895369
+  },
+  "four": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile",
+    "six"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.895369
+  },
+  "five": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile",
+    "six"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.895369
+  }
+ },
+ "mean": {
+  "three": 0.862821,
+  "four": 0.862275,
+  "five": 0.863484
+ },
+ "testNeverRead": true
+}

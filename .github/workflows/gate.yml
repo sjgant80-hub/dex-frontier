@@ -78,3 +78,6 @@ jobs:
       - name: the second body study (FIT and GATE only, TEST never read) is the run itself
         run: |
           if [ -f data/study-body-2.json ]; then node tools/study-body-2.mjs --check; else echo "no study yet"; fi
+      - name: the third body study, paired rules (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/study-body-3.json ]; then node tools/study-body-3.mjs --check; else echo "no study yet"; fi
