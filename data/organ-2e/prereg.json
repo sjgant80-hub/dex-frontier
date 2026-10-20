@@ -1,0 +1,53 @@
+{
+ "kind": "dex-frontier.organ-2e.prereg",
+ "v": 1,
+ "organ": "organ 2e, the mesh chooses its own coupling — with the choice made out of fold on GATE alone, do specialists compose into more than their best one in both domains?",
+ "why": "Organ 2: the linear coupling composes the telco nodes (0.822 vs their best 0.813, bound +0.001) but not the shop’s. Organ 2d: trees over the scores compose the shop nodes (0.830 vs 0.810, bound +0.013; level with every record pooled, 0.827) but not telco’s (0.817). A mesh in the field has no TEST to choose by; it must choose on what it may learn from.",
+ "scenario": "Organ 2’s live nodes, unchanged. Two couplings, one interface (src/select.mjs): linear (organ 2’s) and trees (organ 2d’s, the same settings). Each is scored out of fold on the domain’s GATE cases (four folds, every case predicted by a coupling that never learned from it); the better is learned on all of GATE — on a tie, linear. TEST is read only to score the result: against the best single node, and boosted trees on every column pooled.",
+ "rules": [
+  {
+   "id": "L1",
+   "kind": "property",
+   "claim": "each domain’s choice is made out of fold on GATE alone — scrambling every TEST record leaves both out-of-fold scores and the choice unchanged — and is the same twice",
+   "seenBeforeSeal": "organs 2, 2b, 2c and 2d’s records and verdicts; not the out-of-fold scores"
+  },
+  {
+   "id": "L2",
+   "kind": "prediction",
+   "claim": "THE GATE: in both domains the mesh, coupled as it chose, beats the best single node on TEST: bound above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "L3",
+   "kind": "prediction",
+   "claim": "in both domains the mesh is within 0.02 of every record pooled: bound above −0.02",
+   "seenBeforeSeal": "no"
+  }
+ ],
+ "disclosure": "The fifth attempt at the gate, designed after organs 2, 2b, 2c and 2d were judged, knowing their TEST numbers — including that, on TEST, linear composes telco and trees compose the shop. That knowledge is exactly why the choice is taken from TEST and given to GATE alone, out of fold: L2 can pass only if GATE picks what TEST would have rewarded, and it may not. Five attempts at one gate are a reason to read a pass with care; every earlier verdict stands as it was. The expectation written before the run: L2 is open (it rests on the out-of-fold choice); L3 is likely to fail on telco.",
+ "judgedBy": "tools/judge-2e.mjs (pinned below)",
+ "files": {
+  "src/silos.mjs": "2de9959bacfdd2c9a4b771226cd1ae1521fc1175211704ea60fcb0815c534894",
+  "src/node.mjs": "9c0eb1965d1c0fb7d4c8a97608767b5188bd132621152ad4b621d53d6d6261b8",
+  "src/compose.mjs": "1e244b5f9f1b442c609a84f98b77093d52dd4f36a00593fa7af78b3aee3a3b89",
+  "src/stats.mjs": "688e483063a2327d7b6afb9e196dca48c690ff5d33875783fdeb4c3acd293b38",
+  "vendor/living-seed/src/genome.mjs": "45feb26823b80647b2b50a8ea395ad3b7abbae1f3cf0a9b793a14d1d41b6bb25",
+  "vendor/living-seed/src/germinate.mjs": "9ea0b23879a211c87c7a6fa2ad2ea7a7b49c6743631382d62d6e919c8ae1c520",
+  "vendor/living-seed/vendor/seed-library/seedlib.mjs": "f1904ed31b48794ac3454453d5853e799509dcdf8b8695ffea8bcedfd6f60e72",
+  "vendor/living-seed/vendor/seed-library/sha256.mjs": "8ebd4260e8b79fbdf9824ecbe6d6cde621cc003f1d358255101c01bb26763233",
+  "vendor/living-seed/vendor/keys/keys.mjs": "636969fdaaac7eab1868c6670cc7a85da1c22d65498f25e8a2ce5ad3487113e0",
+  "vendor/living-seed/vendor/keys/canon.mjs": "6ebe4f961ff0a2ce8693de89193921c8b5372c4e08d4941361212dd4cba29d21",
+  "data/telco-churn.csv": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "data/online_shoppers_intention.csv": "d8e130ba51532985f93281a73ce299e6ce150cb915769a7962a11e595eadd6a1",
+  "tools/mesh.mjs": "0e912d9790262495b44af90f372fa8b1c0797c1aaedafa35b7f3ffc24500a9ff",
+  "tools/organ.mjs": "9be59e72be9537c8672bbfcca0d7ce61d49c7b7687c17b503a44c19b2d1ad765",
+  "tools/order.mjs": "94e53dbad44e6586a9730c35258a350ee6e2a774b6704a20cf48d1242adf0d8a",
+  "tools/measure-1.mjs": "5d4477b853b4d53afab49e6cb8b04942e7c3f8eeb67064b04adbbeb402b99e3f",
+  "src/select.mjs": "ac739da0cccd80198fe7b6f6575a651afb53da5c3d5ec5bad833b8e6bfd3edd4",
+  "vendor/living-seed/src/baseline.mjs": "b4f7ddb958edfa19ef2d33e33173aab41146437195b7e89e1f7c60021d23ad4c",
+  "tools/measure-2d.mjs": "06b392bc62cc498131de5dbfce3f17a1ce482892d79a47192d8ac504b71e069b",
+  "tools/measure-2e.mjs": "5d75e617b9b886d67a44e7fae668f6e65b1e59b857a51e07e9e25a49e54efddd",
+  "tools/judge-2e.mjs": "5629c92bb49277a6cbbc7e1e8cc0463a65aa052a80f4f14d58790dbda117b1ba",
+  "tools/seal-2e.mjs": "ad9ff8f02a69ce9bf201e0fe0ec013d4ff73bc9f1581dd67fa115d210664d4ab"
+ }
+}
