@@ -60,3 +60,6 @@ jobs:
       - name: organ 2f, the gate retaken in full on fresh cases (re-derived, re-judged, seal first, once it is measured)
         run: |
           if [ -f data/organ-2f/record.json ]; then node tools/measure-2f.mjs --check && node tools/judge-2f.mjs --check && node tools/order.mjs --organ 2f; elif [ -f data/organ-2f/prereg.json ]; then echo "organ 2f sealed, being measured"; else echo "organ 2f built, not yet sealed"; fi
+      - name: the check made after organ 2f was judged (could any model here pass its frontier test?) is the run itself
+        run: |
+          if [ -f data/organ-2f/ceiling.json ]; then node tools/ceiling-2f.mjs --check; else echo "no check yet"; fi

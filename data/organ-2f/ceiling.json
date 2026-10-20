@@ -1,0 +1,36 @@
+{
+ "kind": "dex-frontier.organ-2f.ceiling",
+ "v": 1,
+ "when": "after organ 2f was judged; not sealed",
+ "bar": -0.02,
+ "bank": {
+  "boosted": {
+   "a": 0.8178,
+   "b": 0.82005,
+   "lead": -0.00225,
+   "low95": -0.027569
+  },
+  "logistic": {
+   "a": 0.8121,
+   "b": 0.82005,
+   "lead": -0.00795,
+   "low95": -0.029365
+  },
+  "anyPasses": false
+ },
+ "adult": {
+  "boosted": {
+   "a": 0.927525,
+   "b": 0.9373,
+   "lead": -0.009775,
+   "low95": -0.023976
+  },
+  "logistic": {
+   "a": 0.9172,
+   "b": 0.9373,
+   "lead": -0.0201,
+   "low95": -0.036102
+  },
+  "anyPasses": false
+ }
+}
