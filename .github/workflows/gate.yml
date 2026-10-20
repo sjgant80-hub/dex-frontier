@@ -45,12 +45,6 @@ jobs:
       - name: the trace of a real case on the page is the run itself
         run: |
           if [ -f data/trace.json ]; then node tools/trace.mjs --check; else echo "no trace yet"; fi
-      - name: the diagnosis of the gap (FIT and GATE only, TEST never read) is the run itself
-        run: |
-          node tools/diagnose.mjs --check
-      - name: the diagnosis after organ 2f, on all four datasets (FIT and GATE only, TEST never read) is the run itself
-        run: |
-          node tools/diagnose-2.mjs --check
       - name: organ 2c (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
         run: |
           if [ -f data/organ-2c/record.json ]; then node tools/measure-2c.mjs --check && node tools/judge-2c.mjs --check && node tools/order.mjs --organ 2c; elif [ -f data/organ-2c/prereg.json ]; then echo "organ 2c sealed, being measured"; else echo "organ 2c built, not yet sealed"; fi
@@ -66,3 +60,19 @@ jobs:
       - name: the check made after organ 2f was judged (could any model here pass its frontier test?) is the run itself
         run: |
           if [ -f data/organ-2f/ceiling.json ]; then node tools/ceiling-2f.mjs --check; else echo "no check yet"; fi
+  design:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: the diagnosis of the gap (FIT and GATE only, TEST never read) is the run itself
+        run: node tools/diagnose.mjs --check
+      - name: the diagnosis after organ 2f, on all four datasets (FIT and GATE only, TEST never read) is the run itself
+        run: node tools/diagnose-2.mjs --check
+      - name: the first body study (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/study-body.json ]; then node tools/study-body.mjs --check; else echo "no study yet"; fi
+      - name: the second body study (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/study-body-2.json ]; then node tools/study-body-2.mjs --check; else echo "no study yet"; fi

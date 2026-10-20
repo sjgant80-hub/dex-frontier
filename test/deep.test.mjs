@@ -18,7 +18,7 @@ const rows = (a, b) => Array.from({ length: b - a }, (_, k) => a + k);
 const SMALL = { population: 16, elites: 4, generations: 8, stages: 5 };
 
 test('the settings a deep body grows with by default', () => {
-  assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3 });
+  assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3, cuts: 'quantile' });
 });
 
 test('each kept stage raises the held-out score; the body is deterministic; every stage is expressed on all the training rows', () => {
@@ -80,4 +80,30 @@ test('held sets the share held out for the search and its check: a wider share g
   const d = wide(900, 5), tr = rows(0, 600), wider = growDeep(d, tr, 3, { ...SMALL, held: 1 / 2 }), plain = growDeep(d, tr, 3, SMALL);
   assert.notDeepEqual(wider.stages, plain.stages);
   assert.equal(sha256Hex(JSON.stringify(wider)).slice(0, 16), 'f2cd9edb9faf4508');
+});
+
+/** a coded column (a month-like category, 1 … 6, the third far more common) whose middle value carries the outcome, beside noise */
+function coded(n, seed) {
+  const r = rng(seed), cols = { m: new Float64Array(n), z: new Float64Array(n) }, y = new Uint8Array(n);
+  for (let i = 0; i < n; i++) { const u = r(), m = u < 0.4 ? 3 : 1 + Math.floor(r() * 6); cols.m[i] = m; cols.z[i] = r(); y[i] = Number(r() < (m === 4 ? 0.7 : 0.15)); }
+  return { features: ['m', 'z'], cols, y, n };
+}
+
+test('cuts "values": a column of few distinct values is cut between its actual values; a many-valued column keeps the grid', () => {
+  const d = coded(400, 2), rs = rows(0, 400), q = fitter(d, rs), v = fitter(d, rs, 'values'), g = { on: 1, f0: 0, q0: 3, d0: 1, w0: 6 };
+  assert.deepEqual(v(g).rules[0], { feat: 'm', op: '>', v: 4, w: 1 }, 'the fourth distinct value of 1 … 6');
+  assert.deepEqual(v({ ...g, q0: 9 }).rules[0].v, 4, 'an index wraps over the six values');
+  assert.deepEqual(q(g), fit(d, rs, g), 'quantile cuts are the seed library’s');
+  const z = { ...g, f0: 1 };
+  assert.deepEqual(v(z), q(z), 'a column of 400 distinct values keeps the grid');
+  const few = { features: ['m'], cols: { m: Float64Array.from({ length: 32 }, (_, i) => i % 16) }, y: new Uint8Array(32), n: 32 }, many = { ...few, cols: { m: Float64Array.from({ length: 34 }, (_, i) => i % 17) } };
+  assert.equal(fitter(few, rows(0, 32), 'values')({ on: 1, f0: 0, q0: 15, d0: 1, w0: 6 }).rules[0].v, 15, '16 distinct values: still cut between them');
+  assert.deepEqual(fitter(many, rows(0, 34), 'values')({ on: 1, f0: 0, q0: 15, d0: 1, w0: 6 }), fit(many, rows(0, 34), { on: 1, f0: 0, q0: 15, d0: 1, w0: 6 }), '17: the grid');
+});
+
+test('a body grown with value cuts is pinned byte for byte (the values path of the search, its splits and its expression)', async () => {
+  const { sha256Hex } = await import('../vendor/living-seed/vendor/seed-library/sha256.mjs');
+  const d = coded(2400, 6), b = growDeep(d, rows(0, 1200), 2, { ...SMALL, cuts: 'values' });
+  assert.ok(b.stages.length >= 1 && b.stages.every((c) => c.rules.every((r) => r.feat !== 'm' || Number.isInteger(r.v))), 'every cut on the coded column is one of its values');
+  assert.equal(sha256Hex(JSON.stringify(b)).slice(0, 16), '3a32a6a540150b28');
 });

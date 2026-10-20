@@ -8,19 +8,25 @@
 // search never saw (𝟙), so a stage that only fits the search's own rows is refused, and growth stops when it stops
 // paying. HELD sets the share of the training rows held out for SELECT and CHECK together (a larger CHECK judges each
 // stage on more rows). No step damping: fitness is AUC, which ignores scale, so damping every stage alike changes
-// nothing (a test showed it), and each rule's weight grid already sets a stage's size. Pure, deterministic, total.
-import { splitRows, rng, draw, coin, fit, scoreRow, auc, round6, stemGenome, randomGenome, crossGenome, mutateGenome, MAXRULES, QGRID, WGRID } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
+// nothing (a test showed it), and each rule's weight grid already sets a stage's size. CUTS sets where a rule may cut a
+// column: 'quantile' (the seed library's grid of sixteenths) or 'values' (on a column with at most 16 distinct values,
+// between its actual values, so a coded category such as a month can be picked out exactly; other columns keep the
+// grid). The body study after organ 2f (data/study-body.json) found budget, stages and held share changed nothing, and
+// the cut grid the likely limit. Pure, deterministic, total.
+import { splitRows, rng, draw, coin, scoreRow, auc, round6, stemGenome, randomGenome, crossGenome, mutateGenome, MAXRULES, QGRID, WGRID } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
 
-export const DEEP = { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3 };
+export const DEEP = { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3, cuts: 'quantile' };
 
-/** the seed library's fit(dataset, rows, genome), exactly, with each column's values on `rows` sorted once, not once per rule */
-export function fitter(dataset, rows) {
+/** the seed library's fit(dataset, rows, genome), exactly, with each column's values on `rows` sorted once, not once per rule;
+ *  with cuts 'values', a column of at most 16 distinct values is cut between its actual values instead */
+export function fitter(dataset, rows, cuts = 'quantile') {
   const feats = dataset.features, nf = feats.length, sorted = new Map(), base = rows.length ? rows.reduce((a, i) => a + dataset.y[i], 0) / rows.length : 0;
-  const at = (feat, q) => { if (!sorted.has(feat)) sorted.set(feat, rows.map((i) => dataset.cols[feat][i]).sort((a, b) => a - b)); const xs = sorted.get(feat); return xs[Math.floor(q * (xs.length - 1))]; };   // no rows: undefined, which round6 reads as 0, as the library does
+  const col = (feat) => { if (!sorted.has(feat)) { const xs = rows.map((i) => dataset.cols[feat][i]).sort((a, b) => a - b), vs = [...new Set(xs)]; sorted.set(feat, { xs, vs: cuts === 'values' && vs.length <= QGRID.length + 1 ? vs : null }); } return sorted.get(feat); };
+  const at = (feat, k) => { const { xs, vs } = col(feat); return vs ? vs[k % vs.length] : xs[Math.floor(QGRID[k % QGRID.length] * (xs.length - 1))]; };   // no rows: undefined, which round6 reads as 0, as the library does
   const slots = Array.from({ length: MAXRULES }, (_, r) => r);
   return (genome) => ({ genome, base: round6(base), rules: slots.filter((r) => (genome.on >> r) & 1).map((r) => {
     const feat = feats[genome['f' + r] % nf];
-    return { feat, op: genome['d' + r] & 1 ? '>' : '<=', v: round6(at(feat, QGRID[genome['q' + r] % QGRID.length])), w: WGRID[genome['w' + r] % WGRID.length] };
+    return { feat, op: genome['d' + r] & 1 ? '>' : '<=', v: round6(at(feat, genome['q' + r])), w: WGRID[genome['w' + r] % WGRID.length] };
   }) });
 }
 
@@ -29,12 +35,12 @@ export function fitter(dataset, rows) {
  * → { stages: [scorecard], history: [CHECK AUC after each kept stage], rules, refused: the stage that did not pay, or null }
  */
 export function growDeep(dataset, trainRows, seed, cfg = DEEP) {
-  const { population, elites, generations, stages, held } = { ...DEEP, ...cfg };
+  const { population, elites, generations, stages, held, cuts } = { ...DEEP, ...cfg };
   if (!dataset || !Array.isArray(dataset.features) || !dataset.features.length || !Array.isArray(trainRows)) return { stages: [], history: [], rules: 0, refused: null };
   // too few rows to hold any out: every stage scores 0.5 against a body of 0.5, so the first is refused and nothing grows
   const inner = splitRows(dataset, trainRows, held, seed), cut = splitRows(dataset, inner.held, 1 / 2, seed + 1);
   const rest = inner.rest, select = cut.rest, check = cut.held, sy = select.map((i) => dataset.y[i]), cy = check.map((i) => dataset.y[i]);
-  const express = fitter(dataset, rest), r = rng(seed * 7919 + 1), onSelect = new Float64Array(select.length), onCheck = new Float64Array(check.length), cards = [], history = [];
+  const express = fitter(dataset, rest, cuts), whole = fitter(dataset, trainRows, cuts), r = rng(seed * 7919 + 1), onSelect = new Float64Array(select.length), onCheck = new Float64Array(check.length), cards = [], history = [];
   let so = auc(Array.from(onCheck), cy), refused = null;
   for (let s = 0; s < stages; s++) {
     const live = (g) => { const card = express(g); return { g, fitness: auc(select.map((i, k) => onSelect[k] + scoreRow(card, dataset, i)), sy) }; };
@@ -52,7 +58,7 @@ export function growDeep(dataset, trainRows, seed, cfg = DEEP) {
     select.forEach((i, k) => { onSelect[k] += scoreRow(card, dataset, i); });
     check.forEach((i, k) => { onCheck[k] += scoreRow(card, dataset, i); });
     so = passed;
-    cards.push(fit(dataset, trainRows, champ.g));   // expressed on all of the department's training rows, as the seed library does
+    cards.push(whole(champ.g));   // expressed on all of the department's training rows, as the seed library does
     history.push(round6(so));
   }
   return { stages: cards, history, rules: cards.reduce((a, c) => a + c.rules.length, 0), refused };

@@ -1,0 +1,617 @@
+{
+ "kind": "dex-frontier.study-body",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read",
+ "settings": {
+  "A": {
+   "stages": 8,
+   "held": 0.3333333333333333
+  },
+  "B": {
+   "stages": 16,
+   "held": 0.3333333333333333
+  },
+  "C": {
+   "stages": 16,
+   "held": 0.5
+  },
+  "D": {
+   "stages": 16,
+   "held": 0.5,
+   "population": 80,
+   "generations": 40
+  }
+ },
+ "telco": {
+  "A": {
+   "departments": [
+    {
+     "department": "telco-customer",
+     "deep": 0.676787,
+     "stages": 2,
+     "rules": 8,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-services",
+     "deep": 0.764953,
+     "stages": 3,
+     "rules": 8,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-account",
+     "deep": 0.824418,
+     "stages": 2,
+     "rules": 12,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "linear",
+    "outOfFold": 0.836312
+   }
+  },
+  "B": {
+   "departments": [
+    {
+     "department": "telco-customer",
+     "deep": 0.676787,
+     "stages": 2,
+     "rules": 8,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-services",
+     "deep": 0.764953,
+     "stages": 3,
+     "rules": 8,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-account",
+     "deep": 0.824418,
+     "stages": 2,
+     "rules": 12,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "linear",
+    "outOfFold": 0.836312
+   }
+  },
+  "C": {
+   "departments": [
+    {
+     "department": "telco-customer",
+     "deep": 0.677382,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-services",
+     "deep": 0.782454,
+     "stages": 4,
+     "rules": 17,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-account",
+     "deep": 0.828094,
+     "stages": 3,
+     "rules": 13,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "linear",
+    "outOfFold": 0.836471
+   }
+  },
+  "D": {
+   "departments": [
+    {
+     "department": "telco-customer",
+     "deep": 0.677382,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-services",
+     "deep": 0.7812,
+     "stages": 2,
+     "rules": 9,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "telco-account",
+     "deep": 0.832407,
+     "stages": 5,
+     "rules": 25,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "linear",
+    "outOfFold": 0.842435
+   }
+  }
+ },
+ "shop": {
+  "A": {
+   "departments": [
+    {
+     "department": "shop-browsing",
+     "deep": 0.66317,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "six",
+     "live": true
+    },
+    {
+     "department": "shop-analytics",
+     "deep": 0.915473,
+     "stages": 2,
+     "rules": 9,
+     "fielded": "six",
+     "live": true
+    },
+    {
+     "department": "shop-context",
+     "deep": 0.619993,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.934507
+   }
+  },
+  "B": {
+   "departments": [
+    {
+     "department": "shop-browsing",
+     "deep": 0.66317,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "six",
+     "live": true
+    },
+    {
+     "department": "shop-analytics",
+     "deep": 0.915473,
+     "stages": 2,
+     "rules": 9,
+     "fielded": "six",
+     "live": true
+    },
+    {
+     "department": "shop-context",
+     "deep": 0.619993,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.934507
+   }
+  },
+  "C": {
+   "departments": [
+    {
+     "department": "shop-browsing",
+     "deep": 0.674203,
+     "stages": 2,
+     "rules": 9,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "shop-analytics",
+     "deep": 0.919617,
+     "stages": 2,
+     "rules": 10,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "shop-context",
+     "deep": 0.622391,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.933016
+   }
+  },
+  "D": {
+   "departments": [
+    {
+     "department": "shop-browsing",
+     "deep": 0.681971,
+     "stages": 1,
+     "rules": 6,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "shop-analytics",
+     "deep": 0.914059,
+     "stages": 2,
+     "rules": 10,
+     "fielded": "six",
+     "live": true
+    },
+    {
+     "department": "shop-context",
+     "deep": 0.631388,
+     "stages": 2,
+     "rules": 12,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.929798
+   }
+  }
+ },
+ "bank": {
+  "A": {
+   "departments": [
+    {
+     "department": "bank-profile",
+     "deep": 0.608987,
+     "stages": 4,
+     "rules": 13,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-credit",
+     "deep": 0.569346,
+     "stages": 1,
+     "rules": 4,
+     "fielded": "deep",
+     "live": false
+    },
+    {
+     "department": "bank-campaign",
+     "deep": 0.720823,
+     "stages": 3,
+     "rules": 14,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-economy",
+     "deep": 0.780457,
+     "stages": 3,
+     "rules": 13,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.784044
+   }
+  },
+  "B": {
+   "departments": [
+    {
+     "department": "bank-profile",
+     "deep": 0.608987,
+     "stages": 4,
+     "rules": 13,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-credit",
+     "deep": 0.569346,
+     "stages": 1,
+     "rules": 4,
+     "fielded": "deep",
+     "live": false
+    },
+    {
+     "department": "bank-campaign",
+     "deep": 0.720823,
+     "stages": 3,
+     "rules": 14,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-economy",
+     "deep": 0.780457,
+     "stages": 3,
+     "rules": 13,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.784044
+   }
+  },
+  "C": {
+   "departments": [
+    {
+     "department": "bank-profile",
+     "deep": 0.617397,
+     "stages": 2,
+     "rules": 11,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-credit",
+     "deep": 0.563186,
+     "stages": 1,
+     "rules": 3,
+     "fielded": "six",
+     "live": false
+    },
+    {
+     "department": "bank-campaign",
+     "deep": 0.717501,
+     "stages": 5,
+     "rules": 18,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-economy",
+     "deep": 0.777229,
+     "stages": 6,
+     "rules": 27,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.78046
+   }
+  },
+  "D": {
+   "departments": [
+    {
+     "department": "bank-profile",
+     "deep": 0.618575,
+     "stages": 2,
+     "rules": 9,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-credit",
+     "deep": 0.563186,
+     "stages": 1,
+     "rules": 4,
+     "fielded": "six",
+     "live": false
+    },
+    {
+     "department": "bank-campaign",
+     "deep": 0.723413,
+     "stages": 3,
+     "rules": 15,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "bank-economy",
+     "deep": 0.774552,
+     "stages": 2,
+     "rules": 10,
+     "fielded": "deep",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.78128
+   }
+  }
+ },
+ "adult": {
+  "A": {
+   "departments": [
+    {
+     "department": "adult-person",
+     "deep": 0.823457,
+     "stages": 7,
+     "rules": 29,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-work",
+     "deep": 0.779433,
+     "stages": 8,
+     "rules": 29,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-employer",
+     "deep": 0.576453,
+     "stages": 2,
+     "rules": 10,
+     "fielded": "deep",
+     "live": false
+    },
+    {
+     "department": "adult-tax",
+     "deep": 0.632076,
+     "stages": 1,
+     "rules": 4,
+     "fielded": "six",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "linear",
+    "outOfFold": 0.895369
+   }
+  },
+  "B": {
+   "departments": [
+    {
+     "department": "adult-person",
+     "deep": 0.823457,
+     "stages": 7,
+     "rules": 29,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-work",
+     "deep": 0.779433,
+     "stages": 8,
+     "rules": 29,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-employer",
+     "deep": 0.576453,
+     "stages": 2,
+     "rules": 10,
+     "fielded": "deep",
+     "live": false
+    },
+    {
+     "department": "adult-tax",
+     "deep": 0.632076,
+     "stages": 1,
+     "rules": 4,
+     "fielded": "six",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "linear",
+    "outOfFold": 0.895369
+   }
+  },
+  "C": {
+   "departments": [
+    {
+     "department": "adult-person",
+     "deep": 0.803683,
+     "stages": 1,
+     "rules": 3,
+     "fielded": "six",
+     "live": true
+    },
+    {
+     "department": "adult-work",
+     "deep": 0.782308,
+     "stages": 9,
+     "rules": 41,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-employer",
+     "deep": 0.58142,
+     "stages": 3,
+     "rules": 15,
+     "fielded": "deep",
+     "live": false
+    },
+    {
+     "department": "adult-tax",
+     "deep": 0.632076,
+     "stages": 1,
+     "rules": 5,
+     "fielded": "six",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.893354
+   }
+  },
+  "D": {
+   "departments": [
+    {
+     "department": "adult-person",
+     "deep": 0.820472,
+     "stages": 3,
+     "rules": 15,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-work",
+     "deep": 0.780321,
+     "stages": 5,
+     "rules": 25,
+     "fielded": "deep",
+     "live": true
+    },
+    {
+     "department": "adult-employer",
+     "deep": 0.581456,
+     "stages": 3,
+     "rules": 14,
+     "fielded": "deep",
+     "live": false
+    },
+    {
+     "department": "adult-tax",
+     "deep": 0.632076,
+     "stages": 1,
+     "rules": 3,
+     "fielded": "six",
+     "live": true
+    }
+   ],
+   "mesh": {
+    "chosen": "trees",
+    "outOfFold": 0.893669
+   }
+  }
+ },
+ "meanMesh": {
+  "A": 0.862558,
+  "B": 0.862558,
+  "C": 0.860825,
+  "D": 0.861795
+ },
+ "chosen": "A",
+ "testNeverRead": true
+}
