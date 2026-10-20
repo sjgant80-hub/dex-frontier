@@ -1,0 +1,410 @@
+{
+ "kind": "dex-frontier.study-body-2",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read",
+ "telco": {
+  "departments": [
+   {
+    "department": "telco-customer",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.661938,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.676787,
+      "live": true,
+      "stages": 2
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.666685,
+      "live": true,
+      "stages": 1
+     }
+    ]
+   },
+   {
+    "department": "telco-services",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.729309,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.764953,
+      "live": true,
+      "stages": 3
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.777894,
+      "live": true,
+      "stages": 5
+     }
+    ]
+   },
+   {
+    "department": "telco-account",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.813515,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.824418,
+      "live": true,
+      "stages": 2
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.822115,
+      "live": true,
+      "stages": 4
+     }
+    ]
+   }
+  ],
+  "two": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.836312
+  },
+  "three": {
+   "fielded": [
+    "deep-quantile",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.837115
+  }
+ },
+ "shop": {
+  "departments": [
+   {
+    "department": "shop-browsing",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.664534,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.66317,
+      "live": true,
+      "stages": 1
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.662192,
+      "live": true,
+      "stages": 2
+     }
+    ]
+   },
+   {
+    "department": "shop-analytics",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.917962,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.915473,
+      "live": true,
+      "stages": 2
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.915473,
+      "live": true,
+      "stages": 2
+     }
+    ]
+   },
+   {
+    "department": "shop-context",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.586547,
+      "live": false
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.619993,
+      "live": true,
+      "stages": 1
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.577678,
+      "live": false,
+      "stages": 3
+     }
+    ]
+   }
+  ],
+  "two": {
+   "fielded": [
+    "six",
+    "six",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.934507
+  },
+  "three": {
+   "fielded": [
+    "six",
+    "six",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.934507
+  }
+ },
+ "bank": {
+  "departments": [
+   {
+    "department": "bank-profile",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.603577,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.608987,
+      "live": true,
+      "stages": 4
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.608225,
+      "live": true,
+      "stages": 2
+     }
+    ]
+   },
+   {
+    "department": "bank-credit",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.563186,
+      "live": false
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.569346,
+      "live": false,
+      "stages": 1
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.571404,
+      "live": false,
+      "stages": 1
+     }
+    ]
+   },
+   {
+    "department": "bank-campaign",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.690794,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.720823,
+      "live": true,
+      "stages": 3
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.737188,
+      "live": true,
+      "stages": 8
+     }
+    ]
+   },
+   {
+    "department": "bank-economy",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.764541,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.780457,
+      "live": true,
+      "stages": 3
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.776332,
+      "live": true,
+      "stages": 1
+     }
+    ]
+   }
+  ],
+  "two": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.784044
+  },
+  "three": {
+   "fielded": [
+    "deep-quantile",
+    "deep-values",
+    "deep-values",
+    "deep-quantile"
+   ],
+   "chosen": "trees",
+   "outOfFold": 0.784294
+  }
+ },
+ "adult": {
+  "departments": [
+   {
+    "department": "adult-person",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.803683,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.823457,
+      "live": true,
+      "stages": 7
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.821591,
+      "live": true,
+      "stages": 8
+     }
+    ]
+   },
+   {
+    "department": "adult-work",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.740705,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.779433,
+      "live": true,
+      "stages": 8
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.777016,
+      "live": true,
+      "stages": 8
+     }
+    ]
+   },
+   {
+    "department": "adult-employer",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.57087,
+      "live": false
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.576453,
+      "live": false,
+      "stages": 2
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.576453,
+      "live": false,
+      "stages": 2
+     }
+    ]
+   },
+   {
+    "department": "adult-tax",
+    "bodies": [
+     {
+      "body": "six",
+      "gate": 0.632076,
+      "live": true
+     },
+     {
+      "body": "deep-quantile",
+      "gate": 0.632076,
+      "live": true,
+      "stages": 1
+     },
+     {
+      "body": "deep-values",
+      "gate": 0.632076,
+      "live": true,
+      "stages": 1
+     }
+    ]
+   }
+  ],
+  "two": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile",
+    "six"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.895369
+  },
+  "three": {
+   "fielded": [
+    "deep-quantile",
+    "deep-quantile",
+    "deep-quantile",
+    "six"
+   ],
+   "chosen": "linear",
+   "outOfFold": 0.895369
+  }
+ },
+ "mean": {
+  "two": 0.862558,
+  "three": 0.862821
+ },
+ "testNeverRead": true
+}
