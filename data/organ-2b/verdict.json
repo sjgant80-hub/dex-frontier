@@ -1,0 +1,43 @@
+{
+ "kind": "dex-frontier.organ-2b.verdict",
+ "v": 1,
+ "prereg": "a3e66255b5b69c7d",
+ "record": "47d6574e069058bf",
+ "verdicts": [
+  {
+   "id": "H1",
+   "kind": "property",
+   "claim": "no coupling weight is negative; every co-grown node that joined adds on GATE out of fold; the same mesh twice; TEST never read",
+   "pass": true,
+   "saw": "telco: telco-account grown on its own; telco-services co-grown (adds null on GATE, alone 0.257116) stayed out; telco-customer co-grown (adds -0.000225 on GATE, alone 0.641932) stayed out; weights never negative: true; shop: shop-analytics grown on its own; shop-browsing co-grown (adds null on GATE, alone 0.454045) stayed out; shop-context co-grown (adds 0.007774 on GATE, alone 0.617471) joined; weights never negative: true; the same twice: true; TEST never read: true"
+  },
+  {
+   "id": "H2",
+   "kind": "prediction",
+   "claim": "COMPOSITION, RETAKEN: in both domains the fixed mesh (C) beats the best single node on TEST: bound above 0",
+   "pass": false,
+   "saw": "telco: the fixed mesh against the best single node (telco-account, alone): 0.813196 vs 0.813196, lead 0, bound 0; shop: the fixed mesh against the best single node (shop-analytics, alone): 0.817841 vs 0.809854, lead 0.007987, bound 0.005008"
+  },
+  {
+   "id": "H3",
+   "kind": "prediction",
+   "claim": "SAFE: in both domains the fixed mesh is never worse than the best single node by more than 0.002: bound above −0.002",
+   "pass": true,
+   "saw": "telco: never worse than the best node by more than 0.002: bound 0; shop: never worse than the best node by more than 0.002: bound 0.005008"
+  },
+  {
+   "id": "H4",
+   "kind": "prediction",
+   "claim": "in both domains the fixed mesh is within 0.02 of every record pooled: bound above −0.02",
+   "pass": false,
+   "saw": "telco: against every record pooled: 0.813196 vs 0.84632, lead -0.033124, bound -0.042928 against −0.02; shop: against every record pooled: 0.817841 vs 0.826773, lead -0.008932, bound -0.019281 against −0.02"
+  },
+  {
+   "id": "H5",
+   "kind": "prediction",
+   "claim": "the non-negative coupling alone (B) costs nothing where organ 2 already composed: in both domains not worse than organ 2’s mesh by more than 0.002 (bound above −0.002)",
+   "pass": true,
+   "saw": "telco: the non-negative coupling alone against organ 2’s free one: 0.82205 vs 0.82205, lead 0, bound 0 (silenced: none); shop: the non-negative coupling alone against organ 2’s free one: 0.809854 vs 0.791135, lead 0.018719, bound 0.013816 (silenced: shop-browsing)"
+  }
+ ]
+}
