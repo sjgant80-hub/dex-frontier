@@ -1,0 +1,149 @@
+{
+ "kind": "dex-frontier.trace",
+ "v": 1,
+ "telco": {
+  "case": 3441,
+  "steps": [
+   {
+    "silo": "telco-customer",
+    "sees": {
+     "gender": 1,
+     "SeniorCitizen": 0,
+     "Partner": 1,
+     "Dependents": 1
+    },
+    "state": "live",
+    "fired": [
+     "Dependents <= 1 → -0.25",
+     "Partner > 0 → -0.25",
+     "Partner > 0 → -0.25"
+    ],
+    "score": -0.75
+   },
+   {
+    "silo": "telco-services",
+    "sees": {
+     "PhoneService": 1,
+     "MultipleLines": 0,
+     "InternetService": 1,
+     "OnlineSecurity": 1,
+     "OnlineBackup": 1,
+     "DeviceProtection": 1,
+     "TechSupport": 0,
+     "StreamingTV": 0,
+     "StreamingMovies": 0
+    },
+    "state": "live",
+    "fired": [
+     "InternetService > 0 → 1",
+     "StreamingTV <= 1 → -0.25"
+    ],
+    "score": 0.75
+   },
+   {
+    "silo": "telco-account",
+    "sees": {
+     "tenure": 34,
+     "Contract": 1,
+     "PaperlessBilling": 1,
+     "ElectronicCheck": 0,
+     "AutoPay": 0,
+     "MonthlyCharges": 60.8,
+     "TotalCharges": 2042.05
+    },
+    "state": "live",
+    "fired": [
+     "MonthlyCharges <= 70.45 → -1",
+     "tenure > 5 → -0.5",
+     "Contract > 0 → -2"
+    ],
+    "score": -3.5
+   }
+  ],
+  "weights": [
+   {
+    "silo": "telco-account",
+    "weight": 1.101535
+   },
+   {
+    "silo": "telco-services",
+    "weight": 0.360767
+   },
+   {
+    "silo": "telco-customer",
+    "weight": 0.302479
+   }
+  ],
+  "intercept": -1.468342,
+  "logOdds": -3.741843,
+  "probability": 0.023161,
+  "outcome": false,
+  "crossed": "3 scores"
+ },
+ "shop": {
+  "case": 6639,
+  "steps": [
+   {
+    "silo": "shop-browsing",
+    "sees": {
+     "Administrative": 2,
+     "Administrative_Duration": 182.4,
+     "Informational": 0,
+     "Informational_Duration": 0,
+     "ProductRelated": 27,
+     "ProductRelated_Duration": 1165.944762
+    },
+    "state": "live",
+    "fired": [
+     "Informational_Duration <= 125.5 → -2",
+     "Administrative_Duration <= 284.85 → -0.25",
+     "ProductRelated_Duration > 502.966667 → 0.5"
+    ],
+    "score": -1.75
+   },
+   {
+    "silo": "shop-analytics",
+    "sees": {
+     "BounceRates": 0,
+     "ExitRates": 0.007407,
+     "PageValues": 0
+    },
+    "state": "live",
+    "fired": [
+     "PageValues <= 0 → -2"
+    ],
+    "score": -2
+   },
+   {
+    "silo": "shop-context",
+    "sees": {
+     "SpecialDay": 0,
+     "OperatingSystems": 2,
+     "Browser": 4,
+     "Region": 6,
+     "TrafficType": 11,
+     "VisitorType": 0,
+     "Weekend": 1
+    },
+    "state": "cut",
+    "fired": [],
+    "score": null
+   }
+  ],
+  "weights": [
+   {
+    "silo": "shop-analytics",
+    "weight": 1.975069
+   },
+   {
+    "silo": "shop-browsing",
+    "weight": -0.328409
+   }
+  ],
+  "intercept": -3.307576,
+  "logOdds": -3.906814,
+  "probability": 0.019708,
+  "outcome": false,
+  "crossed": "2 scores"
+ }
+}
