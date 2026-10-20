@@ -1,0 +1,64 @@
+{
+ "kind": "dex-frontier.organ-2.verdict",
+ "v": 1,
+ "prereg": "366f58c2b8273366",
+ "record": "b56faf86ed7b8740",
+ "verdicts": [
+  {
+   "id": "B1",
+   "kind": "property",
+   "claim": "in both domains: TEST is never read while the nodes grow or the coupling learns (scrambling every TEST record changes no node), each node holds only its own silo’s columns, the same mesh grows twice, every TEST case is answered, no node grown on shuffled outcomes goes live (the gate refuses a mesh that learned nothing), and at least two nodes are live",
+   "pass": true,
+   "saw": "telco: 3 of 3 nodes live (account, services, customer); TEST never read while growing or coupling: true; each node held only its own silo’s columns: true; the same mesh twice: true; 2112 of 2112 answered; nodes grown on shuffled outcomes that went live: 0; shop: 2 of 3 nodes live (analytics, browsing); TEST never read while growing or coupling: true; each node held only its own silo’s columns: true; the same mesh twice: true; 4725 of 4725 answered; nodes grown on shuffled outcomes that went live: 0"
+  },
+  {
+   "id": "B2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: in both domains the composed mesh beats its best single node on TEST: the 95% lower bound of its lead is above 0",
+   "pass": false,
+   "saw": "telco: composed against its best node on TEST (account): 0.82205 vs 0.813196, lead 0.008854, bound 0.001105; shop: composed against its best node on TEST (analytics): 0.791135 vs 0.809854, lead -0.018719, bound -0.023762"
+  },
+  {
+   "id": "B3",
+   "kind": "prediction",
+   "claim": "in both domains the composed mesh beats random routing AND a coupling taught shuffled outcomes: both bounds above 0",
+   "pass": true,
+   "saw": "telco: against random routing 0.82205 vs 0.737359, lead 0.084691, bound 0.067682; against a coupling taught shuffled outcomes 0.82205 vs 0.610275, lead 0.211775, bound 0.184571; shop: against random routing 0.791135 vs 0.772542, lead 0.018593, bound 0.002335; against a coupling taught shuffled outcomes 0.791135 vs 0.190927, lead 0.600208, bound 0.569432"
+  },
+  {
+   "id": "B4",
+   "kind": "prediction",
+   "claim": "GROWTH COMPOUNDS: in both domains, adding the live nodes one at a time (in GATE order) never lowers the composed TEST AUC, and the full mesh is at least 0.01 above its first node",
+   "pass": false,
+   "saw": "telco: 1 node 0.813196 → 2 nodes 0.823279 → 3 nodes 0.82205; shop: 1 node 0.809854 → 2 nodes 0.791135"
+  },
+  {
+   "id": "B5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: in both domains the composed mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: the bound of its lead is above −0.02",
+   "pass": false,
+   "saw": "telco: composed (64 numbers) against the pooled boosted trees (2001 numbers, every column in one place): 0.82205 vs 0.84632, lead -0.02427, bound -0.033332 against −0.02; shop: composed (41 numbers) against the pooled boosted trees (2001 numbers, every column in one place): 0.791135 vs 0.826773, lead -0.035638, bound -0.048497 against −0.02"
+  },
+  {
+   "id": "B6",
+   "kind": "prediction",
+   "claim": "in both domains, on the 300, the composed mesh beats qwen2.5:14b shown 24 examples and every column: bound above 0",
+   "pass": false,
+   "saw": "telco: on the 300, composed against qwen2.5:14b shown 24 examples and every column: 0.8117 vs 0.74145, lead 0.07025, bound 0.020139 (0 unreadable); shop: on the 300, composed against qwen2.5:14b shown 24 examples and every column: 0.80815 vs 0.72515, lead 0.083, bound -0.002763 (0 unreadable)"
+  },
+  {
+   "id": "B7",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: in both domains, on the 300, the composed mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "pass": false,
+   "saw": "telco: on the 300, composed against claude-opus-5-5 (cold, all 300 at once): 0.8117 vs 0.844275, lead -0.032575, bound -0.055542 against −0.02 (0 unreadable); shop: on the 300, composed against claude-opus-5-5 (cold, all 300 at once): 0.80815 vs 0.858475, lead -0.050325, bound -0.098315 against −0.02 (0 unreadable)"
+  },
+  {
+   "id": "B8",
+   "kind": "property",
+   "claim": "BREADTH: in one unlabelled stream of both domains’ TEST cases, every case reaches all of its own domain’s live nodes and none of the other’s; no node covers more than one domain; the mesh covers both",
+   "pass": true,
+   "saw": "6837 TEST cases of both domains in one unlabelled stream, 5 live nodes: every case reached all its own domain’s live nodes: true; cases that reached the other domain’s: 0; domains any one node covers: 1; domains the mesh covers: 2"
+  }
+ ]
+}
