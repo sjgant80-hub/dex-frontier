@@ -16,7 +16,7 @@ more than the sum?** That is organ 2, sealed before it ran and allowed to fail.
 <!-- geo:organs -->
 | # | Organ | What it had to show | Sealed rules | What happened |
 |---|---|---|---|---|
-| 1 | **One specialist body** | one department’s node against a 14B and a frontier model | sealed, being measured | being asked |
+| 1 | **One specialist body** | one department’s node against a 14B and a frontier model | 2 of 3 sealed rules held | the 7-column node 0.801 vs the 14B 0.741 and the frontier 0.844 on 300 customers |
 | 2 | **The composition proof** | specialists compose into more than the sum, before anything scales | sealed, being measured | being asked |
 | 2b | **The composition fix** | taken only if organ 2 finds composition does not net: nodes grown to complement | not taken unless needed | — |
 | 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built; sealed only after organ 2 is judged | — |
