@@ -17,6 +17,7 @@ export const ORGANS = {
   1: { seal: 'data/organ-1/prereg.json', later: ['data/llm/qwen2.5-14b-telco.json', 'data/llm/frontier-telco.json', 'data/organ-1/record.json'] },
   2: { seal: 'data/organ-2/prereg.json', later: ['data/llm/qwen2.5-14b-telco.json', 'data/llm/qwen2.5-14b-shop.json', 'data/llm/frontier-telco.json', 'data/llm/frontier-shop.json', 'data/organ-2/record.json'] },
   '2b': { seal: 'data/organ-2b/prereg.json', later: ['data/organ-2b/record.json'] },
+  '2c': { seal: 'data/organ-2c/prereg.json', later: ['data/organ-2c/record.json'] },
   3: { seal: 'data/organ-3/prereg.json', later: ['data/organ-3/record.json'] },
   4: { seal: 'data/organ-4/prereg.json', later: ['data/organ-4/record.json'] },
   5: { seal: 'data/organ-5/prereg.json', later: ['data/organ-5/record.json'] },

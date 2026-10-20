@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+// tools/seal-2c.mjs — organ 2c's pre-registration (the composition fix, third take), committed before it is measured.
+import { seal } from './organ.mjs';
+seal('2c', {
+  organ: 'organ 2c, the composition fix, third take — coupled everywhere the way the mesh is, and with every silo offering both of its nodes, do specialists now compose into more than their best one, in both domains?',
+  why: 'Organ 2: composition netted on telco (0.822 vs 0.813) and hurt on the shop (0.791 vs 0.810), because a weight learned negative on February–October pulled the holiday months the wrong way. Organ 2b: a non-negative coupling stopped that harm, and on the shop a co-grown context node joined and the mesh beat its best node (0.818 vs 0.810); but on telco co-growth, scoring its candidates with a free coupling, grew a services node that helped only by being counted against its own evidence (0.257 alone), its gate cut it, and the mesh fell back to one node (0.813).',
+  scenario: 'As organ 2b, with two changes. Co-growth scores each candidate with the non-negative coupling, the one the mesh uses (src/cogrow.mjs, opts.coupler), so a co-grown node can only help by adding its own evidence. And every silo after the first offers both of its nodes — the one grown on its own (organ 2’s) and the co-grown one; the candidate whose out-of-fold, non-negatively coupled contribution on GATE is larger joins, if it is above zero. Silos are taken in GATE order. The mesh is coupled non-negatively. On TEST: against the best single node (any live node, alone-grown or co-grown), organ 2’s mesh, and boosted trees on every column pooled.',
+  rules: [
+    { id: 'J1', kind: 'property', claim: 'no coupling weight is negative; every silo after the first offered both its nodes; every node that joined adds on GATE out of fold; the same mesh twice; TEST never read', seenBeforeSeal: 'organs 2 and 2b’s records and verdicts' },
+    { id: 'J2', kind: 'prediction', claim: 'COMPOSITION, THIRD TAKE: in both domains the mesh beats the best single node on TEST: bound above 0', seenBeforeSeal: 'no' },
+    { id: 'J3', kind: 'prediction', claim: 'SAFE: in both domains the mesh is never worse than the best single node by more than 0.002: bound above −0.002', seenBeforeSeal: 'no' },
+    { id: 'J4', kind: 'prediction', claim: 'in both domains the mesh is within 0.02 of every record pooled: bound above −0.02', seenBeforeSeal: 'no' },
+  ],
+  disclosure: 'The third attempt at the gate, designed after organs 2 and 2b were judged, knowing their numbers; both verdicts stand as they were. Three attempts at one gate are themselves a reason to read a pass with care: what earns it is that each change answers a failure the previous record showed, and that nothing here chooses by TEST. The expectation written before the run: J3 holds; J2 is open (on telco the alone-grown services node should be offered and may join; on the shop the co-grown context node should join again); J4 is likely to fail.',
+}, ['src/cogrow.mjs', 'src/population.mjs', 'src/wisp.mjs', 'vendor/living-seed/src/baseline.mjs']);

@@ -30,14 +30,14 @@ export const windows = (n, size) => Array.from({ length: Math.ceil(n / size) }, 
  * How much a node adds, out of fold: the k-fold AUC of the coupling with the node against without it, on the rows
  * given (columns: one per node; y: outcomes). → with − without (positive: it adds)
  */
-export function contribution(columns, k, y, folds = 2) {
+export function contribution(columns, k, y, folds = 2, coupler = couple) {
   const n = y.length, fold = (i) => i % folds;
   const oof = (cols) => {
     const out = new Array(n);
     Array.from({ length: folds }, (_, f) => f).forEach((f) => {
       const train = [], held = [];
       y.forEach((_, i) => (fold(i) === f ? held : train).push(i));
-      const c = couple(cols.map((col) => train.map((i) => col[i])), train.map((i) => y[i]));
+      const c = coupler(cols.map((col) => train.map((i) => col[i])), train.map((i) => y[i]));
       for (const i of held) out[i] = coupled(c, cols.map((col) => col[i]));
     });
     return auc(out, y);

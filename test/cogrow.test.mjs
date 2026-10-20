@@ -45,3 +45,20 @@ test('co-grown, the node finds what the mesh lacks; grown alone it is drawn to w
   assert.deepEqual(co.history, [0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.927274, 0.927274], 'the one climb for seed 7');
   assert.equal(co.champion.on, 60);
 });
+
+test('coupled as the mesh will be: under a non-negative coupling, a rule that only helps when counted against its own evidence is worth nothing', async () => {
+  const { coupleNonNegative } = await import('../src/compose.mjs');
+  const { contribution } = await import('../src/wisp.mjs');
+  const inner = splitRows(W.view, W.rows, 1 / 3, 5);
+  const inverted = { on: 1, f0: 1, q0: 7, d0: 0, w0: 6, f1: 0, q1: 0, d1: 0, w1: 0, f2: 0, q2: 0, d2: 0, w2: 0, f3: 0, q3: 0, d3: 0, w3: 0, f4: 0, q4: 0, d4: 0, w4: 0, f5: 0, q5: 0, d5: 0, w5: 0 };   // fires when v is LOW, weight +
+  const free = joinFitness(W.view, inner, inverted, others), nn = joinFitness(W.view, inner, inverted, others, coupleNonNegative);
+  const alone = auc(inner.held.map((i) => W.neighbour[i]), inner.held.map((i) => W.view.y[i]));
+  assert.ok(free > alone + 0.01, 'freely coupled, the inverted rule seems to add: ' + free + ' vs ' + alone);
+  assert.ok(Math.abs(nn - alone) < 1e-9, 'non-negatively coupled, it is silenced and adds nothing: ' + nn + ' vs ' + alone);
+  const co = cogrow(W.view, W.rows, 7, QUICK, others, { coupler: coupleNonNegative });
+  const card = fit(W.view, W.rows, co.champion), s = W.rows.map((i) => scoreRow(card, W.view, i));
+  assert.ok(auc(s, W.rows.map((i) => W.view.y[i])) > 0.5, 'co-grown under the non-negative coupling, the node points the right way');
+  const yW = W.rows.map((i) => W.view.y[i]), inv = W.rows.map((i) => -W.view.cols.v[i]);
+  assert.ok(contribution([W.rows.map((i) => W.neighbour[i]), inv], 1, yW) > 0.01, 'freely, an inverted column contributes');
+  assert.equal(contribution([W.rows.map((i) => W.neighbour[i]), inv], 1, yW, 2, coupleNonNegative), 0, 'non-negatively, it contributes exactly nothing');
+});

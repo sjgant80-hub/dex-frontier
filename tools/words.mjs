@@ -12,7 +12,7 @@ export { format };
 const ROOT = new URL('../', import.meta.url);
 const read = (p) => readFileSync(new URL(p, ROOT), 'utf8');
 const has = (p) => existsSync(new URL(p, ROOT));
-export const ORGANS = ['1', '2', '2b', '3', '4', '5', '6', '7'];
+export const ORGANS = ['1', '2', '2b', '2c', '3', '4', '5', '6', '7'];
 
 /** every judged organ's record and verdict */
 export function records() {
