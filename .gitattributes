@@ -5,3 +5,5 @@
 data/bank-additional-full.csv -text
 data/adult.data -text
 data/adult.test -text
+data/*.xls -text
+data/IDS_mapping.csv -text

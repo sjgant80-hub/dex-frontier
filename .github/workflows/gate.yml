@@ -14,6 +14,8 @@ jobs:
         run: node witness-all.mjs
       - name: the vendored kernels are byte-identical to living-seed's
         run: node tools/vendor-check.mjs
+      - name: the credit CSV is the publisher's .xls, re-derived byte for byte
+        run: node tools/convert-credit.mjs --check
       - name: organ 1, one specialist body (re-grown, re-scored, re-judged, seal first; the seal alone while it is being asked)
         run: |
           if [ -f data/organ-1/record.json ]; then node tools/measure-1.mjs --check && node tools/judge-1.mjs --check && node tools/order.mjs --organ 1; else test -f data/organ-1/prereg.json && echo "organ 1 sealed, being asked"; fi

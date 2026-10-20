@@ -1,8 +1,8 @@
 // deep.test.mjs — the deeper grown body: the seed library's ribosome grown in stages, each kept only if it pays. Synthetic.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { growDeep, scoreDeep, DEEP, fitter } from '../src/deep.mjs';
-import { rng, auc, fit, scoreRow, stemGenome, randomGenome } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
+import { growDeep, scoreDeep, DEEP, fitter, scoreCard, genomeOps } from '../src/deep.mjs';
+import { rng, auc, fit, scoreRow, stemGenome, randomGenome, crossGenome, mutateGenome } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
 
 /** ten columns that each carry a little of the outcome: more than one six-rule scorecard can hold */
 function wide(n, seed, signal = true) {
@@ -18,7 +18,7 @@ const rows = (a, b) => Array.from({ length: b - a }, (_, k) => a + k);
 const SMALL = { population: 16, elites: 4, generations: 8, stages: 5 };
 
 test('the settings a deep body grows with by default', () => {
-  assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3, cuts: 'quantile' });
+  assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3, cuts: 'quantile', pairs: false });
 });
 
 test('each kept stage raises the held-out score; the body is deterministic; every stage is expressed on all the training rows', () => {
@@ -106,4 +106,44 @@ test('a body grown with value cuts is pinned byte for byte (the values path of t
   const d = coded(2400, 6), b = growDeep(d, rows(0, 1200), 2, { ...SMALL, cuts: 'values' });
   assert.ok(b.stages.length >= 1 && b.stages.every((c) => c.rules.every((r) => r.feat !== 'm' || Number.isInteger(r.v))), 'every cut on the coded column is one of its values');
   assert.equal(sha256Hex(JSON.stringify(b)).slice(0, 16), '3a32a6a540150b28');
+});
+
+/** a pure interaction: the outcome follows whether two columns share a sign — no single column says anything */
+function joint(n, seed) {
+  const r = rng(seed), f = ['x0', 'x1', 'x2', 'x3'], cols = Object.fromEntries(f.map((k) => [k, new Float64Array(n)])), y = new Uint8Array(n);
+  for (let i = 0; i < n; i++) { for (const k of f) cols[k][i] = r() * 2 - 1; y[i] = Number(r() < ((cols.x0[i] > 0) === (cols.x1[i] > 0) ? 0.8 : 0.2)); }
+  return { features: f, cols, y, n };
+}
+
+test('scoreCard is the seed library’s scoreRow for single rules; a paired rule fires only when both its conditions hold', () => {
+  const d = wide(300, 4), f = fitter(d, rows(0, 300)), r = rng(11);
+  for (let k = 0; k < 40; k++) { const card = f(randomGenome(r)); for (const i of [0, 7, 150, 299]) assert.equal(scoreCard(card, d, i), scoreRow(card, d, i)); }
+  const ds = { cols: { a: [1, 1, -1, -1, 0.5], b: [1, -1, 1, -1, 0.5] } }, card = { rules: [{ feat: 'a', op: '>', v: 0, w: 2, and: { feat: 'b', op: '>', v: 0 } }, { feat: 'a', op: '>', v: 0, w: 0.25, and: { feat: 'a', op: '<=', v: 0.5 } }] };
+  assert.deepEqual([0, 1, 2, 3, 4].map((i) => scoreCard(card, ds, i)), [2, 0, 0, 0, 2.25], 'both conditions, and an interval on one column');
+});
+
+test('the genome operations carry the second condition: drawn in range, crossed slot by slot from one parent, one change a mutation', () => {
+  assert.deepEqual(genomeOps(false), { stem: stemGenome, random: randomGenome, cross: crossGenome, mutate: mutateGenome });
+  const G = genomeOps(true), r = rng(21), slots = [0, 1, 2, 3, 4, 5];
+  const st = G.stem();
+  assert.ok(slots.every((k) => st['a' + k] === 0 && st['g' + k] === k && st['h' + k] === 7 && st['e' + k] === 1), 'the stem pairs nothing');
+  for (let t = 0; t < 30; t++) {
+    const a = G.random(r), b = G.random(r), c = G.cross(a, b, r), m = G.mutate(a, r);
+    assert.ok(slots.every((k) => [0, 1].includes(a['a' + k]) && a['g' + k] >= 0 && a['g' + k] < 16 && a['h' + k] >= 0 && a['h' + k] < 15 && [0, 1].includes(a['e' + k])));
+    assert.ok(slots.every((k) => ['a', 'g', 'h', 'e'].every((f) => c[f + k] === a[f + k]) || ['a', 'g', 'h', 'e'].every((f) => c[f + k] === b[f + k])), 'each slot from one parent');
+    assert.ok(Object.keys(a).filter((key) => m[key] !== a[key]).length <= 1, 'one change');
+    assert.ok(slots.every((k) => m['h' + k] >= 0 && m['h' + k] < 15));
+  }
+  const edge = { ...G.random(r), h0: 14, h1: 14, h2: 14, h3: 0, h4: 0, h5: 0 };
+  let moved = 0;
+  for (let t = 0; t < 400; t++) { const m = G.mutate(edge, rng(t)); assert.ok([0, 1, 2].every((k) => m['h' + k] <= 14) && [3, 4, 5].every((k) => m['h' + k] >= 0), 'the cut stays on the grid'); moved += [0, 1, 2, 3, 4, 5].some((k) => m['h' + k] !== edge['h' + k]); }
+  assert.ok(moved > 10, 'cuts at the edge are moved inward: ' + moved);
+});
+
+test('on a pure interaction, single-column rules find nothing and paired rules find it (pinned)', async () => {
+  const { sha256Hex } = await import('../vendor/living-seed/vendor/seed-library/sha256.mjs');
+  const d = joint(3000, 4), tr = rows(0, 1500), held = rows(1500, 3000), y = held.map((i) => d.y[i]), S = { population: 24, elites: 6, generations: 12, stages: 6 };
+  const A = (b) => auc(held.map((i) => scoreDeep(b, d, i)), y);
+  for (const seed of [2, 3]) { assert.ok(A(growDeep(d, tr, seed, S)) < 0.53); assert.ok(A(growDeep(d, tr, seed, { ...S, pairs: true })) > 0.65, 'seed ' + seed); }
+  assert.deepEqual([1, 2, 3].map((seed) => sha256Hex(JSON.stringify(growDeep(d, tr, seed, { ...S, pairs: true }))).slice(0, 16)), ['531023ece18588ff', '74ec14a32a390fa4', 'c23ba77395add997']);
 });
