@@ -1,0 +1,36 @@
+{
+ "kind": "dex-frontier.organ-2d.verdict",
+ "v": 1,
+ "prereg": "781b2e136b651e6e",
+ "record": "8b4dc03989893f3c",
+ "verdicts": [
+  {
+   "id": "K1",
+   "kind": "property",
+   "claim": "the coupling reads only the live nodes’ scores, learns on GATE only (scrambling TEST changes nothing), is the same twice, and taught shuffled outcomes it scores under 0.6 on TEST",
+   "pass": true,
+   "saw": "telco: the coupling (100 trees, 1001 numbers) reads only telco-account, telco-customer, telco-services: only scores: true; taught shuffled outcomes it scores 0.49573; shop: the coupling (100 trees, 995 numbers) reads only shop-analytics, shop-browsing: only scores: true; taught shuffled outcomes it scores 0.416956; the same twice: true; TEST never read: true"
+  },
+  {
+   "id": "K2",
+   "kind": "prediction",
+   "claim": "in both domains the nonlinear mesh beats the best single node on TEST: bound above 0",
+   "pass": false,
+   "saw": "telco: against the best single node (telco-account): 0.817396 vs 0.813196, lead 0.0042, bound -0.003805; shop: against the best single node (shop-analytics): 0.830184 vs 0.809854, lead 0.020329, bound 0.01252"
+  },
+  {
+   "id": "K3",
+   "kind": "prediction",
+   "claim": "INTERACTIONS ADD: in both domains the nonlinear coupling beats organ 2’s linear coupling of the same nodes: bound above 0",
+   "pass": false,
+   "saw": "telco: against organ 2’s linear coupling of the same nodes: 0.817396 vs 0.82205, lead -0.004654, bound -0.010109; shop: against organ 2’s linear coupling of the same nodes: 0.830184 vs 0.791135, lead 0.039049, bound 0.02857"
+  },
+  {
+   "id": "K4",
+   "kind": "prediction",
+   "claim": "in both domains the nonlinear mesh is within 0.02 of every record pooled: bound above −0.02",
+   "pass": false,
+   "saw": "telco: against every record pooled: 0.817396 vs 0.84632, lead -0.028924, bound -0.038484 against −0.02; shop: against every record pooled: 0.830184 vs 0.826773, lead 0.00341, bound -0.005652 against −0.02"
+  }
+ ]
+}
