@@ -1,0 +1,36 @@
+{
+ "kind": "dex-frontier.organ-2c.verdict",
+ "v": 1,
+ "prereg": "297b1cb9c4fddace",
+ "record": "c559a1f3b703dce3",
+ "verdicts": [
+  {
+   "id": "J1",
+   "kind": "property",
+   "claim": "no coupling weight is negative; every silo after the first offered both its nodes; every node that joined adds on GATE out of fold; the same mesh twice; TEST never read",
+   "pass": true,
+   "saw": "telco: telco-account: grown on its own; telco-services: alone adds 0.00519, co-grown adds 0.004112 → alone; telco-customer: alone adds 0.006662, co-grown adds 0.004242 → alone; weights never negative: true; shop: shop-analytics: grown on its own; shop-browsing: alone adds 0, co-grown adds 0.000073 → co-grown; shop-context: alone adds null, co-grown adds 0.00344 → co-grown; weights never negative: true; the same twice: true; TEST never read: true"
+  },
+  {
+   "id": "J2",
+   "kind": "prediction",
+   "claim": "COMPOSITION, THIRD TAKE: in both domains the mesh beats the best single node on TEST: bound above 0",
+   "pass": false,
+   "saw": "telco: the mesh (telco-account, telco-services, telco-customer) against the best single node (telco-account, alone): 0.82205 vs 0.813196, lead 0.008854, bound 0.001105; shop: the mesh (shop-analytics, shop-browsing (co-grown), shop-context (co-grown)) against the best single node (shop-analytics, alone): 0.8088 vs 0.809854, lead -0.001055, bound -0.004885"
+  },
+  {
+   "id": "J3",
+   "kind": "prediction",
+   "claim": "SAFE: in both domains the mesh is never worse than the best single node by more than 0.002: bound above −0.002",
+   "pass": false,
+   "saw": "telco: never worse than the best node by more than 0.002: bound 0.001105; shop: never worse than the best node by more than 0.002: bound -0.004885"
+  },
+  {
+   "id": "J4",
+   "kind": "prediction",
+   "claim": "in both domains the mesh is within 0.02 of every record pooled: bound above −0.02",
+   "pass": false,
+   "saw": "telco: against every record pooled: 0.82205 vs 0.84632, lead -0.02427, bound -0.033332 against −0.02; shop: against every record pooled: 0.8088 vs 0.826773, lead -0.017974, bound -0.02783 against −0.02"
+  }
+ ]
+}
