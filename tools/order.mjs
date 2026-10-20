@@ -19,6 +19,7 @@ export const ORGANS = {
   '2b': { seal: 'data/organ-2b/prereg.json', later: ['data/organ-2b/record.json'] },
   '2c': { seal: 'data/organ-2c/prereg.json', later: ['data/organ-2c/record.json'] },
   '2d': { seal: 'data/organ-2d/prereg.json', later: ['data/organ-2d/record.json'] },
+  '2e': { seal: 'data/organ-2e/prereg.json', later: ['data/organ-2e/record.json'] },
   3: { seal: 'data/organ-3/prereg.json', later: ['data/organ-3/record.json'] },
   4: { seal: 'data/organ-4/prereg.json', later: ['data/organ-4/record.json'] },
   5: { seal: 'data/organ-5/prereg.json', later: ['data/organ-5/record.json'] },
