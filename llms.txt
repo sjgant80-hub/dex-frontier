@@ -1,0 +1,26 @@
+# The Self-Growing DEX Frontier
+
+> A way to build one AI from many departments without pooling their records. Each department grows a small specialist from its own records, on its own machine, from a signed seed of a few hundred bytes. A specialist that cannot prove itself on cases it never trained on is cut. The live ones answer together: each scores the case from what it knows, and a coupling learned from outcomes weighs their scores into one answer.
+
+Live: https://sjgant80-hub.github.io/dex-frontier/
+Code: https://github.com/sjgant80-hub/dex-frontier (MIT, no licence fee)
+
+## Organs (sealed before measured; failures kept)
+- Organ 1 · One specialist body: one department’s node against a 14B and a frontier model. sealed, being measured; being asked.
+- Organ 2 · The composition proof: specialists compose into more than the sum, before anything scales. sealed, being measured; being asked.
+
+## Questions
+- What is it? A way to build one AI from many departments without pooling their records. Each department grows a small specialist from its own records, on its own machine, from a signed seed of a few hundred bytes. A specialist that cannot prove itself on cases it never trained on is cut. The live ones answer together: each scores the case from what it knows, and a coupling learned from outcomes weighs their scores into one answer.
+- Is this a large language model? No. What runs here answers questions about structured business records: will this customer leave, will this visitor buy. Each specialist is a handful of readable rules. The spec it was built from aims, in the end, at a distributed frontier language model grown the same way. What is proven here, on real data, is the step the spec says must come first: whether specialists compose into more than the sum.
+- Do any records leave a department? No. A node reads only its own silo’s columns, on its own machine, and what crosses between nodes is a score per case. The page enforces the same in your browser: its security policy lets it connect only to its own site, and the data it uses are its own files.
+- Did composition work? It is being measured now. The rules were sealed before a single test case was scored. This answer fills in from the record when it is judged.
+- How does it compare with putting every record in one place? It is being measured now: the composed mesh against boosted trees and logistic regression with every record pooled in one place.
+- How does it compare with a 14-billion-parameter model and a frontier model? Both have answered or are answering now, on 300 test cases per domain: the local 14B one case at a time, the frontier model all 300 at once.
+- How is this different from federated learning? Federated learning sends model updates, weights or gradients, from each party to a centre that averages them. Here each department’s records hold different columns about the same customers (the setting known as vertically partitioned data), and nothing is averaged. Each node is grown on its own columns, and what crosses is one score per case. The coupling is stacked generalisation, a known technique: a small model learns how to weigh the specialists’ answers.
+- What if one department’s records are poor? Its node is cut. It must clear its bar on cases it never grew on, or it answers nothing and the rest carry on. On this page the shop’s context silo (browser, region, traffic source, visitor type) is that case: it was cut at its gate.
+- Can a department leave, or join, without retraining everything? Yes. A node is unplugged by dropping it, and the coupling re-learns its few weights from held-back outcomes in milliseconds; no other node changes. Box 5 does it live. A new department grows its own node from its own seed and joins the same way.
+- What did not work? Nothing is measured yet. Every failed prediction will be kept on this page with its reason.
+- How do I check it myself? In this browser: box 2 grows all six nodes and checks them against CI’s record, and box 4 re-scores every test case. On your own machine, with Node 20 or later and the repository: npm test runs every test; node witness-all.mjs breaks every kernel line by line and checks the tests notice; node tools/measure-2.mjs --check re-derives the composition proof byte for byte. It takes someone who can run a command line.
+- What does it cost? The code is MIT licensed: no licence fee. It runs on machines you already have, with no cloud, no model hosting and no central data store. Support is agreed per deployment with AI Native Solutions.
+
+Supplier: AI Native Solutions (https://www.ai-nativesolutions.com). Powered by the Konomi architecture, created by Thomas Frumkin.

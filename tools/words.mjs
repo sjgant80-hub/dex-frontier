@@ -5,6 +5,7 @@
 // "failed"; <!-- w:name --> … <!-- /w:name --> blocks get a generated paragraph. An organ not yet measured reads "…".
 //   node tools/words.mjs [--write|--check]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { copy } from './copy.mjs';
 
 const ROOT = new URL('../', import.meta.url);
 const read = (p) => readFileSync(new URL(p, ROOT), 'utf8');
@@ -50,14 +51,14 @@ export function blocks(R = records()) {
     const r = R['1'].r;
     out.verdict1 = '<p class="answer"><b>The verdict.</b> The billing department’s node, seeing 7 of the 20 columns, ' + (pass(R, '1', 'A2') ? 'beat' : 'did not beat') + ' the 14B that saw all 20 beyond the noise (' + format(r.local.vs.a, 3) + ' against ' + format(r.local.vs.b, 3) + ', bound ' + format(r.local.vs.low95, 3) + '), and it ' + (pass(R, '1', 'A3') ? 'held within 0.02 of' : 'fell more than 0.02 behind') + ' the frontier model (' + format(r.frontier.vs.b, 3) + ', bound ' + format(r.frontier.vs.low95, 3) + '). ' + (R['1'].v.every((v) => v.pass) ? 'Every sealed rule held.' : R['1'].v.filter((v) => !v.pass).map((v) => v.id).join(', ') + ' failed as sealed, and is kept.') + '</p>';
   } else out.verdict1 = '<p class="answer"><b>Sealed, being measured.</b> This fills in from the record when it is judged.</p>';
-  return out;
+  return { ...out, ...copy(R, { pass, format }) };
 }
 
 /** the page with every generated number, word and block written in */
 export function render(html, R = records()) {
   const t = tally(R);
   for (const [k, v] of Object.entries(t)) html = html.replace(new RegExp('(data-tally="' + k + '">)[^<]*(<)', 'g'), '$1' + v + '$2');
-  html = html.replace(/(data-r="([0-9])+:([^"|]+)(?:\|([a-z0-9]+))?">)[^<]*(<)/g, (m, open, k, path, f, close) => open + (R[k] ? format(at(R[k].r, path), f) : '…') + close);
+  html = html.replace(/(data-r="([0-9]+):([^"|]+)(?:\|([a-z0-9]+))?">)[^<]*(<)/g, (m, open, k, path, f, close) => open + (R[k] ? format(at(R[k].r, path), f) : '…') + close);
   html = html.replace(/(data-v="([0-9]+):([A-Z][0-9]+)">)[^<]*(<)/g, (m, open, k, id, close) => open + (pass(R, k, id) === null ? '…' : pass(R, k, id) ? 'held' : 'failed') + close);
   for (const [k, v] of Object.entries(blocks(R))) html = html.replace(new RegExp('(<!-- w:' + k + ' -->)[\\s\\S]*?(<!-- /w:' + k + ' -->)'), '$1' + v + '$2');
   return html.replace(/(<meta name="description" content="[^"]*?)[0-9]+ of [0-9]+( sealed rules held)/, '$1' + t.held + '$2');

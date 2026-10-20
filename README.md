@@ -14,6 +14,10 @@ more than the sum?** That is organ 2, sealed before it ran and allowed to fail.
 ## The organs (sealed, measured, judged; failures kept)
 
 <!-- geo:organs -->
+| # | Organ | What it had to show | Sealed rules | What happened |
+|---|---|---|---|---|
+| 1 | **One specialist body** | one department’s node against a 14B and a frontier model | sealed, being measured | being asked |
+| 2 | **The composition proof** | specialists compose into more than the sum, before anything scales | sealed, being measured | being asked |
 <!-- /geo:organs -->
 
 ## Run it yourself

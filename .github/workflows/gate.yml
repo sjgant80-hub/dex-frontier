@@ -20,3 +20,7 @@ jobs:
       - name: organ 2, the composition proof (re-grown, re-coupled, re-scored, re-judged, seal first)
         run: |
           if [ -f data/organ-2/record.json ]; then node tools/measure-2.mjs --check && node tools/judge-2.mjs --check && node tools/order.mjs --organ 2; else test -f data/organ-2/prereg.json && echo "organ 2 sealed, being asked"; fi
+      - name: the page says what the records say (every number and result-dependent sentence generated), and its AI layer too
+        run: node tools/words.mjs --check && node tools/geo.mjs --check
+      - name: the page's security policy pins exactly its scripts, and lets it connect nowhere but its own site
+        run: node tools/csp.mjs --check
