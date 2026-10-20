@@ -1,8 +1,8 @@
 // deep.test.mjs — the deeper grown body: the seed library's ribosome grown in stages, each kept only if it pays. Synthetic.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { growDeep, scoreDeep, DEEP } from '../src/deep.mjs';
-import { rng, auc, fit, scoreRow } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
+import { growDeep, scoreDeep, DEEP, fitter } from '../src/deep.mjs';
+import { rng, auc, fit, scoreRow, stemGenome, randomGenome } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
 
 /** ten columns that each carry a little of the outcome: more than one six-rule scorecard can hold */
 function wide(n, seed, signal = true) {
@@ -65,4 +65,12 @@ test('the body is pinned: the same data and seed grow these exact bytes (any cha
   const { sha256Hex } = await import('../vendor/living-seed/vendor/seed-library/sha256.mjs');
   const d = wide(900, 5), pins = { 1: 'b3a974532422206a', 2: 'ad4d6adad7157e2f', 3: '2e4143453a7d7131', 4: 'e6b0169875aa7431', 5: '311020041b9e26f6', 6: '1298a9bb94dba7ec' };
   for (const [s, pin] of Object.entries(pins)) assert.equal(sha256Hex(JSON.stringify(growDeep(d, rows(0, 600), Number(s), SMALL))).slice(0, 16), pin, 'seed ' + s);
+});
+
+test('fitter is the seed library’s fit exactly, on any rows (none, one, many), for any genome', () => {
+  const d = wide(300, 4), r = rng(77);
+  for (const rs of [[], [7], rows(0, 2), rows(0, 300), rows(50, 213)]) {
+    const f = fitter(d, rs);
+    for (let k = 0; k < 60; k++) { const g = k === 0 ? stemGenome() : randomGenome(r); assert.deepEqual(f(g), fit(d, rs, g), "rows " + rs.length + " genome " + k); }
+  }
 });
