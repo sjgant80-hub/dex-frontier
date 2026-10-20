@@ -6,6 +6,8 @@
 //   node tools/words.mjs [--write|--check]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { copy } from './copy.mjs';
+import { format } from './format.mjs';
+export { format };
 
 const ROOT = new URL('../', import.meta.url);
 const read = (p) => readFileSync(new URL(p, ROOT), 'utf8');
@@ -19,15 +21,6 @@ export function records() {
 
 /** a record value at a dotted path */
 export function at(obj, path) { return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj); }
-
-/** a value as the page prints it */
-export function format(v, f) {
-  if (typeof v !== 'number' || !Number.isFinite(v)) return typeof v === 'string' ? v : '…';
-  if (f === 'n') return v.toLocaleString('en-GB');
-  if (f === 's') return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(3);
-  const d = Number(f);
-  return Number.isInteger(d) ? v.toFixed(d) : String(v);
-}
 
 /** the tally across every judged organ */
 export function tally(R = records()) {
