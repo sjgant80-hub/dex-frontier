@@ -1,0 +1,90 @@
+{
+ "kind": "dex-frontier.diagnose",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read",
+ "settings": {
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  }
+ },
+ "telco": {
+  "pooled": 0.849756,
+  "grown": {
+   "nodes": [
+    "telco-account",
+    "telco-services",
+    "telco-customer"
+   ],
+   "alone": [
+    0.813515,
+    0.729309,
+    0.661938
+   ],
+   "numbers": 3,
+   "linear": 0.819271,
+   "trees": 0.810551
+  },
+  "rules": {
+   "numbers": 16,
+   "linear": 0.824048,
+   "trees": 0.822992
+  },
+  "deep": {
+   "silos": [
+    "telco-customer",
+    "telco-services",
+    "telco-account"
+   ],
+   "alone": [
+    0.67303,
+    0.784437,
+    0.840161
+   ],
+   "numbers": 3,
+   "linear": 0.84502,
+   "trees": 0.835912
+  }
+ },
+ "shop": {
+  "pooled": 0.944779,
+  "grown": {
+   "nodes": [
+    "shop-analytics",
+    "shop-browsing"
+   ],
+   "alone": [
+    0.917962,
+    0.664534
+   ],
+   "numbers": 2,
+   "linear": 0.918629,
+   "trees": 0.933893
+  },
+  "rules": {
+   "numbers": 10,
+   "linear": 0.918757,
+   "trees": 0.940479
+  },
+  "deep": {
+   "silos": [
+    "shop-browsing",
+    "shop-analytics",
+    "shop-context"
+   ],
+   "alone": [
+    0.6904,
+    0.919856,
+    0.661809
+   ],
+   "numbers": 3,
+   "linear": 0.926246,
+   "trees": 0.925172
+  }
+ },
+ "testNeverRead": true
+}
