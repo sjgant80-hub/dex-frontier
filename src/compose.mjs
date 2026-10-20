@@ -39,6 +39,27 @@ export function couple(columns, y, { lambda = 1, iterations = 50, tol = 1e-10 } 
   return { weights: w, mean, sd, lambda, steps };
 }
 
+/**
+ * A coupling whose node weights may not go below zero (Breiman 1996, Stacked Regressions: non-negative stacking): a
+ * node may add its word or be silent, but never be counted against its own evidence — the failure organ 2 found on the
+ * shop, where a weight learned negative on February–October pulled the holiday months the wrong way. Active set: learn
+ * the free coupling on the nodes still in; if any weight is below zero, silence the most negative and learn again.
+ * → the same shape as couple(), every node's weight present (0 for a silenced one), plus silenced: [node indices]
+ */
+export function coupleNonNegative(columns, y, opts) {
+  const k = columns.length, silenced = [];
+  for (;;) {
+    const keep = columns.map((_, j) => j).filter((j) => !silenced.includes(j));
+    const c = couple(keep.map((j) => columns[j]), y, opts), w = keep.map((_, i) => c.weights[i + 1]);
+    const worst = w.reduce((m, v, i) => (v < w[m] ? i : m), 0);
+    if (w[worst] >= 0 || keep.length === 1) {
+      const { mean, sd } = scale(columns), weights = [c.weights[0], ...columns.map((_, j) => (keep.includes(j) ? Math.max(0, w[keep.indexOf(j)]) : 0))];
+      return { weights, mean, sd, lambda: c.lambda, steps: c.steps, silenced: silenced.slice().sort((p, q) => p - q), k };
+    }
+    silenced.push(keep[worst]);
+  }
+}
+
 /** the coupled answer for one case, from each node's score in the coupling's order (log-odds) */
 export function coupled(c, scores) {
   return scores.reduce((a, s, k) => a + c.weights[k + 1] * ((s - c.mean[k]) / c.sd[k]), c.weights[0]);

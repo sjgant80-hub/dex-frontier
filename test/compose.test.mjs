@@ -81,3 +81,26 @@ test('shams: random routing answers each case from one node; a coupling taught s
   const sham = couple([FIT.a, FIT.b], sy), shamScores = TEST.a.map((_, i) => coupled(sham, [TEST.a[i], TEST.b[i]]));
   assert.ok(Math.abs(aucOf(shamScores, TEST.y) - 0.5) < 0.12 || Math.abs(sham.weights[1]) + Math.abs(sham.weights[2]) < 0.3, 'taught nothing true');
 });
+
+test('a non-negative coupling: the free one when every weight is already positive; otherwise the node pulled below zero is silenced', async () => {
+  const { coupleNonNegative } = await import('../src/compose.mjs');
+  const free = couple([FIT.a, FIT.b], FIT.y), nn = coupleNonNegative([FIT.a, FIT.b], FIT.y);
+  assert.deepEqual(nn.weights, free.weights, 'nothing to silence: the same coupling'); assert.deepEqual(nn.silenced, []); assert.equal(nn.k, 2);
+  // c is noise, and against = −a: a free coupling counts "against" negatively; the non-negative one silences it
+  const against = FIT.a.map((v) => -v + 0.01 * FIT.c[FIT.a.indexOf(v)]);
+  const f2 = couple([FIT.b, against], FIT.y), n2 = coupleNonNegative([FIT.b, against], FIT.y);
+  assert.ok(f2.weights[2] < 0, 'the free coupling counts it against: ' + f2.weights[2]);
+  assert.deepEqual(n2.silenced, [1]); assert.equal(n2.weights[2], 0);
+  assert.deepEqual(n2.weights.slice(0, 2), couple([FIT.b], FIT.y).weights, 'the rest is the coupling of the nodes left');
+  assert.ok(n2.weights.slice(1).every((w) => w >= 0), 'never a negative weight');
+  assert.equal(n2.mean.length, 2); assert.equal(coupled(n2, [FIT.b[0], against[0]]), coupled(couple([FIT.b], FIT.y), [FIT.b[0]]), 'a silenced node changes no answer');
+  const alone = coupleNonNegative([against], FIT.y);
+  assert.deepEqual(alone.weights.slice(1), [0], 'a lone node against its evidence says nothing'); assert.deepEqual(alone.silenced, []);
+  const three = coupleNonNegative([FIT.a, against.map((v) => v * 2), FIT.b], FIT.y);
+  assert.ok(three.silenced.includes(1) && three.weights[2] === 0 && three.weights[1] > 0 && three.weights[3] > 0, JSON.stringify(three.weights));
+  const still = coupleNonNegative([FIT.a, new Array(600).fill(3)], FIT.y);
+  assert.equal(couple([FIT.a, new Array(600).fill(3)], FIT.y).weights[2], 0, 'a node that never varies gets a free weight of exactly 0');
+  assert.deepEqual(still.silenced, [], 'and a weight of exactly 0 is not below zero: nothing is silenced');
+  const twins = coupleNonNegative([against, against.slice()], FIT.y);
+  assert.deepEqual(twins.silenced, [0], 'two equally against: the first is silenced, and the last one left stands alone');
+});

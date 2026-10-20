@@ -24,9 +24,9 @@ export async function nodes(views, { seed = 1, maker = (v) => v.name.split('-').
 /** the live nodes, best GATE first (ties by name) */
 export const liveOf = (ns) => ns.filter((n) => n.advert.state === 'live').sort((a, b) => b.advert.gateAuc - a.advert.gateAuc || (a.name < b.name ? -1 : 1));
 
-/** a mesh: the coupling learned on GATE over these live nodes; score(rows) → composed scores */
-export function mesh(ds, live) {
-  const gateY = ds.gateRows.map((i) => ds.y[i]), gateCols = live.map((n) => scores(n.organism, n.view, ds.gateRows)), c = couple(gateCols, gateY);
+/** a mesh: the coupling learned on GATE over these live nodes (organ 2's free coupling unless another is given) */
+export function mesh(ds, live, coupler = couple) {
+  const gateY = ds.gateRows.map((i) => ds.y[i]), gateCols = live.map((n) => scores(n.organism, n.view, ds.gateRows)), c = coupler(gateCols, gateY);
   const cols = (rows) => live.map((n) => scores(n.organism, n.view, rows));
   return { c, gateCols, gateY, cols, score: (rows) => { const k = cols(rows); return rows.map((_, r) => coupled(c, k.map((x) => x[r]))); } };
 }

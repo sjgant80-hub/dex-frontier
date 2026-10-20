@@ -15,6 +15,7 @@ import { cogrow } from '../src/cogrow.mjs';
 import { fixedRecipe } from '../src/population.mjs';
 import { contribution } from '../src/wisp.mjs';
 import { lead } from '../src/stats.mjs';
+import { coupleNonNegative } from '../src/compose.mjs';
 import { GROW } from '../src/node.mjs';
 import { seal } from '../vendor/living-seed/src/genome.mjs';
 import { boosted } from '../vendor/living-seed/src/baseline.mjs';
@@ -42,12 +43,19 @@ async function domain(ds) {
     if (joined) inMesh.push(candidate);
     steps.push({ silo: n.name, how: 'co-grown', innerFitness: g.fitness, gateAlone: grown.organ.heldAuc, addsOnGate: adds, joined, rules: grown.organ.body ? grown.organ.body.rules.length : 0 });
   }
-  const co = mesh(ds, inMesh), coS = co.score(ds.testRows), soloS = mesh(ds, soloLive).score(ds.testRows);
-  const singles = inMesh.map((m) => ({ node: m.name, s: scores(m.organism, m.view, ds.testRows) })), bestK = singles.reduce((b, x, k) => (auc(x.s, testY) > auc(singles[b].s, testY) ? k : b), 0);
-  const allSingles = solo.filter((m) => m.advert.state === 'live').map((m) => scores(m.organism, m.view, ds.testRows)).concat(singles.map((x) => x.s));
-  const bestAny = allSingles.reduce((b, s) => (auc(s, testY) > auc(b, testY) ? s : b));
+  // A — organ 2's mesh (nodes grown alone, a free coupling); B — the same nodes, the non-negative coupling;
+  // C — the fix: co-grown nodes that joined through the gate on composition, coupled non-negatively
+  const A = mesh(ds, soloLive).score(ds.testRows), bMesh = mesh(ds, soloLive, coupleNonNegative), B = bMesh.score(ds.testRows);
+  const cMesh = mesh(ds, inMesh, coupleNonNegative), C = cMesh.score(ds.testRows);
+  const singles = [...soloLive, ...inMesh.slice(1)].map((m) => ({ node: m.name, how: soloLive.includes(m) ? 'alone' : 'co-grown', s: scores(m.organism, m.view, ds.testRows) }));
+  const best = singles.reduce((b, x) => (auc(x.s, testY) > auc(b.s, testY) ? x : b));
   const P = pooled(ds), b = boosted(P, P.rows), bS = ds.testRows.map((i) => b.score(i));
-  return { steps, mesh: inMesh.map((m) => m.name), coAuc: testAuc(ds, coS), soloAuc: testAuc(ds, soloS), vsBest: lead(coS, bestAny, testY), vsSolo: lead(coS, soloS, testY), vsMonolith: lead(coS, bS, testY), bestInMesh: singles[bestK].node };
+  const named = (m, nodesIn) => nodesIn.map((n, k) => ({ node: n.name, weight: round6(m.c.weights[k + 1]) }));
+  return { steps, best: { node: best.node, how: best.how, testAuc: testAuc(ds, best.s) },
+    A: { auc: testAuc(ds, A) },
+    B: { auc: testAuc(ds, B), weights: named(bMesh, soloLive), silenced: bMesh.c.silenced.map((k) => soloLive[k].name), vsA: lead(B, A, testY), vsBest: lead(B, best.s, testY) },
+    C: { auc: testAuc(ds, C), mesh: inMesh.map((m) => m.name), weights: named(cMesh, inMesh), silenced: cMesh.c.silenced.map((k) => inMesh[k].name), vsBest: lead(C, best.s, testY), vsA: lead(C, A, testY), vsMonolith: lead(C, bS, testY) },
+    nonNegative: [bMesh, cMesh].every((m) => m.c.weights.slice(1).every((w) => w >= 0)) };
 }
 
 export async function measure() {
