@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pEPyFxTVb4xNG7yp1a/GUh8QoKGHHG/qJB/aOuKxNQk=' 'sha256-iffa3G5KY2bEfjRk0Jas1hQbdddLDmYZs3jmMdUobMc='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pEPyFxTVb4xNG7yp1a/GUh8QoKGHHG/qJB/aOuKxNQk=' 'sha256-etj9VjG7uW305bbn3VQPqfHoP/IWZ8gNfyBQ7P31hO8='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Self-Growing DEX Frontier</title>
 <meta name="description" content="A frontier mind grown, not poured: specialist nodes grown from seeds on each department’s own records, coupled into one answer, records never shared. The composition proof was sealed before it ran: 0 of 0 sealed rules held." />
@@ -152,13 +152,14 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
 
 <section id="start" aria-labelledby="start-h">
   <h2 id="start-h"><span class="n">01</span>Start here</h2>
-  <p>Five steps, a few minutes. Everything happens in this tab, on this page’s own files. Nothing you do leaves it.</p>
+  <p>Six steps, a few minutes. Everything happens in this tab, on this page’s own files. Nothing you do leaves it.</p>
   <ol class="steps">
     <li><b>See the seeds.</b> Box 1 shows the six seeds, one per silo: three for a telecom company’s customers, three for a web shop’s sessions. Each is signed by the contributor who owns that silo.</li>
     <li><b>Grow the mesh.</b> Press <i>Grow all six nodes</i> in box 2. Your browser grows each node from its own silo’s records, holds it to its bar, and learns the coupling. One node may be cut. Read why.</li>
     <li><b>Ask it.</b> In box 3, draw a case it never trained on. Each node answers from its own silo (or abstains), the coupling weighs them, and you see what really happened.</li>
     <li><b>Re-run the proof.</b> Box 4 re-scores every test case and puts the composed mesh against its best single node, the shams and the poured monolith, beside the committed record.</li>
     <li><b>Break it.</b> Unplug a node in box 5 and watch the mesh carry on without it. Change one character of a seed in box 6 and watch it refused.</li>
+    <li><b>Watch it live.</b> Breed two nodes in box 7: their child is born only if it beats both. In box 8, the strongest node starts answering noise half-way through the test stream. The mesh that keeps learning cuts it; the one that doesn’t keeps trusting it.</li>
   </ol>
 </section>
 
@@ -175,6 +176,10 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
   <div class="grid two" style="margin-top:14px">
     <div class="panel"><h3>5 · Unplug a node</h3><div class="row"><label for="b5-n">Node</label><select id="b5-n"></select><button id="b5-go" type="button" disabled>Unplug it and re-couple</button></div><div id="b5" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
     <div class="panel"><h3>6 · Change one character of a seed</h3><div class="row"><button id="b6-go" type="button" disabled>Change one character and grow</button></div><div id="b6" role="status" aria-live="polite"><p class="dim">A seed is checked against its signature before a single line of it is read.</p></div></div>
+  </div>
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel"><h3>7 · Breed two nodes</h3><div class="row"><label for="b7-s">Silo</label><select id="b7-s"><option value="telco/account">telco · account</option><option value="telco/services">telco · services</option><option value="shop/analytics">shop · analytics</option><option value="shop/browsing">shop · browsing</option></select><button id="b7-go" type="button" disabled>Grow two parents and breed</button></div><div id="b7" role="status" aria-live="polite"><p class="dim">Two contributors grow a node each on the same silo; their child is born only if it beats both on cases neither grew on.</p></div></div>
+    <div class="panel"><h3>8 · Break a node mid-stream</h3><div class="row"><label for="b8-d">Domain</label><select id="b8-d"><option value="telco">telco</option><option value="shop">shop</option></select><button id="b8-go" type="button" disabled>Break the strongest node half-way</button></div><div id="b8" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2). Then the test cases stream in, and half-way the strongest node starts answering noise.</p></div></div>
   </div>
 </section>
 
@@ -325,6 +330,8 @@ import { lead } from './src/stats.mjs';
 import { boosted } from './vendor/living-seed/src/baseline.mjs';
 import { caseOf } from './vendor/living-seed/src/germinate.mjs';
 import { auc } from './vendor/living-seed/vendor/seed-library/seedlib.mjs';
+import { member, breed } from './src/population.mjs';
+import { order, run, breakAt } from './src/wisp.mjs';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -349,7 +356,7 @@ async function boot() {
   $('b1').innerHTML = '<div class="tw"><table><thead><tr><th>Domain</th><th>Silo</th><th>Columns it sees</th><th>Seed</th><th>Contributor’s key</th></tr></thead><tbody>'
     + S.seeds.map((s) => '<tr><td>' + s.d + '</td><td><b>' + esc(s.name) + '</b></td><td class="dim">' + esc(s.view.features.join(', ')) + '</td><td class="num">' + gb(new TextEncoder().encode(s.genome.text).length) + ' bytes</td><td><code>' + esc(s.keys.pub.slice(0, 16)) + '…</code></td></tr>').join('')
     + '</tbody></table></div><details><summary>The account node’s whole seed, as it travels</summary><pre class="mono">' + esc(S.seeds.find((s) => s.name === 'account').genome.text) + '</pre></details>';
-  $('b2-go').disabled = false; $('b6-go').disabled = false;
+  $('b2-go').disabled = false; $('b6-go').disabled = false; $('b7-go').disabled = false;
 }
 
 async function growAll() {
@@ -369,7 +376,7 @@ async function growAll() {
   }
   $('b2-t').textContent = 'grown in ' + Math.round((performance.now() - t0) / 1000) + ' s, here';
   $('b2').innerHTML = table(rows) + ['telco', 'shop'].map((d) => '<p><b>' + d + ' coupling:</b> ' + S.mesh[d].live.map((n, k) => esc(n.name) + ' × ' + S.mesh[d].c.weights[k + 1].toFixed(2)).join(', ') + ' — learned from ' + gb(S.mesh[d].gateY.length) + ' GATE outcomes.</p>').join('') + compareGrown();
-  for (const id of ['b3-go', 'b4-go', 'b5-go']) $(id).disabled = false;
+  for (const id of ['b3-go', 'b4-go', 'b5-go', 'b8-go']) $(id).disabled = false;
   $('b5-n').innerHTML = rows.filter((r) => r.advert.state === 'live').map((r) => '<option value="' + esc(r.d + '/' + r.name) + '">' + esc(r.d + ' · ' + r.name) + '</option>').join('');
   for (const id of ['b3', 'b4', 'b5']) $(id).innerHTML = '<p class="dim">Ready.</p>';
 }
@@ -431,6 +438,27 @@ async function tamper() {
   const s = S.seeds.find((x) => x.name === 'account'), text = s.genome.text, at = text.indexOf('auc=') + 6, bad = text.slice(0, at) + (text[at] === '6' ? '7' : '6') + text.slice(at + 1);
   const n = await growNode(bad, s.view);
   $('b6').innerHTML = n.ok ? '<p class="bad-t">✗ It grew — this should not happen.</p>' : '<p class="ok-t">✓ Refused before a line of it was read: ' + esc(n.why) + '. Nothing grew.</p><p class="dim">The changed character: the bar in <code>gate auc=…</code>, one digit.</p>';
+}
+
+async function breedTwo() {
+  const [d, name] = $('b7-s').value.split('/'), view = silo(S.ds[d], name);
+  $('b7-go').disabled = true; $('b7').innerHTML = '<p class="dim">Growing two parents on ' + esc(d + ' · ' + name) + '…</p>'; await tick();
+  const parents = [];
+  for (const [who, seed] of [[name, 1], [name + '-2', 2]]) { const keys = await contributor(who), g = await sealNode(view, keys, { seed }), n = await growNode(g.text, view); parents.push(member(g, n)); await tick(); }
+  const breeder = await contributor(view.name + '-breeder'), tries = [];
+  for (let s = 1; s <= 6; s++) { $('b7').innerHTML = '<p class="dim">Breeding, try ' + s + ' of 6…</p>'; await tick(); tries.push([s, await breed(parents[0], parents[1], view, breeder, s)]); }
+  $('b7').innerHTML = '<p>Parents on GATE: <b>' + f3(parents[0].gateAuc) + '</b> and <b>' + f3(parents[1].gateAuc) + '</b>. Six breedings, each child the parents’ rules crossed and, half the time, changed once:</p><ul>'
+    + tries.map(([s, o]) => '<li>try ' + s + ': ' + (o.born ? '<span class="ok-t">born</span>, GATE ' + f3(o.child.gateAuc) + ', its seal names both parents' : '<span class="warn-t">refused</span>: ' + esc(o.why)) + '</li>').join('') + '</ul>';
+  $('b7-go').disabled = false;
+}
+
+function breakNode() {
+  const d = $('b8-d').value, ds = S.ds[d], m = S.mesh[d], half = Math.floor(ds.testRows.length / 2);
+  const stream = d === 'telco' ? order(ds.testRows, 5005) : ds.testRows, cols = m.live.map((n) => scores(n.grown.organism, n.view, stream)), y = stream.map((i) => ds.y[i]);
+  const broken = { cols: cols.map((c, k) => (k === 0 ? breakAt(c, half, 55) : c)), y }, gate = { cols: m.gateCols, y: m.gateY };
+  const frozen = run(gate, broken, { size: 300 }), wisp = run(gate, broken, { size: 300, learn: true, prune: true });
+  const late = (s) => auc(s.slice(half), y.slice(half)), at = wisp.live.findIndex((l, w) => w * 300 >= half && !l.includes(0));
+  $('b8').innerHTML = '<p>Half-way through ' + gb(stream.length) + ' test cases, <b>' + esc(m.live[0].name) + '</b> began answering noise.</p><p class="answer">On the rest of the stream: the frozen mesh <b>' + f3(late(frozen.scores)) + '</b>, the wisp <b>' + f3(late(wisp.scores)) + '</b>. ' + (at >= 0 ? 'The wisp cut the broken node in window ' + (at + 1) + ', ' + (at - Math.floor(half / 300)) + ' after the break.' : 'The wisp did not cut it.') + '</p>';
 }
 
 function rulesTable(pre, ver) {
@@ -496,6 +524,8 @@ $('b3-go').addEventListener('click', ask);
 $('b4-go').addEventListener('click', proof);
 $('b5-go').addEventListener('click', unplug);
 $('b6-go').addEventListener('click', tamper);
+$('b7-go').addEventListener('click', breedTwo);
+$('b8-go').addEventListener('click', breakNode);
 records().catch(() => {});
 boot().catch((e) => { $('b1').innerHTML = '<p class="bad-t">The page could not load its data: ' + esc(e.message) + '</p>'; });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
