@@ -47,7 +47,7 @@ export function blocks(R = records()) {
     const r = R['1'].r;
     out.verdict1 = '<p class="answer"><b>The verdict.</b> The billing department’s node, seeing 7 of the 20 columns, ' + (pass(R, '1', 'A2') ? 'beat' : 'did not beat') + ' the 14B that saw all 20 beyond the noise (' + format(r.local.vs.a, 3) + ' against ' + format(r.local.vs.b, 3) + ', bound ' + format(r.local.vs.low95, 's') + '), and it ' + (pass(R, '1', 'A3') ? 'held within 0.02 of' : 'fell more than 0.02 behind') + ' the frontier model (' + format(r.frontier.vs.b, 3) + ', bound ' + format(r.frontier.vs.low95, 's') + '). ' + (R['1'].v.every((v) => v.pass) ? 'Every sealed rule held.' : R['1'].v.filter((v) => !v.pass).map((v) => v.id).join(', ') + ' failed as sealed, and ' + (R['1'].v.filter((v) => !v.pass).length > 1 ? 'are' : 'is') + ' kept.') + '</p>';
   } else out.verdict1 = '<p class="answer"><b>Sealed, being measured.</b> This fills in from the record when it is judged.</p>';
-  return { ...out, trace: traced(), ...later(R), ...copy(R, { pass, format }) };
+  return { ...out, gate: gate(R), trace: traced(), ...later(R), ...copy(R, { pass, format }) };
 }
 
 /** how it works, traced from a real run (data/trace.json, written after organ 2 is measured) */
@@ -61,13 +61,38 @@ export function traced() {
   return one('telco', t.telco) + one('shop', t.shop);
 }
 
+/** the gate, taken as many times as it took: every sealed attempt at composition, side by side */
+export const ATTEMPTS = [
+  ['2', 'nodes grown alone, a linear coupling (organ 2)', (r, d) => [r[d].composedAuc, r[d].vsBest]],
+  ['2b', 'a coupling that counts no node against its own evidence; nodes co-grown to complement; a gate on what a node adds', (r, d) => [r[d].C.auc, r[d].C.vsBest]],
+  ['2c', 'as 2b, with co-growth coupled the way the mesh is, and each silo offering both its nodes', (r, d) => [r[d].auc, r[d].vsBest]],
+  ['2d', 'a nonlinear coupling: small boosted trees over the nodes’ scores (interactions)', (r, d) => [r[d].auc, r[d].vsBest]],
+  ['2e', 'the mesh chooses its own coupling, linear or trees, out of fold on the cases it may learn from', (r, d) => [r[d].auc, r[d].vsBest]],
+];
+export function gate(R) {
+  const tried = ATTEMPTS.filter(([k]) => R[k]);
+  if (!tried.length) return '';
+  const cell = (k, get, d) => { const [a, v] = get(R[k].r, d); return format(a, 3) + ' vs ' + format(v.b, 3) + ' <span class="dim">(bound ' + format(v.low95, 's') + ')</span>'; };
+  const passes = (k, get) => ['telco', 'shop'].every((d) => get(R[k].r, d)[1].low95 > 0);
+  const first = tried.find(([k, , get]) => passes(k, get));
+  return '<h3 id="gate">The gate, taken ' + tried.length + ' time' + (tried.length === 1 ? '' : 's') + ', every attempt sealed first</h3><p>' + (first
+    ? 'Composition first held in both domains in organ ' + first[0] + ': ' + first[1] + '. Every earlier attempt is kept with its failures, and so are this one’s. That it took ' + tried.length + ' sealed attempts is itself a reason to read the pass with care: each attempt answers a failure the one before it recorded, and none chose anything on the test cases.'
+    : 'Composition has not yet held in both domains. Every attempt is kept with its failures.')
+    + '</p><div class="tw"><table><thead><tr><th>Organ</th><th>How the nodes were composed</th><th>Telco: mesh vs best node</th><th>Shop: mesh vs best node</th><th>Beats the best node in both?</th></tr></thead><tbody>'
+    + tried.map(([k, how, get]) => '<tr><td><a href="#fix">' + k + '</a></td><td>' + how + '</td><td class="num">' + cell(k, get, 'telco') + '</td><td class="num">' + cell(k, get, 'shop') + '</td><td>' + (passes(k, get) ? '<span class="chip pass">yes</span>' : '<span class="chip fail">no</span>') + '</td></tr>').join('') + '</tbody></table></div>';
+}
+
 /** the verdict paragraphs of the organs after the gate */
 function later(R) {
   const f = (x) => format(x, 3), held = (k) => R[k].v.filter((v) => !v.pass).map((v) => v.id), tail = (k) => (held(k).length ? ' ' + held(k).join(', ') + ' failed as sealed, and ' + (held(k).length > 1 ? 'are' : 'is') + ' kept.' : ' Every sealed rule held.');
   const P = (k, s) => '<p class="answer"><b>The verdict.</b> ' + s + tail(k) + '</p>';
-  const wait = (k) => '<p class="dim">' + (k === '2b' ? 'Not taken: it runs only if organ 2 finds that composition does not net.' : 'Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.') + '</p>';
+  const wait = (k) => '<p class="dim">' + (/^2[b-e]$/.test(k) ? 'Not taken: it runs only if the attempt before it finds that composition does not net.' : 'Built and waiting: by the spec’s order it is sealed only after organ 2 is judged.') + '</p>';
   const out = {};
   out.verdict2b = R['2b'] ? P('2b', 'The fixed mesh (co-grown nodes joining only if they add, coupled so no node counts against its own evidence) scored ' + f(R['2b'].r.telco.C.auc) + ' on the telecom customers and ' + f(R['2b'].r.shop.C.auc) + ' on the shop sessions, against ' + f(R['2b'].r.telco.best.testAuc) + ' and ' + f(R['2b'].r.shop.best.testAuc) + ' for the best single node. ' + ['telco', 'shop'].filter((d) => R['2b'].r[d].C.vsBest.low95 > 0).map((d) => (d === 'telco' ? 'On the telecom customers' : 'On the shop sessions') + ' it beat the best node beyond the noise.').join(' ') + ' The non-negative coupling alone took organ 2’s shop mesh from ' + f(R['2b'].r.shop.A.auc) + ' to ' + f(R['2b'].r.shop.B.auc) + ': it stopped the harm.') : wait('2b');
+  const vb = (r, d) => f(r[d].auc) + ' against ' + f(r[d].best.testAuc) + ' for the best node (bound ' + format(r[d].vsBest.low95, 's') + ')';
+  out.verdict2c = R['2c'] ? P('2c', 'The mesh scored ' + vb(R['2c'].r, 'telco') + ' on the telecom customers and ' + vb(R['2c'].r, 'shop') + ' on the shop sessions. On the shop a co-grown browsing node joined on a gain of ' + f(R['2c'].r.shop.steps.find((s) => s.silo === 'shop-browsing').coGrown.adds) + ' on GATE, and the mesh fell just under its best node.') : wait('2c');
+  out.verdict2d = R['2d'] ? P('2d', 'Trees over the scores scored ' + vb(R['2d'].r, 'telco') + ' on the telecom customers and ' + vb(R['2d'].r, 'shop') + ' on the shop sessions — where the two specialists, whose records never met, came level with every record pooled (' + f(R['2d'].r.shop.vsMonolith.b) + ').') : wait('2d');
+  out.verdict2e = R['2e'] ? P('2e', 'Choosing out of fold on GATE alone, the telecom mesh took the ' + R['2e'].r.telco.chosen + ' coupling and the shop mesh the ' + R['2e'].r.shop.chosen + ' one. On the test cases the mesh scored ' + vb(R['2e'].r, 'telco') + ' and ' + vb(R['2e'].r, 'shop') + ': ' + (R['2e'].r.telco.vsBest.low95 > 0 && R['2e'].r.shop.vsBest.low95 > 0 ? 'composition beat the best single node beyond the noise in both domains, the gate the spec sets before anything scales.' : 'composition did not beat the best node in both.')) : wait('2e');
   out.verdict3 = R['3'] ? P('3', R['3'].r.telco.silos.concat(R['3'].r.shop.silos).reduce((a, s) => a + s.born, 0) + ' children were born through the gate and ' + R['3'].r.telco.silos.concat(R['3'].r.shop.silos).reduce((a, s) => a + s.refused, 0) + ' were refused. On TEST the bred mesh scored ' + f(R['3'].r.telco.bredMeshAuc) + ' and ' + f(R['3'].r.shop.bredMeshAuc) + ', against ' + f(R['3'].r.telco.firstMeshAuc) + ' and ' + f(R['3'].r.shop.firstMeshAuc) + ' for organ 2’s mesh.') : wait('3');
   out.verdict4 = R['4'] ? P('4', 'As records arrived, the mesh went from ' + f(R['4'].r.telco.firstToLast.from) + ' to ' + f(R['4'].r.telco.firstToLast.to) + ' on the telecom test cases and from ' + f(R['4'].r.shop.firstToLast.from) + ' to ' + f(R['4'].r.shop.firstToLast.to) + ' on the shop’s.') : wait('4');
   out.verdict5 = R['5'] ? P('5', 'When the strongest node went bad half-way, the frozen mesh fell to ' + f(R['5'].r.telco.broken.frozenLate) + ' (telecom) and ' + f(R['5'].r.shop.broken.frozenLate) + ' (shop) on the rest of the stream; the wisp, learning and pruning, held ' + f(R['5'].r.telco.broken.wispLate) + ' and ' + f(R['5'].r.shop.broken.wispLate) + '. With no break, learning scored ' + f(R['5'].r.telco.calm.learningLate) + ' and ' + f(R['5'].r.shop.calm.learningLate) + ' against ' + f(R['5'].r.telco.calm.frozenLate) + ' and ' + f(R['5'].r.shop.calm.frozenLate) + ' frozen.') : wait('5');
