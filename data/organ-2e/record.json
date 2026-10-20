@@ -1,0 +1,85 @@
+{
+ "kind": "dex-frontier.organ-2e.record",
+ "v": 1,
+ "settings": {
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  }
+ },
+ "telco": {
+  "nodes": [
+   "telco-account",
+   "telco-services",
+   "telco-customer"
+  ],
+  "chosen": "linear",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.819271
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.810551
+   }
+  ],
+  "auc": 0.82205,
+  "best": {
+   "node": "telco-account",
+   "testAuc": 0.813196
+  },
+  "vsBest": {
+   "a": 0.82205,
+   "b": 0.813196,
+   "lead": 0.008854,
+   "low95": 0.001105
+  },
+  "vsMonolith": {
+   "a": 0.82205,
+   "b": 0.84632,
+   "lead": -0.02427,
+   "low95": -0.033332
+  }
+ },
+ "shop": {
+  "nodes": [
+   "shop-analytics",
+   "shop-browsing"
+  ],
+  "chosen": "trees",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.918629
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.933893
+   }
+  ],
+  "auc": 0.830184,
+  "best": {
+   "node": "shop-analytics",
+   "testAuc": 0.809854
+  },
+  "vsBest": {
+   "a": 0.830184,
+   "b": 0.809854,
+   "lead": 0.020329,
+   "low95": 0.01252
+  },
+  "vsMonolith": {
+   "a": 0.830184,
+   "b": 0.826773,
+   "lead": 0.00341,
+   "low95": -0.005652
+  }
+ },
+ "deterministic": true,
+ "choiceNeverReadTest": true
+}
