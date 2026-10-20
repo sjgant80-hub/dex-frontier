@@ -39,20 +39,20 @@
     {
      "silo": "telco-customer",
      "stages": 2,
-     "rules": 6,
-     "gate": 0.677127
+     "rules": 8,
+     "gate": 0.676787
     },
     {
      "silo": "telco-services",
-     "stages": 2,
-     "rules": 10,
-     "gate": 0.771992
+     "stages": 3,
+     "rules": 8,
+     "gate": 0.764953
     },
     {
      "silo": "telco-account",
-     "stages": 3,
-     "rules": 13,
-     "gate": 0.824799
+     "stages": 2,
+     "rules": 12,
+     "gate": 0.824418
     }
    ],
    "live": [
@@ -61,8 +61,8 @@
     "telco-customer"
    ],
    "numbers": 3,
-   "linear": 0.838591,
-   "trees": 0.833028
+   "linear": 0.836312,
+   "trees": 0.825556
   },
   "deep": {
    "silos": [
@@ -104,30 +104,31 @@
    "bodies": [
     {
      "silo": "shop-browsing",
-     "stages": 3,
-     "rules": 12,
-     "gate": 0.655381
+     "stages": 1,
+     "rules": 6,
+     "gate": 0.66317
     },
     {
      "silo": "shop-analytics",
-     "stages": 1,
-     "rules": 5,
-     "gate": 0.91986
+     "stages": 2,
+     "rules": 9,
+     "gate": 0.915473
     },
     {
      "silo": "shop-context",
-     "stages": 2,
-     "rules": 11,
-     "gate": 0.565783
+     "stages": 1,
+     "rules": 6,
+     "gate": 0.619993
     }
    ],
    "live": [
     "shop-analytics",
-    "shop-browsing"
+    "shop-browsing",
+    "shop-context"
    ],
-   "numbers": 2,
-   "linear": 0.920493,
-   "trees": 0.914368
+   "numbers": 3,
+   "linear": 0.91653,
+   "trees": 0.933249
   },
   "deep": {
    "silos": [

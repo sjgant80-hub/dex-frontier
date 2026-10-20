@@ -24,17 +24,16 @@ export function growDeep(dataset, trainRows, seed, cfg = DEEP) {
   const r = rng(seed * 7919 + 1), onSelect = new Float64Array(select.length), onCheck = new Float64Array(check.length), cards = [], history = [];
   let so = auc(Array.from(onCheck), cy), refused = null;
   for (let s = 0; s < stages; s++) {
-    let born = 0;
-    const live = (g) => { const card = fit(dataset, rest, g); return { g, n: born++, fitness: auc(select.map((i, k) => onSelect[k] + scoreRow(card, dataset, i)), sy) }; };
-    const better = (a, b) => a.fitness > b.fitness || (a.fitness === b.fitness && a.n < b.n);
-    let pop = [stemGenome(), ...Array.from({ length: population - 1 }, () => randomGenome(r))].map(live);
+    const live = (g) => { const card = fit(dataset, rest, g); return { g, fitness: auc(select.map((i, k) => onSelect[k] + scoreRow(card, dataset, i)), sy) }; };
+    const rank = (p) => [...p].sort((a, b) => b.fitness - a.fitness);   // stable: on a tie the one already ahead stays ahead
+    let pop = rank([stemGenome(), ...Array.from({ length: population - 1 }, () => randomGenome(r))].map(live));
     for (let gen = 1; gen < generations; gen++) {
-      const battle = () => { const a = pop[draw(r, pop.length)], b = pop[draw(r, pop.length)]; return better(b, a) ? b : a; };
-      const next = [...pop].sort((a, b) => (better(a, b) ? -1 : 1)).slice(0, elites);
+      const battle = () => { const a = pop[draw(r, pop.length)], b = pop[draw(r, pop.length)]; return b.fitness > a.fitness ? b : a; };
+      const next = pop.slice(0, elites);
       while (next.length < population) { const child = crossGenome(battle().g, battle().g, r); next.push(live(coin(r) ? mutateGenome(child, r) : child)); }
-      pop = next;
+      pop = rank(next);
     }
-    const champ = pop.reduce((a, b) => (better(b, a) ? b : a)), card = fit(dataset, rest, champ.g);
+    const champ = pop[0], card = fit(dataset, rest, champ.g);
     const passed = auc(check.map((i, k) => onCheck[k] + scoreRow(card, dataset, i)), cy);
     if (!(passed > so)) { refused = { stage: s + 1, check: round6(passed), bodySoFar: round6(so) }; break; }
     select.forEach((i, k) => { onSelect[k] += scoreRow(card, dataset, i); });

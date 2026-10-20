@@ -60,3 +60,9 @@ test('total: garbage grows nothing and never throws; too few rows to hold any ou
   for (const n of [0, 1, 2]) { const b = growDeep(d, rows(0, n), 1, SMALL); assert.deepEqual(b.stages, []); assert.deepEqual(b.refused, { stage: 1, check: 0.5, bodySoFar: 0.5 }); }
   assert.equal(scoreDeep({ stages: [] }, d, 0), 0);
 });
+
+test('the body is pinned: the same data and seed grow these exact bytes (any change to the search, its splits, its seeds or its tie-breaks shows)', async () => {
+  const { sha256Hex } = await import('../vendor/living-seed/vendor/seed-library/sha256.mjs');
+  const d = wide(900, 5), pins = { 1: 'b3a974532422206a', 2: 'ad4d6adad7157e2f', 3: '2e4143453a7d7131', 4: 'e6b0169875aa7431', 5: '311020041b9e26f6', 6: '1298a9bb94dba7ec' };
+  for (const [s, pin] of Object.entries(pins)) assert.equal(sha256Hex(JSON.stringify(growDeep(d, rows(0, 600), Number(s), SMALL))).slice(0, 16), pin, 'seed ' + s);
+});
