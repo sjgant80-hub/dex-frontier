@@ -6,6 +6,7 @@ import { carry, ledger, revoke, message } from '../src/spread.mjs';
 import { contributor, sealNode } from '../src/node.mjs';
 import { rng } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
 import { readCard, cardOf } from '../vendor/living-seed/src/card.mjs';
+import { couple } from '../src/compose.mjs';
 
 const view = { name: 'demo-silo', features: ['a'], cols: { a: new Float64Array(10) }, y: new Uint8Array(10), trainRows: [], heldRows: [] };
 
@@ -41,6 +42,8 @@ test('revoke: the coupling re-learns without the node; the last node cannot leav
   const v = revoke([a, b], y, 1);
   assert.ok(v.ok); assert.equal(v.left, 1); assert.equal(v.coupling.weights.length, 2);
   assert.equal(revoke([a], y, 0).ok, false);
+  const c = [0.5, 0.2, 0.7, 0.1, 0.9, 0.3, 0.4, 0.6];
+  assert.deepEqual(revoke([a, b, c], y, 1).coupling, couple([a, c], y), 'the coupling of exactly the nodes that stay');
   const m = message([1.25, -0.5, null]);
   assert.equal(m.text, '[1.25,-0.5,null]'); assert.equal(m.bytes, 16); assert.equal(m.numbers, 3);
   assert.equal(message([1 / 3]).text, '[0.333333]', 'six places');

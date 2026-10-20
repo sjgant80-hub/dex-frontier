@@ -34,12 +34,12 @@ export function contribution(columns, k, y, folds = 2) {
   const n = y.length, fold = (i) => i % folds;
   const oof = (cols) => {
     const out = new Array(n);
-    for (let f = 0; f < folds; f++) {
+    Array.from({ length: folds }, (_, f) => f).forEach((f) => {
       const train = [], held = [];
-      for (let i = 0; i < n; i++) (fold(i) === f ? held : train).push(i);
+      y.forEach((_, i) => (fold(i) === f ? held : train).push(i));
       const c = couple(cols.map((col) => train.map((i) => col[i])), train.map((i) => y[i]));
       for (const i of held) out[i] = coupled(c, cols.map((col) => col[i]));
-    }
+    });
     return auc(out, y);
   };
   return oof(columns) - oof(columns.filter((_, j) => j !== k));

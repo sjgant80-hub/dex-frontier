@@ -37,6 +37,7 @@ test('contribution: a useful node adds out of fold, a useless one adds about not
   assert.equal(contribution(G.cols, 0, G.y, 3), contribution(G.cols, 0, G.y, 3), 'deterministic');
   assert.notEqual(contribution(G.cols, 0, G.y, 3), ca, 'the folds count');
   assert.ok(Math.abs(ca - 0.10695381454406505) < 1e-12, 'the exact out-of-fold contribution: ' + ca);
+  assert.ok(Math.abs(contribution(G.cols, 0, G.y, 3) - 0.10820037710083374) < 1e-12, 'and over three folds, each held out once');
 });
 
 test('the wisp: when the world shifts, a coupling that learns from outcomes beats one frozen at GATE', () => {

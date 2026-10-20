@@ -37,7 +37,7 @@ export async function breed(a, b, view, keys, seed) {
 export function pick(pop, r) {
   const ranked = [...pop].sort((p, q) => q.gateAuc - p.gateAuc), total = (ranked.length * (ranked.length + 1)) / 2, t = r() * total;   // a stable sort: ties keep their order
   let acc = 0;
-  return ranked.find((_, k) => (acc += ranked.length - k) > t) || ranked[ranked.length - 1];
+  return ranked.find((_, k) => (acc += ranked.length - k) > t);   // t < total, so the last always takes it
 }
 
 /**
