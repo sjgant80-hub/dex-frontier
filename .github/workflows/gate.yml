@@ -45,3 +45,12 @@ jobs:
       - name: the trace of a real case on the page is the run itself
         run: |
           if [ -f data/trace.json ]; then node tools/trace.mjs --check; else echo "no trace yet"; fi
+      - name: organ 2c (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-2c/record.json ]; then node tools/measure-2c.mjs --check && node tools/judge-2c.mjs --check && node tools/order.mjs --organ 2c; elif [ -f data/organ-2c/prereg.json ]; then echo "organ 2c sealed, being measured"; else echo "organ 2c built, not yet sealed"; fi
+      - name: organ 2d (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-2d/record.json ]; then node tools/measure-2d.mjs --check && node tools/judge-2d.mjs --check && node tools/order.mjs --organ 2d; elif [ -f data/organ-2d/prereg.json ]; then echo "organ 2d sealed, being measured"; else echo "organ 2d built, not yet sealed"; fi
+      - name: organ 2e (re-derived, re-judged, seal first, once it is measured; nothing until it is sealed)
+        run: |
+          if [ -f data/organ-2e/record.json ]; then node tools/measure-2e.mjs --check && node tools/judge-2e.mjs --check && node tools/order.mjs --organ 2e; elif [ -f data/organ-2e/prereg.json ]; then echo "organ 2e sealed, being measured"; else echo "organ 2e built, not yet sealed"; fi
