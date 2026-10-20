@@ -6,10 +6,12 @@
 // each stage grows on what the stages before it missed. The department's training rows are cut three ways: thresholds
 // are set on REST, the search selects on SELECT, and a stage is kept only if it beats the body so far on CHECK — rows the
 // search never saw (𝟙), so a stage that only fits the search's own rows is refused, and growth stops when it stops
-// paying. Pure, deterministic, total on its inputs.
+// paying. HELD sets the share of the training rows held out for SELECT and CHECK together (a larger CHECK judges each
+// stage on more rows). No step damping: fitness is AUC, which ignores scale, so damping every stage alike changes
+// nothing (a test showed it), and each rule's weight grid already sets a stage's size. Pure, deterministic, total.
 import { splitRows, rng, draw, coin, fit, scoreRow, auc, round6, stemGenome, randomGenome, crossGenome, mutateGenome, MAXRULES, QGRID, WGRID } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
 
-export const DEEP = { population: 40, elites: 8, generations: 30, stages: 8 };
+export const DEEP = { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3 };
 
 /** the seed library's fit(dataset, rows, genome), exactly, with each column's values on `rows` sorted once, not once per rule */
 export function fitter(dataset, rows) {
@@ -27,10 +29,10 @@ export function fitter(dataset, rows) {
  * → { stages: [scorecard], history: [CHECK AUC after each kept stage], rules, refused: the stage that did not pay, or null }
  */
 export function growDeep(dataset, trainRows, seed, cfg = DEEP) {
-  const { population, elites, generations, stages } = { ...DEEP, ...cfg };
+  const { population, elites, generations, stages, held } = { ...DEEP, ...cfg };
   if (!dataset || !Array.isArray(dataset.features) || !dataset.features.length || !Array.isArray(trainRows)) return { stages: [], history: [], rules: 0, refused: null };
   // too few rows to hold any out: every stage scores 0.5 against a body of 0.5, so the first is refused and nothing grows
-  const inner = splitRows(dataset, trainRows, 1 / 3, seed), cut = splitRows(dataset, inner.held, 1 / 2, seed + 1);
+  const inner = splitRows(dataset, trainRows, held, seed), cut = splitRows(dataset, inner.held, 1 / 2, seed + 1);
   const rest = inner.rest, select = cut.rest, check = cut.held, sy = select.map((i) => dataset.y[i]), cy = check.map((i) => dataset.y[i]);
   const express = fitter(dataset, rest), r = rng(seed * 7919 + 1), onSelect = new Float64Array(select.length), onCheck = new Float64Array(check.length), cards = [], history = [];
   let so = auc(Array.from(onCheck), cy), refused = null;

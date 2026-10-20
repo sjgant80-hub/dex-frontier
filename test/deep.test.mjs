@@ -18,7 +18,7 @@ const rows = (a, b) => Array.from({ length: b - a }, (_, k) => a + k);
 const SMALL = { population: 16, elites: 4, generations: 8, stages: 5 };
 
 test('the settings a deep body grows with by default', () => {
-  assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8 });
+  assert.deepEqual(DEEP, { population: 40, elites: 8, generations: 30, stages: 8, held: 1 / 3 });
 });
 
 test('each kept stage raises the held-out score; the body is deterministic; every stage is expressed on all the training rows', () => {
@@ -73,4 +73,11 @@ test('fitter is the seed library’s fit exactly, on any rows (none, one, many),
     const f = fitter(d, rs);
     for (let k = 0; k < 60; k++) { const g = k === 0 ? stemGenome() : randomGenome(r); assert.deepEqual(f(g), fit(d, rs, g), "rows " + rs.length + " genome " + k); }
   }
+});
+
+test('held sets the share held out for the search and its check: a wider share grows another body, pinned', async () => {
+  const { sha256Hex } = await import('../vendor/living-seed/vendor/seed-library/sha256.mjs');
+  const d = wide(900, 5), tr = rows(0, 600), wider = growDeep(d, tr, 3, { ...SMALL, held: 1 / 2 }), plain = growDeep(d, tr, 3, SMALL);
+  assert.notDeepEqual(wider.stages, plain.stages);
+  assert.equal(sha256Hex(JSON.stringify(wider)).slice(0, 16), 'f2cd9edb9faf4508');
 });

@@ -1,0 +1,256 @@
+{
+ "kind": "dex-frontier.diagnose-2",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read",
+ "settings": {
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  }
+ },
+ "telco": {
+  "pooled": 0.849756,
+  "departments": [
+   {
+    "department": "telco-customer",
+    "columns": 4,
+    "six": 0.661938,
+    "deep": 0.676787,
+    "deepStages": 2,
+    "boosted": 0.67303,
+    "fielded": "deep",
+    "live": true
+   },
+   {
+    "department": "telco-services",
+    "columns": 9,
+    "six": 0.729309,
+    "deep": 0.764953,
+    "deepStages": 3,
+    "boosted": 0.784437,
+    "fielded": "deep",
+    "live": true
+   },
+   {
+    "department": "telco-account",
+    "columns": 7,
+    "six": 0.813515,
+    "deep": 0.824418,
+    "deepStages": 2,
+    "boosted": 0.840161,
+    "fielded": "deep",
+    "live": true
+   }
+  ],
+  "mesh2f": {
+   "live": [
+    "telco-customer",
+    "telco-services",
+    "telco-account"
+   ],
+   "numbers": 3,
+   "linear": 0.836312,
+   "trees": 0.825556
+  },
+  "meshBoosted": {
+   "live": [
+    "telco-customer",
+    "telco-services",
+    "telco-account"
+   ],
+   "numbers": 3,
+   "linear": 0.84502,
+   "trees": 0.835912
+  }
+ },
+ "shop": {
+  "pooled": 0.944779,
+  "departments": [
+   {
+    "department": "shop-browsing",
+    "columns": 6,
+    "six": 0.664534,
+    "deep": 0.66317,
+    "deepStages": 1,
+    "boosted": 0.6904,
+    "fielded": "six",
+    "live": true
+   },
+   {
+    "department": "shop-analytics",
+    "columns": 3,
+    "six": 0.917962,
+    "deep": 0.915473,
+    "deepStages": 2,
+    "boosted": 0.919856,
+    "fielded": "six",
+    "live": true
+   },
+   {
+    "department": "shop-context",
+    "columns": 7,
+    "six": 0.586547,
+    "deep": 0.619993,
+    "deepStages": 1,
+    "boosted": 0.661809,
+    "fielded": "deep",
+    "live": true
+   }
+  ],
+  "mesh2f": {
+   "live": [
+    "shop-browsing",
+    "shop-analytics",
+    "shop-context"
+   ],
+   "numbers": 3,
+   "linear": 0.92063,
+   "trees": 0.934507
+  },
+  "meshBoosted": {
+   "live": [
+    "shop-browsing",
+    "shop-analytics",
+    "shop-context"
+   ],
+   "numbers": 3,
+   "linear": 0.926246,
+   "trees": 0.925172
+  }
+ },
+ "bank": {
+  "pooled": 0.796643,
+  "departments": [
+   {
+    "department": "bank-profile",
+    "columns": 15,
+    "six": 0.603577,
+    "deep": 0.608987,
+    "deepStages": 4,
+    "boosted": 0.635355,
+    "fielded": "deep",
+    "live": true
+   },
+   {
+    "department": "bank-credit",
+    "columns": 3,
+    "six": 0.563186,
+    "deep": 0.569346,
+    "deepStages": 1,
+    "boosted": 0.573927,
+    "fielded": "deep",
+    "live": false
+   },
+   {
+    "department": "bank-campaign",
+    "columns": 7,
+    "six": 0.690794,
+    "deep": 0.720823,
+    "deepStages": 3,
+    "boosted": 0.756614,
+    "fielded": "deep",
+    "live": true
+   },
+   {
+    "department": "bank-economy",
+    "columns": 5,
+    "six": 0.764541,
+    "deep": 0.780457,
+    "deepStages": 3,
+    "boosted": 0.790147,
+    "fielded": "deep",
+    "live": true
+   }
+  ],
+  "mesh2f": {
+   "live": [
+    "bank-profile",
+    "bank-campaign",
+    "bank-economy"
+   ],
+   "numbers": 3,
+   "linear": 0.772851,
+   "trees": 0.784044
+  },
+  "meshBoosted": {
+   "live": [
+    "bank-profile",
+    "bank-campaign",
+    "bank-economy"
+   ],
+   "numbers": 3,
+   "linear": 0.798998,
+   "trees": 0.794335
+  }
+ },
+ "adult": {
+  "pooled": 0.910858,
+  "departments": [
+   {
+    "department": "adult-person",
+    "columns": 16,
+    "six": 0.803683,
+    "deep": 0.823457,
+    "deepStages": 7,
+    "boosted": 0.830562,
+    "fielded": "deep",
+    "live": true
+   },
+   {
+    "department": "adult-work",
+    "columns": 15,
+    "six": 0.740705,
+    "deep": 0.779433,
+    "deepStages": 8,
+    "boosted": 0.786346,
+    "fielded": "deep",
+    "live": true
+   },
+   {
+    "department": "adult-employer",
+    "columns": 7,
+    "six": 0.57087,
+    "deep": 0.576453,
+    "deepStages": 2,
+    "boosted": 0.581473,
+    "fielded": "deep",
+    "live": false
+   },
+   {
+    "department": "adult-tax",
+    "columns": 2,
+    "six": 0.632076,
+    "deep": 0.632076,
+    "deepStages": 1,
+    "boosted": 0.638471,
+    "fielded": "six",
+    "live": true
+   }
+  ],
+  "mesh2f": {
+   "live": [
+    "adult-person",
+    "adult-work",
+    "adult-tax"
+   ],
+   "numbers": 3,
+   "linear": 0.895369,
+   "trees": 0.894331
+  },
+  "meshBoosted": {
+   "live": [
+    "adult-person",
+    "adult-work",
+    "adult-tax"
+   ],
+   "numbers": 3,
+   "linear": 0.90442,
+   "trees": 0.900403
+  }
+ },
+ "testNeverRead": true
+}
