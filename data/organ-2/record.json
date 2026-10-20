@@ -1,0 +1,346 @@
+{
+ "kind": "dex-frontier.organ-2.record",
+ "v": 1,
+ "seeds": {
+  "node": 1,
+  "route": 7,
+  "shuffle": 13,
+  "noise": 17
+ },
+ "telco": {
+  "nodes": [
+   {
+    "silo": "customer",
+    "columns": 4,
+    "genomeBytes": 313,
+    "state": "live",
+    "gateAuc": 0.661938,
+    "rules": 5,
+    "maker": "aa8e7aa541fdb8ff536f7a1afcf77d21431dab6b655d4da79a2447e45c0cf6ea"
+   },
+   {
+    "silo": "services",
+    "columns": 9,
+    "genomeBytes": 313,
+    "state": "live",
+    "gateAuc": 0.729309,
+    "rules": 5,
+    "maker": "4946d36f723ebd04270e87e0233c552d6b9de71d44c233c790540746085f325e"
+   },
+   {
+    "silo": "account",
+    "columns": 7,
+    "genomeBytes": 311,
+    "state": "live",
+    "gateAuc": 0.813515,
+    "rules": 6,
+    "maker": "8453c0f62e15ec9f9e759d48584706c99368e3fdf14db6f6554c3d69c807d06b"
+   }
+  ],
+  "live": [
+   "account",
+   "services",
+   "customer"
+  ],
+  "viewsOwnColumnsOnly": true,
+  "deterministic": true,
+  "testNeverRead": true,
+  "noiseMeshLive": [],
+  "answered": 2112,
+  "cases": 2112,
+  "outcomes": 560,
+  "coupling": {
+   "weights": [
+    -1.468342,
+    1.101535,
+    0.360767,
+    0.302479
+   ],
+   "steps": 7,
+   "numbers": 10
+  },
+  "composedAuc": 0.82205,
+  "singles": [
+   {
+    "node": "account",
+    "gateAuc": 0.813515,
+    "testAuc": 0.813196
+   },
+   {
+    "node": "services",
+    "gateAuc": 0.729309,
+    "testAuc": 0.758093
+   },
+   {
+    "node": "customer",
+    "gateAuc": 0.661938,
+    "testAuc": 0.628105
+   }
+  ],
+  "best": {
+   "node": "account",
+   "gateAuc": 0.813515,
+   "testAuc": 0.813196
+  },
+  "vsBest": {
+   "a": 0.82205,
+   "b": 0.813196,
+   "lead": 0.008854,
+   "low95": 0.001105
+  },
+  "vsRoute": {
+   "a": 0.82205,
+   "b": 0.737359,
+   "lead": 0.084691,
+   "low95": 0.067682
+  },
+  "vsShuffled": {
+   "a": 0.82205,
+   "b": 0.610275,
+   "lead": 0.211775,
+   "low95": 0.184571
+  },
+  "growth": [
+   {
+    "nodes": 1,
+    "added": "account",
+    "testAuc": 0.813196
+   },
+   {
+    "nodes": 2,
+    "added": "services",
+    "testAuc": 0.823279
+   },
+   {
+    "nodes": 3,
+    "added": "customer",
+    "testAuc": 0.82205
+   }
+  ],
+  "monolith": {
+   "boosted": {
+    "numbers": 2001,
+    "vs": {
+     "a": 0.82205,
+     "b": 0.84632,
+     "lead": -0.02427,
+     "low95": -0.033332
+    }
+   },
+   "logistic": {
+    "numbers": 61,
+    "vs": {
+     "a": 0.82205,
+     "b": 0.850814,
+     "lead": -0.028764,
+     "low95": -0.037879
+    }
+   }
+  },
+  "sample": {
+   "cases": 300,
+   "outcomes": 100,
+   "sha": "bd4f4a7c75c607cc",
+   "composedAuc": 0.8117
+  },
+  "local": {
+   "model": {
+    "name": "qwen2.5:14b",
+    "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+    "bytes": 8988124069
+   },
+   "answered": 300,
+   "unreadable": 0,
+   "longestPrompt": 3136,
+   "numCtx": 4096,
+   "medianMs": 28527,
+   "vs": {
+    "a": 0.8117,
+    "b": 0.74145,
+    "lead": 0.07025,
+    "low95": 0.020139
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "answered": 300,
+   "unreadable": 0,
+   "vs": {
+    "a": 0.8117,
+    "b": 0.844275,
+    "lead": -0.032575,
+    "low95": -0.055542
+   }
+  },
+  "meshNumbers": 64
+ },
+ "shop": {
+  "nodes": [
+   {
+    "silo": "browsing",
+    "columns": 6,
+    "genomeBytes": 311,
+    "state": "live",
+    "gateAuc": 0.664534,
+    "rules": 5,
+    "maker": "a55182cd06a1216328e1377ee97154d2f81165a704a3567c894c289675554d61"
+   },
+   {
+    "silo": "analytics",
+    "columns": 3,
+    "genomeBytes": 313,
+    "state": "live",
+    "gateAuc": 0.917962,
+    "rules": 5,
+    "maker": "3d8aba881eee80dcb893d8fb4835a230e76a41e93816b9f33f7ac5c9efcdfa71"
+   },
+   {
+    "silo": "context",
+    "columns": 7,
+    "genomeBytes": 309,
+    "state": "cut",
+    "gateAuc": 0.586547,
+    "rules": 0,
+    "maker": "c055c2d39881f0ba0dbb674b4408d9b2feceb6acc20d8a0345005770eac26fd4"
+   }
+  ],
+  "live": [
+   "analytics",
+   "browsing"
+  ],
+  "viewsOwnColumnsOnly": true,
+  "deterministic": true,
+  "testNeverRead": true,
+  "noiseMeshLive": [],
+  "answered": 4725,
+  "cases": 4725,
+  "outcomes": 976,
+  "coupling": {
+   "weights": [
+    -3.307576,
+    1.975069,
+    -0.328409
+   ],
+   "steps": 8,
+   "numbers": 7
+  },
+  "composedAuc": 0.791135,
+  "singles": [
+   {
+    "node": "analytics",
+    "gateAuc": 0.917962,
+    "testAuc": 0.809854
+   },
+   {
+    "node": "browsing",
+    "gateAuc": 0.664534,
+    "testAuc": 0.683238
+   }
+  ],
+  "best": {
+   "node": "analytics",
+   "gateAuc": 0.917962,
+   "testAuc": 0.809854
+  },
+  "vsBest": {
+   "a": 0.791135,
+   "b": 0.809854,
+   "lead": -0.018719,
+   "low95": -0.023762
+  },
+  "vsRoute": {
+   "a": 0.791135,
+   "b": 0.772542,
+   "lead": 0.018593,
+   "low95": 0.002335
+  },
+  "vsShuffled": {
+   "a": 0.791135,
+   "b": 0.190927,
+   "lead": 0.600208,
+   "low95": 0.569432
+  },
+  "growth": [
+   {
+    "nodes": 1,
+    "added": "analytics",
+    "testAuc": 0.809854
+   },
+   {
+    "nodes": 2,
+    "added": "browsing",
+    "testAuc": 0.791135
+   }
+  ],
+  "monolith": {
+   "boosted": {
+    "numbers": 2001,
+    "vs": {
+     "a": 0.791135,
+     "b": 0.826773,
+     "lead": -0.035638,
+     "low95": -0.048497
+    }
+   },
+   "logistic": {
+    "numbers": 49,
+    "vs": {
+     "a": 0.791135,
+     "b": 0.808935,
+     "lead": -0.0178,
+     "low95": -0.026532
+    }
+   }
+  },
+  "sample": {
+   "cases": 300,
+   "outcomes": 100,
+   "sha": "beb833d37a5a6f2c",
+   "composedAuc": 0.80815
+  },
+  "local": {
+   "model": {
+    "name": "qwen2.5:14b",
+    "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+    "bytes": 8988124069
+   },
+   "answered": 300,
+   "unreadable": 0,
+   "longestPrompt": 3086,
+   "numCtx": 4096,
+   "medianMs": 38653,
+   "vs": {
+    "a": 0.80815,
+    "b": 0.72515,
+    "lead": 0.083,
+    "low95": -0.002763
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "answered": 300,
+   "unreadable": 0,
+   "vs": {
+    "a": 0.80815,
+    "b": 0.858475,
+    "lead": -0.050325,
+    "low95": -0.098315
+   }
+  },
+  "meshNumbers": 41
+ },
+ "breadth": {
+  "cases": 6837,
+  "liveNodes": 5,
+  "everyCaseReachesAllItsOwnLiveNodes": true,
+  "casesReachingTheOtherDomain": 0,
+  "domainsPerNode": 1,
+  "domainsCovered": 2
+ }
+}
