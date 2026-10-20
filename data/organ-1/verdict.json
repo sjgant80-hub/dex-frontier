@@ -1,0 +1,29 @@
+{
+ "kind": "dex-frontier.organ-1.verdict",
+ "v": 1,
+ "prereg": "df02585d6c3e185c",
+ "record": "365dffddb3f49d34",
+ "verdicts": [
+  {
+   "id": "A1",
+   "kind": "property",
+   "claim": "the node travels as a genome of at most 400 bytes over the 7 account columns, grows live at or above its bar, grows the same organism twice, grows the same organism when every TEST record is scrambled (TEST is never read while growing), and answers every TEST customer",
+   "pass": true,
+   "saw": "a 311-byte genome for the 7 account columns grew 6 rules (20 numbers) and is live at gate AUC 0.813515 (bar 0.6); the same organism twice: true; TEST never read while growing: true; it answered 2112 of 2112 test customers"
+  },
+  {
+   "id": "A2",
+   "kind": "prediction",
+   "claim": "on the 300, the node beats qwen2.5:14b shown 24 examples and all 20 columns: the 95% lower bound of its lead is above 0",
+   "pass": true,
+   "saw": "on the 300: the node 0.800875, qwen2.5:14b shown 24 examples and all 20 columns 0.74145; the node’s lead 0.059425, its 95% lower bound 0.013977 (300 answered, 0 unreadable, longest prompt 3136 of 4096 tokens)"
+  },
+  {
+   "id": "A3",
+   "kind": "prediction",
+   "claim": "on the 300, the node is not worse than the frontier model by more than 0.02 AUC: the 95% lower bound of its lead is above −0.02",
+   "pass": false,
+   "saw": "on the 300: the node 0.800875, claude-opus-5-5 (cold, all 300 at once, all 20 columns) 0.844275; the node’s lead -0.0434, its 95% lower bound -0.067496 against −0.02 (0 unreadable)"
+  }
+ ]
+}
