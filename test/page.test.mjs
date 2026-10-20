@@ -33,7 +33,7 @@ test('every element the script reaches for is on the page, and every in-page lin
 test('the page says what the records say: every generated number, word and block is current', () => {
   assert.equal(render(html), html, 'node tools/words.mjs --write has been run since the last record');
   const t = tally();
-  assert.ok(html.includes('data-tally="held">' + t.held + '<'));
+  assert.ok(html.includes('data-tally="line">' + t.line + '<') && html.includes('data-tally="fails">' + t.fails + '<'), 'the header says what the verdicts say');
   for (const [p, text] of Object.entries(outputs())) assert.equal(read(p), text, p + ' is what tools/geo.mjs generates');
 });
 

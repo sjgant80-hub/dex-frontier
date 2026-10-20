@@ -25,7 +25,10 @@ export function at(obj, path) { return path.split('.').reduce((o, k) => (o == nu
 /** the tally across every judged organ */
 export function tally(R = records()) {
   const vs = Object.values(R).flatMap((x) => x.v);
-  return { held: vs.filter((v) => v.pass).length + ' of ' + vs.length, tests: String(Object.keys(R).length), failed: String(vs.filter((v) => !v.pass && v.kind === 'prediction').length), red: String(vs.filter((v) => !v.pass && v.kind !== 'prediction').length) };
+  const sealed = Object.keys(JSON.parse(has('data/organs.json') ? read('data/organs.json') : '{}')).length, n = Object.keys(R).length, failed = vs.filter((v) => !v.pass && v.kind === 'prediction').length;
+  return { line: n ? vs.filter((v) => v.pass).length + ' of ' + vs.length + ' sealed rules held across ' + n + ' measured organ' + (n === 1 ? '' : 's') : sealed + ' organs sealed before a single test case was scored · being measured',
+    fails: n ? failed + ' prediction' + (failed === 1 ? '' : 's') + ' failed · every one kept' : 'every prediction may fail, and is kept if it does',
+    held: vs.filter((v) => v.pass).length + ' of ' + vs.length, tests: String(Object.keys(R).length), failed: String(failed), red: String(vs.filter((v) => !v.pass && v.kind !== 'prediction').length) };
 }
 
 const pass = (R, k, id) => { const x = R[k] && R[k].v.find((v) => v.id === id); return x ? x.pass : null; };
