@@ -1,0 +1,100 @@
+{
+ "kind": "dex-frontier.organ-1.record",
+ "v": 1,
+ "silo": "telco-account",
+ "columns": [
+  "tenure",
+  "Contract",
+  "PaperlessBilling",
+  "ElectronicCheck",
+  "AutoPay",
+  "MonthlyCharges",
+  "TotalCharges"
+ ],
+ "genome": {
+  "bytes": 311,
+  "id": "92108c61ddf462b7",
+  "recipe": "◊ seed.v1 telco-account 1 g:40.8.30 35840ff073bf",
+  "maker": "8453c0f62e15ec9f9e759d48584706c99368e3fdf14db6f6554c3d69c807d06b"
+ },
+ "grown": {
+  "state": "live",
+  "gateAuc": 0.813515,
+  "bar": 0.6,
+  "rules": 6,
+  "numbers": 20,
+  "body": [
+   "MonthlyCharges <= 70.45 → -1",
+   "tenure > 5 → -0.5",
+   "ElectronicCheck > 0 → 1",
+   "Contract > 0 → -2",
+   "tenure <= 18 → 0.5",
+   "Contract <= 0 → 2"
+  ]
+ },
+ "deterministic": true,
+ "testNeverRead": true,
+ "organism": "f81f21e0dc52d4d8",
+ "advert": {
+  "node": "f81f21e0dc52d4d8",
+  "silo": "telco-account",
+  "features": [
+   "tenure",
+   "Contract",
+   "PaperlessBilling",
+   "ElectronicCheck",
+   "AutoPay",
+   "MonthlyCharges",
+   "TotalCharges"
+  ],
+  "state": "live",
+  "gateAuc": 0.813515,
+  "bar": 0.6,
+  "rules": 6,
+  "maker": "8453c0f62e15ec9f9e759d48584706c99368e3fdf14db6f6554c3d69c807d06b"
+ },
+ "test": {
+  "cases": 2112,
+  "churners": 560,
+  "answered": 2112,
+  "auc": 0.813196
+ },
+ "sample": {
+  "cases": 300,
+  "churners": 100,
+  "sha": "bd4f4a7c75c607cc",
+  "nodeAuc": 0.800875
+ },
+ "local": {
+  "model": {
+   "name": "qwen2.5:14b",
+   "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+   "bytes": 8988124069
+  },
+  "answered": 300,
+  "unreadable": 0,
+  "longestPrompt": 3136,
+  "numCtx": 4096,
+  "medianMs": 28527,
+  "vs": {
+   "a": 0.800875,
+   "b": 0.74145,
+   "lead": 0.059425,
+   "low95": 0.013977
+  }
+ },
+ "frontier": {
+  "model": {
+   "name": "claude-opus-5-5",
+   "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+  },
+  "answered": 300,
+  "unreadable": 0,
+  "vs": {
+   "a": 0.800875,
+   "b": 0.844275,
+   "lead": -0.0434,
+   "low95": -0.067496
+  }
+ }
+}
