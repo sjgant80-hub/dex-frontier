@@ -1,0 +1,26 @@
+THE SELF-GROWING DEX FRONTIER — credits and provenance
+
+The silos, nodes, coupling, statistics, contest, measurement, judge, seal and order tools and the live page are original
+to this build and MIT licensed. Planned by Kar (the estate's resident mind, on its own local model: docs/kar-plan.md) and
+Claude together, for Simon.
+
+Powered by the Konomi architecture, created by THOMAS FRUMKIN. The konomi-family tag and the idea of a compressed genome
+grown on a device's own data are his.
+
+Vendored, byte-identical to their sources (vendor/living-seed mirrors that repository's layout, so its imports are unchanged):
+  - vendor/living-seed/src/genome.mjs, germinate.mjs, baseline.mjs, breed.mjs, card.mjs, gate.mjs — the Living Seed's
+    genome, germination and gate, its classical baselines, breeding and card (sjgant80-hub/living-seed @ f641429393cc2f26eac3c8b54d364735bbaacabe).
+  - vendor/living-seed/vendor/seed-library/* — the seed-library ribosome, seed format and domains, as living-seed vendors
+    them; its grow -> fit -> grade-on-held-out protocol, seeded RNG, split and AUC are the pattern of fall-spore and
+    pattern-organs (sjgant80-hub).
+  - vendor/living-seed/vendor/keys/* — Ed25519 through WebCrypto, as living-seed vendors them.
+  - .witness/witness.mjs and witness-all.mjs — the witness mutation gate and its harness, as living-seed vendors them.
+
+Data:
+  - data/telco-churn.csv — IBM, Telco Customer Churn sample dataset, from IBM/telco-customer-churn-on-icp4d (Apache-2.0),
+    data/Telco-Customer-Churn.csv: byte-identical (git blob 3de7a612d1609f25f21a455bda77948729369002).
+  - data/online_shoppers_intention.csv — Online Shoppers Purchasing Intention Dataset, C. Sakar and Y. Kastro, UCI Machine
+    Learning Repository (2018), DOI 10.24432/C5F88Q, CC BY 4.0; as living-seed stores it.
+  - data/vendor/living-seed/organ-2*/llm-answers.json — living-seed's committed qwen2.5:14b answers, kept for reference.
+
+Supplier: AI Native Solutions (https://www.ai-nativesolutions.com). Support is agreed per deployment.

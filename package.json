@@ -1,0 +1,11 @@
+{
+  "name": "dex-frontier",
+  "version": "0.1.0",
+  "description": "The self-growing DEX frontier — specialist nodes grown from seeds on each department's own records, coupled into one mind; composition proven, sealed, before anything scales.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "witness": "node witness-all.mjs"
+  }
+}
