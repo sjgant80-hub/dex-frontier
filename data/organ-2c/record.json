@@ -1,0 +1,170 @@
+{
+ "kind": "dex-frontier.organ-2c.record",
+ "v": 1,
+ "settings": {
+  "seed": 1,
+  "joinBar": 0.5
+ },
+ "telco": {
+  "steps": [
+   {
+    "silo": "telco-account",
+    "joined": "grown on its own"
+   },
+   {
+    "silo": "telco-services",
+    "alone": {
+     "live": true,
+     "adds": 0.00519
+    },
+    "coGrown": {
+     "live": true,
+     "gateAlone": 0.730911,
+     "adds": 0.004112
+    },
+    "joined": "alone"
+   },
+   {
+    "silo": "telco-customer",
+    "alone": {
+     "live": true,
+     "adds": 0.006662
+    },
+    "coGrown": {
+     "live": true,
+     "gateAlone": 0.646059,
+     "adds": 0.004242
+    },
+    "joined": "alone"
+   }
+  ],
+  "mesh": [
+   "telco-account",
+   "telco-services",
+   "telco-customer"
+  ],
+  "weights": [
+   {
+    "node": "telco-account",
+    "weight": 1.101535
+   },
+   {
+    "node": "telco-services",
+    "weight": 0.360767
+   },
+   {
+    "node": "telco-customer",
+    "weight": 0.302479
+   }
+  ],
+  "auc": 0.82205,
+  "best": {
+   "node": "telco-account",
+   "how": "alone",
+   "testAuc": 0.813196
+  },
+  "organ2": 0.82205,
+  "vsBest": {
+   "a": 0.82205,
+   "b": 0.813196,
+   "lead": 0.008854,
+   "low95": 0.001105
+  },
+  "vsOrgan2": {
+   "a": 0.82205,
+   "b": 0.82205,
+   "lead": 0,
+   "low95": 0
+  },
+  "vsMonolith": {
+   "a": 0.82205,
+   "b": 0.84632,
+   "lead": -0.02427,
+   "low95": -0.033332
+  },
+  "nonNegative": true,
+  "bothOffered": true
+ },
+ "shop": {
+  "steps": [
+   {
+    "silo": "shop-analytics",
+    "joined": "grown on its own"
+   },
+   {
+    "silo": "shop-browsing",
+    "alone": {
+     "live": true,
+     "adds": 0
+    },
+    "coGrown": {
+     "live": true,
+     "gateAlone": 0.515858,
+     "adds": 0.000073
+    },
+    "joined": "co-grown"
+   },
+   {
+    "silo": "shop-context",
+    "alone": {
+     "live": false,
+     "adds": null
+    },
+    "coGrown": {
+     "live": true,
+     "gateAlone": 0.547073,
+     "adds": 0.00344
+    },
+    "joined": "co-grown"
+   }
+  ],
+  "mesh": [
+   "shop-analytics",
+   "shop-browsing (co-grown)",
+   "shop-context (co-grown)"
+  ],
+  "weights": [
+   {
+    "node": "shop-analytics",
+    "weight": 1.878488
+   },
+   {
+    "node": "shop-browsing",
+    "weight": 0.15368
+   },
+   {
+    "node": "shop-context",
+    "weight": 0.233345
+   }
+  ],
+  "auc": 0.8088,
+  "best": {
+   "node": "shop-analytics",
+   "how": "alone",
+   "testAuc": 0.809854
+  },
+  "organ2": 0.791135,
+  "vsBest": {
+   "a": 0.8088,
+   "b": 0.809854,
+   "lead": -0.001055,
+   "low95": -0.004885
+  },
+  "vsOrgan2": {
+   "a": 0.8088,
+   "b": 0.791135,
+   "lead": 0.017665,
+   "low95": 0.011758
+  },
+  "vsMonolith": {
+   "a": 0.8088,
+   "b": 0.826773,
+   "lead": -0.017974,
+   "low95": -0.02783
+  },
+  "nonNegative": true,
+  "bothOffered": true
+ },
+ "deterministic": true,
+ "testNeverRead": true
+}
