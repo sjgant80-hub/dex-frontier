@@ -24,6 +24,7 @@ test('arrivals are cumulative portions; order is a seeded shuffle; a view grows 
   assert.deepEqual(arrivals(rows, 1), [rows]); assert.deepEqual(arrivals([], 3), []); assert.deepEqual(arrivals(rows, 0), []);
   assert.deepEqual(order(rows, 3), order(rows, 3)); assert.deepEqual([...order(rows, 3)].sort((p, q) => p - q), rows); assert.notDeepEqual(order(rows, 3), rows);
   assert.deepEqual(order([7], 3), [7]);
+  assert.deepEqual(order(rows, 3), [9, 5, 6, 1, 2, 4, 8, 3, 0, 7], 'the one Fisher–Yates order for seed 3');
   const v = { name: 'x', trainRows: [1, 2, 3], heldRows: [9] };
   assert.deepEqual(seenSoFar(v, [1]), { name: 'x', trainRows: [1], heldRows: [9] });
   assert.deepEqual(windows(7, 3), [[0, 3], [3, 6], [6, 7]]); assert.deepEqual(windows(6, 3), [[0, 3], [3, 6]]); assert.deepEqual(windows(0, 3), []);
@@ -35,6 +36,7 @@ test('contribution: a useful node adds out of fold, a useless one adds about not
   assert.ok(Math.abs(cc) < 0.02, 'c adds ' + cc);
   assert.equal(contribution(G.cols, 0, G.y, 3), contribution(G.cols, 0, G.y, 3), 'deterministic');
   assert.notEqual(contribution(G.cols, 0, G.y, 3), ca, 'the folds count');
+  assert.ok(Math.abs(ca - 0.10695381454406505) < 1e-12, 'the exact out-of-fold contribution: ' + ca);
 });
 
 test('the wisp: when the world shifts, a coupling that learns from outcomes beats one frozen at GATE', () => {
@@ -49,6 +51,7 @@ test('the wisp: when the world shifts, a coupling that learns from outcomes beat
 test('pruning: a node gone bad mid-stream is cut from the mesh, and the mesh does better without it', () => {
   const calm = world(2400, 8, false), bad = { cols: [calm.cols[0], breakAt(calm.cols[1], 900, 4), calm.cols[2]], y: calm.y };
   assert.deepEqual(bad.cols[1].slice(0, 900), calm.cols[1].slice(0, 900), 'untouched before the break');
+  assert.notEqual(bad.cols[1][900], calm.cols[1][900], 'broken from the break on, the break included');
   assert.notDeepEqual(bad.cols[1].slice(900), calm.cols[1].slice(900));
   const lo = Math.min(...calm.cols[1]), hi = Math.max(...calm.cols[1]);
   assert.ok(bad.cols[1].every((v) => v >= lo && v <= hi), 'noise on its own scale');
@@ -58,4 +61,14 @@ test('pruning: a node gone bad mid-stream is cut from the mesh, and the mesh doe
   const late = (s) => auc(s.slice(1800), bad.y.slice(1800));
   assert.ok(late(pruned.scores) >= late(kept.scores) - 0.005, 'without the broken node: ' + late(pruned.scores) + ' vs ' + late(kept.scores));
   assert.ok(pruned.live.every((l) => l.length >= 1), 'never pruned to nothing');
+});
+
+test('pruning keeps only nodes that add: a node that always says the same adds exactly nothing, and goes', () => {
+  const flat = (n) => new Array(n).fill(1.5), gate = { cols: [G.cols[0], flat(G.y.length), G.cols[1]], y: G.y };
+  const stream = { cols: [S.cols[0].slice(0, 1200), flat(1200), S.cols[1].slice(0, 1200)], y: S.y.slice(0, 1200) };
+  assert.equal(contribution(gate.cols, 1, gate.y), 0, 'exactly 0: its standardised column is all zeros');
+  const out = run(gate, stream, { size: 300, prune: true });
+  assert.deepEqual(out.live[0], [0, 1, 2], 'nothing is known before the first window');
+  assert.ok(!out.live[1].includes(1), 'after it, the node that adds nothing is gone: ' + JSON.stringify(out.live[1]));
+  assert.ok(out.live[1].includes(0), 'and a node that adds stays');
 });

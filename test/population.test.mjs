@@ -14,9 +14,9 @@ function view() {
   return { ok: true, name: 'demo-silo', features: ['a', 'b', 'c'], cols, y, n, trainRows: rows.filter((i) => i % 4), heldRows: rows.filter((i) => !(i % 4)) };
 }
 const V = view(), QUICK = { population: 10, elites: 2, generations: 4 };
-async function founders(k) {
+async function founders(k, grow = QUICK) {
   const out = [];
-  for (let s = 1; s <= k; s++) { const keys = await contributor('c' + s), g = await sealNode(V, keys, { seed: s, grow: QUICK }), n = await growNode(g.text, V); out.push(member(g, n)); }
+  for (let s = 1; s <= k; s++) { const keys = await contributor('c' + s), g = await sealNode(V, keys, { seed: s, grow }), n = await growNode(g.text, V); out.push(member(g, n)); }
   return out;
 }
 
@@ -43,6 +43,12 @@ test('breed: a child is born only if it beats both parents on GATE, and it names
   }
   assert.ok(refusedOnce, 'the gate refuses some children');
   assert.deepEqual(await breed(a, b, V, keys, 3), await breed(a, b, V, keys, 3), 'seeded');
+  // twins: the same seed under two contributors grows the same genome; a child that only matches them is refused
+  const twinKeys = await contributor('twin'), tg = await sealNode(V, twinKeys, { seed: 1, grow: QUICK }), twin = member(tg, await growNode(tg.text, V));
+  assert.equal(twin.gateAuc, a.gateAuc); assert.notEqual(twin.id, a.id);
+  let tied = 0;
+  for (let s = 1; s <= 10; s++) { const out = await breed(a, twin, V, keys, s); if (out.born) assert.ok(out.child.gateAuc > a.gateAuc); else if (/does not beat/.test(out.why) && out.why.includes('GATE ' + a.gateAuc + ' ')) tied++; }
+  assert.ok(tied >= 1, 'a child that only equals its parents is refused');
 });
 
 test('pick: fitter nodes are picked more often, every node can be picked, and it is seeded', () => {
@@ -51,20 +57,23 @@ test('pick: fitter nodes are picked more often, every node can be picked, and it
   assert.ok(n.a > n.c && n.c > n.b && n.b > 0, JSON.stringify(n));
   assert.ok(Math.abs(n.a / 6000 - 3 / 6) < 0.03 && Math.abs(n.c / 6000 - 2 / 6) < 0.03 && Math.abs(n.b / 6000 - 1 / 6) < 0.03, 'rank-proportional 3:2:1');
   const tie = [{ id: 'q', gateAuc: 0.5 }, { id: 'p', gateAuc: 0.5 }];
-  assert.equal(pick(tie, () => 0).id, 'p', 'ties go to the earlier id');
-  assert.equal(pick(tie, () => 0.999999).id, 'q');
+  assert.equal(pick(tie, () => 0).id, 'q', 'ties keep their order (a stable sort)');
+  assert.equal(pick(tie, () => 0.999999).id, 'p');
+  assert.equal(pick(pop, () => 0.5).id, 'c', 'exactly on a boundary (t = 3 of 6), the pick moves on to the next');
+  assert.equal(pick(pop, () => 0.4999).id, 'a');
   assert.equal(pick([{ id: 'only', gateAuc: 0.6 }], () => 0.5).id, 'only');
 });
 
 test('evolve: the population’s best never falls, it keeps its size, every child’s lineage is recorded', async () => {
-  const pop = await founders(4), keys = await contributor('breeder');
-  const out = await evolve(pop, V, keys, { generations: 3, attempts: 4, seed: 2 });
+  const pop = await founders(4, { population: 4, elites: 1, generations: 2 }), keys = await contributor('breeder');   // weak founders leave room to breed better
+  const out = await evolve(pop, V, keys, { generations: 3, attempts: 4, seed: 1 });
   assert.equal(out.history.length, 4); assert.equal(out.pop.length, 4);
   assert.ok(out.history.every((h, k) => k === 0 || h >= out.history[k - 1]), out.history.join(' '));
-  assert.equal(out.born + out.refused <= 12, true); assert.equal(out.lineage.length, out.born);
+  assert.equal(out.born + out.refused, 12, 'every attempt is a birth or a refusal'); assert.equal(out.lineage.length, out.born); assert.ok(out.born >= 1, 'children are born');
   for (const l of out.lineage) { assert.equal(l.parents.length, 2); assert.ok(l.childGate > Math.max(...l.parentGates), 'the record shows each child beat both'); }
   assert.deepEqual(out.pop.map((m) => m.gateAuc), [...out.pop.map((m) => m.gateAuc)].sort((p, q) => q - p), 'kept best first');
-  const again = await evolve(pop, V, keys, { generations: 3, attempts: 4, seed: 2 });
+  assert.ok(out.history[3] > out.history[0], 'the best climbs: ' + out.history.join(' '));
+  const again = await evolve(pop, V, keys, { generations: 3, attempts: 4, seed: 1 });
   assert.deepEqual(again.history, out.history); assert.deepEqual(again.lineage, out.lineage);
   const none = await evolve([pop[0]], V, keys, { generations: 1, attempts: 3, seed: 2 });
   assert.equal(none.born, 0, 'one node alone cannot breed with itself');

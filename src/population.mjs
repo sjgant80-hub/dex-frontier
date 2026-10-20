@@ -4,7 +4,7 @@
 // both parents and grown on the silo like any node; it is born only if it beats BOTH parents on GATE (𝟙 — a child is
 // never a promise, it is what grew); fitter nodes are picked to breed more often (f); the population keeps its best.
 // Every child's lineage is in its seal: its parents' genome ids. Pure apart from the signatures, seeded, total.
-import { encodeSeed, makeSeed, crossGenome, mutateGenome, unpackGenome, fromHex, rng } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
+import { encodeSeed, makeSeed, crossGenome, mutateGenome, unpackGenome, fromHex, rng, coin } from '../vendor/living-seed/vendor/seed-library/seedlib.mjs';
 import { seal } from '../vendor/living-seed/src/genome.mjs';
 import { growNode } from './node.mjs';
 
@@ -21,12 +21,12 @@ export const member = (sealed, grown) => ({ id: sealed.id, text: sealed.text, or
 export async function breed(a, b, view, keys, seed) {
   const r = rng(seed);
   let g = crossGenome(genomeOf(a.organ), genomeOf(b.organ), r);
-  if (r() < 0.5) g = mutateGenome(g, r);
+  if (coin(r)) g = mutateGenome(g, r);   // μ, half the time
   const parents = [a.id, b.id], bar = Math.max(a.organism.gate.auc, b.organism.gate.auc);
   const sealed = await seal({ name: 'node-' + view.name, parents, gate: { auc: bar }, organs: [fixedRecipe(view.name, seed, g)] }, keys);
   if (!sealed.ok) return { born: false, why: 'it could not be sealed: ' + sealed.why, parents };
   const grown = await growNode(sealed.text, view);
-  if (!grown.ok || !grown.organ) return { born: false, why: 'it could not grow here', parents };
+  if (!grown.organ) return { born: false, why: 'it could not grow here', parents };   // a refusal carries no organ
   const beat = Math.max(a.gateAuc, b.gateAuc);
   if (grown.organ.state !== 'live') return { born: false, why: 'it was cut at its gate', parents };
   if (!(grown.organ.heldAuc > beat)) return { born: false, why: 'GATE ' + grown.organ.heldAuc + ' does not beat both parents (' + beat + ')', parents };
@@ -35,10 +35,9 @@ export async function breed(a, b, view, keys, seed) {
 
 /** f: a parent picked with probability proportional to its rank (the fittest is the likeliest), seeded */
 export function pick(pop, r) {
-  const ranked = [...pop].sort((p, q) => q.gateAuc - p.gateAuc || (p.id < q.id ? -1 : 1)), total = (ranked.length * (ranked.length + 1)) / 2;
-  let t = r() * total;
-  for (let k = 0; k < ranked.length; k++) { t -= ranked.length - k; if (t < 0) return ranked[k]; }
-  return ranked[ranked.length - 1];
+  const ranked = [...pop].sort((p, q) => q.gateAuc - p.gateAuc), total = (ranked.length * (ranked.length + 1)) / 2, t = r() * total;   // a stable sort: ties keep their order
+  let acc = 0;
+  return ranked.find((_, k) => (acc += ranked.length - k) > t) || ranked[ranked.length - 1];
 }
 
 /**
@@ -54,14 +53,13 @@ export async function evolve(pop, view, keys, { generations = 4, attempts = 6, s
   for (let gen = 0; gen < generations; gen++) {
     const kids = [];
     for (let t = 0; t < attempts; t++) {
-      const a = pick(pop, r);
-      let b = pick(pop, r);
-      for (let tries = 0; b.id === a.id && tries < 8; tries++) b = pick(pop, r);
-      if (b.id === a.id) continue;
+      const a = pick(pop, r), rest = pop.filter((m) => m.id !== a.id);
+      if (!rest.length) continue;
+      const b = pick(rest, r);
       const out = await breed(a, b, view, keys, seed * 1000 + ++k);
       if (out.born) { kids.push(out.child); lineage.push({ child: out.child.id, parents: out.parents, childGate: out.child.gateAuc, parentGates: [a.gateAuc, b.gateAuc] }); } else refused++;
     }
-    pop = [...pop, ...kids].sort((p, q) => q.gateAuc - p.gateAuc || (p.id < q.id ? -1 : 1)).slice(0, size);
+    pop = [...pop, ...kids].sort((p, q) => q.gateAuc - p.gateAuc).slice(0, size);
     history.push(best(pop));
   }
   return { pop, history, born: lineage.length, refused, lineage };

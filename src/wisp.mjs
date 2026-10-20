@@ -37,7 +37,7 @@ export function contribution(columns, k, y, folds = 2) {
     for (let f = 0; f < folds; f++) {
       const train = [], held = [];
       for (let i = 0; i < n; i++) (fold(i) === f ? held : train).push(i);
-      const c = couple(cols.map((col) => train.map((i) => col[i])), train.map((i) => y[i]), { iterations: 25 });
+      const c = couple(cols.map((col) => train.map((i) => col[i])), train.map((i) => y[i]));
       for (const i of held) out[i] = coupled(c, cols.map((col) => col[i]));
     }
     return auc(out, y);
@@ -56,9 +56,10 @@ export function run(gate, stream, { size = 300, learn = false, prune = false, re
   let live = gate.cols.map((_, k) => k);
   for (const [from, to] of windows(n, size)) {
     const seenCols = gate.cols.map((g, k) => (learn ? g.concat(stream.cols[k].slice(0, from)) : g)), seenY = learn ? gate.y.concat(stream.y.slice(0, from)) : gate.y;
-    if (prune && from > 0 && live.length > 1) {
+    if (prune && live.length > 1) {   // with no outcome yet (or one kind only) every contribution is 0, and nothing is pruned
       const lo = Math.max(0, from - recent), rc = live.map((k) => stream.cols[k].slice(lo, from)), ry = stream.y.slice(lo, from);
-      if (ry.some((v) => v === 1) && ry.some((v) => v === 0)) { const keep = live.filter((k, j) => contribution(rc, j, ry) > 0); if (keep.length) live = keep; }
+      const keep = ry.length ? live.filter((k, j) => contribution(rc, j, ry) > 0) : [];
+      if (keep.length) live = keep;
     }
     liveByWindow.push(live.slice());
     const c = couple(live.map((k) => seenCols[k]), seenY);

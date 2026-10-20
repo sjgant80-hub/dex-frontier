@@ -17,7 +17,7 @@ const draw = (r, k) => Math.floor(r() * k), coin = (r) => draw(r, 2) === 0;
 export function joinFitness(view, inner, genome, others) {
   const card = fit(view, inner.rest, genome);
   const cols = (rows) => { const o = rows.map(others), k = o[0].length; return [...Array.from({ length: k }, (_, j) => o.map((x) => x[j])), rows.map((i) => scoreRow(card, view, i))]; };
-  const restCols = cols(inner.rest), c = couple(restCols, inner.rest.map((i) => view.y[i]), { iterations: 25 });
+  const restCols = cols(inner.rest), c = couple(restCols, inner.rest.map((i) => view.y[i]));
   const heldCols = cols(inner.held);
   return auc(inner.held.map((_, r) => coupled(c, heldCols.map((col) => col[r]))), inner.held.map((i) => view.y[i]));
 }
@@ -27,13 +27,13 @@ export function cogrow(view, rows, seed, cfg, others) {
   const inner = splitRows(view, rows, 1 / 3, seed), r = rng(seed * 7919 + 1);
   let born = 0;
   const live = (g) => ({ g, n: born++, fitness: joinFitness(view, inner, g, others) });
-  const better = (a, b) => a.fitness > b.fitness || (a.fitness === b.fitness && a.n < b.n);
+  const ranked = (p) => [...p].sort((x, y) => y.fitness - x.fitness || x.n - y.n);   // fittest first; ties to the elder
   let pop = [stemGenome(), ...Array.from({ length: cfg.population - 1 }, () => randomGenome(r))].map(live);
-  const best = () => pop.reduce((a, b) => (better(b, a) ? b : a));
+  const best = () => ranked(pop)[0];
   const history = [best().fitness];
   for (let gen = 1; gen < cfg.generations; gen++) {
-    const battle = () => { const a = pop[draw(r, pop.length)], b = pop[draw(r, pop.length)]; return better(b, a) ? b : a; };
-    const next = [...pop].sort((a, b) => (better(a, b) ? -1 : 1)).slice(0, cfg.elites);
+    const battle = () => ranked([pop[draw(r, pop.length)], pop[draw(r, pop.length)]])[0];
+    const next = ranked(pop).slice(0, cfg.elites);
     while (next.length < cfg.population) { const child = crossGenome(battle().g, battle().g, r); next.push(live(coin(r) ? mutateGenome(child, r) : child)); }
     pop = next;
     history.push(best().fitness);

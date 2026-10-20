@@ -31,8 +31,9 @@ test('the ledger: useful nodes earn a share, a useless one earns none; the share
   assert.ok(L[2].share < 0.1, 'the useless node earns little or nothing: ' + L[2].share);
   assert.ok(Math.abs(L.reduce((s, x) => s + x.share, 0) - 1) < 1e-12);
   assert.ok(L.every((x) => x.share >= 0 && x.share <= 1));
-  const none = ledger([{ node: 'x', silo: 's', maker: 'm' }, { node: 'y', silo: 't', maker: 'm' }], [c, c.map((v) => 1 - v)], y);
-  assert.ok(none.every((x) => x.share === 0 || x.contribution > 0));
+  const flat = new Array(n).fill(2), none = ledger([{ node: 'x', silo: 's', maker: 'm' }, { node: 'y', silo: 't', maker: 'm' }], [flat, flat.slice()], y);
+  assert.deepEqual(none.map((x) => x.contribution), [0, 0], 'two nodes that never vary add exactly nothing');
+  assert.deepEqual(none.map((x) => x.share), [0, 0], 'and with nothing to share out, each share is 0, not 0/0');
 });
 
 test('revoke: the coupling re-learns without the node; the last node cannot leave; an answer carries scores only', () => {

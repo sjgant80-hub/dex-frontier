@@ -42,4 +42,6 @@ test('co-grown, the node finds what the mesh lacks; grown alone it is drawn to w
   };
   assert.ok(composedOnTest(co.champion) >= composedOnTest(solo.champion) - 0.005, 'co-growth composes at least as well: ' + composedOnTest(co.champion) + ' vs ' + composedOnTest(solo.champion));
   assert.deepEqual(cogrow(W.view, W.rows, 7, QUICK, others).champion, co.champion, 'seeded');
+  assert.deepEqual(co.history, [0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.921545, 0.927274, 0.927274], 'the one climb for seed 7');
+  assert.equal(co.champion.on, 60);
 });
