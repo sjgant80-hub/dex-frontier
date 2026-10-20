@@ -34,6 +34,36 @@
    "linear": 0.824048,
    "trees": 0.822992
   },
+  "deepGrown": {
+   "bodies": [
+    {
+     "silo": "telco-customer",
+     "stages": 2,
+     "rules": 6,
+     "gate": 0.677127
+    },
+    {
+     "silo": "telco-services",
+     "stages": 2,
+     "rules": 10,
+     "gate": 0.771992
+    },
+    {
+     "silo": "telco-account",
+     "stages": 3,
+     "rules": 13,
+     "gate": 0.824799
+    }
+   ],
+   "live": [
+    "telco-account",
+    "telco-services",
+    "telco-customer"
+   ],
+   "numbers": 3,
+   "linear": 0.838591,
+   "trees": 0.833028
+  },
   "deep": {
    "silos": [
     "telco-customer",
@@ -69,6 +99,35 @@
    "numbers": 10,
    "linear": 0.918757,
    "trees": 0.940479
+  },
+  "deepGrown": {
+   "bodies": [
+    {
+     "silo": "shop-browsing",
+     "stages": 3,
+     "rules": 12,
+     "gate": 0.655381
+    },
+    {
+     "silo": "shop-analytics",
+     "stages": 1,
+     "rules": 5,
+     "gate": 0.91986
+    },
+    {
+     "silo": "shop-context",
+     "stages": 2,
+     "rules": 11,
+     "gate": 0.565783
+    }
+   ],
+   "live": [
+    "shop-analytics",
+    "shop-browsing"
+   ],
+   "numbers": 2,
+   "linear": 0.920493,
+   "trees": 0.914368
   },
   "deep": {
    "silos": [
