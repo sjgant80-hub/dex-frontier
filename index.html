@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=' 'sha256-xxmfrt7P9Q4C8Xa0miEayS4TwTT3bfuTegTxBuB7lao='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Self-Growing DEX Frontier</title>
+<meta name="description" content="A frontier mind grown, not poured: specialist nodes grown from seeds on each department’s own records, coupled into one answer, records never shared. The composition proof was sealed before it ran: 0 of 0 sealed rules held." />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#0b0e13" />
+<script type="application/ld+json">{}</script>
+<style>
+:root{--bg:#0b0e13;--panel:#121821;--panel2:#0e141b;--ink:#e8eef4;--dim:#93a6b8;--faint:#7d8fa1;--line:#1f2b38;
+  --accent:#45d0a8;--accent2:#6ab0ff;--gold:#ffcf5c;--bad:#ff6b6b;--warn:#ffa94d;--violet:#b58cff;--on-accent:#04241b;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#f6f8fa;--panel:#ffffff;--panel2:#f0f3f6;--ink:#0f1720;--dim:#4d5b69;--faint:#5f6b77;--line:#dde3ea;--accent:#087a5b;--accent2:#1a63c0;--gold:#8a6508;--bad:#bf3434;--warn:#9a530b;--violet:#7a4fd0;--on-accent:#ffffff}}
+:root[data-theme="dark"]{--bg:#0b0e13;--panel:#121821;--panel2:#0e141b;--ink:#e8eef4;--dim:#93a6b8;--faint:#7d8fa1;--line:#1f2b38;--accent:#45d0a8;--accent2:#6ab0ff;--gold:#ffcf5c;--bad:#ff6b6b;--warn:#ffa94d;--violet:#b58cff;--on-accent:#04241b}
+*{box-sizing:border-box}html,body{margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px 48px}
+a{color:var(--accent2)}
+code,.mono{font-family:var(--mono);font-size:.92em;overflow-wrap:anywhere}
+header{padding:26px 0 6px}
+h1{font-size:clamp(28px,6vw,46px);margin:0;font-weight:800;letter-spacing:.01em}h1 .x{color:var(--accent)}
+.lede{font-size:clamp(16px,2.4vw,19px);max-width:72ch;margin:10px 0 0}
+.tag{color:var(--dim);max-width:80ch;margin:8px 0 0;font-size:15px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+.pill{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:20px;padding:2px 10px}
+.pill.ok{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.pill.warn{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
+nav.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:14px -16px 0;padding:0 16px}
+nav.top ul{list-style:none;display:flex;gap:2px;margin:0;padding:0;overflow-x:auto;scrollbar-width:thin}
+nav.top a{display:block;padding:10px 11px;color:var(--dim);text-decoration:none;white-space:nowrap;font-size:14px;border-bottom:2px solid transparent}
+nav.top a:hover,nav.top a:focus-visible{color:var(--ink);border-bottom-color:var(--accent)}
+section{padding:30px 0 6px;scroll-margin-top:52px}
+h2{font-size:clamp(21px,3.6vw,28px);margin:0 0 6px}
+h2 .n{font-family:var(--mono);color:var(--accent);font-size:.7em;margin-right:6px;vertical-align:middle}
+h3{font-size:17px;margin:20px 0 6px}
+p{margin:8px 0;max-width:78ch}
+.sub{color:var(--dim);margin-top:0}
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:920px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:640px) and (max-width:919px){.grid.three{grid-template-columns:1fr 1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.panel h3{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim)}
+.panel h4{margin:0 0 6px;font-size:15px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+button{font:inherit;font-size:14px;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 13px;cursor:pointer;min-height:38px}
+button:hover{border-color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+button.on{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+input,select,textarea{font:inherit;font-size:14px;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 9px;min-width:0}
+textarea{width:100%;resize:vertical;font-family:var(--mono);font-size:12.5px;line-height:1.5;white-space:pre;overflow-x:auto}
+label{font-size:14px}
+.devs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.dev{text-align:left;padding:9px 11px;border-radius:10px}
+.dev b{display:block;font-size:14px}.dev span{display:block;color:var(--dim);font-size:12px;line-height:1.35;margin-top:2px}
+.status{font-size:14px;margin:8px 0;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);overflow-wrap:anywhere}
+.status.ok{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.status.bad{border-color:color-mix(in srgb,var(--bad) 60%,var(--line))}
+.ok-t{color:var(--accent)}.bad-t{color:var(--bad)}.warn-t{color:var(--warn)}.dim{color:var(--dim)}
+.chip{display:inline-block;font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:12px;padding:0 8px;white-space:nowrap}
+.chip.live{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.chip.cut{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 50%,var(--line))}
+.chip.dormant{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 50%,var(--line))}
+.chip.pass{color:var(--accent)}.chip.fail{color:var(--bad)}.chip.pred{color:var(--violet)}
+.tw{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+td.num{font-family:var(--mono);white-space:nowrap}
+.steps{counter-reset:s;list-style:none;padding:0;margin:10px 0}
+.steps>li{counter-increment:s;position:relative;padding:4px 0 10px 40px;max-width:80ch}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:3px;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:13px;display:grid;place-items:center}
+.diagram{overflow-x:auto;margin:10px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.diagram svg{display:block;min-width:780px;width:100%;height:auto}
+.dg-box{fill:var(--panel2);stroke:var(--line);stroke-width:1.5}
+.dg-live{stroke:var(--accent)}.dg-cut{stroke:var(--bad)}.dg-dorm{stroke:var(--warn)}.dg-ref{stroke:var(--bad);stroke-dasharray:5 4}
+.dg-t{fill:var(--ink);font:600 14px var(--sans)}.dg-s{fill:var(--dim);font:12px var(--sans)}.dg-m{fill:var(--accent);font:12px var(--mono)}
+.dg-a{stroke:var(--faint);stroke-width:1.6;fill:none;marker-end:url(#arr)}.dg-ah{fill:var(--faint)}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin:8px 0}
+.fields label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--dim)}
+.fields label.read{color:var(--ink)}.fields label.read input{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.answer{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel2);margin-top:8px}
+.answer .v{font-family:var(--mono);font-weight:800;font-size:18px}
+.rules{font-family:var(--mono);font-size:12.5px;margin:6px 0 0;padding-left:18px}
+.kpis{display:grid;gap:10px;grid-template-columns:repeat(2,1fr);margin:12px 0}
+@media(min-width:760px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi .v{font-size:clamp(20px,4vw,28px);font-weight:800;font-family:var(--mono);line-height:1.15}
+.kpi .l{font-size:13px;color:var(--dim)}
+.gloss{display:grid;grid-template-columns:1fr;gap:4px 18px;margin:8px 0 0}@media(min-width:760px){.gloss{grid-template-columns:repeat(2,1fr)}}
+.gloss div{border-top:1px solid var(--line);padding:6px 0}.gloss dt{font-weight:700;display:inline}.gloss dd{display:inline;margin:0;color:var(--dim)}
+.role h4{color:var(--accent)}
+.note{border-left:3px solid var(--warn);padding:6px 12px;background:var(--panel);border-radius:0 8px 8px 0;margin:10px 0;max-width:80ch}
+.note.honest{border-left-color:var(--violet)}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--panel);margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.5}
+article.paper{max-width:80ch}
+article.paper h3{margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:var(--dim);font-size:14px}
+.banner{display:none;margin:12px 0}.banner.show{display:block}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header id="top">
+  <h1>The Self-Growing <span class="x">DEX</span> Frontier</h1>
+  <p class="lede">Frontier AI is poured: every record into one giant model in one data centre, rented back to you. This grows it instead. Each department keeps its own records. A seed of a few hundred bytes grows a specialist from one department’s records, on that department’s machine, and it must prove itself on cases it never saw or it is cut. The specialists share answers, never records. A coupling learns from outcomes how much each one’s word is worth, and the mesh answers as one mind.</p>
+  <p class="tag">Everything on this page runs the real, mutation-gated code in your browser, on two real public datasets. The one claim it all rests on — that specialists compose into more than the sum — was sealed before it was measured, and allowed to fail.</p>
+  <div class="pills">
+    <span class="pill ok"><span data-tally="held">0 of 0</span> sealed rules held across <span data-tally="tests">0</span> sealed organs</span>
+    <span class="pill warn"><span data-tally="failed">0</span> predictions failed · every one kept</span>
+    <span class="pill">composition (organ 2, B2): <span data-v="2:B2">…</span></span>
+    <span class="pill ok">0 records shared between nodes</span>
+    <span class="pill ok">MIT — no licence fee</span>
+  </div>
+  <p id="nocrypto" class="note" hidden>This browser cannot check Ed25519 signatures, so it cannot open a seed. Use a current Chrome, Edge, Firefox or Safari.</p>
+  <nav class="top" aria-label="Sections"><ul>
+    <li><a href="#what">What it is</a></li><li><a href="#start">Start here</a></li><li><a href="#try">Try it</a></li><li><a href="#how">How it works</a></li>
+    <li><a href="#one">Organ 1 · one body</a></li><li><a href="#compose">Organ 2 · composition</a></li><li><a href="#next">What scales next</a></li>
+    <li><a href="#blueprint">Blueprint</a></li><li><a href="#business">For your business</a></li><li><a href="#paper">White paper</a></li><li><a href="#faq">Questions</a></li>
+  </ul></nav>
+</header>
+
+<section id="what" aria-labelledby="what-h">
+  <h2 id="what-h"><span class="n">00</span>What it is, in plain words</h2>
+  <p>New to the words? They are explained <a href="#words">at the end of this section</a>.</p>
+  <p>Every frontier model today is built the same way: gather all the data in one place, train one enormous model on it, and rent out the answers. Your records go to it, or it never sees them. This page builds the opposite way. A business already keeps its records apart: billing has billing’s, the product team has usage, the CRM has the customer. Each of those <b>silos</b> grows its own <b>specialist node</b>, on its own machine, from a <b>seed</b>: a signed recipe of a few hundred bytes that says what to look for. The node sets every threshold from its own records and must clear a bar on past cases it never trained on, or it is <span class="chip cut">cut</span> and says nothing.</p>
+  <p>The live nodes then answer together. Each scores the case from what its own silo knows, and a <b>coupling</b> (κ) weighs their scores into one answer. It learned those weights from outcomes on cases none of them trained on. Nothing but scores crosses between nodes. The billing node never sees the CRM, and the CRM never sees billing.</p>
+  <p>The spec this was built from says the whole idea rests on one claim, to be proven before anything scales: <b>do specialists compose into more than the sum?</b> Organ 2 is that proof, on real data, sealed before it ran and allowed to fail.</p>
+  <h3 id="words">The words this page uses</h3>
+  <dl class="gloss">
+    <div><dt>Silo</dt> <dd>— the records one department keeps, and only those.</dd></div>
+    <div><dt>Seed</dt> <dd>— a signed recipe of a few hundred bytes: which silo, and how hard to search. It carries no trained weights.</dd></div>
+    <div><dt>Node</dt> <dd>— what a seed grows on one silo’s records: a handful of readable rules, each a column, a cut and a weight.</dd></div>
+    <div><dt>Gate</dt> <dd>— the bar a node must clear on past cases it never trained on before it may answer at all.</dd></div>
+    <div><dt>Cut</dt> <dd>— a node that did not clear its bar. It answers nothing.</dd></div>
+    <div><dt>Coupling (κ)</dt> <dd>— how much each node’s word is worth, learned from outcomes on cases no node trained on.</dd></div>
+    <div><dt>Composed</dt> <dd>— the mesh’s one answer: the nodes’ scores, weighed by the coupling.</dd></div>
+    <div><dt>Poured, monolith</dt> <dd>— the usual way: every record in one place and one model fitted on all of it.</dd></div>
+    <div><dt>Sealed</dt> <dd>— rules written and published before a measurement ran, so they could not be bent to the result.</dd></div>
+    <div><dt>Prediction, property</dt> <dd>— a sealed rule that may fail (and is kept when it does), or one the build promises must hold.</dd></div>
+    <div><dt>Mutation gate</dt> <dd>— the code is deliberately broken, line by line, and the tests must notice every break.</dd></div>
+    <div><dt>AUC</dt> <dd>— how often a real case is ranked above a non-case: 0.5 is a coin toss, 1 is perfect.</dd></div>
+  </dl>
+</section>
+
+<section id="start" aria-labelledby="start-h">
+  <h2 id="start-h"><span class="n">01</span>Start here</h2>
+  <p>Five steps, a few minutes. Everything happens in this tab, on this page’s own files. Nothing you do leaves it.</p>
+  <ol class="steps">
+    <li><b>See the seeds.</b> Box 1 shows the six seeds, one per silo: three for a telecom company’s customers, three for a web shop’s sessions. Each is signed by the contributor who owns that silo.</li>
+    <li><b>Grow the mesh.</b> Press <i>Grow all six nodes</i> in box 2. Your browser grows each node from its own silo’s records, holds it to its bar, and learns the coupling. One node may be cut. Read why.</li>
+    <li><b>Ask it.</b> In box 3, draw a case it never trained on. Each node answers from its own silo (or abstains), the coupling weighs them, and you see what really happened.</li>
+    <li><b>Re-run the proof.</b> Box 4 re-scores every test case and puts the composed mesh against its best single node, the shams and the poured monolith, beside the committed record.</li>
+    <li><b>Break it.</b> Unplug a node in box 5 and watch the mesh carry on without it. Change one character of a seed in box 6 and watch it refused.</li>
+  </ol>
+</section>
+
+<section id="try" aria-labelledby="try-h">
+  <h2 id="try-h"><span class="n">02</span>Try it</h2>
+  <div class="grid two">
+    <div class="panel"><h3>1 · The six seeds</h3><p class="dim">One per silo, each sealed by its contributor’s key. The demo keys are derived from public phrases, so anyone can reproduce every seal. A real contributor keeps their own.</p><div id="b1" role="status" aria-live="polite"><p class="dim">Loading the seeds…</p></div></div>
+    <div class="panel"><h3>2 · Grow the mesh here</h3><div class="row"><button id="b2-go" type="button" class="primary" disabled>Grow all six nodes</button><span id="b2-t" class="dim"></span></div><div id="b2" role="status" aria-live="polite"><p class="dim">Your browser grows each node from its own silo: about a minute on a laptop.</p></div></div>
+  </div>
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel"><h3>3 · Ask the mesh a case it never saw</h3><div class="row"><label for="b3-d">Domain</label><select id="b3-d"><option value="telco">Telco customer: will they leave?</option><option value="shop">Shop session: will they buy?</option></select><button id="b3-go" type="button" disabled>Draw a test case</button></div><div id="b3" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
+    <div class="panel"><h3>4 · Re-run the composition proof</h3><div class="row"><button id="b4-go" type="button" disabled>Re-score every test case</button></div><div id="b4" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
+  </div>
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel"><h3>5 · Unplug a node</h3><div class="row"><label for="b5-n">Node</label><select id="b5-n"></select><button id="b5-go" type="button" disabled>Unplug it and re-couple</button></div><div id="b5" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
+    <div class="panel"><h3>6 · Change one character of a seed</h3><div class="row"><button id="b6-go" type="button" disabled>Change one character and grow</button></div><div id="b6" role="status" aria-live="polite"><p class="dim">A seed is checked against its signature before a single line of it is read.</p></div></div>
+  </div>
+</section>
+
+<section id="how" aria-labelledby="how-h">
+  <h2 id="how-h"><span class="n">03</span>How it works</h2>
+  <div class="diagram" role="img" aria-label="Three silos each grow a node from a seed; each node must clear its gate; the live nodes send only scores to the coupling, which answers as one">
+    <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="dg-ah"/></marker></defs>
+      <g><rect class="dg-box" x="20" y="20" width="170" height="64" rx="10"/><text class="dg-t" x="36" y="46">Silo: customer</text><text class="dg-s" x="36" y="68">its own records only</text></g>
+      <g><rect class="dg-box" x="20" y="118" width="170" height="64" rx="10"/><text class="dg-t" x="36" y="144">Silo: services</text><text class="dg-s" x="36" y="166">its own records only</text></g>
+      <g><rect class="dg-box" x="20" y="216" width="170" height="64" rx="10"/><text class="dg-t" x="36" y="242">Silo: account</text><text class="dg-s" x="36" y="264">its own records only</text></g>
+      <g><rect class="dg-box dg-live" x="260" y="20" width="200" height="64" rx="10"/><text class="dg-t" x="276" y="46">Node, grown from a seed</text><text class="dg-m" x="276" y="68">gate: AUC ≥ 0.6 or cut</text></g>
+      <g><rect class="dg-box dg-live" x="260" y="118" width="200" height="64" rx="10"/><text class="dg-t" x="276" y="144">Node, grown from a seed</text><text class="dg-m" x="276" y="166">gate: AUC ≥ 0.6 or cut</text></g>
+      <g><rect class="dg-box dg-live" x="260" y="216" width="200" height="64" rx="10"/><text class="dg-t" x="276" y="242">Node, grown from a seed</text><text class="dg-m" x="276" y="264">gate: AUC ≥ 0.6 or cut</text></g>
+      <path class="dg-a" d="M190 52H258"/><path class="dg-a" d="M190 150H258"/><path class="dg-a" d="M190 248H258"/>
+      <g><rect class="dg-box" x="540" y="104" width="160" height="92" rx="10"/><text class="dg-t" x="556" y="132">Coupling κ</text><text class="dg-s" x="556" y="154">weights learned from</text><text class="dg-s" x="556" y="172">outcomes on GATE</text></g>
+      <path class="dg-a" d="M460 52C500 52 500 130 538 130"/><path class="dg-a" d="M460 150H538"/><path class="dg-a" d="M460 248C500 248 500 170 538 170"/>
+      <text class="dg-m" x="470" y="96">scores, never records</text>
+      <g><rect class="dg-box dg-live" x="760" y="118" width="120" height="64" rx="10"/><text class="dg-t" x="776" y="144">One answer</text><text class="dg-s" x="776" y="166">with every rule</text></g>
+      <path class="dg-a" d="M700 150H758"/>
+    </svg>
+  </div>
+  <ol class="steps">
+    <li><b>A silo stays where it is.</b> Each department’s records stay on its own machine. The data on this page is cut the same way: a telecom company’s 7,043 real customers into customer (4 columns), services (9) and account (7); a web shop’s 12,330 real sessions into browsing (6), analytics (3) and context (7).</li>
+    <li><b>A seed grows a node.</b> The contributor seals a seed for their silo. On their machine, the seed-library ribosome searches for the rules that predict best on part of the silo’s own records and fits every threshold to them. This is a search, not gradient training, and the result is a handful of readable rules.</li>
+    <li><b>The gate decides.</b> The node is scored on the silo’s GATE records, which it never grew on. Under the bar, it is cut and abstains on everything.</li>
+    <li><b>The coupling learns.</b> On the same GATE records, a small logistic regression learns how much each live node’s score is worth. That is the κ-coupling, and it is learned from outcomes, not set by hand.</li>
+    <li><b>The mesh answers.</b> A new case goes only to the live nodes whose silo it carries (routing by fit). Each returns a score, and the coupling weighs them into one answer, with every rule that fired. Records never move.</li>
+  </ol>
+</section>
+
+<section id="one" aria-labelledby="one-h">
+  <h2 id="one-h"><span class="n">04</span>Organ 1 · One specialist body</h2>
+  <p class="lede">The spec’s first step: does one node, grown from a seed on one department’s records, beat a big generalist on that department’s question?</p>
+  <p>The node is the billing department’s: the telecom company’s 7 account columns. Its seed is <span data-r="1:genome.bytes|n">…</span> bytes and its body is <span data-r="1:grown.rules|n">…</span> rules. Against it, on 300 test customers it never saw, are two contestants that see all 20 columns. One is qwen2.5:14b on this laptop’s processor, shown 24 past customers with their outcomes. The other is a frontier model (Claude Opus 5.5), asked cold with the same examples.</p>
+  <!-- w:verdict1 --><p class="answer"><b>Sealed, being measured.</b> This fills in from the record when it is judged.</p><!-- /w:verdict1 -->
+  <div id="r1" role="status" aria-live="polite"></div>
+</section>
+
+<section id="compose" aria-labelledby="compose-h">
+  <h2 id="compose-h"><span class="n">05</span>Organ 2 · The composition proof</h2>
+  <p class="lede">The critical gate. Nothing in the spec scales until this holds: do specialists, each grown on one silo and coupled at κ, compose into more than the sum?</p>
+  <p>In each of two real domains, every silo grows its own node and the live ones are coupled. The composed mesh is then measured on test cases none of them saw, against four kinds of rival. The first is its best single node: the best on the test cases themselves, the strictest rival there is. The second is the shams: random routing, a coupling taught shuffled outcomes, and a mesh grown on shuffled outcomes. The third is the poured monolith: boosted trees and logistic regression on every column, with every record pooled in one place. The fourth is the 14B and the frontier model, on 300 cases each.</p>
+  <!-- w:verdict2 --><p class="answer"><b>Sealed, being measured.</b> The rules were committed before a single TEST case was scored. The 14B is answering on this laptop’s processor, one case at a time; the frontier model has answered. This fills in from the record when it is judged.</p><!-- /w:verdict2 -->
+  <div id="r2" role="status" aria-live="polite"></div>
+</section>
+
+<section id="next" aria-labelledby="next-h">
+  <h2 id="next-h"><span class="n">06</span>What scales next, and only after the gate</h2>
+  <p>The spec’s order is fixed: one body, then the composition proof, then breeding, self-growing, routing that learns, scale, and sovereign spread. Each later organ is sealed only after organ 2 is judged. If composition holds, the build scales. If it does not, the next organ fixes composition first.</p>
+  <div id="r-next" role="status" aria-live="polite"></div>
+</section>
+
+<section id="blueprint" aria-labelledby="bp-h">
+  <h2 id="bp-h"><span class="n">07</span>Blueprint</h2>
+  <div class="tw"><table><thead><tr><th>Part</th><th>File</th><th>What it does</th><th>Gate</th></tr></thead><tbody>
+    <tr><td>Silos</td><td><code>src/silos.mjs</code></td><td>Reads the two real datasets, encodes every column one fixed way, cuts each into its silos, and splits FIT / GATE / TEST (seeded)</td><td>witness, 22 of 22 mutants killed</td></tr>
+    <tr><td>Node</td><td><code>src/node.mjs</code></td><td>Seals a contributor’s grow-seed for one silo, grows it there, cuts it under its bar, reads its scores and advert, routes by fit</td><td>witness, 8 of 8</td></tr>
+    <tr><td>Coupling κ</td><td><code>src/compose.mjs</code></td><td>Learns each node’s weight from GATE outcomes and answers with the weighted sum; the shams it must beat</td><td>witness, 13 of 13</td></tr>
+    <tr><td>Bounds</td><td><code>src/stats.mjs</code></td><td>The paired bootstrap every sealed lead is judged by</td><td>witness, 6 of 6</td></tr>
+    <tr><td>Genome, germination, baselines, breeding, card, gate</td><td><code>vendor/living-seed/</code></td><td>The Living Seed’s kernels, byte-identical to their source (vendor/SOURCES.json)</td><td>gated in living-seed; checked byte for byte here</td></tr>
+    <tr><td>Contest</td><td><code>tools/contest.mjs</code>, <code>ask-llm.mjs</code>, <code>frontier.mjs</code></td><td>Which test cases the models are asked, the examples, the exact prompts, how a reply is read</td><td>pinned by the seals</td></tr>
+    <tr><td>Seal, measure, judge, order</td><td><code>tools/seal-*.mjs</code>, <code>measure-*.mjs</code>, <code>judge-*.mjs</code>, <code>order.mjs</code></td><td>Rules committed first, a deterministic record, the verdict, and git proof that the seal came first</td><td>CI re-derives every record on every push</td></tr>
+    <tr><td>This page</td><td><code>index.html</code>, <code>tools/words.mjs</code></td><td>Runs the kernels in your browser; every number in its prose is written from a record</td><td>page tests; CI refuses a page that drifts from its records</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="business" aria-labelledby="biz-h">
+  <h2 id="biz-h"><span class="n">08</span>For your business</h2>
+  <!-- w:brochure --><!-- /w:brochure -->
+</section>
+
+<section id="paper" aria-labelledby="paper-h">
+  <h2 id="paper-h"><span class="n">09</span>White paper</h2>
+  <!-- w:paper --><!-- /w:paper -->
+</section>
+
+<section id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h"><span class="n">10</span>Questions</h2>
+  <!-- w:faq --><!-- /w:faq -->
+</section>
+
+<footer class="sub">
+  <p>Planned by Kar (the estate’s resident mind, on its own local model: <a href="https://github.com/sjgant80-hub/dex-frontier/blob/main/docs/kar-plan.md">its plan</a>) and Claude, together, for Simon. Powered by the Konomi architecture, created by Thomas Frumkin. Data: IBM’s Telco Customer Churn sample (Apache-2.0) and the UCI Online Shoppers Purchasing Intention dataset (Sakar &amp; Kastro, 2018, CC BY 4.0). Supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>. <a href="https://github.com/sjgant80-hub/dex-frontier">The repository</a> · MIT — no licence fee.</p>
+</footer>
+</div>
+<script type="module">
+import { loadTelco, loadShop, silo, pooled } from './src/silos.mjs';
+import { contributor, sealNode, growNode, scores, advert, route } from './src/node.mjs';
+import { couple, coupled, calibrate, randomRoute, shuffled } from './src/compose.mjs';
+import { lead } from './src/stats.mjs';
+import { boosted } from './vendor/living-seed/src/baseline.mjs';
+import { caseOf } from './vendor/living-seed/src/germinate.mjs';
+import { auc } from './vendor/living-seed/vendor/seed-library/seedlib.mjs';
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const f3 = (x) => (typeof x === 'number' ? x.toFixed(3) : '—'), sg = (x) => (x > 0 ? '+' : x < 0 ? '−' : '') + Math.abs(x).toFixed(3);
+const gb = (x) => Number(x).toLocaleString('en-GB');
+const tick = () => new Promise((r) => setTimeout(r, 0));
+const get = (p) => fetch(p, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(p + ' ' + r.status); return p.endsWith('.json') ? r.json() : r.text(); });
+const S = { ds: {}, seeds: [], grown: {}, mesh: {} };
+const SILOS = { telco: ['customer', 'services', 'account'], shop: ['browsing', 'analytics', 'context'] };
+const SEED = 1, ROUTE_SEED = 7, SHUFFLE_SEED = 13;
+
+async function canSign() { try { await crypto.subtle.generateKey({ name: 'Ed25519' }, false, ['sign']); return true; } catch { return false; } }
+
+async function boot() {
+  if (!(await canSign())) { $('nocrypto').hidden = false; $('b1').innerHTML = '<p class="bad-t">This browser cannot check Ed25519 signatures.</p>'; return; }
+  const [telco, shop] = await Promise.all([get('data/telco-churn.csv'), get('data/online_shoppers_intention.csv')]);
+  S.ds.telco = loadTelco(telco); S.ds.shop = loadShop(shop);
+  for (const d of ['telco', 'shop']) for (const name of SILOS[d]) {
+    const view = silo(S.ds[d], name), keys = await contributor(name), g = await sealNode(view, keys, { seed: SEED });
+    S.seeds.push({ d, name, view, keys, genome: g });
+  }
+  $('b1').innerHTML = '<div class="tw"><table><thead><tr><th>Domain</th><th>Silo</th><th>Columns it sees</th><th>Seed</th><th>Contributor’s key</th></tr></thead><tbody>'
+    + S.seeds.map((s) => '<tr><td>' + s.d + '</td><td><b>' + esc(s.name) + '</b></td><td class="dim">' + esc(s.view.features.join(', ')) + '</td><td class="num">' + gb(new TextEncoder().encode(s.genome.text).length) + ' bytes</td><td><code>' + esc(s.keys.pub.slice(0, 16)) + '…</code></td></tr>').join('')
+    + '</tbody></table></div><details><summary>The account node’s whole seed, as it travels</summary><pre class="mono">' + esc(S.seeds.find((s) => s.name === 'account').genome.text) + '</pre></details>';
+  $('b2-go').disabled = false; $('b6-go').disabled = false;
+}
+
+async function growAll() {
+  $('b2-go').disabled = true;
+  const rows = [], t0 = performance.now();
+  for (const s of S.seeds) {
+    $('b2-t').textContent = 'growing ' + s.d + ' · ' + s.name + '…'; await tick();
+    const n = await growNode(s.genome.text, s.view);
+    S.grown[s.d + '/' + s.name] = { ...s, grown: n, advert: advert(n.organism, s.view) };
+    rows.push(S.grown[s.d + '/' + s.name]);
+    $('b2').innerHTML = table(rows);
+  }
+  for (const d of ['telco', 'shop']) {
+    const ds = S.ds[d], live = rows.filter((r) => r.d === d && r.advert.state === 'live').sort((a, b) => b.advert.gateAuc - a.advert.gateAuc || (a.name < b.name ? -1 : 1));
+    const gateY = ds.gateRows.map((i) => ds.y[i]), gateCols = live.map((n) => scores(n.grown.organism, n.view, ds.gateRows));
+    S.mesh[d] = { live, gateY, gateCols, c: couple(gateCols, gateY) };
+  }
+  $('b2-t').textContent = 'grown in ' + Math.round((performance.now() - t0) / 1000) + ' s, here';
+  $('b2').innerHTML = table(rows) + ['telco', 'shop'].map((d) => '<p><b>' + d + ' coupling:</b> ' + S.mesh[d].live.map((n, k) => esc(n.name) + ' × ' + S.mesh[d].c.weights[k + 1].toFixed(2)).join(', ') + ' — learned from ' + gb(S.mesh[d].gateY.length) + ' GATE outcomes.</p>').join('') + compareGrown();
+  for (const id of ['b3-go', 'b4-go', 'b5-go']) $(id).disabled = false;
+  $('b5-n').innerHTML = rows.filter((r) => r.advert.state === 'live').map((r) => '<option value="' + esc(r.d + '/' + r.name) + '">' + esc(r.d + ' · ' + r.name) + '</option>').join('');
+  for (const id of ['b3', 'b4', 'b5']) $(id).innerHTML = '<p class="dim">Ready.</p>';
+}
+const table = (rows) => '<div class="tw"><table><thead><tr><th>Node</th><th>State</th><th>GATE AUC</th><th>Rules</th></tr></thead><tbody>' + rows.map((r) => '<tr><td>' + esc(r.d + ' · ' + r.name) + '</td><td>' + (r.advert.state === 'live' ? '<span class="chip live">live</span>' : '<span class="chip cut">cut</span>') + '</td><td class="num">' + f3(r.advert.gateAuc) + '</td><td class="num">' + r.advert.rules + '</td></tr>').join('') + '</tbody></table></div>'
+  + rows.filter((r) => r.advert.state === 'cut').map((r) => '<p class="dim">' + esc(r.d + ' · ' + r.name) + ' was cut: ' + esc(r.grown.organ.why) + '. It answers nothing.</p>').join('');
+function compareGrown() {
+  if (!S.rec2) return '';
+  const same = ['telco', 'shop'].every((d) => S.rec2[d].nodes.every((n) => { const g = S.grown[d + '/' + n.silo]; return g && g.advert.state === n.state && g.advert.gateAuc === n.gateAuc; }));
+  return same ? '<p class="ok-t">✓ Every node grew here exactly as CI’s committed record says: the same state and the same GATE score, node for node.</p>' : '<p class="bad-t">✗ A node grew differently here from CI’s record.</p>';
+}
+
+function composedOn(d, rows) {
+  const m = S.mesh[d], cols = m.live.map((n) => scores(n.grown.organism, n.view, rows));
+  return { cols, composed: rows.map((_, r) => coupled(m.c, cols.map((c) => c[r]))) };
+}
+
+function ask() {
+  const d = $('b3-d').value, ds = S.ds[d], i = ds.testRows[Math.floor(Math.random() * ds.testRows.length)], x = caseOf(ds, i);
+  const ads = Object.values(S.grown).map((g) => ({ ...g.advert, key: g.d + '/' + g.name }));
+  const reached = route(ads, x).map((a) => a.key), m = S.mesh[d];
+  const lines = Object.values(S.grown).filter((g) => g.d === d).map((g) => {
+    const s = scores(g.grown.organism, g.view, [i])[0];
+    return '<li><b>' + esc(g.name) + '</b>: ' + (s === null ? '<span class="warn-t">ABSTAIN</span> — ' + esc(g.advert.state === 'cut' ? 'cut at its gate' : 'not reached') : 'score ' + s.toFixed(2) + ' from ' + ((k) => k + (k === 1 ? ' rule' : ' rules'))(g.grown.organ.body.rules.filter((r) => (r.op === '>' ? x[r.feat] > r.v : x[r.feat] <= r.v)).length) + ' that fired') + '</li>';
+  });
+  const z = coupled(m.c, m.live.map((n) => scores(n.grown.organism, n.view, [i])[0])), p = 1 / (1 + Math.exp(-z));
+  const outcome = d === 'telco' ? (ds.y[i] ? 'this customer left' : 'this customer stayed') : (ds.y[i] ? 'this session ended in a purchase' : 'this session did not buy');
+  $('b3').innerHTML = '<p>Routed by fit to ' + reached.length + ' live node' + (reached.length === 1 ? '' : 's') + ' (of ' + ads.length + ' across both domains).</p><ul>' + lines.join('') + '</ul><p class="answer">The mesh: <b>' + Math.round(p * 100) + '%</b> ' + (d === 'telco' ? 'likely to leave' : 'likely to buy') + '. What really happened: <b>' + outcome + '</b>.</p>';
+}
+
+async function proof() {
+  $('b4').innerHTML = '<p class="dim">Re-scoring every test case, and fitting the poured monolith… a few seconds.</p>'; await tick();
+  const out = [];
+  for (const d of ['telco', 'shop']) {
+    const ds = S.ds[d], m = S.mesh[d], y = ds.testRows.map((i) => ds.y[i]), { cols, composed } = composedOn(d, ds.testRows);
+    const singles = cols.map((c) => auc(c, y)), bestK = singles.reduce((b, s, k) => (s > singles[b] ? k : b), 0);
+    const routed = randomRoute(m.gateCols.map((g) => calibrate(g, m.gateY)), cols, ROUTE_SEED);
+    const shamC = couple(m.gateCols, shuffled(m.gateY, SHUFFLE_SEED)), sham = ds.testRows.map((_, r) => coupled(shamC, cols.map((c) => c[r])));
+    await tick();
+    const P = pooled(ds), boost = boosted(P, P.rows), bS = ds.testRows.map((i) => boost.score(i));
+    out.push({ d, composed: auc(composed, y), best: m.live[bestK].name, bestAuc: singles[bestK], route: auc(routed, y), sham: auc(sham, y), boost: auc(bS, y) });
+  }
+  const rec = S.rec2;
+  $('b4').innerHTML = '<div class="tw"><table><thead><tr><th>Domain</th><th>Composed</th><th>Best node</th><th>Random routing</th><th>Shuffled coupling</th><th>Poured monolith</th><th>CI’s record</th></tr></thead><tbody>'
+    + out.map((o) => '<tr><td>' + o.d + '</td><td class="num"><b>' + f3(o.composed) + '</b></td><td class="num">' + f3(o.bestAuc) + ' (' + esc(o.best) + ')</td><td class="num">' + f3(o.route) + '</td><td class="num">' + f3(o.sham) + '</td><td class="num">' + f3(o.boost) + '</td><td>'
+      + (rec ? (Math.abs(rec[o.d].composedAuc - o.composed) < 5e-7 && Math.abs(rec[o.d].monolith.boosted.vs.b - o.boost) < 5e-7 ? '<span class="ok-t">✓ the same</span>' : '<span class="bad-t">✗ differs</span>') : '<span class="dim">being measured</span>') + '</td></tr>').join('')
+    + '</tbody></table></div><p class="dim">AUC on every test case of each domain. The bounds (how sure each lead is) are in organ 2 below.</p>';
+}
+
+function unplug() {
+  const key = $('b5-n').value, [d] = key.split('/'), ds = S.ds[d], m = S.mesh[d], y = ds.testRows.map((i) => ds.y[i]);
+  const keep = m.live.map((n, k) => [n, k]).filter(([n]) => n.d + '/' + n.name !== key);
+  if (!keep.length) { $('b5').innerHTML = '<p class="warn-t">That was the domain’s only live node: the mesh abstains on every case. Nothing answers in its name.</p>'; return; }
+  const c = couple(keep.map(([, k]) => m.gateCols[k]), m.gateY), cols = keep.map(([n]) => scores(n.grown.organism, n.view, ds.testRows));
+  const before = auc(composedOn(d, ds.testRows).composed, y), after = auc(ds.testRows.map((_, r) => coupled(c, cols.map((x) => x[r]))), y);
+  $('b5').innerHTML = '<p>Without <b>' + esc(key.split('/')[1]) + '</b>, the ' + d + ' mesh re-learns its coupling from GATE and carries on with ' + keep.length + ' node' + (keep.length === 1 ? '' : 's') + ': test AUC <b>' + f3(after) + '</b>, against ' + f3(before) + ' with it (' + sg(after - before) + '). No other node had to change, and no record moved.</p>';
+}
+
+async function tamper() {
+  const s = S.seeds.find((x) => x.name === 'account'), text = s.genome.text, at = text.indexOf('auc=') + 6, bad = text.slice(0, at) + (text[at] === '6' ? '7' : '6') + text.slice(at + 1);
+  const n = await growNode(bad, s.view);
+  $('b6').innerHTML = n.ok ? '<p class="bad-t">✗ It grew — this should not happen.</p>' : '<p class="ok-t">✓ Refused before a line of it was read: ' + esc(n.why) + '. Nothing grew.</p><p class="dim">The changed character: the bar in <code>gate auc=…</code>, one digit.</p>';
+}
+
+function rulesTable(pre, ver) {
+  const v = Object.fromEntries(ver.verdicts.map((x) => [x.id, x]));
+  return '<div class="tw"><table><thead><tr><th>Rule</th><th>Kind</th><th>What was claimed</th><th>Verdict</th><th>What the record holds</th></tr></thead><tbody>' + pre.rules.map((q) => { const x = v[q.id] || { pass: false, saw: 'no verdict' }; return '<tr><td><b>' + esc(q.id) + '</b></td><td>' + (q.kind === 'prediction' ? '<span class="chip pred">prediction</span>' : '<span class="chip">property</span>') + '</td><td>' + esc(q.claim) + '</td><td>' + (x.pass ? '<span class="chip pass">PASS</span>' : '<span class="chip fail">FAIL</span>') + '</td><td class="dim">' + esc(x.saw) + '</td></tr>'; }).join('') + '</tbody></table></div>';
+}
+
+function render1() {
+  if (!S.rec1) { $('r1').innerHTML = S.pre1 ? '<details><summary>Organ 1 — the rules sealed before anything was asked</summary>' + rulesTable(S.pre1, { verdicts: [] }) + '</details>' : ''; return; }
+  const r = S.rec1;
+  $('r1').innerHTML = '<div class="tw"><table><thead><tr><th>Contestant</th><th>Sees</th><th>Size</th><th>AUC on the 300</th><th>The node’s lead (95% lower bound)</th></tr></thead><tbody>'
+    + '<tr><td><b>The account node</b></td><td>7 of 20 columns</td><td>' + r.grown.numbers + ' numbers</td><td class="num"><b>' + f3(r.sample.nodeAuc) + '</b></td><td>—</td></tr>'
+    + '<tr><td>qwen2.5:14b, 24 examples</td><td>all 20</td><td>' + gb(r.local.model.bytes) + ' bytes of weights</td><td class="num">' + f3(r.local.vs.b) + '</td><td class="num">' + sg(r.local.vs.lead) + ' (' + sg(r.local.vs.low95) + ')</td></tr>'
+    + '<tr><td>Claude Opus 5.5, cold</td><td>all 20, all 300 at once</td><td>not published</td><td class="num">' + f3(r.frontier.vs.b) + '</td><td class="num">' + sg(r.frontier.vs.lead) + ' (' + sg(r.frontier.vs.low95) + ')</td></tr>'
+    + '</tbody></table></div><p class="dim">On all ' + gb(r.test.cases) + ' test customers the node scores ' + f3(r.test.auc) + '. Its body: ' + r.grown.body.map(esc).join(' · ') + '.</p><details><summary>Organ 1 — sealed rules and verdict</summary>' + rulesTable(S.pre1, S.ver1) + '</details>';
+}
+
+function render2() {
+  if (!S.rec2) { $('r2').innerHTML = S.pre2 ? '<details><summary>Organ 2 — the rules sealed before a single test case was scored</summary>' + rulesTable(S.pre2, { verdicts: [] }) + '</details>' : ''; return; }
+  const r = S.rec2, row = (label, x) => '<tr><td>' + label + '</td><td class="num">' + f3(x.b) + '</td><td class="num">' + sg(x.lead) + '</td><td class="num">' + sg(x.low95) + '</td><td>' + (x.low95 > 0 ? '<span class="chip pass">beats it</span>' : x.low95 > -0.02 ? '<span class="chip">within the noise</span>' : '<span class="chip fail">behind</span>') + '</td></tr>';
+  $('r2').innerHTML = ['telco', 'shop'].map((d) => { const x = r[d]; return '<h3>' + (d === 'telco' ? 'Telco customers' : 'Shop sessions') + ': composed AUC <b>' + f3(x.composedAuc) + '</b> on ' + gb(x.cases) + ' test cases</h3>'
+    + '<p class="dim">Nodes: ' + x.nodes.map((n) => esc(n.silo) + ' (' + n.state + ', GATE ' + f3(n.gateAuc) + ')').join(' · ') + '. Growth, one node at a time: ' + x.growth.map((g) => g.nodes + ' → ' + f3(g.testAuc)).join(', ') + '.</p>'
+    + '<div class="tw"><table><thead><tr><th>Against</th><th>Its AUC</th><th>The mesh’s lead</th><th>95% lower bound</th><th></th></tr></thead><tbody>'
+    + row('its best node (' + esc(x.best.node) + ')', x.vsBest) + row('random routing', x.vsRoute) + row('a coupling taught shuffled outcomes', x.vsShuffled)
+    + row('the poured monolith: boosted trees, every column pooled (' + gb(x.monolith.boosted.numbers) + ' numbers)', x.monolith.boosted.vs) + row('the poured monolith: logistic regression', x.monolith.logistic.vs)
+    + row('qwen2.5:14b, 24 examples, on the 300', x.local.vs) + row('Claude Opus 5.5, cold, on the 300', x.frontier.vs)
+    + '</tbody></table></div><p class="dim">The mesh carries ' + gb(x.meshNumbers) + ' numbers in all, its coupling included.</p>'; }).join('')
+    + '<details><summary>Organ 2 — sealed rules and verdict</summary>' + rulesTable(S.pre2, S.ver2) + '</details>';
+}
+
+async function records() {
+  const st = await get('data/organs.json').catch(() => ({}));
+  for (const k of ['1', '2']) {
+    S['pre' + k] = await get('data/organ-' + k + '/prereg.json').catch(() => null);
+    if (st[k] === 'measured') { S['rec' + k] = await get('data/organ-' + k + '/record.json').catch(() => null); S['ver' + k] = await get('data/organ-' + k + '/verdict.json').catch(() => null); }
+  }
+  render1(); render2();
+  const names = { 3: 'Breeding: a bred child must beat both parents on cases neither saw', 4: 'Self-growing: each node sharpens as real work arrives', 5: 'Routing that learns from outcomes', 6: 'Scale: more silos, more nodes, the composed score climbing', 7: 'Sovereign spread: each node owned by its contributor, carried by cards' };
+  $('r-next').innerHTML = '<div class="tw"><table><thead><tr><th>Organ</th><th>What it must show</th><th>State</th></tr></thead><tbody>' + [3, 4, 5, 6, 7].map((k) => '<tr><td>' + k + '</td><td>' + names[k] + '</td><td>' + esc(st[k] || 'sealed only after organ 2 is judged') + '</td></tr>').join('') + '</tbody></table></div>';
+}
+
+$('b2-go').addEventListener('click', growAll);
+$('b3-go').addEventListener('click', ask);
+$('b4-go').addEventListener('click', proof);
+$('b5-go').addEventListener('click', unplug);
+$('b6-go').addEventListener('click', tamper);
+records().catch(() => {});
+boot().catch((e) => { $('b1').innerHTML = '<p class="bad-t">The page could not load its data: ' + esc(e.message) + '</p>'; });
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>

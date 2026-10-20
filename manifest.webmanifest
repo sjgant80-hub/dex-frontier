@@ -1,0 +1,13 @@
+{
+  "name": "The Self-Growing DEX Frontier — a mind grown from seeds, not poured",
+  "short_name": "DEX Frontier",
+  "description": "Specialist nodes grown from seeds on each department's own records, coupled into one answer; records never shared. The composition proof sealed before it ran.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0e13",
+  "theme_color": "#0b0e13",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
