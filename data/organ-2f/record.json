@@ -1,0 +1,727 @@
+{
+ "kind": "dex-frontier.organ-2f.record",
+ "v": 1,
+ "settings": {
+  "bar": 0.6,
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  },
+  "seed": 1
+ },
+ "filesMatchSources": true,
+ "bank": {
+  "departments": [
+   {
+    "department": "bank-profile",
+    "columns": 15,
+    "six": {
+     "gateAuc": 0.603577,
+     "rules": 5
+    },
+    "deep": {
+     "gateAuc": 0.608987,
+     "stages": 4,
+     "rules": 13
+    },
+    "fielded": "deep",
+    "gateAuc": 0.608987,
+    "state": "live"
+   },
+   {
+    "department": "bank-credit",
+    "columns": 3,
+    "six": {
+     "gateAuc": 0.563186,
+     "rules": 0
+    },
+    "deep": {
+     "gateAuc": 0.569346,
+     "stages": 1,
+     "rules": 4
+    },
+    "fielded": "deep",
+    "gateAuc": 0.569346,
+    "state": "cut"
+   },
+   {
+    "department": "bank-campaign",
+    "columns": 7,
+    "six": {
+     "gateAuc": 0.690794,
+     "rules": 4
+    },
+    "deep": {
+     "gateAuc": 0.720823,
+     "stages": 3,
+     "rules": 14
+    },
+    "fielded": "deep",
+    "gateAuc": 0.720823,
+    "state": "live"
+   },
+   {
+    "department": "bank-economy",
+    "columns": 5,
+    "six": {
+     "gateAuc": 0.764541,
+     "rules": 5
+    },
+    "deep": {
+     "gateAuc": 0.780457,
+     "stages": 3,
+     "rules": 13
+    },
+    "fielded": "deep",
+    "gateAuc": 0.780457,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "bank-economy",
+   "bank-campaign",
+   "bank-profile"
+  ],
+  "chosen": "trees",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.772851
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.784044
+   }
+  ],
+  "cases": 12356,
+  "outcomes": 1392,
+  "composedAuc": 0.786288,
+  "singles": [
+   {
+    "department": "bank-economy",
+    "fielded": "deep",
+    "gateAuc": 0.780457,
+    "testAuc": 0.77812
+   },
+   {
+    "department": "bank-campaign",
+    "fielded": "deep",
+    "gateAuc": 0.720823,
+    "testAuc": 0.72454
+   },
+   {
+    "department": "bank-profile",
+    "fielded": "deep",
+    "gateAuc": 0.608987,
+    "testAuc": 0.625101
+   }
+  ],
+  "best": {
+   "department": "bank-economy",
+   "fielded": "deep",
+   "gateAuc": 0.780457,
+   "testAuc": 0.77812
+  },
+  "vsBest": {
+   "a": 0.786288,
+   "b": 0.77812,
+   "lead": 0.008168,
+   "low95": 0.002964
+  },
+  "vsShuffled": {
+   "a": 0.786288,
+   "b": 0.443346,
+   "lead": 0.342943,
+   "low95": 0.318127
+  },
+  "vsRoute": {
+   "a": 0.786288,
+   "b": 0.710043,
+   "lead": 0.076245,
+   "low95": 0.063874
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "bank-economy",
+    "chosen": "linear",
+    "testAuc": 0.77812
+   },
+   {
+    "departments": 2,
+    "added": "bank-campaign",
+    "chosen": "trees",
+    "testAuc": 0.785565
+   },
+   {
+    "departments": 3,
+    "added": "bank-profile",
+    "chosen": "trees",
+    "testAuc": 0.786288
+   }
+  ],
+  "monolith": {
+   "boosted": {
+    "a": 0.786288,
+    "b": 0.796718,
+    "lead": -0.01043,
+    "low95": -0.015613
+   },
+   "logistic": {
+    "a": 0.786288,
+    "b": 0.77531,
+    "lead": 0.010978,
+    "low95": 0.003725
+   }
+  },
+  "ownColumnsOnly": true,
+  "sample": {
+   "cases": 300,
+   "outcomes": 100,
+   "sha": "eccf34939ac0c4d4",
+   "composedAuc": 0.80625
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "answered": 300,
+   "unreadable": 0,
+   "promptMatches": true,
+   "vs": {
+    "a": 0.80625,
+    "b": 0.82005,
+    "lead": -0.0138,
+    "low95": -0.037735
+   }
+  },
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ },
+ "adult": {
+  "departments": [
+   {
+    "department": "adult-person",
+    "columns": 16,
+    "six": {
+     "gateAuc": 0.803683,
+     "rules": 4
+    },
+    "deep": {
+     "gateAuc": 0.823457,
+     "stages": 7,
+     "rules": 29
+    },
+    "fielded": "deep",
+    "gateAuc": 0.823457,
+    "state": "live"
+   },
+   {
+    "department": "adult-work",
+    "columns": 15,
+    "six": {
+     "gateAuc": 0.740705,
+     "rules": 5
+    },
+    "deep": {
+     "gateAuc": 0.779433,
+     "stages": 8,
+     "rules": 29
+    },
+    "fielded": "deep",
+    "gateAuc": 0.779433,
+    "state": "live"
+   },
+   {
+    "department": "adult-employer",
+    "columns": 7,
+    "six": {
+     "gateAuc": 0.57087,
+     "rules": 0
+    },
+    "deep": {
+     "gateAuc": 0.576453,
+     "stages": 2,
+     "rules": 10
+    },
+    "fielded": "deep",
+    "gateAuc": 0.576453,
+    "state": "cut"
+   },
+   {
+    "department": "adult-tax",
+    "columns": 2,
+    "six": {
+     "gateAuc": 0.632076,
+     "rules": 4
+    },
+    "deep": {
+     "gateAuc": 0.632076,
+     "stages": 1,
+     "rules": 4
+    },
+    "fielded": "six",
+    "gateAuc": 0.632076,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "adult-person",
+   "adult-work",
+   "adult-tax"
+  ],
+  "chosen": "linear",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.895369
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.894331
+   }
+  ],
+  "cases": 16281,
+  "outcomes": 3846,
+  "composedAuc": 0.896122,
+  "singles": [
+   {
+    "department": "adult-person",
+    "fielded": "deep",
+    "gateAuc": 0.823457,
+    "testAuc": 0.82248
+   },
+   {
+    "department": "adult-work",
+    "fielded": "deep",
+    "gateAuc": 0.779433,
+    "testAuc": 0.783334
+   },
+   {
+    "department": "adult-tax",
+    "fielded": "six",
+    "gateAuc": 0.632076,
+    "testAuc": 0.626439
+   }
+  ],
+  "best": {
+   "department": "adult-person",
+   "fielded": "deep",
+   "gateAuc": 0.823457,
+   "testAuc": 0.82248
+  },
+  "vsBest": {
+   "a": 0.896122,
+   "b": 0.82248,
+   "lead": 0.073642,
+   "low95": 0.068246
+  },
+  "vsShuffled": {
+   "a": 0.896122,
+   "b": 0.651222,
+   "lead": 0.2449,
+   "low95": 0.232322
+  },
+  "vsRoute": {
+   "a": 0.896122,
+   "b": 0.768733,
+   "lead": 0.127389,
+   "low95": 0.120181
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "adult-person",
+    "chosen": "linear",
+    "testAuc": 0.82248
+   },
+   {
+    "departments": 2,
+    "added": "adult-work",
+    "chosen": "linear",
+    "testAuc": 0.881858
+   },
+   {
+    "departments": 3,
+    "added": "adult-tax",
+    "chosen": "linear",
+    "testAuc": 0.896122
+   }
+  ],
+  "monolith": {
+   "boosted": {
+    "a": 0.896122,
+    "b": 0.912413,
+    "lead": -0.016291,
+    "low95": -0.018786
+   },
+   "logistic": {
+    "a": 0.896122,
+    "b": 0.899209,
+    "lead": -0.003087,
+    "low95": -0.006001
+   }
+  },
+  "ownColumnsOnly": true,
+  "sample": {
+   "cases": 300,
+   "outcomes": 100,
+   "sha": "71d54710c64e504d",
+   "composedAuc": 0.921625
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "answered": 300,
+   "unreadable": 0,
+   "promptMatches": true,
+   "vs": {
+    "a": 0.921625,
+    "b": 0.9373,
+    "lead": -0.015675,
+    "low95": -0.032556
+   }
+  },
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ },
+ "notFresh": {
+  "telco": {
+   "departments": [
+    {
+     "department": "telco-customer",
+     "columns": 4,
+     "six": {
+      "gateAuc": 0.661938,
+      "rules": 5
+     },
+     "deep": {
+      "gateAuc": 0.676787,
+      "stages": 2,
+      "rules": 8
+     },
+     "fielded": "deep",
+     "gateAuc": 0.676787,
+     "state": "live"
+    },
+    {
+     "department": "telco-services",
+     "columns": 9,
+     "six": {
+      "gateAuc": 0.729309,
+      "rules": 5
+     },
+     "deep": {
+      "gateAuc": 0.764953,
+      "stages": 3,
+      "rules": 8
+     },
+     "fielded": "deep",
+     "gateAuc": 0.764953,
+     "state": "live"
+    },
+    {
+     "department": "telco-account",
+     "columns": 7,
+     "six": {
+      "gateAuc": 0.813515,
+      "rules": 6
+     },
+     "deep": {
+      "gateAuc": 0.824418,
+      "stages": 2,
+      "rules": 12
+     },
+     "fielded": "deep",
+     "gateAuc": 0.824418,
+     "state": "live"
+    }
+   ],
+   "live": [
+    "telco-account",
+    "telco-services",
+    "telco-customer"
+   ],
+   "chosen": "linear",
+   "outOfFold": [
+    {
+     "coupling": "linear",
+     "gateAuc": 0.836312
+    },
+    {
+     "coupling": "trees",
+     "gateAuc": 0.825556
+    }
+   ],
+   "cases": 2112,
+   "outcomes": 560,
+   "composedAuc": 0.835081,
+   "singles": [
+    {
+     "department": "telco-account",
+     "fielded": "deep",
+     "gateAuc": 0.824418,
+     "testAuc": 0.824766
+    },
+    {
+     "department": "telco-services",
+     "fielded": "deep",
+     "gateAuc": 0.764953,
+     "testAuc": 0.782337
+    },
+    {
+     "department": "telco-customer",
+     "fielded": "deep",
+     "gateAuc": 0.676787,
+     "testAuc": 0.624833
+    }
+   ],
+   "best": {
+    "department": "telco-account",
+    "fielded": "deep",
+    "gateAuc": 0.824418,
+    "testAuc": 0.824766
+   },
+   "vsBest": {
+    "a": 0.835081,
+    "b": 0.824766,
+    "lead": 0.010315,
+    "low95": 0.002519
+   },
+   "vsShuffled": {
+    "a": 0.835081,
+    "b": 0.424623,
+    "lead": 0.410458,
+    "low95": 0.37246
+   },
+   "vsRoute": {
+    "a": 0.835081,
+    "b": 0.753013,
+    "lead": 0.082068,
+    "low95": 0.066004
+   },
+   "growth": [
+    {
+     "departments": 1,
+     "added": "telco-account",
+     "chosen": "linear",
+     "testAuc": 0.824766
+    },
+    {
+     "departments": 2,
+     "added": "telco-services",
+     "chosen": "linear",
+     "testAuc": 0.838169
+    },
+    {
+     "departments": 3,
+     "added": "telco-customer",
+     "chosen": "linear",
+     "testAuc": 0.835081
+    }
+   ],
+   "monolith": {
+    "boosted": {
+     "a": 0.835081,
+     "b": 0.84632,
+     "lead": -0.011239,
+     "low95": -0.019976
+    },
+    "logistic": {
+     "a": 0.835081,
+     "b": 0.850814,
+     "lead": -0.015733,
+     "low95": -0.02398
+    }
+   },
+   "ownColumnsOnly": true,
+   "frontier": {
+    "model": {
+     "name": "claude-opus-5-5",
+     "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+    },
+    "answered": 300,
+    "unreadable": 0,
+    "vs": {
+     "a": 0.82475,
+     "b": 0.844275,
+     "lead": -0.019525,
+     "low95": -0.040364
+    }
+   }
+  },
+  "shop": {
+   "departments": [
+    {
+     "department": "shop-browsing",
+     "columns": 6,
+     "six": {
+      "gateAuc": 0.664534,
+      "rules": 5
+     },
+     "deep": {
+      "gateAuc": 0.66317,
+      "stages": 1,
+      "rules": 6
+     },
+     "fielded": "six",
+     "gateAuc": 0.664534,
+     "state": "live"
+    },
+    {
+     "department": "shop-analytics",
+     "columns": 3,
+     "six": {
+      "gateAuc": 0.917962,
+      "rules": 5
+     },
+     "deep": {
+      "gateAuc": 0.915473,
+      "stages": 2,
+      "rules": 9
+     },
+     "fielded": "six",
+     "gateAuc": 0.917962,
+     "state": "live"
+    },
+    {
+     "department": "shop-context",
+     "columns": 7,
+     "six": {
+      "gateAuc": 0.586547,
+      "rules": 0
+     },
+     "deep": {
+      "gateAuc": 0.619993,
+      "stages": 1,
+      "rules": 6
+     },
+     "fielded": "deep",
+     "gateAuc": 0.619993,
+     "state": "live"
+    }
+   ],
+   "live": [
+    "shop-analytics",
+    "shop-browsing",
+    "shop-context"
+   ],
+   "chosen": "trees",
+   "outOfFold": [
+    {
+     "coupling": "linear",
+     "gateAuc": 0.92063
+    },
+    {
+     "coupling": "trees",
+     "gateAuc": 0.934507
+    }
+   ],
+   "cases": 4725,
+   "outcomes": 976,
+   "composedAuc": 0.827507,
+   "singles": [
+    {
+     "department": "shop-analytics",
+     "fielded": "six",
+     "gateAuc": 0.917962,
+     "testAuc": 0.809854
+    },
+    {
+     "department": "shop-browsing",
+     "fielded": "six",
+     "gateAuc": 0.664534,
+     "testAuc": 0.683238
+    },
+    {
+     "department": "shop-context",
+     "fielded": "deep",
+     "gateAuc": 0.619993,
+     "testAuc": 0.579821
+    }
+   ],
+   "best": {
+    "department": "shop-analytics",
+    "fielded": "six",
+    "gateAuc": 0.917962,
+    "testAuc": 0.809854
+   },
+   "vsBest": {
+    "a": 0.827507,
+    "b": 0.809854,
+    "lead": 0.017653,
+    "low95": 0.009718
+   },
+   "vsShuffled": {
+    "a": 0.827507,
+    "b": 0.431185,
+    "lead": 0.396322,
+    "low95": 0.369507
+   },
+   "vsRoute": {
+    "a": 0.827507,
+    "b": 0.728905,
+    "lead": 0.098602,
+    "low95": 0.080638
+   },
+   "growth": [
+    {
+     "departments": 1,
+     "added": "shop-analytics",
+     "chosen": "linear",
+     "testAuc": 0.809854
+    },
+    {
+     "departments": 2,
+     "added": "shop-browsing",
+     "chosen": "trees",
+     "testAuc": 0.830184
+    },
+    {
+     "departments": 3,
+     "added": "shop-context",
+     "chosen": "trees",
+     "testAuc": 0.827507
+    }
+   ],
+   "monolith": {
+    "boosted": {
+     "a": 0.827507,
+     "b": 0.826773,
+     "lead": 0.000734,
+     "low95": -0.009203
+    },
+    "logistic": {
+     "a": 0.827507,
+     "b": 0.808935,
+     "lead": 0.018572,
+     "low95": 0.0092
+    }
+   },
+   "ownColumnsOnly": true,
+   "frontier": {
+    "model": {
+     "name": "claude-opus-5-5",
+     "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+    },
+    "answered": 300,
+    "unreadable": 0,
+    "vs": {
+     "a": 0.851025,
+     "b": 0.858475,
+     "lead": -0.00745,
+     "low95": -0.04295
+    }
+   }
+  }
+ }
+}
