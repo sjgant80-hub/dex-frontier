@@ -1,0 +1,82 @@
+{
+ "kind": "dex-frontier.organ-2.prereg",
+ "v": 1,
+ "organ": "organ 2, THE COMPOSITION PROOF — the critical gate before anything scales: do specialist nodes, each grown on one department’s records and coupled at κ, compose into more than the sum, approach what a model pooling every record in one place gets, and hold their own against a 14B and a frontier model?",
+ "scenario": "Two real domains, each cut into the silos a business keeps apart. Telco (IBM, 7,043 customers): customer (4 columns), services (9), account (7); FIT 3,699 / GATE 1,232 / TEST 2,112, seeded and stratified. Shop (UCI, 12,330 sessions): browsing (6), analytics (3), context (7); FIT 5,704 / GATE 1,901 from February–October, TEST the 4,725 November–December sessions. Every silo grows a node from its contributor’s sealed grow-seed (seed 1) on its own FIT records only; a node that does not clear AUC 0.6 on GATE is cut and abstains. The coupling (κ): a logistic regression over the live nodes’ standardised scores, L2 1, learned on GATE outcomes only. The best single node is the best on TEST, the strictest rival. Shams: random routing (seed 7), a coupling taught shuffled outcomes (seed 13), a mesh grown on shuffled outcomes (seed 17). The monolith is the poured way: boosted trees (200 depth-2 trees) and logistic regression on every column, FIT and GATE pooled in one place. On the 300 of each domain (100 with the outcome, 200 without): qwen2.5:14b and Claude Opus 5.5, exactly as in organ 1. Breadth: both domains’ TEST cases in one unlabelled stream, routed by fit (a node takes a case only if the case carries every column of its silo). Bounds: paired bootstrap, 2,000 resamples, seed 99.",
+ "rules": [
+  {
+   "id": "B1",
+   "kind": "property",
+   "claim": "in both domains: TEST is never read while the nodes grow or the coupling learns (scrambling every TEST record changes no node), each node holds only its own silo’s columns, the same mesh grows twice, every TEST case is answered, no node grown on shuffled outcomes goes live (the gate refuses a mesh that learned nothing), and at least two nodes are live",
+   "seenBeforeSeal": "the six nodes’ growth on FIT and their GATE scores: yes (telco 0.662 / 0.729 / 0.814, all live; shop browsing 0.665 and analytics 0.918 live, context 0.587 cut) — in a smoke run that scored no TEST case"
+  },
+  {
+   "id": "B2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: in both domains the composed mesh beats its best single node on TEST: the 95% lower bound of its lead is above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "B3",
+   "kind": "prediction",
+   "claim": "in both domains the composed mesh beats random routing AND a coupling taught shuffled outcomes: both bounds above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "B4",
+   "kind": "prediction",
+   "claim": "GROWTH COMPOUNDS: in both domains, adding the live nodes one at a time (in GATE order) never lowers the composed TEST AUC, and the full mesh is at least 0.01 above its first node",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "B5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: in both domains the composed mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: the bound of its lead is above −0.02",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "B6",
+   "kind": "prediction",
+   "claim": "in both domains, on the 300, the composed mesh beats qwen2.5:14b shown 24 examples and every column: bound above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "B7",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: in both domains, on the 300, the composed mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "B8",
+   "kind": "property",
+   "claim": "BREADTH: in one unlabelled stream of both domains’ TEST cases, every case reaches all of its own domain’s live nodes and none of the other’s; no node covers more than one domain; the mesh covers both",
+   "seenBeforeSeal": "no"
+  }
+ ],
+ "disclosure": "Designed by Kar and Claude together, sealed with organ 1 before either was measured. The expectation written before the run: telco composes (account and services carry different signal), so B2 holds there; the shop’s analytics node carries most of the signal on its own, so whether the browsing node adds to it beyond the noise is genuinely open, and B2 or B4 may fail on the shop. The 300-case comparisons are narrow, and the frontier model is given an advantage (it sees all 300 at once). This is the gate the spec puts before scaling: if composition does not net, the finding is kept and the next organ fixes composition before anything scales.",
+ "judgedBy": "tools/judge-2.mjs (pinned below)",
+ "files": {
+  "src/silos.mjs": "2de9959bacfdd2c9a4b771226cd1ae1521fc1175211704ea60fcb0815c534894",
+  "src/node.mjs": "9c0eb1965d1c0fb7d4c8a97608767b5188bd132621152ad4b621d53d6d6261b8",
+  "src/stats.mjs": "688e483063a2327d7b6afb9e196dca48c690ff5d33875783fdeb4c3acd293b38",
+  "vendor/living-seed/src/genome.mjs": "45feb26823b80647b2b50a8ea395ad3b7abbae1f3cf0a9b793a14d1d41b6bb25",
+  "vendor/living-seed/src/germinate.mjs": "9ea0b23879a211c87c7a6fa2ad2ea7a7b49c6743631382d62d6e919c8ae1c520",
+  "vendor/living-seed/vendor/seed-library/seedlib.mjs": "f1904ed31b48794ac3454453d5853e799509dcdf8b8695ffea8bcedfd6f60e72",
+  "vendor/living-seed/vendor/seed-library/sha256.mjs": "8ebd4260e8b79fbdf9824ecbe6d6cde621cc003f1d358255101c01bb26763233",
+  "vendor/living-seed/vendor/keys/keys.mjs": "636969fdaaac7eab1868c6670cc7a85da1c22d65498f25e8a2ce5ad3487113e0",
+  "vendor/living-seed/vendor/keys/canon.mjs": "6ebe4f961ff0a2ce8693de89193921c8b5372c4e08d4941361212dd4cba29d21",
+  "data/telco-churn.csv": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "tools/contest.mjs": "bc424ee22caa027645267799621a46de97ff916e667574b064e20be220aace54",
+  "tools/ask-llm.mjs": "171542f62164272cb6f148a388999994df144fe1eb4616d1a0cd2884610799dc",
+  "tools/frontier.mjs": "07a9e6082fbb454e7302098e4a86eaebec143417fbea64db2d10b3a293a348fa",
+  "tools/measure-1.mjs": "5d4477b853b4d53afab49e6cb8b04942e7c3f8eeb67064b04adbbeb402b99e3f",
+  "tools/order.mjs": "6b5ae2e5202ff74fad6c089cf391e9ba6f4082ddcf5d81008f95a3768294b3ca",
+  "src/compose.mjs": "d4d59c178e44c4605466cd006e9e0e8e8fef2928c6adf4c0054d41a8cbef5e0c",
+  "vendor/living-seed/src/baseline.mjs": "b4f7ddb958edfa19ef2d33e33173aab41146437195b7e89e1f7c60021d23ad4c",
+  "data/online_shoppers_intention.csv": "d8e130ba51532985f93281a73ce299e6ce150cb915769a7962a11e595eadd6a1",
+  "tools/measure-2.mjs": "00dc28025a8e42c54c69dc347e970247a6b9cb43b4e87939b3ce0c7ee8f5c3b8",
+  "tools/judge-2.mjs": "4c41293c757b9f868bc040e5689be0a14bfe9015bfaffffe22c58a1b856b5e01",
+  "tools/seal-2.mjs": "327c27cb79d6bef4721abbb26c915c60536b60f46038900fa63045e96428b693",
+  "tools/seal-1.mjs": "9313189a1e6d03ceb03df865d661027733e2f3394c5fcaafb9c792ff62d9fc97"
+ }
+}
