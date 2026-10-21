@@ -1,0 +1,57 @@
+{
+ "kind": "dex-frontier.organ-2g.verdict",
+ "v": 1,
+ "prereg": "89b30ba02671ced4",
+ "record": "f67622d6cda40aca",
+ "verdicts": [
+  {
+   "id": "P1",
+   "kind": "property",
+   "claim": "the fresh files are the ones downloaded, byte for byte; in both fresh domains each department holds only its own columns, TEST is never read (scrambling every TEST record leaves every department’s bodies, the body it fields and the mesh’s choice of coupling unchanged), a changed seed is refused before it is read, and the frontier model answered every batch of 300 to its sealed prompt (1,200 cases)",
+   "pass": true,
+   "saw": "files as downloaded: true; hospital: live  (admissions pairs-quantile 0.542206 cut, clinical deep-quantile 0.572347 cut, pharmacy pairs-values 0.540018 cut, history deep-values 0.555762 cut, discharge six 0.580203 cut), own columns only true, TEST never read true, a changed seed refused true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓; credit: live credit-collections, credit-payments, credit-customer (customer pairs-values 0.637067 live, collections deep-quantile 0.739214 live, billing pairs-quantile 0.579223 cut, payments pairs-quantile 0.66396 live), own columns only true, TEST never read true, a changed seed refused true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓"
+  },
+  {
+   "id": "P2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: in both fresh domains at least two departments clear their bar, and the mesh beats its best single department on TEST (the best on TEST): bound above 0",
+   "pass": false,
+   "saw": "hospital: the mesh (none (no department live)) against its best department (none): 0.5 vs 0.5, lead 0, bound 0; credit: the mesh (trees) against its best department (credit-collections): 0.76659 vs 0.747799, lead 0.018791, bound 0.010345"
+  },
+  {
+   "id": "P3",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: in both fresh domains, on the 1,200, the mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "pass": false,
+   "saw": "hospital: on the 1,200, the mesh against claude-opus-5-5: 0.5 vs 0.631147, lead -0.131147, bound -0.1641 against −0.02 (0 unreadable); the pooled model against it: 0.659236 vs 0.631147, lead 0.028089, bound 0.004605; credit: on the 1,200, the mesh against claude-opus-5-5: 0.761169 vs 0.745681, lead 0.015487, bound -0.00664 against −0.02 (0 unreadable); the pooled model against it: 0.778964 vs 0.745681, lead 0.033283, bound 0.01106"
+  },
+  {
+   "id": "P4",
+   "kind": "prediction",
+   "claim": "GROWTH MEASURABLY RAISES IT: in both fresh domains, with at least two departments live, adding the live departments one at a time in GATE order (the coupling chosen afresh at each size) never lowers the TEST AUC, and the full mesh beats its first department beyond the noise: bound above 0",
+   "pass": false,
+   "saw": "hospital: ; the full mesh against its first department: 0.5 vs 0.5, lead 0, bound 0; credit: 1 0.747799 → 2 0.759944 → 3 0.76659; the full mesh against its first department: 0.76659 vs 0.747799, lead 0.018791, bound 0.010345"
+  },
+  {
+   "id": "P5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: in both fresh domains the mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: bound above −0.02",
+   "pass": false,
+   "saw": "hospital: against boosted trees on every column pooled: 0.5 vs 0.659198, lead -0.159198, bound -0.172663 against −0.02; logistic regression pooled 0.652154; credit: against boosted trees on every column pooled: 0.76659 vs 0.779804, lead -0.013214, bound -0.018796 against −0.02; logistic regression pooled 0.761027"
+  },
+  {
+   "id": "P6",
+   "kind": "prediction",
+   "claim": "NOT A SHAM: in both fresh domains the mesh beats a coupling taught shuffled outcomes and random routing (both bounds above 0), and grown on shuffled outcomes no department goes live",
+   "pass": false,
+   "saw": "hospital: against a coupling taught shuffled outcomes: 0.5 vs 0.5, lead 0, bound 0; against random routing: 0.5 vs 0.5, lead 0, bound 0; live on shuffled outcomes: none; credit: against a coupling taught shuffled outcomes: 0.76659 vs 0.59053, lead 0.17606, bound 0.159546; against random routing: 0.76659 vs 0.663939, lead 0.102651, bound 0.090008; live on shuffled outcomes: none"
+  },
+  {
+   "id": "GATE",
+   "kind": "prediction",
+   "claim": "THE GATE, the spec’s WIN in full: P2, P3 and P4 all hold. Nothing below the gate (organs 3 to 7) is sealed unless it does",
+   "pass": false,
+   "saw": "composition > parts false, approaches the frontier false, growth measurably raises it false"
+  }
+ ]
+}
