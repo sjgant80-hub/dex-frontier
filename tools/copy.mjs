@@ -3,6 +3,7 @@
 // they fell. Nothing here is a hand-typed result. Supplier facts are the estate's: AI Native Solutions, support agreed
 // per deployment, MIT with no licence fee, no prices on a product page.
 
+import { readFileSync, existsSync } from 'node:fs';
 import { organRows } from './rows.mjs';
 
 const f3 = (x) => (typeof x === 'number' && Number.isFinite(x) ? x.toFixed(3) : '…');
@@ -48,6 +49,28 @@ function freshest(R) {
   if (!rows.length) return '';
   return 'On data no attempt had touched before it, the mesh against every record pooled in one place: ' + rows.map(({ k, d, x }) => names[d] + ' (organ ' + k + ') ' + ((x.live || []).length ? f3(x.composedAuc) + ' against ' + f3(x.monolith.boosted.b) : 'no mesh formed, pooled ' + f3(x.monolith.boosted.b))).join('; ') + '.';
 }
+/** what one score per department carries, from the checks made on FIT and GATE alone (data/diagnose-2, -3, -4): for each
+ *  dataset, every record pooled against the better coupling of one boosted model per department, one score each */
+const CHECKED = { telco: 'telecom customers', shop: 'shop sessions', bank: 'bank calls', adult: 'census people', hospital: 'hospital stays', credit: 'credit clients', coupon: 'coupon offers', cover: 'forest cells' };
+export function oneScore(base = new URL('../data/', import.meta.url)) {
+  const at = (f) => (existsSync(new URL(f, base)) ? JSON.parse(readFileSync(new URL(f, base), 'utf8')) : {});
+  const files = [at('diagnose-2.json'), at('diagnose-3.json'), at('diagnose-4.json')];
+  return Object.keys(CHECKED).flatMap((d) => files.filter((r) => r[d]).slice(-1).map((r) => { const m = r[d].meshBoosted || r[d].boostedMesh; return { d, pooled: r[d].pooled, mesh: Math.max(m.linear, m.trees), gap: r[d].pooled - Math.max(m.linear, m.trees) }; }));
+}
+function oneScoreText() {
+  const rows = oneScore(), near = rows.filter((x) => x.gap <= 0.01).length, close = rows.filter((x) => x.gap <= 0.02), far = rows.filter((x) => x.gap > 0.02);
+  if (!rows.length) return '';
+  return 'In the checks made on held-back cases alone (FIT and GATE), one boosted model per department, each sending one score, came within a hundredth of every record pooled on ' + near + ' of the ' + rows.length + ' datasets and within two hundredths on ' + (close.length === rows.length ? 'all ' + rows.length : close.length)
+    + (far.length ? '; it trailed ' + far.map((x) => 'on the ' + CHECKED[x.d] + ' by ' + f3(x.gap) + ' (' + f3(x.mesh) + ' against ' + f3(x.pooled) + ')').join(' and ') : '') + '.';
+}
+const OUTCOME = { bank: 'calls that sold a deposit', adult: 'people earning over $50,000', hospital: 'hospital stays followed by a readmission within 30 days', credit: 'card holders who defaulted the next month', coupon: 'coupons accepted', cover: 'forest cells under spruce or fir' };
+/** how rare the outcome was, across the fresh test sets: the rarest and the commonest, from the records */
+function rates(R) {
+  const all = ['2f', '2g', '2h'].filter((k) => R[k]).flatMap((k) => Object.keys(CHECKED).filter((d) => R[k].r[d] && R[k].r[d].cases).map((d) => ({ d, rate: R[k].r[d].outcomes / R[k].r[d].cases })));
+  if (!all.length) return null;
+  const lo = all.reduce((a, x) => (x.rate < a.rate ? x : a)), hi = all.reduce((a, x) => (x.rate > a.rate ? x : a));
+  return { lo, hi, pct: (x) => (100 * x.rate).toFixed(1) + '%' };
+}
 const tally = (R) => { const v = Object.values(R).flatMap((x) => x.v); return v.filter((x) => x.pass).length + ' of ' + v.length + ' sealed rules held across ' + Object.keys(R).length + ' judged organs'; };
 
 /** the questions, as data: the visible FAQ and the structured data are both made from this one list */
@@ -72,9 +95,12 @@ export function faqs(R, { pass }) {
     ['Who owns a node, and can they take it back?', R['7'] ? 'The contributor whose key sealed it. A node travels as a card, a picture carrying its sealed seed, and every card came back to grow the identical node. The mesh keeps a ledger of each node’s share, measured from what it adds. A contributor can revoke: the coupling re-learns without their node in milliseconds, every other node stays exactly as it was, and the mesh still answers every case.' : 'The contributor whose key sealed it. Organ 7 measures the rest: a node carried as a card, a ledger of each node’s share, and revoking a node without touching anyone else’s.'],
     ['What did not work?', Object.keys(R).length ? 'Every failed sealed prediction is kept on this page with its reason: ' + Object.entries(R).flatMap(([k, x]) => x.v.filter((v) => !v.pass).map((v) => 'organ ' + k + '’s ' + v.id)).join(', ').replace(/^$/, 'none so far') + '. A failed property would turn the build red; a failed prediction is a finding.' : 'Nothing is measured yet. Every failed prediction will be kept on this page with its reason.'],
     ['How do I check it myself?', 'In this browser: box 2 grows all six nodes and checks them against CI’s record, and box 4 re-scores every test case. On your own machine, with Node 20 or later and the repository: npm test runs every test; node witness-all.mjs breaks every kernel line by line and checks the tests notice; node tools/measure-2.mjs --check re-derives the composition proof byte for byte. It takes someone who can run a command line.'],
-    ['Can it see how one department’s columns interact with another’s?', 'Partly, and this is the price of no record crossing. Each department sends one score per case, so a pattern that needs a column from billing and a column from the CRM together, seen raw, is invisible to both. What the mesh can do is weigh the departments’ scores against each other, and with the tree coupling it can learn that two scores together mean more than either alone. In the checks on held-back cases (FIT and GATE only), one boosted model per department, each sending one score, came within a hundredth of every record pooled on four of the six datasets and within two hundredths on all six: so on these data most of what pooling adds survives the one-score limit.'],
+    ['Can it see how one department’s columns interact with another’s?', 'Partly, and this is the price of no record crossing. Each department sends one score per case, so a pattern that needs a column from billing and a column from the CRM together, seen raw, is invisible to both. What the mesh can do is weigh the departments’ scores against each other, and with the tree coupling it can learn that two scores together mean more than either alone. ' + oneScoreText()],
     ['Does it work in real time, and at scale?', 'A node’s answer is a sum over a few dozen rules, so scoring a case takes a handful of comparisons, and the coupling a few more: fast enough to answer as each case arrives. Box 4 on this page re-scores every test case of both domains in your browser. Growing a node takes seconds to minutes per department on an ordinary machine. A new department grows one more node from its own seed, and the coupling re-learns; no other node changes.'],
     ['What does a pilot take?', 'One question whose answer lives across two or three departments, and a few people’s time: someone in each department runs the seal and the grow on their own machine, and someone joins the departments’ scores on a held-back slice of past cases, keyed by a case id they share, to learn the coupling. Then it runs beside your current process while you compare its calls with what happened. The code carries no licence fee; support is agreed per deployment with AI Native Solutions.'],
+    ['How does it connect to the systems we already have?', 'It reads a table. Each department exports its own columns from whatever system holds them, one row per case, with a case id the departments share. A loader turns each column into a number by a fixed list written down before anything is measured; src/fresh3.mjs holds two, for the coupon survey and the forest cells. Nothing is installed into your systems and nothing writes back to them. What comes out is a score per case id, which you send wherever the decision is made.'],
+    ['What if our records are messy, incomplete, or change over time?', 'Messy: a blank answer gets a code of its own (the coupon survey’s unanswered habits are coded as not answered), and a value outside a column’s list stops the load, naming the row and the reason, rather than being guessed. Incomplete: a department whose records say little is held to its bar like any other; from organ 2h it joins only if it beats a coin beyond the noise, so a weak department can still add without being trusted blindly. Change over time: the shop sessions were split by time, with nodes grown on February to October and judged on November and December, months none of them saw. Beyond that, nothing on this page proves how it handles drift. When records change, a department re-grows its node from the same seed on newer records, and the node must pass its bar again before it answers.'],
+    ['What if the outcome we care about is rare?', (() => { const t = rates(R); return 'The score used throughout, AUC, does not depend on how rare the outcome is. ' + (t ? 'In the fresh test sets the outcome ran from ' + t.pct(t.lo) + ' (' + OUTCOME[t.lo.d] + ') to ' + t.pct(t.hi) + ' (' + OUTCOME[t.hi.d] + '). ' : '') + 'A rare outcome leaves fewer cases to learn from and widens the noise bound, and every sealed test is judged on that bound, so rarity shows up as a wider margin, never as a flattering average.'; })()],
     ['What does it cost?', 'The code is MIT licensed: no licence fee. It runs on machines you already have, with no cloud, no model hosting and no central data store. Support is agreed per deployment with AI Native Solutions.'],
   ].map(([q, a]) => ({ q, a }));
 }

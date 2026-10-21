@@ -1,0 +1,341 @@
+{
+ "kind": "dex-frontier.diagnose-4",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read; boosted trees stand in for a body",
+ "folds": 4,
+ "trees": {
+  "rounds": 100,
+  "rate": 0.1,
+  "bins": 16,
+  "lambda": 1,
+  "minHess": 1
+ },
+ "coupon": {
+  "cases": 2219,
+  "outcomes": 1261,
+  "pooled": 0.783592,
+  "departments": [
+   {
+    "department": "trip",
+    "columns": 12,
+    "boosted": 0.653628
+   },
+   {
+    "department": "coupon",
+    "columns": 5,
+    "boosted": 0.68168
+   },
+   {
+    "department": "driver",
+    "columns": 11,
+    "boosted": 0.584948
+   },
+   {
+    "department": "habits",
+    "columns": 5,
+    "boosted": 0.626388
+   }
+  ],
+  "boostedMesh": {
+   "linear": 0.753377,
+   "trees": 0.747238
+  },
+  "pairs": [
+   {
+    "merged": [
+     "trip",
+     "coupon"
+    ],
+    "alone": 0.729389,
+    "mesh": {
+     "linear": 0.764912,
+     "trees": 0.760758
+    }
+   },
+   {
+    "merged": [
+     "trip",
+     "driver"
+    ],
+    "alone": 0.667401,
+    "mesh": {
+     "linear": 0.750113,
+     "trees": 0.747101
+    }
+   },
+   {
+    "merged": [
+     "trip",
+     "habits"
+    ],
+    "alone": 0.693905,
+    "mesh": {
+     "linear": 0.753293,
+     "trees": 0.740057
+    }
+   },
+   {
+    "merged": [
+     "coupon",
+     "driver"
+    ],
+    "alone": 0.707964,
+    "mesh": {
+     "linear": 0.756062,
+     "trees": 0.753162
+    }
+   },
+   {
+    "merged": [
+     "coupon",
+     "habits"
+    ],
+    "alone": 0.751837,
+    "mesh": {
+     "linear": 0.779314,
+     "trees": 0.766061
+    }
+   },
+   {
+    "merged": [
+     "driver",
+     "habits"
+    ],
+    "alone": 0.642714,
+    "mesh": {
+     "linear": 0.753683,
+     "trees": 0.744631
+    }
+   }
+  ],
+  "relayStrongFirst": {
+   "order": [
+    "coupon",
+    "trip",
+    "habits",
+    "driver"
+   ],
+   "last": 0.77234,
+   "departments": [
+    0.68168,
+    0.725766,
+    0.767282,
+    0.77234
+   ],
+   "mesh": {
+    "linear": 0.772506,
+    "trees": 0.771485
+   }
+  },
+  "relayWeakFirst": {
+   "order": [
+    "driver",
+    "habits",
+    "trip",
+    "coupon"
+   ],
+   "last": 0.750383,
+   "departments": [
+    0.584948,
+    0.636041,
+    0.68859,
+    0.750383
+   ],
+   "mesh": {
+    "linear": 0.748398,
+    "trees": 0.741811
+   }
+  }
+ },
+ "cover": {
+  "cases": 10499,
+  "outcomes": 3828,
+  "pooled": 0.87206,
+  "departments": [
+   {
+    "department": "terrain",
+    "columns": 3,
+    "boosted": 0.828395
+   },
+   {
+    "department": "distances",
+    "columns": 4,
+    "boosted": 0.683646
+   },
+   {
+    "department": "light",
+    "columns": 3,
+    "boosted": 0.577904
+   },
+   {
+    "department": "land",
+    "columns": 4,
+    "boosted": 0.606062
+   },
+   {
+    "department": "soil",
+    "columns": 16,
+    "boosted": 0.747604
+   }
+  ],
+  "boostedMesh": {
+   "linear": 0.841407,
+   "trees": 0.844428
+  },
+  "pairs": [
+   {
+    "merged": [
+     "terrain",
+     "distances"
+    ],
+    "alone": 0.85455,
+    "mesh": {
+     "linear": 0.857907,
+     "trees": 0.861343
+    }
+   },
+   {
+    "merged": [
+     "terrain",
+     "light"
+    ],
+    "alone": 0.830371,
+    "mesh": {
+     "linear": 0.8425,
+     "trees": 0.845702
+    }
+   },
+   {
+    "merged": [
+     "terrain",
+     "land"
+    ],
+    "alone": 0.832285,
+    "mesh": {
+     "linear": 0.843822,
+     "trees": 0.844862
+    }
+   },
+   {
+    "merged": [
+     "terrain",
+     "soil"
+    ],
+    "alone": 0.848981,
+    "mesh": {
+     "linear": 0.851617,
+     "trees": 0.850519
+    }
+   },
+   {
+    "merged": [
+     "distances",
+     "light"
+    ],
+    "alone": 0.697464,
+    "mesh": {
+     "linear": 0.840746,
+     "trees": 0.844124
+    }
+   },
+   {
+    "merged": [
+     "distances",
+     "land"
+    ],
+    "alone": 0.717257,
+    "mesh": {
+     "linear": 0.84147,
+     "trees": 0.844937
+    }
+   },
+   {
+    "merged": [
+     "distances",
+     "soil"
+    ],
+    "alone": 0.789633,
+    "mesh": {
+     "linear": 0.849153,
+     "trees": 0.8503
+    }
+   },
+   {
+    "merged": [
+     "light",
+     "land"
+    ],
+    "alone": 0.64445,
+    "mesh": {
+     "linear": 0.841079,
+     "trees": 0.842191
+    }
+   },
+   {
+    "merged": [
+     "light",
+     "soil"
+    ],
+    "alone": 0.758084,
+    "mesh": {
+     "linear": 0.842995,
+     "trees": 0.843465
+    }
+   },
+   {
+    "merged": [
+     "land",
+     "soil"
+    ],
+    "alone": 0.762355,
+    "mesh": {
+     "linear": 0.846846,
+     "trees": 0.848971
+    }
+   }
+  ],
+  "relayStrongFirst": {
+   "order": [
+    "terrain",
+    "soil",
+    "distances",
+    "land",
+    "light"
+   ],
+   "last": 0.867441,
+   "departments": [
+    0.828395,
+    0.844185,
+    0.862722,
+    0.865437,
+    0.867441
+   ],
+   "mesh": {
+    "linear": 0.867041,
+    "trees": 0.866069
+   }
+  },
+  "relayWeakFirst": {
+   "order": [
+    "light",
+    "land",
+    "distances",
+    "soil",
+    "terrain"
+   ],
+   "last": 0.851988,
+   "departments": [
+    0.577904,
+    0.635057,
+    0.719073,
+    0.793139,
+    0.851988
+   ],
+   "mesh": {
+    "linear": 0.852403,
+    "trees": 0.852977
+   }
+  }
+ },
+ "testNeverRead": true
+}

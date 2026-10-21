@@ -93,3 +93,9 @@ jobs:
       - name: the diagnosis after organ 2g, hospital and credit with no bar (FIT and GATE only, TEST never read) is the run itself
         run: |
           if [ -f data/diagnose-3.json ]; then node tools/diagnose-3.mjs --check; else echo "no diagnosis yet"; fi
+      - name: the diagnosis after organ 2h, what one score carries and whether a relay wins it back (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-4.json ]; then node tools/diagnose-4.mjs --check; else echo "no diagnosis yet"; fi
+      - name: the relay with grown bodies (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-5.json ]; then node tools/diagnose-5.mjs --check; else echo "no diagnosis yet"; fi
