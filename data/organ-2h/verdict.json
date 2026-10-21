@@ -1,0 +1,57 @@
+{
+ "kind": "dex-frontier.organ-2h.verdict",
+ "v": 1,
+ "prereg": "00cf29391d25d430",
+ "record": "e3eaa90c2710b423",
+ "verdicts": [
+  {
+   "id": "Q1",
+   "kind": "property",
+   "claim": "the fresh files are the ones downloaded, byte for byte; in both fresh domains each department holds only its own columns, TEST is never read (scrambling every TEST record leaves every department’s bodies, the body it fields, its join and the mesh’s choice of coupling unchanged), a changed seed is refused before it is read, and the frontier model answered every batch of 300 to its sealed prompt (1,200 cases)",
+   "pass": true,
+   "saw": "files as downloaded: true; coupon: live coupon-coupon, coupon-trip, coupon-habits, coupon-driver (trip deep-values 0.620086 live, coupon pairs-values 0.675091 live, driver deep-quantile 0.544403 live, habits pairs-quantile 0.610124 live), own columns only true, TEST never read true, a changed seed refused true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓; cover: live cover-terrain, cover-soil, cover-distances, cover-land, cover-light (terrain deep-quantile 0.816549 live, distances pairs-quantile 0.647245 live, light deep-quantile 0.569753 live, land six 0.606062 live, soil deep-values 0.750291 live), own columns only true, TEST never read true, a changed seed refused true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓"
+  },
+  {
+   "id": "Q2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: in both fresh domains at least two departments join, and the mesh beats its best single department on TEST (the best on TEST): bound above 0",
+   "pass": true,
+   "saw": "coupon: the mesh (trees) against its best department (coupon-coupon): 0.729184 vs 0.666235, lead 0.062949, bound 0.05031; cover: the mesh (trees) against its best department (cover-terrain): 0.84032 vs 0.814007, lead 0.026313, bound 0.023466"
+  },
+  {
+   "id": "Q3",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: in both fresh domains, on the 1,200, the mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "pass": false,
+   "saw": "coupon: on the 1,200, the mesh against claude-opus-5-5: 0.727605 vs 0.738086, lead -0.010481, bound -0.031699 against −0.02 (0 unreadable); the pooled model against it: 0.75743 vs 0.738086, lead 0.019344, bound 0.000658; cover: on the 1,200, the mesh against claude-opus-5-5: 0.833616 vs 0.823006, lead 0.010609, bound -0.001701 against −0.02 (0 unreadable); the pooled model against it: 0.868589 vs 0.823006, lead 0.045583, bound 0.032806"
+  },
+  {
+   "id": "Q4",
+   "kind": "prediction",
+   "claim": "GROWTH MEASURABLY RAISES IT: in both fresh domains, with at least two departments joined, adding them one at a time in GATE order (the coupling chosen afresh at each size) never lowers the TEST AUC, and the full mesh beats its first department beyond the noise: bound above 0",
+   "pass": true,
+   "saw": "coupon: 1 0.666235 → 2 0.701663 → 3 0.726682 → 4 0.729184; the full mesh against its first department: 0.729184 vs 0.666235, lead 0.062949, bound 0.05031; cover: 1 0.814007 → 2 0.8274 → 3 0.834622 → 4 0.839075 → 5 0.84032; the full mesh against its first department: 0.84032 vs 0.814007, lead 0.026313, bound 0.023466"
+  },
+  {
+   "id": "Q5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: in both fresh domains the mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: bound above −0.02",
+   "pass": false,
+   "saw": "coupon: against boosted trees on every column pooled: 0.729184 vs 0.761845, lead -0.032661, bound -0.041201 against −0.02; logistic regression pooled 0.730178; cover: against boosted trees on every column pooled: 0.84032 vs 0.874721, lead -0.034401, bound -0.037272 against −0.02; logistic regression pooled 0.841432"
+  },
+  {
+   "id": "Q6",
+   "kind": "prediction",
+   "claim": "NOT A SHAM: in both fresh domains the mesh beats a coupling taught shuffled outcomes and random routing (both bounds above 0), and grown on shuffled outcomes no department joins",
+   "pass": true,
+   "saw": "coupon: against a coupling taught shuffled outcomes: 0.729184 vs 0.544408, lead 0.184776, bound 0.161448; against random routing: 0.729184 vs 0.604605, lead 0.124579, bound 0.106234; live on shuffled outcomes: none; cover: against a coupling taught shuffled outcomes: 0.84032 vs 0.532317, lead 0.308003, bound 0.297781; against random routing: 0.84032 vs 0.696342, lead 0.143977, bound 0.136694; live on shuffled outcomes: none"
+  },
+  {
+   "id": "GATE",
+   "kind": "prediction",
+   "claim": "THE GATE, the spec’s WIN in full: Q2, Q3 and Q4 all hold. Nothing below the gate (organs 3 to 7) is sealed unless it does",
+   "pass": false,
+   "saw": "composition > parts true, approaches the frontier false, growth measurably raises it true"
+  }
+ ]
+}
