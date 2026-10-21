@@ -87,3 +87,6 @@ jobs:
       - name: the third body study, paired rules (FIT and GATE only, TEST never read) is the run itself
         run: |
           if [ -f data/study-body-3.json ]; then node tools/study-body-3.mjs --check; else echo "no study yet"; fi
+      - name: the diagnosis after organ 2g, hospital and credit with no bar (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-3.json ]; then node tools/diagnose-3.mjs --check; else echo "no diagnosis yet"; fi

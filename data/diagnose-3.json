@@ -1,0 +1,99 @@
+{
+ "kind": "dex-frontier.diagnose-3",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read; no bar",
+ "hospital": {
+  "pooled": 0.642719,
+  "departments": [
+   {
+    "department": "hospital-admissions",
+    "fielded": "pairs-quantile",
+    "grown": 0.542206,
+    "answers": true,
+    "boosted": 0.545306
+   },
+   {
+    "department": "hospital-clinical",
+    "fielded": "deep-quantile",
+    "grown": 0.572347,
+    "answers": true,
+    "boosted": 0.584548
+   },
+   {
+    "department": "hospital-pharmacy",
+    "fielded": "pairs-values",
+    "grown": 0.540018,
+    "answers": true,
+    "boosted": 0.540525
+   },
+   {
+    "department": "hospital-history",
+    "fielded": "deep-values",
+    "grown": 0.555762,
+    "answers": true,
+    "boosted": 0.564576
+   },
+   {
+    "department": "hospital-discharge",
+    "fielded": "six",
+    "grown": 0.580203,
+    "answers": false,
+    "boosted": 0.580243
+   }
+  ],
+  "grownMesh": {
+   "departments": 4,
+   "linear": 0.608225,
+   "trees": 0.600815
+  },
+  "boostedMesh": {
+   "departments": 5,
+   "linear": 0.636278,
+   "trees": 0.62373
+  }
+ },
+ "credit": {
+  "pooled": 0.783798,
+  "departments": [
+   {
+    "department": "credit-customer",
+    "fielded": "pairs-values",
+    "grown": 0.637067,
+    "answers": true,
+    "boosted": 0.641834
+   },
+   {
+    "department": "credit-collections",
+    "fielded": "deep-quantile",
+    "grown": 0.739214,
+    "answers": true,
+    "boosted": 0.745106
+   },
+   {
+    "department": "credit-billing",
+    "fielded": "pairs-quantile",
+    "grown": 0.579223,
+    "answers": true,
+    "boosted": 0.6213
+   },
+   {
+    "department": "credit-payments",
+    "fielded": "pairs-quantile",
+    "grown": 0.66396,
+    "answers": true,
+    "boosted": 0.671624
+   }
+  ],
+  "grownMesh": {
+   "departments": 4,
+   "linear": 0.772692,
+   "trees": 0.777263
+  },
+  "boostedMesh": {
+   "departments": 4,
+   "linear": 0.773037,
+   "trees": 0.768476
+  }
+ },
+ "testNeverRead": true
+}
