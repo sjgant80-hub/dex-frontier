@@ -35,7 +35,7 @@ const ROOT = new URL('../', import.meta.url);
 const COUPLERS = [linear, trees(TREES)];
 
 /** every department: three bodies grown from its sealed seed, the best on GATE fielded (a tie fields the earlier) */
-async function departments(ds) {
+export async function departments(ds) {
   const gy = ds.gateRows.map((i) => ds.y[i]), grown = await nodes(Object.keys(ds.silos).map((s) => silo(ds, s)), { seed: SEED });
   return grown.map((n) => {
     const deep = Object.fromEntries(BODIES.filter((b) => b !== 'six').map((b) => [b, growDeep(n.view, ds.fitRows, SEED, DEEP_BODIES[b])]));
@@ -52,7 +52,7 @@ const gateSide = (deps) => deps.map((d) => [d.name, d.fielded, ...BODIES.map((k)
 
 /** with no live department the mesh abstains on every case: a coin (0.5), so every rule that compares it fails as it should */
 const ABSTAIN = { chosen: 'none (no department live)', scored: [], model: { predict: () => 0.5 } };
-function meshOf(live, ds) {
+export function meshOf(live, ds) {
   const gy = ds.gateRows.map((i) => ds.y[i]), gateCols = live.map((d) => d.score(ds.gateRows)), pick = live.length ? choose(COUPLERS, gateCols, gy, FOLDS) : ABSTAIN;
   const testCols = live.map((d) => d.score(ds.testRows)), composed = ds.testRows.map((_, r) => pick.model.predict(testCols.map((c) => c[r])));
   return { pick, gateCols, testCols, composed, gy };
