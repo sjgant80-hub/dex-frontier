@@ -1,0 +1,471 @@
+{
+ "kind": "dex-frontier.organ-2g.record",
+ "v": 1,
+ "settings": {
+  "bar": 0.6,
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  },
+  "seed": 1,
+  "bodies": [
+   "six",
+   "deep-quantile",
+   "deep-values",
+   "pairs-quantile",
+   "pairs-values"
+  ],
+  "frontierCases": 1200,
+  "batch": 300
+ },
+ "filesMatchSources": true,
+ "hospital": {
+  "departments": [
+   {
+    "department": "hospital-admissions",
+    "columns": 12,
+    "gate": {
+     "six": 0.52975,
+     "deep-quantile": 0.535914,
+     "deep-values": 0.540683,
+     "pairs-quantile": 0.542206,
+     "pairs-values": 0.529984
+    },
+    "stages": {
+     "deep-quantile": 5,
+     "deep-values": 4,
+     "pairs-quantile": 7,
+     "pairs-values": 1
+    },
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.542206,
+    "state": "cut"
+   },
+   {
+    "department": "hospital-clinical",
+    "columns": 15,
+    "gate": {
+     "six": 0.565714,
+     "deep-quantile": 0.572347,
+     "deep-values": 0.559775,
+     "pairs-quantile": 0.562409,
+     "pairs-values": 0.557285
+    },
+    "stages": {
+     "deep-quantile": 2,
+     "deep-values": 2,
+     "pairs-quantile": 2,
+     "pairs-values": 1
+    },
+    "fielded": "deep-quantile",
+    "gateAuc": 0.572347,
+    "state": "cut"
+   },
+   {
+    "department": "hospital-pharmacy",
+    "columns": 10,
+    "gate": {
+     "six": 0.53642,
+     "deep-quantile": 0.53077,
+     "deep-values": 0.53602,
+     "pairs-quantile": 0.533056,
+     "pairs-values": 0.540018
+    },
+    "stages": {
+     "deep-quantile": 1,
+     "deep-values": 7,
+     "pairs-quantile": 3,
+     "pairs-values": 2
+    },
+    "fielded": "pairs-values",
+    "gateAuc": 0.540018,
+    "state": "cut"
+   },
+   {
+    "department": "hospital-history",
+    "columns": 3,
+    "gate": {
+     "six": 0.546627,
+     "deep-quantile": 0.551691,
+     "deep-values": 0.555762,
+     "pairs-quantile": 0.550505,
+     "pairs-values": 0.554012
+    },
+    "stages": {
+     "deep-quantile": 1,
+     "deep-values": 1,
+     "pairs-quantile": 1,
+     "pairs-values": 2
+    },
+    "fielded": "deep-values",
+    "gateAuc": 0.555762,
+    "state": "cut"
+   },
+   {
+    "department": "hospital-discharge",
+    "columns": 6,
+    "gate": {
+     "six": 0.580203,
+     "deep-quantile": 0.579008,
+     "deep-values": 0.579078,
+     "pairs-quantile": 0.579829,
+     "pairs-values": 0.579074
+    },
+    "stages": {
+     "deep-quantile": 1,
+     "deep-values": 1,
+     "pairs-quantile": 1,
+     "pairs-values": 1
+    },
+    "fielded": "six",
+    "gateAuc": 0.580203,
+    "state": "cut"
+   }
+  ],
+  "live": [],
+  "chosen": "none (no department live)",
+  "outOfFold": [],
+  "cases": 20991,
+  "outcomes": 1883,
+  "composedAuc": 0.5,
+  "singles": [],
+  "best": {
+   "department": "none",
+   "fielded": "none",
+   "gateAuc": 0,
+   "testAuc": 0.5
+  },
+  "vsBest": {
+   "a": 0.5,
+   "b": 0.5,
+   "lead": 0,
+   "low95": 0
+  },
+  "vsShuffled": {
+   "a": 0.5,
+   "b": 0.5,
+   "lead": 0,
+   "low95": 0
+  },
+  "vsRoute": {
+   "a": 0.5,
+   "b": 0.5,
+   "lead": 0,
+   "low95": 0
+  },
+  "growth": [],
+  "fullVsFirst": {
+   "a": 0.5,
+   "b": 0.5,
+   "lead": 0,
+   "low95": 0
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.5,
+    "b": 0.659198,
+    "lead": -0.159198,
+    "low95": -0.172663
+   },
+   "logistic": {
+    "a": 0.5,
+    "b": 0.652154,
+    "lead": -0.152154,
+    "low95": -0.165172
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "9339a3c733f49e83",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "vs": {
+    "a": 0.5,
+    "b": 0.631147,
+    "lead": -0.131147,
+    "low95": -0.1641
+   },
+   "pooledVs": {
+    "a": 0.659236,
+    "b": 0.631147,
+    "lead": 0.028089,
+    "low95": 0.004605
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ },
+ "credit": {
+  "departments": [
+   {
+    "department": "credit-customer",
+    "columns": 6,
+    "gate": {
+     "six": 0.629236,
+     "deep-quantile": 0.629411,
+     "deep-values": 0.63326,
+     "pairs-quantile": 0.631641,
+     "pairs-values": 0.637067
+    },
+    "stages": {
+     "deep-quantile": 1,
+     "deep-values": 4,
+     "pairs-quantile": 1,
+     "pairs-values": 2
+    },
+    "fielded": "pairs-values",
+    "gateAuc": 0.637067,
+    "state": "live"
+   },
+   {
+    "department": "credit-collections",
+    "columns": 6,
+    "gate": {
+     "six": 0.730745,
+     "deep-quantile": 0.739214,
+     "deep-values": 0.737169,
+     "pairs-quantile": 0.737451,
+     "pairs-values": 0.733411
+    },
+    "stages": {
+     "deep-quantile": 2,
+     "deep-values": 3,
+     "pairs-quantile": 4,
+     "pairs-values": 6
+    },
+    "fielded": "deep-quantile",
+    "gateAuc": 0.739214,
+    "state": "live"
+   },
+   {
+    "department": "credit-billing",
+    "columns": 6,
+    "gate": {
+     "six": 0.548705,
+     "deep-quantile": 0.548379,
+     "deep-values": 0.548379,
+     "pairs-quantile": 0.579223,
+     "pairs-values": 0.579223
+    },
+    "stages": {
+     "deep-quantile": 4,
+     "deep-values": 4,
+     "pairs-quantile": 8,
+     "pairs-values": 8
+    },
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.579223,
+    "state": "cut"
+   },
+   {
+    "department": "credit-payments",
+    "columns": 6,
+    "gate": {
+     "six": 0.645464,
+     "deep-quantile": 0.648111,
+     "deep-values": 0.648111,
+     "pairs-quantile": 0.66396,
+     "pairs-values": 0.66396
+    },
+    "stages": {
+     "deep-quantile": 3,
+     "deep-values": 3,
+     "pairs-quantile": 6,
+     "pairs-values": 6
+    },
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.66396,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "credit-collections",
+   "credit-payments",
+   "credit-customer"
+  ],
+  "chosen": "trees",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.77249
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.7777
+   }
+  ],
+  "cases": 8999,
+  "outcomes": 1990,
+  "composedAuc": 0.76659,
+  "singles": [
+   {
+    "department": "credit-collections",
+    "fielded": "deep-quantile",
+    "gateAuc": 0.739214,
+    "testAuc": 0.747799
+   },
+   {
+    "department": "credit-payments",
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.66396,
+    "testAuc": 0.65465
+   },
+   {
+    "department": "credit-customer",
+    "fielded": "pairs-values",
+    "gateAuc": 0.637067,
+    "testAuc": 0.605171
+   }
+  ],
+  "best": {
+   "department": "credit-collections",
+   "fielded": "deep-quantile",
+   "gateAuc": 0.739214,
+   "testAuc": 0.747799
+  },
+  "vsBest": {
+   "a": 0.76659,
+   "b": 0.747799,
+   "lead": 0.018791,
+   "low95": 0.010345
+  },
+  "vsShuffled": {
+   "a": 0.76659,
+   "b": 0.59053,
+   "lead": 0.17606,
+   "low95": 0.159546
+  },
+  "vsRoute": {
+   "a": 0.76659,
+   "b": 0.663939,
+   "lead": 0.102651,
+   "low95": 0.090008
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "credit-collections",
+    "chosen": "linear",
+    "testAuc": 0.747799
+   },
+   {
+    "departments": 2,
+    "added": "credit-payments",
+    "chosen": "trees",
+    "testAuc": 0.759944
+   },
+   {
+    "departments": 3,
+    "added": "credit-customer",
+    "chosen": "trees",
+    "testAuc": 0.76659
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.76659,
+   "b": 0.747799,
+   "lead": 0.018791,
+   "low95": 0.010345
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.76659,
+    "b": 0.779804,
+    "lead": -0.013214,
+    "low95": -0.018796
+   },
+   "logistic": {
+    "a": 0.76659,
+    "b": 0.761027,
+    "lead": 0.005563,
+    "low95": 0.000058
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "e5e4ffca7488a45e",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "vs": {
+    "a": 0.761169,
+    "b": 0.745681,
+    "lead": 0.015487,
+    "low95": -0.00664
+   },
+   "pooledVs": {
+    "a": 0.778964,
+    "b": 0.745681,
+    "lead": 0.033283,
+    "low95": 0.01106
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ }
+}
