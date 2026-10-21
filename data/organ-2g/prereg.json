@@ -1,0 +1,87 @@
+{
+ "kind": "dex-frontier.organ-2g.prereg",
+ "v": 1,
+ "organ": "organ 2g, THE GATE TAKEN AGAIN — on two datasets no attempt has touched, with a frontier test large enough to tell “within 0.02” from “behind” and growth read as the spec says it (measurably), do the gate’s three tests hold together?",
+ "scenario": "Two real datasets downloaded after organ 2f was judged (data/fresh2-sources.json): UCI Diabetes 130-US Hospitals (69,973 first stays of 71,518 patients, deaths and hospice out; readmitted within 30 days; departments admissions 12 columns, clinical 15, pharmacy 10, history 3, discharge 6) and UCI Default of Credit Card Clients (30,000; departments customer 6, collections 6, billing 6, payments 6); each a stratified 30% TEST, the rest 75 / 25 FIT / GATE. Each department grows 5 bodies from its own sealed seed (six, deep-quantile, deep-values, pairs-quantile, pairs-values) and fields the one best on GATE; under 0.6 on GATE it is cut. The mesh chooses its coupling, linear or trees, out of fold on GATE, then learns it on all of GATE; departments join in GATE order. On TEST: against the best single department (the best on TEST), a coupling taught shuffled outcomes, random routing, boosted trees and logistic regression on every column pooled, and, on 1,200 cases per domain (400 with the outcome, 800 without, seeded), Claude Opus 5.5 asked cold in four batches of 300, each batch a fresh subagent that reads only its prompt (the fields in words, 24 past cases, its 300 cases; tools/contest-2g.mjs).",
+ "rules": [
+  {
+   "id": "P1",
+   "kind": "property",
+   "claim": "the fresh files are the ones downloaded, byte for byte; in both fresh domains each department holds only its own columns, TEST is never read (scrambling every TEST record leaves every department’s bodies, the body it fields and the mesh’s choice of coupling unchanged), a changed seed is refused before it is read, and the frontier model answered every batch of 300 to its sealed prompt (1,200 cases)",
+   "seenBeforeSeal": "the fresh files’ outcome counts (hospital 6,277 readmitted of 69,973; credit 6,636 defaults of 30,000) and split sizes, checked by the loaders’ tests; the design records on telco, shop, bank and adult (data/diagnose-2.json, data/study-body*.json: FIT and GATE only). No model was grown or scored on either fresh dataset before this seal"
+  },
+  {
+   "id": "P2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: in both fresh domains at least two departments clear their bar, and the mesh beats its best single department on TEST (the best on TEST): bound above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "P3",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: in both fresh domains, on the 1,200, the mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "P4",
+   "kind": "prediction",
+   "claim": "GROWTH MEASURABLY RAISES IT: in both fresh domains, with at least two departments live, adding the live departments one at a time in GATE order (the coupling chosen afresh at each size) never lowers the TEST AUC, and the full mesh beats its first department beyond the noise: bound above 0",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "P5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: in both fresh domains the mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: bound above −0.02",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "P6",
+   "kind": "prediction",
+   "claim": "NOT A SHAM: in both fresh domains the mesh beats a coupling taught shuffled outcomes and random routing (both bounds above 0), and grown on shuffled outcomes no department goes live",
+   "seenBeforeSeal": "no"
+  },
+  {
+   "id": "GATE",
+   "kind": "prediction",
+   "claim": "THE GATE, the spec’s WIN in full: P2, P3 and P4 all hold. Nothing below the gate (organs 3 to 7) is sealed unless it does",
+   "seenBeforeSeal": "no"
+  }
+ ],
+ "disclosure": "Sealed after organ 2f was judged and the gate found not won there, knowing every number of organs 2 to 2f. Two of 2f’s rules are changed here, both for a reason found after 2f, and said plainly. (1) 2f asked the frontier model 300 cases a domain; with 300 cases the bound’s noise band is about ±0.025, wider than the 0.02 bar, and after the seal even the pooled models failed that test on the same cases (data/organ-2f/ceiling.json). Here 1,200 cases: scaling 2f’s bands (0.024 and 0.017 at 300) by the square root of four gives about ±0.012 and ±0.008, so a mesh truly within about 0.01 of the frontier model can pass. (2) 2f asked growth for a fixed +0.01 over the first department; on the bank even the pooled model gains only 0.007 over its economy department on GATE (data/diagnose-2.json), so a fixed step can sit beyond any model’s reach. The spec asks that adding a specialist measurably raise the mesh: here, beyond the noise (bound above 0), and still never lowering it. The bodies were chosen on telco, shop, bank and adult, FIT and GATE only, before these data were downloaded; nothing was tuned on the fresh data. The expectations written before the run: P2 holds in both (the hospital’s history and clinical departments, and the card issuer’s collections and payments desks, carry different signal). P3 is open: readmission is hard for every reader, and the frontier model knows medicine and credit. P4 is open where one department dominates (credit’s collections). P5 holds. Determinism is shown by CI re-deriving the record byte for byte. A department must clear 0.6 on GATE, as in every organ; if none does, the mesh abstains on every case (a coin), and the rules that compare it fail. The local 14B is not asked: the gate names a frontier model. The hospital and bank files hold carriage returns (kept byte for byte), so the seal pins data/fresh2-sources.json, which holds every fresh file’s hash, and the measurement refuses to run if a file differs from it.",
+ "judgedBy": "tools/judge-2g.mjs (pinned below)",
+ "files": {
+  "src/silos.mjs": "2de9959bacfdd2c9a4b771226cd1ae1521fc1175211704ea60fcb0815c534894",
+  "src/node.mjs": "9c0eb1965d1c0fb7d4c8a97608767b5188bd132621152ad4b621d53d6d6261b8",
+  "src/compose.mjs": "1e244b5f9f1b442c609a84f98b77093d52dd4f36a00593fa7af78b3aee3a3b89",
+  "src/stats.mjs": "688e483063a2327d7b6afb9e196dca48c690ff5d33875783fdeb4c3acd293b38",
+  "vendor/living-seed/src/genome.mjs": "45feb26823b80647b2b50a8ea395ad3b7abbae1f3cf0a9b793a14d1d41b6bb25",
+  "vendor/living-seed/src/germinate.mjs": "9ea0b23879a211c87c7a6fa2ad2ea7a7b49c6743631382d62d6e919c8ae1c520",
+  "vendor/living-seed/vendor/seed-library/seedlib.mjs": "f1904ed31b48794ac3454453d5853e799509dcdf8b8695ffea8bcedfd6f60e72",
+  "vendor/living-seed/vendor/seed-library/sha256.mjs": "8ebd4260e8b79fbdf9824ecbe6d6cde621cc003f1d358255101c01bb26763233",
+  "vendor/living-seed/vendor/keys/keys.mjs": "636969fdaaac7eab1868c6670cc7a85da1c22d65498f25e8a2ce5ad3487113e0",
+  "vendor/living-seed/vendor/keys/canon.mjs": "6ebe4f961ff0a2ce8693de89193921c8b5372c4e08d4941361212dd4cba29d21",
+  "data/telco-churn.csv": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "data/online_shoppers_intention.csv": "d8e130ba51532985f93281a73ce299e6ce150cb915769a7962a11e595eadd6a1",
+  "tools/mesh.mjs": "0e912d9790262495b44af90f372fa8b1c0797c1aaedafa35b7f3ffc24500a9ff",
+  "tools/organ.mjs": "9be59e72be9537c8672bbfcca0d7ce61d49c7b7687c17b503a44c19b2d1ad765",
+  "tools/order.mjs": "46493a365d8b1b8249259368e451a979051d7cf8acad03470d74b8b010c57675",
+  "tools/measure-1.mjs": "5d4477b853b4d53afab49e6cb8b04942e7c3f8eeb67064b04adbbeb402b99e3f",
+  "src/fresh.mjs": "280d702d33bb691776d795292c3cedcab09013972f027d34db0b0c408056fe1c",
+  "src/fresh2.mjs": "87811bb14b93698d17fe569def653496ddb13ec5d58548923947321d945a45e5",
+  "src/deep.mjs": "b9743d941d9574255213cbdc3db6692c43e5650e4270c48888c141ff10a8edd1",
+  "src/select.mjs": "ac739da0cccd80198fe7b6f6575a651afb53da5c3d5ec5bad833b8e6bfd3edd4",
+  "vendor/living-seed/src/baseline.mjs": "b4f7ddb958edfa19ef2d33e33173aab41146437195b7e89e1f7c60021d23ad4c",
+  "tools/measure-2d.mjs": "06b392bc62cc498131de5dbfce3f17a1ce482892d79a47192d8ac504b71e069b",
+  "tools/contest.mjs": "bc424ee22caa027645267799621a46de97ff916e667574b064e20be220aace54",
+  "tools/contest-2g.mjs": "899ece3aadec3c334d69717a5c2777269265b38bc1b91179a97443cad4c299a1",
+  "tools/xls.mjs": "a83313f2df66039e8cfd54d03f78ae78ad9c43cf64684f6c91ee8601d39ec9a0",
+  "tools/convert-credit.mjs": "cd9bd03ac27828098976c55a3d8907daf5283f0f5f7347863691d96323a953a9",
+  "data/fresh2-sources.json": "5e64cf3b605d8d21176d35c76d8048e9de726d229a24042fd75d75b4d033d45e",
+  "data/credit-default.csv": "4edce6da569b2c30788a85fd98a9bafb1a983e8ca1a7aac875dd7ff853cbd0bb",
+  "data/organ-2f/ceiling.json": "1124d1a9a340068ef29310e3a5349c824e2fc0323a9bf8f5a35930cd1a9e112c",
+  "data/diagnose-2.json": "3606f074804014aa9d41b0d4208c6b34697bd4e337a159e8743eb4d7c89e11aa",
+  "tools/measure-2g.mjs": "74365117080b349fee9094f82d0baedf0f715787f6c2068c5752645ffd060eba",
+  "tools/judge-2g.mjs": "511c0d7ccf79c5590e3b2be75b0f71c04f45e4d4edc120acbba42710b4ebdb0f",
+  "tools/seal-2g.mjs": "6eb93b868b6e5380eb97b66003860d67105b3a5c23a650cea9db376f22fd67a0"
+ }
+}

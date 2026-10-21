@@ -21,6 +21,7 @@ export const ORGANS = {
   '2d': { seal: 'data/organ-2d/prereg.json', later: ['data/organ-2d/record.json'] },
   '2e': { seal: 'data/organ-2e/prereg.json', later: ['data/organ-2e/record.json'] },
   '2f': { seal: 'data/organ-2f/prereg.json', later: ['data/llm/frontier-bank.json', 'data/llm/frontier-adult.json', 'data/organ-2f/record.json'] },
+  '2g': { seal: 'data/organ-2g/prereg.json', later: ['data/llm/frontier-hospital-1.json', 'data/llm/frontier-hospital-2.json', 'data/llm/frontier-hospital-3.json', 'data/llm/frontier-hospital-4.json', 'data/llm/frontier-credit-1.json', 'data/llm/frontier-credit-2.json', 'data/llm/frontier-credit-3.json', 'data/llm/frontier-credit-4.json', 'data/organ-2g/record.json'] },
   3: { seal: 'data/organ-3/prereg.json', later: ['data/organ-3/record.json'] },
   4: { seal: 'data/organ-4/prereg.json', later: ['data/organ-4/record.json'] },
   5: { seal: 'data/organ-5/prereg.json', later: ['data/organ-5/record.json'] },
