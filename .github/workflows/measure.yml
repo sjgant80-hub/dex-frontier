@@ -1,0 +1,39 @@
+name: measure
+# Run by hand, on GitHub's runner, which grows the bodies several times faster than the machine they were built on.
+#   dry      — before an organ is sealed: synthetic frontier answers, the measurement in full, the rules read strictly;
+#              prints only "ran" or what is broken, never a number from the data
+#   measure  — after its answers are committed: the measurement itself, its record uploaded to be committed as it is;
+#              every push re-derives that record byte for byte in the gate, so a record made here is checked like any other
+on:
+  workflow_dispatch:
+    inputs:
+      organ: { description: 'organ, e.g. 2i', required: true }
+      mode: { description: 'dry or measure', required: true, default: 'dry' }
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      ORGAN: ${{ inputs.organ }}
+      MODE: ${{ inputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: the inputs are an organ and a mode, nothing else
+        run: |
+          case "$ORGAN" in [0-9]|[0-9][a-z]) ;; *) echo "not an organ: $ORGAN"; exit 1;; esac
+          case "$MODE" in dry|measure) ;; *) echo "not a mode: $MODE"; exit 1;; esac
+      - name: the dry run (prints only whether it ran)
+        if: env.MODE == 'dry'
+        run: node tools/dry.mjs "$ORGAN"
+      - name: the measurement
+        if: env.MODE == 'measure'
+        run: |
+          test -f "data/organ-$ORGAN/prereg.json" || { echo "not sealed"; exit 1; }
+          test ! -f "data/organ-$ORGAN/record.json" || { echo "measured already"; exit 1; }
+          node "tools/measure-$ORGAN.mjs"
+      - name: the record, to be committed as it is
+        if: env.MODE == 'measure'
+        uses: actions/upload-artifact@v4
+        with: { name: record, path: 'data/organ-${{ env.ORGAN }}/record.json' }

@@ -65,6 +65,9 @@ jobs:
       - name: organ 2h, the gate taken again with the join rule fixed (re-derived, re-judged, seal first, once it is measured)
         run: |
           if [ -f data/organ-2h/record.json ]; then node tools/measure-2h.mjs --check && node tools/judge-2h.mjs --check && node tools/order.mjs --organ 2h; elif [ -f data/organ-2h/prereg.json ]; then echo "organ 2h sealed, being measured"; else echo "organ 2h built, not yet sealed"; fi
+      - name: organ 2i, the gate taken again with a relay (re-derived, re-judged, seal first, once it is measured)
+        run: |
+          if [ -f data/organ-2i/record.json ]; then node tools/measure-2i.mjs --check && node tools/judge-2i.mjs --check && node tools/order.mjs --organ 2i; elif [ -f data/organ-2i/prereg.json ]; then echo "organ 2i sealed, being measured"; else echo "organ 2i built, not yet sealed"; fi
       - name: the check made after organ 2g was judged (the hospital with every department kept) is the run itself
         run: |
           if [ -f data/organ-2g/nobar.json ]; then node tools/nobar-2g.mjs --check; else echo "no check yet"; fi

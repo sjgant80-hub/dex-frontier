@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+<title>The Self-Growing DEX Frontier</title>
+<meta name="description" content="A frontier mind grown, not poured: specialist nodes grown from seeds on each department’s own records, coupled into one answer, records never shared. The composition proof was sealed before it ran: 0 of 0 sealed rules held." />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#0b0e13" />
+<script type="application/ld+json">{}</script>
+/*STYLE*/
+</head>
+<body>
+<div class="wrap">
+<header id="top">
+  <h1>The Self-Growing <span class="x">DEX</span> Frontier</h1>
+  <p class="lede">Frontier AI is poured: every record into one giant model in one data centre, rented back to you. This grows it instead. Each department keeps its own records. A seed of a few hundred bytes grows a specialist from one department’s records, on that department’s machine, and it must prove itself on cases it never saw or it is cut. The specialists share answers, never records. A coupling learns from outcomes how much each one’s word is worth, and the mesh answers as one mind.</p>
+  <p class="tag">Everything on this page runs the real, mutation-gated code in your browser, on two real public datasets. The one claim it all rests on — that specialists compose into more than the sum — was sealed before it was measured, and allowed to fail.</p>
+  <div class="pills">
+    <span class="pill ok"><span data-tally="line"></span></span>
+    <span class="pill warn"><span data-tally="fails"></span></span>
+    <span class="pill">composition (organ 2, B2): <span data-v="2:B2">…</span></span>
+    <span class="pill ok">0 records shared between nodes</span>
+    <span class="pill ok">MIT — no licence fee</span>
+  </div>
+  <p id="nocrypto" class="note" hidden>This browser cannot check Ed25519 signatures, so it cannot open a seed. Use a current Chrome, Edge, Firefox or Safari.</p>
+  <nav class="top" aria-label="Sections"><ul>
+    <li><a href="#what">What it is</a></li><li><a href="#start">Start here</a></li><li><a href="#try">Try it</a></li><li><a href="#how">How it works</a></li>
+    <li><a href="#one">Organ 1 · one body</a></li><li><a href="#compose">Organ 2 · composition</a></li><li><a href="#next">What scales next</a></li>
+    <li><a href="#blueprint">Blueprint</a></li><li><a href="#business">For your business</a></li><li><a href="#paper">White paper</a></li><li><a href="#faq">Questions</a></li>
+  </ul></nav>
+</header>
+
+<section id="what" aria-labelledby="what-h">
+  <h2 id="what-h"><span class="n">00</span>What it is, in plain words</h2>
+  <p>New to the words? They are explained <a href="#words">at the end of this section</a>.</p>
+  <p>Every frontier model today is built the same way: gather all the data in one place, train one enormous model on it, and rent out the answers. Your records go to it, or it never sees them. This page builds the opposite way. A business already keeps its records apart: billing has billing’s, the product team has usage, the CRM has the customer. Each of those <b>silos</b> grows its own <b>specialist node</b>, on its own machine, from a <b>seed</b>: a signed recipe of a few hundred bytes that says what to look for. The node sets every threshold from its own records and must clear a bar on past cases it never trained on, or it is <span class="chip cut">cut</span> and says nothing.</p>
+  <p>The live nodes then answer together. Each scores the case from what its own silo knows, and a <b>coupling</b> (κ) weighs their scores into one answer. It learned those weights from outcomes on cases none of them trained on. Nothing but scores crosses between nodes. The billing node never sees the CRM, and the CRM never sees billing.</p>
+  <p>The spec this was built from says the whole idea rests on one claim, to be proven before anything scales: <b>do specialists compose into more than the sum?</b> Organ 2 took that proof first, and every attempt after it (2b onward) took it again, each on real data, sealed before it ran and allowed to fail. <a href="#gate">The gate</a> says where it stands.</p>
+  <h3 id="words">The words this page uses</h3>
+  <dl class="gloss">
+    <div><dt>Silo, department</dt> <dd>— the records one department keeps, and only those.</dd></div>
+    <div><dt>Seed</dt> <dd>— a signed recipe of a few hundred bytes: which silo, and how hard to search. It carries no trained weights.</dd></div>
+    <div><dt>Node</dt> <dd>— what a seed grows on one silo’s records: a handful of readable rules, each a column, a cut and a weight.</dd></div>
+    <div><dt>Bar, join</dt> <dd>— what a node must show on past cases it never trained on before it may answer at all. Up to organ 2g, a fixed score of 0.6; from organ 2h, beating a coin beyond the noise.</dd></div>
+    <div><dt>Cut</dt> <dd>— a node that did not clear its bar. It answers nothing.</dd></div>
+    <div><dt>The gate</dt> <dd>— the spec’s three tests, all of which must hold before anything scales: the mesh beats any single specialist, it comes close to a frontier model, and adding a specialist measurably raises it.</dd></div>
+    <div><dt>Mesh</dt> <dd>— the live nodes answering together, their scores weighed by the coupling.</dd></div>
+    <div><dt>Coupling (κ)</dt> <dd>— how much each node’s word is worth, learned from outcomes on cases no node trained on.</dd></div>
+    <div><dt>Composed</dt> <dd>— the mesh’s one answer: the nodes’ scores, weighed by the coupling.</dd></div>
+    <div><dt>Poured, monolith</dt> <dd>— the usual way: every record in one place and one model fitted on all of it.</dd></div>
+    <div><dt>Frontier model</dt> <dd>— one of the largest general AI models available (here Claude Opus 5.5), shown every column of a case in words and asked for a probability, cold.</dd></div>
+    <div><dt>FIT, GATE, TEST</dt> <dd>— the three slices of every dataset: nodes grow on FIT, prove themselves and learn the coupling on GATE, and are judged on TEST, which nothing sees until the sealed measurement.</dd></div>
+    <div><dt>Organ</dt> <dd>— one sealed experiment, numbered in the spec’s build order (2b, 2c … are further attempts at organ 2).</dd></div>
+    <div><dt>Sealed</dt> <dd>— rules written and published before a measurement ran, so they could not be bent to the result.</dd></div>
+    <div><dt>Prediction, property</dt> <dd>— a sealed rule that may fail (and is kept when it does), or one the build promises must hold.</dd></div>
+    <div><dt>Mutation gate</dt> <dd>— the code is deliberately broken, line by line, and the tests must notice every break.</dd></div>
+    <div><dt>AUC</dt> <dd>— how often a real case is ranked above a non-case: 0.5 is a coin toss, 1 is perfect. It does not depend on how rare the outcome is.</dd></div>
+    <div><dt>Bound, beyond the noise</dt> <dd>— a lead is real only if it survives resampling the cases two thousand times: the bound is the lead the worst one in forty of those resamples still shows.</dd></div>
+    <div><dt>Stacked generalisation</dt> <dd>— the known technique the coupling is: a small model learns how to weigh other models’ answers (Wolpert, 1992).</dd></div>
+    <div><dt>Living Seed</dt> <dd>— the earlier build whose code grows each node: a signed seed that germinates into a working, checked set of rules on the records it finds.</dd></div>
+    <div><dt>Breeding</dt> <dd>— two nodes of one silo crossed into a child, kept only if it beats both parents on cases neither trained on (organ 3, built and held until the gate is won).</dd></div>
+  </dl>
+</section>
+
+<section id="start" aria-labelledby="start-h">
+  <h2 id="start-h"><span class="n">01</span>Start here</h2>
+  <p>Six steps, a few minutes. Everything happens in this tab, on this page’s own files. Nothing you do leaves it.</p>
+  <ol class="steps">
+    <li><b>See the seeds.</b> Box 1 shows the six seeds, one per silo: three for a telecom company’s customers, three for a web shop’s sessions. Each is signed by the contributor who owns that silo.</li>
+    <li><b>Grow the mesh.</b> Press <i>Grow all six nodes</i> in box 2. Your browser grows each node from its own silo’s records, holds it to its bar, and learns the coupling. One node may be cut. Read why.</li>
+    <li><b>Ask it.</b> In box 3, draw a case it never trained on. Each node answers from its own silo (or abstains), the coupling weighs them, and you see what really happened.</li>
+    <li><b>Re-run the proof.</b> Box 4 re-scores every test case and puts the composed mesh against its best single node, the shams and the poured monolith, beside the committed record.</li>
+    <li><b>Break it.</b> Unplug a node in box 5 and watch the mesh carry on without it. Change one character of a seed in box 6 and watch it refused.</li>
+    <li><b>Watch it live.</b> Breed two nodes in box 7: their child is born only if it beats both. In box 8, the strongest node starts answering noise half-way through the test stream. The mesh that keeps learning cuts it; the one that doesn’t keeps trusting it.</li>
+  </ol>
+</section>
+
+<section id="try" aria-labelledby="try-h">
+  <h2 id="try-h"><span class="n">02</span>Try it</h2>
+  <div class="grid two">
+    <div class="panel"><h3>1 · The six seeds</h3><p class="dim">One per silo, each sealed by its contributor’s key. The demo keys are derived from public phrases, so anyone can reproduce every seal. A real contributor keeps their own.</p><div id="b1" role="status" aria-live="polite"><p class="dim">Loading the seeds…</p></div></div>
+    <div class="panel"><h3>2 · Grow the mesh here</h3><div class="row"><button id="b2-go" type="button" class="primary" disabled>Grow all six nodes</button><span id="b2-t" class="dim"></span></div><div id="b2" role="status" aria-live="polite"><p class="dim">Your browser grows each node from its own silo: about a minute on a laptop.</p></div></div>
+  </div>
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel"><h3>3 · Ask the mesh a case it never saw</h3><div class="row"><label for="b3-d">Domain</label><select id="b3-d"><option value="telco">Telco customer: will they leave?</option><option value="shop">Shop session: will they buy?</option></select><button id="b3-go" type="button" disabled>Draw a test case</button></div><div id="b3" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
+    <div class="panel"><h3>4 · Re-run the composition proof</h3><div class="row"><button id="b4-go" type="button" disabled>Re-score every test case</button></div><div id="b4" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
+  </div>
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel"><h3>5 · Unplug a node</h3><div class="row"><label for="b5-n">Node</label><select id="b5-n"></select><button id="b5-go" type="button" disabled>Unplug it and re-couple</button></div><div id="b5" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2).</p></div></div>
+    <div class="panel"><h3>6 · Change one character of a seed</h3><div class="row"><button id="b6-go" type="button" disabled>Change one character and grow</button></div><div id="b6" role="status" aria-live="polite"><p class="dim">A seed is checked against its signature before a single line of it is read.</p></div></div>
+  </div>
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel"><h3>7 · Breed two nodes</h3><div class="row"><label for="b7-s">Silo</label><select id="b7-s"><option value="telco/account">telco · account</option><option value="telco/services">telco · services</option><option value="shop/analytics">shop · analytics</option><option value="shop/browsing">shop · browsing</option></select><button id="b7-go" type="button" disabled>Grow two parents and breed</button></div><div id="b7" role="status" aria-live="polite"><p class="dim">Two contributors grow a node each on the same silo; their child is born only if it beats both on cases neither grew on.</p></div></div>
+    <div class="panel"><h3>8 · Break a node mid-stream</h3><div class="row"><label for="b8-d">Domain</label><select id="b8-d"><option value="telco">telco</option><option value="shop">shop</option></select><button id="b8-go" type="button" disabled>Break the strongest node half-way</button></div><div id="b8" role="status" aria-live="polite"><p class="dim">Grow the mesh first (box 2). Then the test cases stream in, and half-way the strongest node starts answering noise.</p></div></div>
+  </div>
+</section>
+
+<section id="how" aria-labelledby="how-h">
+  <h2 id="how-h"><span class="n">03</span>How it works</h2>
+  <div class="diagram" role="img" aria-label="Three silos each grow a node from a seed; each node must clear its gate; the live nodes send only scores to the coupling, which answers as one">
+    <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="dg-ah"/></marker></defs>
+      <g><rect class="dg-box" x="20" y="20" width="170" height="64" rx="10"/><text class="dg-t" x="36" y="46">Silo: customer</text><text class="dg-s" x="36" y="68">its own records only</text></g>
+      <g><rect class="dg-box" x="20" y="118" width="170" height="64" rx="10"/><text class="dg-t" x="36" y="144">Silo: services</text><text class="dg-s" x="36" y="166">its own records only</text></g>
+      <g><rect class="dg-box" x="20" y="216" width="170" height="64" rx="10"/><text class="dg-t" x="36" y="242">Silo: account</text><text class="dg-s" x="36" y="264">its own records only</text></g>
+      <g><rect class="dg-box dg-live" x="260" y="20" width="200" height="64" rx="10"/><text class="dg-t" x="276" y="46">Node, grown from a seed</text><text class="dg-m" x="276" y="68">gate: AUC ≥ 0.6 or cut</text></g>
+      <g><rect class="dg-box dg-live" x="260" y="118" width="200" height="64" rx="10"/><text class="dg-t" x="276" y="144">Node, grown from a seed</text><text class="dg-m" x="276" y="166">gate: AUC ≥ 0.6 or cut</text></g>
+      <g><rect class="dg-box dg-live" x="260" y="216" width="200" height="64" rx="10"/><text class="dg-t" x="276" y="242">Node, grown from a seed</text><text class="dg-m" x="276" y="264">gate: AUC ≥ 0.6 or cut</text></g>
+      <path class="dg-a" d="M190 52H258"/><path class="dg-a" d="M190 150H258"/><path class="dg-a" d="M190 248H258"/>
+      <g><rect class="dg-box" x="540" y="104" width="160" height="92" rx="10"/><text class="dg-t" x="556" y="132">Coupling κ</text><text class="dg-s" x="556" y="154">weights learned from</text><text class="dg-s" x="556" y="172">outcomes on GATE</text></g>
+      <path class="dg-a" d="M460 52C500 52 500 130 538 130"/><path class="dg-a" d="M460 150H538"/><path class="dg-a" d="M460 248C500 248 500 170 538 170"/>
+      <text class="dg-m" x="470" y="96">scores, never records</text>
+      <g><rect class="dg-box dg-live" x="760" y="118" width="120" height="64" rx="10"/><text class="dg-t" x="776" y="144">One answer</text><text class="dg-s" x="776" y="166">with every rule</text></g>
+      <path class="dg-a" d="M700 150H758"/>
+    </svg>
+  </div>
+  <ol class="steps">
+    <li><b>A silo stays where it is.</b> Each department’s records stay on its own machine. The data on this page is cut the same way: a telecom company’s 7,043 real customers into customer (4 columns), services (9) and account (7); a web shop’s 12,330 real sessions into browsing (6), analytics (3) and context (7).</li>
+    <li><b>A seed grows a node.</b> The contributor seals a seed for their silo. On their machine, the seed-library ribosome searches for the rules that predict best on part of the silo’s own records and fits every threshold to them. This is a search, not gradient training, and the result is a handful of readable rules.</li>
+    <li><b>The gate decides.</b> The node is scored on the silo’s GATE records, which it never grew on. Under the bar, it is cut and abstains on everything.</li>
+    <li><b>The coupling learns.</b> On the same GATE records, a small logistic regression learns how much each live node’s score is worth. That is the κ-coupling, and it is learned from outcomes, not set by hand.</li>
+    <li><b>The mesh answers.</b> A new case goes only to the live nodes whose silo it carries (routing by fit). Each returns a score, and the coupling weighs them into one answer, with every rule that fired. Records never move.</li>
+  </ol>
+  <h3 id="traced">Traced from a real run</h3>
+  <!-- w:trace --><!-- /w:trace -->
+</section>
+
+<section id="one" aria-labelledby="one-h">
+  <h2 id="one-h"><span class="n">04</span>Organ 1 · One specialist body</h2>
+  <p class="lede">The spec’s first step: does one node, grown from a seed on one department’s records, beat a big generalist on that department’s question?</p>
+  <p>The node is the billing department’s: the telecom company’s 7 account columns. Its seed is <span data-r="1:genome.bytes|n">…</span> bytes and its body is <span data-r="1:grown.rules|n">…</span> rules. Against it, on 300 test customers it never saw, are two contestants that see all 20 columns. One is qwen2.5:14b on this laptop’s processor, shown 24 past customers with their outcomes. The other is a frontier model (Claude Opus 5.5), asked cold with the same examples.</p>
+  <!-- w:verdict1 --><!-- /w:verdict1 -->
+  <div id="r1" role="status" aria-live="polite"></div>
+</section>
+
+<section id="compose" aria-labelledby="compose-h">
+  <h2 id="compose-h"><span class="n">05</span>Organ 2 · The composition proof</h2>
+  <p class="lede">The critical gate. Nothing in the spec scales until this holds: do specialists, each grown on one silo and coupled at κ, compose into more than the sum?</p>
+  <p>In each of two real domains, every silo grows its own node and the live ones are coupled. The composed mesh is then measured on test cases none of them saw, against four kinds of rival. The first is its best single node: the best on the test cases themselves, the strictest rival there is. The second is the shams: random routing, a coupling taught shuffled outcomes, and a mesh grown on shuffled outcomes. The third is the poured monolith: boosted trees and logistic regression on every column, with every record pooled in one place. The fourth is the 14B and the frontier model, on 300 cases each.</p>
+  <!-- w:verdict2 --><!-- /w:verdict2 -->
+  <!-- w:gate --><!-- /w:gate -->
+  <div id="r2" role="status" aria-live="polite"></div>
+</section>
+
+<section id="next" aria-labelledby="next-h">
+  <h2 id="next-h"><span class="n">06</span>What scales next, and only after the gate</h2>
+  <p>The spec’s order is fixed: one body, then the composition proof, then breeding, self-growing, routing that learns, scale, and sovereign spread. Each later organ is sealed only once composition wins all three of the gate’s tests. Until it does, the next organ fixes composition first.</p>
+  <div id="r-next" role="status" aria-live="polite"></div>
+</section>
+
+<section id="fix" aria-labelledby="fix-h">
+  <h2 id="fix-h"><span class="n">06b</span>Organs 2b–2h · Fixing composition, sealed each time</h2>
+  <p class="lede">Taken only if organ 2 found that composition does not net. A node grown on its own finds what predicts best by itself, so a weaker silo can mostly repeat what the strongest already knows. Grown to complement the mesh instead, does it add?</p>
+  <h3>2b · Count no node against its evidence; grow nodes to complement</h3>
+  <!-- w:verdict2b --><!-- /w:verdict2b -->
+  <div id="r2b" role="status" aria-live="polite"></div>
+  <h3>2c · Co-grow the way the mesh couples; offer both nodes</h3>
+  <!-- w:verdict2c --><!-- /w:verdict2c -->
+  <div id="r2c" role="status" aria-live="polite"></div>
+  <h3>2d · A nonlinear coupling</h3>
+  <!-- w:verdict2d --><!-- /w:verdict2d -->
+  <div id="r2d" role="status" aria-live="polite"></div>
+  <h3>2e · The mesh chooses its own coupling</h3>
+  <!-- w:verdict2e --><!-- /w:verdict2e -->
+  <div id="r2e" role="status" aria-live="polite"></div>
+  <h3 id="retake">2f · The gate retaken in full, on fresh cases</h3>
+  <p>Five attempts had been scored on the same telco and shop test cases, and only the first of the gate’s three tests had held. Organ 2f takes all three at once, on two datasets downloaded after organ 2e was judged: 41,188 calls of a Portuguese bank’s marketing campaign and 48,842 people of the 1994 US census, each cut into four departments by what its columns mean. The mechanism was fixed beforehand, on FIT and GATE alone: each department grows a six-rule body and a deeper staged one from its seed and fields the better on GATE, and the mesh chooses its coupling out of fold.</p>
+  <!-- w:verdict2f --><!-- /w:verdict2f -->
+  <div id="r2f" role="status" aria-live="polite"></div>
+  <h3 id="retake2">2g · The gate taken again, its measurement fixed</h3>
+  <p>Organ 2f found two of its own tests flawed. On 300 cases its frontier test could not tell a near tie from a real gap: after the seal, even the pooled models failed it. And its fixed growth step sat beyond any model’s reach on the bank. Organ 2g takes the gate again on two more datasets that no attempt had touched: 69,973 hospital stays (readmission within 30 days) and 30,000 credit-card clients (default next month). The frontier model answers 1,200 cases a domain, and growth must be measurable, beyond the noise. Each department now also grows deeper bodies: rules that cut a coded column between its actual values, and rules that hold two conditions at once (a slice of two columns, where an interaction lives). It fields whichever body proves best on cases it never grew on.</p>
+  <!-- w:verdict2g --><!-- /w:verdict2g -->
+  <div id="r2g" role="status" aria-live="polite"></div>
+  <h3 id="retake3">2h · The gate taken again, the join rule fixed</h3>
+  <p>On the hospital stays in organ 2g, every department was weak on its own and none cleared the fixed bar that every organ had used, so no mesh formed, though the signal was there between them. Organ 2h changes that one rule, sealed before it ran: a department joins when it beats a coin on cases it never grew on beyond the noise, not when it clears a fixed bar alone, and it fields only a body that answers every case. Two more datasets no attempt had touched: 12,684 answers to a driving survey (does the driver accept the coupon offered?) and 59,999 cells of forest in northern Colorado (spruce or fir?). Everything else is 2g’s, test for test: the frontier model on 1,200 cases a domain, growth that must be measurable.</p>
+  <!-- w:verdict2h --><!-- /w:verdict2h -->
+  <div id="r2h" role="status" aria-live="polite"></div>
+</section>
+
+<section id="breed" aria-labelledby="breed-h">
+  <h2 id="breed-h"><span class="n">06c</span>Organ 3 · Breeding</h2>
+  <p class="lede">μ ⋈κ f 𝟙: two nodes of one silo breed a child that carries both lineages, and the child is born only if it beats both parents on cases neither grew on. Does a breeding population grow a better mesh?</p>
+  <!-- w:verdict3 --><!-- /w:verdict3 -->
+  <div id="r3" role="status" aria-live="polite"></div>
+</section>
+
+<section id="grow" aria-labelledby="grow-h">
+  <h2 id="grow-h"><span class="n">06d</span>Organ 4 · Growing by working</h2>
+  <p class="lede">Records arrive over time. At each step every node grows again from everything it has seen. Does the mesh sharpen as it works?</p>
+  <!-- w:verdict4 --><!-- /w:verdict4 -->
+  <div id="r4" role="status" aria-live="polite"></div>
+</section>
+
+<section id="wisp" aria-labelledby="wisp-h">
+  <h2 id="wisp-h"><span class="n">06e</span>Organ 5 · The wisp: routing that learns</h2>
+  <p class="lede">Cases stream in and their outcomes follow. The coupling keeps learning from them: routes that keep paying strengthen, routes that stop paying weaken, and a node that adds nothing is pruned. What happens when a node goes bad?</p>
+  <!-- w:verdict5 --><!-- /w:verdict5 -->
+  <div id="r5" role="status" aria-live="polite"></div>
+</section>
+
+<section id="scale" aria-labelledby="scale-h">
+  <h2 id="scale-h"><span class="n">06f</span>Organ 6 · Scale</h2>
+  <p class="lede">Cut finer, the way a bigger company holds its records: more silos, more nodes, each knowing less on its own. Does the composed answer keep climbing as nodes join?</p>
+  <!-- w:verdict6 --><!-- /w:verdict6 -->
+  <div id="r6" role="status" aria-live="polite"></div>
+</section>
+
+<section id="spread" aria-labelledby="spread-h">
+  <h2 id="spread-h"><span class="n">06g</span>Organ 7 · Sovereign spread</h2>
+  <p class="lede">Each node belongs to the contributor who sealed it. It travels as a card. The mesh keeps a ledger of what each node is worth, a contributor can revoke without touching anyone else, and what crosses is a score.</p>
+  <!-- w:verdict7 --><!-- /w:verdict7 -->
+  <div id="r7" role="status" aria-live="polite"></div>
+</section>
+
+<section id="blueprint" aria-labelledby="bp-h">
+  <h2 id="bp-h"><span class="n">07</span>Blueprint</h2>
+  <div class="tw"><table><thead><tr><th>Part</th><th>File</th><th>What it does</th><th>Gate</th></tr></thead><tbody>
+    <tr><td>Silos</td><td><code>src/silos.mjs</code></td><td>Reads the two real datasets, encodes every column one fixed way, cuts each into its silos, and splits FIT / GATE / TEST (seeded)</td><td>witness, 22 of 22 mutants killed</td></tr>
+    <tr><td>Node</td><td><code>src/node.mjs</code></td><td>Seals a contributor’s grow-seed for one silo, grows it there, cuts it under its bar, reads its scores and advert, routes by fit</td><td>witness, 8 of 8</td></tr>
+    <tr><td>Coupling κ</td><td><code>src/compose.mjs</code></td><td>Learns each node’s weight from GATE outcomes and answers with the weighted sum; the shams it must beat</td><td>witness, 13 of 13</td></tr>
+    <tr><td>Bounds</td><td><code>src/stats.mjs</code></td><td>The paired bootstrap every sealed lead is judged by</td><td>witness, 6 of 6</td></tr>
+    <tr><td>Genome, germination, baselines, breeding, card, gate</td><td><code>vendor/living-seed/</code></td><td>The Living Seed’s kernels, byte-identical to their source (vendor/SOURCES.json)</td><td>gated in living-seed; checked byte for byte here</td></tr>
+    <tr><td>Contest</td><td><code>tools/contest.mjs</code>, <code>ask-llm.mjs</code>, <code>frontier.mjs</code></td><td>Which test cases the models are asked, the examples, the exact prompts, how a reply is read</td><td>pinned by the seals</td></tr>
+    <tr><td>Seal, measure, judge, order</td><td><code>tools/seal-*.mjs</code>, <code>measure-*.mjs</code>, <code>judge-*.mjs</code>, <code>order.mjs</code></td><td>Rules committed first, a deterministic record, the verdict, and git proof that the seal came first</td><td>CI re-derives every record on every push</td></tr>
+    <tr><td>This page</td><td><code>index.html</code>, <code>tools/words.mjs</code></td><td>Runs the kernels in your browser; every number in its prose is written from a record</td><td>page tests; CI refuses a page that drifts from its records</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="business" aria-labelledby="biz-h">
+  <h2 id="biz-h"><span class="n">08</span>For your business</h2>
+  <!-- w:brochure --><!-- /w:brochure -->
+</section>
+
+<section id="paper" aria-labelledby="paper-h">
+  <h2 id="paper-h"><span class="n">09</span>White paper</h2>
+  <!-- w:paper --><!-- /w:paper -->
+</section>
+
+<section id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h"><span class="n">10</span>Questions</h2>
+  <!-- w:faq --><!-- /w:faq -->
+</section>
+
+<footer class="sub">
+  <p>Planned by Kar (the estate’s resident mind, on its own local model: <a href="https://github.com/sjgant80-hub/dex-frontier/blob/main/docs/kar-plan.md">its plan</a>) and Claude, together, for Simon. Powered by the Konomi architecture, created by Thomas Frumkin. Draws on the Guided Entropy Principle (GEP) of Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC (New Caney, Texas), Open Defensive Prior Art (Creative Commons): “NEXUS — Distributed Synthetic Intelligence: Architecture, Ethics, and the GEP-Native Mind,” 2026; “From GEP Stabilization to Dual-Map Ethical Reasoning: A derivation of positive ethical evidence, negative ethical evidence, and non-legal moral reasoning,” Derivation v0.2; “The Laws of Entropy-Time: Rewriting Thermodynamics with the Guided Entropy Principle,” February 2026. Data: IBM’s Telco Customer Churn sample (Apache-2.0), the UCI Online Shoppers Purchasing Intention dataset (Sakar &amp; Kastro, 2018, CC BY 4.0) and the fresh public datasets of organs 2f onward, each credited in <a href="#paper">the white paper’s references</a> (CC BY 4.0). Supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>. <a href="https://github.com/sjgant80-hub/dex-frontier">The repository</a> · MIT — no licence fee.</p>
+</footer>
+</div>
+<script type="module">/*MODULE*/</script>
+</body>
+</html>

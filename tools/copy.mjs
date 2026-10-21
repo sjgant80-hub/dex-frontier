@@ -71,6 +71,18 @@ function rates(R) {
   const lo = all.reduce((a, x) => (x.rate < a.rate ? x : a)), hi = all.reduce((a, x) => (x.rate > a.rate ? x : a));
   return { lo, hi, pct: (x) => (100 * x.rate).toFixed(1) + '%' };
 }
+/** Gary W. Floyd's papers this build draws on (read off the papers; the build is the estate's): each with what it draws */
+export const GARY = [
+  ["“NEXUS — Distributed Synthetic Intelligence: Architecture, Ethics, and the GEP-Native Mind,” 2026", 'intelligence distributed across specialist organs: departments grow their own specialists and compose, records never shared.'],
+  ["“From GEP Stabilization to Dual-Map Ethical Reasoning: A derivation of positive ethical evidence, negative ethical evidence, and non-legal moral reasoning,” Derivation v0.2", 'a stable system can stabilize a wrong reference, so every claim here is sealed and judged on cases nothing touched, and a failed prediction is kept.'],
+  ["“The Laws of Entropy-Time: Rewriting Thermodynamics with the Guided Entropy Principle,” February 2026", 'claims split into properties and predictions, each with the test that could fail it.'],
+];
+/** every fresh dataset, once, as its sources record cites it (data/fresh*-sources.json) */
+export function datasets(base = new URL('../data/', import.meta.url)) {
+  const seen = new Set();
+  return ['fresh-sources.json', 'fresh2-sources.json', 'fresh3-sources.json', 'fresh4-sources.json'].filter((f) => existsSync(new URL(f, base)))
+    .flatMap((f) => JSON.parse(readFileSync(new URL(f, base), 'utf8')).files).filter((x) => x.cite && x.cite !== 'as above' && x.dataset && !seen.has(x.dataset.split(',')[0]) && seen.add(x.dataset.split(',')[0]));
+}
 const tally = (R) => { const v = Object.values(R).flatMap((x) => x.v); return v.filter((x) => x.pass).length + ' of ' + v.length + ' sealed rules held across ' + Object.keys(R).length + ' judged organs'; };
 
 /** the questions, as data: the visible FAQ and the structured data are both made from this one list */
@@ -159,7 +171,9 @@ export function copy(R, h) {
     + '<h3>3 · Results</h3>' + results
     + '<h3>4 · Every organ, sealed before it was measured</h3><div class="tw"><table><thead><tr><th>#</th><th>Organ</th><th>What it had to show</th><th>Sealed rules</th><th>What happened</th></tr></thead><tbody>' + organRows(R).map((o) => '<tr><td>' + o[0] + '</td><td><b>' + esc(o[1]) + '</b></td><td>' + esc(o[2]) + '</td><td>' + esc(o[3]) + '</td><td class="dim">' + esc(o[4]) + '</td></tr>').join('') + '</tbody></table></div>'
     + '<h3>5 · Limitations</h3><ul><li>Two datasets, both tabular; nothing here is a language task.</li><li>The silos are cut from one table per company, so the departments describe the same customers: the vertically partitioned setting, not every federation.</li><li>The coupling needs a held-back slice of outcomes every department can score.</li><li>The language-model comparisons are on 300 cases per domain, and the frontier model saw all 300 at once (an advantage it was given).</li><li>The gate’s first test held on the fifth attempt. Each attempt was sealed before it ran, but all five were scored on the same test cases, so by the fifth those cases were no longer fresh to the line of attempts. A dataset none of them has seen would settle it' + (f2 ? ': organ 2f is that test, on two.' : '.') + '</li><li>No outside adversary has tried to break it.</li></ul>'
-    + '<h3>6 · References</h3><ul><li>Sakar, C. O., & Kastro, Y. (2018). Online Shoppers Purchasing Intention Dataset. UCI Machine Learning Repository, DOI 10.24432/C5F88Q, CC BY 4.0.</li><li>IBM. Telco Customer Churn sample dataset, IBM/telco-customer-churn-on-icp4d, Apache-2.0.</li><li>Wolpert, D. H. (1992). Stacked generalization. Neural Networks 5(2).</li><li>Jacobs, R. A., Jordan, M. I., Nowlan, S. J., & Hinton, G. E. (1991). Adaptive mixtures of local experts. Neural Computation 3(1).</li><li>Friedman, J. H. (2001). Greedy function approximation: a gradient boosting machine. Annals of Statistics 29(5).</li><li>Efron, B., & Tibshirani, R. J. (1993). An Introduction to the Bootstrap. Chapman & Hall.</li><li>Powered by the Konomi architecture, created by Thomas Frumkin.</li></ul></article>';
+    + '<h3>6 · References</h3><ul><li>Sakar, C. O., & Kastro, Y. (2018). Online Shoppers Purchasing Intention Dataset. UCI Machine Learning Repository, DOI 10.24432/C5F88Q, CC BY 4.0.</li><li>IBM. Telco Customer Churn sample dataset, IBM/telco-customer-churn-on-icp4d, Apache-2.0.</li><li>Wolpert, D. H. (1992). Stacked generalization. Neural Networks 5(2).</li><li>Jacobs, R. A., Jordan, M. I., Nowlan, S. J., & Hinton, G. E. (1991). Adaptive mixtures of local experts. Neural Computation 3(1).</li><li>Friedman, J. H. (2001). Greedy function approximation: a gradient boosting machine. Annals of Statistics 29(5).</li><li>Efron, B., & Tibshirani, R. J. (1993). An Introduction to the Bootstrap. Chapman & Hall.</li><li>Powered by the Konomi architecture, created by Thomas Frumkin.</li>'
+    + GARY.map(([paper, drawn]) => '<li>Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC — ' + esc(paper) + '. Open Defensive Prior Art (Creative Commons). This build draws on it: ' + esc(drawn) + '</li>').join('')
+    + datasets().map((d) => '<li>' + esc(d.cite) + '. ' + esc(d.dataset) + ', ' + esc(d.licence) + '.</li>').join('') + '</ul></article>';
   const faq = faqs(R, h).map((x) => '<details><summary>' + esc(x.q) + '</summary><p>' + esc(x.a) + '</p></details>').join('\n  ');
   return { brochure, paper, faq };
 }

@@ -1,0 +1,39 @@
+{
+ "kind": "dex-frontier.fresh4-sources",
+ "why": "test cases none of organs 2 to 2h scored: downloaded 2026-10-21, after organ 2h was judged, with Simon's go-ahead",
+ "files": [
+  {
+   "path": "data/hotel-H1.csv",
+   "sha256": "6f38fda13794fd6cf6547d2432ffb79666200000eb45fd09e4b97fe49519a6ab",
+   "from": "https://ars.els-cdn.com/content/image/1-s2.0-S2352340918315191-mmc2.zip → H1.csv (byte for byte, CRLF kept), the article's supplementary data on the publisher's own server",
+   "zipSha256": "6db57d635b9edec05f1cf9616ba6473e864909e4fc34819fa21cff58d518ee6a",
+   "dataset": "Hotel booking demand datasets, Data in Brief 22 (2019) 41–49, DOI 10.1016/j.dib.2018.11.126",
+   "licence": "CC BY 4.0",
+   "cite": "N. Antonio, A. de Almeida and L. Nunes. Hotel booking demand datasets. Data in Brief 22 (2019) 41–49",
+   "rows": 40060,
+   "note": "H1, a resort hotel. real bookings, anonymised by the authors; identical bookings (a group's rooms, for one) can fall on both sides of the split, for every model alike"
+  },
+  {
+   "path": "data/hotel-H2.csv",
+   "sha256": "5107090ffdc5585a9e18299801e9d85c3b459c235542882183a502a73ef63c4d",
+   "from": "the same zip → H2.csv (byte for byte, CRLF kept)",
+   "zipSha256": "6db57d635b9edec05f1cf9616ba6473e864909e4fc34819fa21cff58d518ee6a",
+   "dataset": "Hotel booking demand datasets, Data in Brief 22 (2019) 41–49, DOI 10.1016/j.dib.2018.11.126",
+   "licence": "CC BY 4.0",
+   "cite": "as above",
+   "rows": 79330,
+   "note": "H2, a city hotel. a stratified seeded sample of 59,999 of the two hotels' 119,390 bookings is used (src/fresh4.mjs HOTEL_SAMPLE), drawn before the split; cancelled = 1"
+  },
+  {
+   "path": "data/OnlineNewsPopularity.csv",
+   "sha256": "b66d9088632308cc27fa35af847650d174a5a50503987c4e511de94a99d1c218",
+   "from": "https://archive.ics.uci.edu/static/public/332/online+news+popularity.zip → OnlineNewsPopularity/OnlineNewsPopularity.csv (byte for byte, CRLF kept)",
+   "zipSha256": "dba2ae526f62ccef6f2f8efb53b0268319f4d0d2719bb98d88958cfe31d58a22",
+   "dataset": "Online News Popularity, UCI Machine Learning Repository, DOI 10.24432/C5NS3V",
+   "licence": "CC BY 4.0",
+   "cite": "K. Fernandes, P. Vinagre and P. Cortez. A Proactive Intelligent Decision Support System for Predicting the Popularity of Online News. EPIA 2015, Lecture Notes in Computer Science 9273 (2015) 535–546",
+   "rows": 39644,
+   "note": "statistics of Mashable articles, not their text; popular = 1,400 shares or more, the dataset paper's threshold; the url and days-since-publication columns are not used. The zip's documentation file is not kept here: it lists its authors' contact addresses"
+  }
+ ]
+}

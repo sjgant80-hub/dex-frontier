@@ -1,0 +1,221 @@
+{
+ "kind": "dex-frontier.diagnose-5",
+ "v": 1,
+ "on": "FIT and GATE only; TEST never read; grown deep bodies",
+ "folds": 4,
+ "trees": {
+  "rounds": 100,
+  "rate": 0.1,
+  "bins": 16,
+  "lambda": 1,
+  "minHess": 1
+ },
+ "maxColumns": 16,
+ "coupon": {
+  "cases": 2219,
+  "alone": {
+   "departments": [
+    {
+     "department": "trip",
+     "fielded": "deep-values",
+     "gateAuc": 0.620086
+    },
+    {
+     "department": "coupon",
+     "fielded": "pairs-values",
+     "gateAuc": 0.675091
+    },
+    {
+     "department": "driver",
+     "fielded": "deep-quantile",
+     "gateAuc": 0.544403
+    },
+    {
+     "department": "habits",
+     "fielded": "pairs-quantile",
+     "gateAuc": 0.610124
+    }
+   ],
+   "mesh": {
+    "linear": 0.724195,
+    "trees": 0.7349
+   }
+  },
+  "relay": {
+   "order": [
+    "coupon",
+    "trip",
+    "habits",
+    "driver"
+   ],
+   "departments": [
+    {
+     "department": "coupon",
+     "took": 0,
+     "fielded": "pairs-values",
+     "gate": {
+      "deep-quantile": 0.607314,
+      "deep-values": 0.66966,
+      "pairs-quantile": 0.674267,
+      "pairs-values": 0.675091
+     },
+     "gateAuc": 0.675091
+    },
+    {
+     "department": "trip",
+     "took": 1,
+     "fielded": "pairs-values",
+     "gate": {
+      "deep-quantile": 0.613199,
+      "deep-values": 0.607582,
+      "pairs-quantile": 0.604945,
+      "pairs-values": 0.619665
+     },
+     "gateAuc": 0.619665
+    },
+    {
+     "department": "habits",
+     "took": 2,
+     "fielded": "deep-quantile",
+     "gate": {
+      "deep-quantile": 0.62795,
+      "deep-values": 0.604556,
+      "pairs-quantile": 0.580649,
+      "pairs-values": 0.564572
+     },
+     "gateAuc": 0.62795
+    },
+    {
+     "department": "driver",
+     "took": 3,
+     "fielded": "deep-values",
+     "gate": {
+      "deep-quantile": 0.53299,
+      "deep-values": 0.563585,
+      "pairs-quantile": 0.509906,
+      "pairs-values": 0.555326
+     },
+     "gateAuc": 0.563585
+    }
+   ],
+   "last": 0.563585,
+   "mesh": {
+    "linear": 0.723493,
+    "trees": 0.735681
+   }
+  }
+ },
+ "cover": {
+  "cases": 10499,
+  "alone": {
+   "departments": [
+    {
+     "department": "terrain",
+     "fielded": "deep-quantile",
+     "gateAuc": 0.816549
+    },
+    {
+     "department": "distances",
+     "fielded": "pairs-quantile",
+     "gateAuc": 0.647245
+    },
+    {
+     "department": "light",
+     "fielded": "deep-quantile",
+     "gateAuc": 0.569753
+    },
+    {
+     "department": "land",
+     "fielded": "deep-quantile",
+     "gateAuc": 0.606062
+    },
+    {
+     "department": "soil",
+     "fielded": "deep-values",
+     "gateAuc": 0.750291
+    }
+   ],
+   "mesh": {
+    "linear": 0.830527,
+    "trees": 0.838586
+   }
+  },
+  "relay": {
+   "order": [
+    "terrain",
+    "soil",
+    "distances",
+    "land",
+    "light"
+   ],
+   "departments": [
+    {
+     "department": "terrain",
+     "took": 0,
+     "fielded": "deep-quantile",
+     "gate": {
+      "deep-quantile": 0.816549,
+      "deep-values": 0.816549,
+      "pairs-quantile": 0.814822,
+      "pairs-values": 0.814822
+     },
+     "gateAuc": 0.816549
+    },
+    {
+     "department": "soil",
+     "took": 0,
+     "fielded": "deep-values",
+     "gate": {
+      "deep-quantile": 0.745848,
+      "deep-values": 0.750291,
+      "pairs-quantile": 0.745753,
+      "pairs-values": 0.748992
+     },
+     "gateAuc": 0.750291
+    },
+    {
+     "department": "distances",
+     "took": 2,
+     "fielded": "pairs-quantile",
+     "gate": {
+      "deep-quantile": 0.806672,
+      "deep-values": 0.806672,
+      "pairs-quantile": 0.809422,
+      "pairs-values": 0.809422
+     },
+     "gateAuc": 0.809422
+    },
+    {
+     "department": "land",
+     "took": 3,
+     "fielded": "pairs-values",
+     "gate": {
+      "deep-quantile": 0.821016,
+      "deep-values": 0.816181,
+      "pairs-quantile": 0.809056,
+      "pairs-values": 0.822459
+     },
+     "gateAuc": 0.822459
+    },
+    {
+     "department": "light",
+     "took": 4,
+     "fielded": "deep-quantile",
+     "gate": {
+      "deep-quantile": 0.79367,
+      "deep-values": 0.79367,
+      "pairs-quantile": 0.776665,
+      "pairs-values": 0.776665
+     },
+     "gateAuc": 0.79367
+    }
+   ],
+   "last": 0.79367,
+   "mesh": {
+    "linear": 0.834314,
+    "trees": 0.840046
+   }
+  }
+ },
+ "testNeverRead": true
+}

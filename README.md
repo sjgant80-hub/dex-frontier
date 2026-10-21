@@ -43,6 +43,10 @@ node tools/order.mjs --organ 2   # prove from git that the seal came before the 
 ```
 
 Planned by Kar (the estate's resident mind, on its own local model: [docs/kar-plan.md](docs/kar-plan.md)) and Claude,
-together, for Simon. Powered by the Konomi architecture, created by Thomas Frumkin. Data: IBM's Telco Customer Churn
-sample (Apache-2.0) and the UCI Online Shoppers Purchasing Intention dataset (CC BY 4.0). See [NOTICE](NOTICE).
+together, for Simon. Powered by the Konomi architecture, created by Thomas Frumkin.
+
+Draws on the Guided Entropy Principle (GEP) of Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC (New Caney, Texas), Open Defensive Prior Art (Creative Commons): “NEXUS — Distributed Synthetic Intelligence: Architecture, Ethics, and the GEP-Native Mind,” 2026; “From GEP Stabilization to Dual-Map Ethical Reasoning: A derivation of positive ethical evidence, negative ethical evidence, and non-legal moral reasoning,” Derivation v0.2; “The Laws of Entropy-Time: Rewriting Thermodynamics with the Guided Entropy Principle,” February 2026.
+
+Data: IBM's Telco Customer Churn sample (Apache-2.0), the UCI Online Shoppers Purchasing Intention dataset (CC BY 4.0) and
+the fresh public datasets of organs 2f onward (CC BY 4.0), each credited in [NOTICE](NOTICE).
 Supplied by [AI Native Solutions](https://www.ai-nativesolutions.com). MIT, no licence fee.

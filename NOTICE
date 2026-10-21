@@ -7,6 +7,13 @@ Claude together, for Simon.
 Powered by the Konomi architecture, created by THOMAS FRUMKIN. The konomi-family tag and the idea of a compressed genome
 grown on a device's own data are his.
 
+Draws on the Guided Entropy Principle (GEP) of Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service
+LLC (New Caney, Texas), Open Defensive Prior Art (Creative Commons). The build is the estate's: it draws on these papers,
+it does not implement them.
+  - Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC — “NEXUS — Distributed Synthetic Intelligence: Architecture, Ethics, and the GEP-Native Mind,” 2026.
+  - Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC — “From GEP Stabilization to Dual-Map Ethical Reasoning: A derivation of positive ethical evidence, negative ethical evidence, and non-legal moral reasoning,” Derivation v0.2.
+  - Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC — “The Laws of Entropy-Time: Rewriting Thermodynamics with the Guided Entropy Principle,” February 2026.
+
 Vendored, byte-identical to their sources (vendor/living-seed mirrors that repository's layout, so its imports are unchanged):
   - vendor/living-seed/src/genome.mjs, germinate.mjs, baseline.mjs, breed.mjs, card.mjs, gate.mjs — the Living Seed's
     genome, germination and gate, its classical baselines, breeding and card (sjgant80-hub/living-seed @ f641429393cc2f26eac3c8b54d364735bbaacabe).
@@ -22,5 +29,14 @@ Data:
   - data/online_shoppers_intention.csv — Online Shoppers Purchasing Intention Dataset, C. Sakar and Y. Kastro, UCI Machine
     Learning Repository (2018), DOI 10.24432/C5F88Q, CC BY 4.0; as living-seed stores it.
   - data/vendor/living-seed/organ-2*/llm-answers.json — living-seed's committed qwen2.5:14b answers, kept for reference.
+Fresh data, downloaded byte for byte after the organ before it was judged (each file's hash in data/fresh*-sources.json):
+  - data/bank-additional-full.csv — Bank Marketing, UCI Machine Learning Repository, DOI 10.24432/C5K306, CC BY 4.0. S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems 62 (2014), doi:10.1016/j.dss.2014.03.001.
+  - data/adult.data, data/adult.test — Adult, UCI Machine Learning Repository, DOI 10.24432/C5XW20, CC BY 4.0. B. Becker and R. Kohavi. Adult. UCI Machine Learning Repository (1996), doi:10.24432/C5XW20.
+  - data/diabetic_data.csv, data/IDS_mapping.csv — Diabetes 130-US Hospitals for Years 1999–2008, UCI Machine Learning Repository, DOI 10.24432/C5230J, CC BY 4.0. B. Strack, J. P. DeShazo, C. Gennings, J. L. Olmo, S. Ventura, K. J. Cios and J. N. Clore. Impact of HbA1c Measurement on Hospital Readmission Rates: Analysis of 70,000 Clinical Database Patient Records. BioMed Research International (2014), doi:10.1155/2014/781670.
+  - data/credit-default.xls, data/credit-default.csv — Default of Credit Card Clients, UCI Machine Learning Repository, DOI 10.24432/C55S3H, CC BY 4.0. I.-C. Yeh and C.-H. Lien. The comparisons of data mining techniques for the predictive accuracy of probability of default of credit card clients. Expert Systems with Applications 36(2) (2009), doi:10.1016/j.eswa.2007.12.020.
+  - data/in-vehicle-coupon-recommendation.csv — In-Vehicle Coupon Recommendation, UCI Machine Learning Repository, DOI 10.24432/C5GS4P, CC BY 4.0. T. Wang, C. Rudin, F. Doshi-Velez, Y. Liu, E. Klampfl and P. MacNeille. A Bayesian Framework for Learning Rule Sets for Interpretable Classification. Journal of Machine Learning Research 18(70) (2017).
+  - data/covtype.data.gz, data/covtype.info — Covertype, UCI Machine Learning Repository, DOI 10.24432/C50K5N, CC BY 4.0. J. A. Blackard and D. J. Dean. Comparative accuracies of artificial neural networks and discriminant analysis in predicting forest cover types from cartographic variables. Computers and Electronics in Agriculture 24(3) (1999) 131–151.
+  - data/hotel-H1.csv, data/hotel-H2.csv — Hotel booking demand datasets, Data in Brief 22 (2019) 41–49, DOI 10.1016/j.dib.2018.11.126, CC BY 4.0. N. Antonio, A. de Almeida and L. Nunes. Hotel booking demand datasets. Data in Brief 22 (2019) 41–49.
+  - data/OnlineNewsPopularity.csv — Online News Popularity, UCI Machine Learning Repository, DOI 10.24432/C5NS3V, CC BY 4.0. K. Fernandes, P. Vinagre and P. Cortez. A Proactive Intelligent Decision Support System for Predicting the Popularity of Online News. EPIA 2015, Lecture Notes in Computer Science 9273 (2015) 535–546.
 
 Supplier: AI Native Solutions (https://www.ai-nativesolutions.com). Support is agreed per deployment.

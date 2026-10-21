@@ -11,3 +11,6 @@ data/diabetic_data.csv -text
 data/in-vehicle-coupon-recommendation.csv -text
 data/covtype.data.gz -text
 data/covtype.info -text
+data/hotel-H1.csv -text
+data/hotel-H2.csv -text
+data/OnlineNewsPopularity.csv -text
