@@ -1,0 +1,570 @@
+{
+ "kind": "dex-frontier.organ-2h.record",
+ "v": 1,
+ "settings": {
+  "join": "beats a coin on GATE beyond the noise: the bound of its lead over 0.5 above 0",
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  },
+  "seed": 1,
+  "bodies": [
+   "six",
+   "deep-quantile",
+   "deep-values",
+   "pairs-quantile",
+   "pairs-values"
+  ],
+  "frontierCases": 1200,
+  "batch": 300
+ },
+ "filesMatchSources": true,
+ "coupon": {
+  "departments": [
+   {
+    "department": "coupon-trip",
+    "columns": 12,
+    "gate": {
+     "six": 0.60533,
+     "deep-quantile": 0.612187,
+     "deep-values": 0.620086,
+     "pairs-quantile": 0.609245,
+     "pairs-values": 0.61913
+    },
+    "stages": {
+     "deep-quantile": 2,
+     "deep-values": 2,
+     "pairs-quantile": 5,
+     "pairs-values": 4
+    },
+    "fielded": "deep-values",
+    "gateAuc": 0.620086,
+    "joinBound": 0.096865,
+    "state": "live"
+   },
+   {
+    "department": "coupon-coupon",
+    "columns": 5,
+    "gate": {
+     "six": 0.672781,
+     "deep-quantile": 0.607314,
+     "deep-values": 0.66966,
+     "pairs-quantile": 0.674267,
+     "pairs-values": 0.675091
+    },
+    "stages": {
+     "deep-quantile": 2,
+     "deep-values": 2,
+     "pairs-quantile": 2,
+     "pairs-values": 1
+    },
+    "fielded": "pairs-values",
+    "gateAuc": 0.675091,
+    "joinBound": 0.154169,
+    "state": "live"
+   },
+   {
+    "department": "coupon-driver",
+    "columns": 11,
+    "gate": {
+     "six": 0.551642,
+     "deep-quantile": 0.544403,
+     "deep-values": 0.538976,
+     "pairs-quantile": 0.540033,
+     "pairs-values": 0.543601
+    },
+    "stages": {
+     "deep-quantile": 1,
+     "deep-values": 1,
+     "pairs-quantile": 2,
+     "pairs-values": 1
+    },
+    "fielded": "deep-quantile",
+    "gateAuc": 0.544403,
+    "joinBound": 0.020687,
+    "state": "live"
+   },
+   {
+    "department": "coupon-habits",
+    "columns": 5,
+    "gate": {
+     "six": 0.60351,
+     "deep-quantile": 0.58065,
+     "deep-values": 0.579798,
+     "pairs-quantile": 0.610124,
+     "pairs-values": 0.595803
+    },
+    "stages": {
+     "deep-quantile": 2,
+     "deep-values": 2,
+     "pairs-quantile": 1,
+     "pairs-values": 1
+    },
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.610124,
+    "joinBound": 0.088527,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "coupon-coupon",
+   "coupon-trip",
+   "coupon-habits",
+   "coupon-driver"
+  ],
+  "chosen": "trees",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.724195
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.7349
+   }
+  ],
+  "cases": 3805,
+  "outcomes": 2163,
+  "composedAuc": 0.729184,
+  "singles": [
+   {
+    "department": "coupon-coupon",
+    "fielded": "pairs-values",
+    "gateAuc": 0.675091,
+    "testAuc": 0.666235
+   },
+   {
+    "department": "coupon-trip",
+    "fielded": "deep-values",
+    "gateAuc": 0.620086,
+    "testAuc": 0.610257
+   },
+   {
+    "department": "coupon-habits",
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.610124,
+    "testAuc": 0.58104
+   },
+   {
+    "department": "coupon-driver",
+    "fielded": "deep-quantile",
+    "gateAuc": 0.544403,
+    "testAuc": 0.545201
+   }
+  ],
+  "best": {
+   "department": "coupon-coupon",
+   "fielded": "pairs-values",
+   "gateAuc": 0.675091,
+   "testAuc": 0.666235
+  },
+  "vsBest": {
+   "a": 0.729184,
+   "b": 0.666235,
+   "lead": 0.062949,
+   "low95": 0.05031
+  },
+  "vsShuffled": {
+   "a": 0.729184,
+   "b": 0.544408,
+   "lead": 0.184776,
+   "low95": 0.161448
+  },
+  "vsRoute": {
+   "a": 0.729184,
+   "b": 0.604605,
+   "lead": 0.124579,
+   "low95": 0.106234
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "coupon-coupon",
+    "chosen": "linear",
+    "testAuc": 0.666235
+   },
+   {
+    "departments": 2,
+    "added": "coupon-trip",
+    "chosen": "trees",
+    "testAuc": 0.701663
+   },
+   {
+    "departments": 3,
+    "added": "coupon-habits",
+    "chosen": "trees",
+    "testAuc": 0.726682
+   },
+   {
+    "departments": 4,
+    "added": "coupon-driver",
+    "chosen": "trees",
+    "testAuc": 0.729184
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.729184,
+   "b": 0.666235,
+   "lead": 0.062949,
+   "low95": 0.05031
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.729184,
+    "b": 0.761845,
+    "lead": -0.032661,
+    "low95": -0.041201
+   },
+   "logistic": {
+    "a": 0.729184,
+    "b": 0.730178,
+    "lead": -0.000994,
+    "low95": -0.009935
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "2920706d5bb27fd7",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "vs": {
+    "a": 0.727605,
+    "b": 0.738086,
+    "lead": -0.010481,
+    "low95": -0.031699
+   },
+   "pooledVs": {
+    "a": 0.75743,
+    "b": 0.738086,
+    "lead": 0.019344,
+    "low95": 0.000658
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ },
+ "cover": {
+  "departments": [
+   {
+    "department": "cover-terrain",
+    "columns": 3,
+    "gate": {
+     "six": 0.798096,
+     "deep-quantile": 0.816549,
+     "deep-values": 0.816549,
+     "pairs-quantile": 0.814822,
+     "pairs-values": 0.814822
+    },
+    "stages": {
+     "deep-quantile": 3,
+     "deep-values": 3,
+     "pairs-quantile": 2,
+     "pairs-values": 2
+    },
+    "fielded": "deep-quantile",
+    "gateAuc": 0.816549,
+    "joinBound": 0.308559,
+    "state": "live"
+   },
+   {
+    "department": "cover-distances",
+    "columns": 4,
+    "gate": {
+     "six": 0.61289,
+     "deep-quantile": 0.628912,
+     "deep-values": 0.628912,
+     "pairs-quantile": 0.647245,
+     "pairs-values": 0.647245
+    },
+    "stages": {
+     "deep-quantile": 8,
+     "deep-values": 8,
+     "pairs-quantile": 8,
+     "pairs-values": 8
+    },
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.647245,
+    "joinBound": 0.136644,
+    "state": "live"
+   },
+   {
+    "department": "cover-light",
+    "columns": 3,
+    "gate": {
+     "six": 0.556157,
+     "deep-quantile": 0.569753,
+     "deep-values": 0.569753,
+     "pairs-quantile": 0.561657,
+     "pairs-values": 0.561657
+    },
+    "stages": {
+     "deep-quantile": 5,
+     "deep-values": 5,
+     "pairs-quantile": 2,
+     "pairs-values": 2
+    },
+    "fielded": "deep-quantile",
+    "gateAuc": 0.569753,
+    "joinBound": 0.058325,
+    "state": "live"
+   },
+   {
+    "department": "cover-land",
+    "columns": 4,
+    "gate": {
+     "six": 0.606062,
+     "deep-quantile": 0.606062,
+     "deep-values": 0.606062,
+     "pairs-quantile": 0.606062,
+     "pairs-values": 0.606062
+    },
+    "stages": {
+     "deep-quantile": 1,
+     "deep-values": 1,
+     "pairs-quantile": 1,
+     "pairs-values": 1
+    },
+    "fielded": "six",
+    "gateAuc": 0.606062,
+    "joinBound": 0.096539,
+    "state": "live"
+   },
+   {
+    "department": "cover-soil",
+    "columns": 16,
+    "gate": {
+     "six": 0.674282,
+     "deep-quantile": 0.745848,
+     "deep-values": 0.750291,
+     "pairs-quantile": 0.745753,
+     "pairs-values": 0.748992
+    },
+    "stages": {
+     "deep-quantile": 7,
+     "deep-values": 5,
+     "pairs-quantile": 8,
+     "pairs-values": 5
+    },
+    "fielded": "deep-values",
+    "gateAuc": 0.750291,
+    "joinBound": 0.241624,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "cover-terrain",
+   "cover-soil",
+   "cover-distances",
+   "cover-land",
+   "cover-light"
+  ],
+  "chosen": "trees",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.830527
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.838586
+   }
+  ],
+  "cases": 17998,
+  "outcomes": 6562,
+  "composedAuc": 0.84032,
+  "singles": [
+   {
+    "department": "cover-terrain",
+    "fielded": "deep-quantile",
+    "gateAuc": 0.816549,
+    "testAuc": 0.814007
+   },
+   {
+    "department": "cover-soil",
+    "fielded": "deep-values",
+    "gateAuc": 0.750291,
+    "testAuc": 0.749943
+   },
+   {
+    "department": "cover-distances",
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.647245,
+    "testAuc": 0.656616
+   },
+   {
+    "department": "cover-land",
+    "fielded": "six",
+    "gateAuc": 0.606062,
+    "testAuc": 0.600428
+   },
+   {
+    "department": "cover-light",
+    "fielded": "deep-quantile",
+    "gateAuc": 0.569753,
+    "testAuc": 0.569811
+   }
+  ],
+  "best": {
+   "department": "cover-terrain",
+   "fielded": "deep-quantile",
+   "gateAuc": 0.816549,
+   "testAuc": 0.814007
+  },
+  "vsBest": {
+   "a": 0.84032,
+   "b": 0.814007,
+   "lead": 0.026313,
+   "low95": 0.023466
+  },
+  "vsShuffled": {
+   "a": 0.84032,
+   "b": 0.532317,
+   "lead": 0.308003,
+   "low95": 0.297781
+  },
+  "vsRoute": {
+   "a": 0.84032,
+   "b": 0.696342,
+   "lead": 0.143977,
+   "low95": 0.136694
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "cover-terrain",
+    "chosen": "linear",
+    "testAuc": 0.814007
+   },
+   {
+    "departments": 2,
+    "added": "cover-soil",
+    "chosen": "linear",
+    "testAuc": 0.8274
+   },
+   {
+    "departments": 3,
+    "added": "cover-distances",
+    "chosen": "trees",
+    "testAuc": 0.834622
+   },
+   {
+    "departments": 4,
+    "added": "cover-land",
+    "chosen": "trees",
+    "testAuc": 0.839075
+   },
+   {
+    "departments": 5,
+    "added": "cover-light",
+    "chosen": "trees",
+    "testAuc": 0.84032
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.84032,
+   "b": 0.814007,
+   "lead": 0.026313,
+   "low95": 0.023466
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.84032,
+    "b": 0.874721,
+    "lead": -0.034401,
+    "low95": -0.037272
+   },
+   "logistic": {
+    "a": 0.84032,
+    "b": 0.841432,
+    "lead": -0.001112,
+    "low95": -0.004268
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "35bd54a996ede790",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "vs": {
+    "a": 0.833616,
+    "b": 0.823006,
+    "lead": 0.010609,
+    "low95": -0.001701
+   },
+   "pooledVs": {
+    "a": 0.868589,
+    "b": 0.823006,
+    "lead": 0.045583,
+    "low95": 0.032806
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ }
+}
