@@ -1,0 +1,39 @@
+{
+ "kind": "dex-frontier.fresh3-sources",
+ "why": "test cases none of organs 2 to 2g scored: downloaded 2026-10-21, after organ 2g was judged, with Simon's go-ahead",
+ "files": [
+  {
+   "path": "data/in-vehicle-coupon-recommendation.csv",
+   "sha256": "d47897367f5a12a31dece0f4e42d7bd9da76d7016b568da511b50335d08dcb43",
+   "from": "https://archive.ics.uci.edu/static/public/603/in+vehicle+coupon+recommendation.zip → in-vehicle-coupon-recommendation.csv (byte for byte, CRLF kept)",
+   "zipSha256": "22fc6bf1a03e28908c3a3ceb2fe0c7cad073ceb541f5fca60dd37e3b0af9fc46",
+   "dataset": "In-Vehicle Coupon Recommendation, UCI Machine Learning Repository, DOI 10.24432/C5GS4P",
+   "licence": "CC BY 4.0",
+   "cite": "T. Wang, C. Rudin, F. Doshi-Velez, Y. Liu, E. Klampfl and P. MacNeille. A Bayesian Framework for Learning Rule Sets for Interpretable Classification. Journal of Machine Learning Research 18(70) (2017)",
+   "rows": 12684,
+   "note": "survey answers (Amazon Mechanical Turk): one respondent answers several scenarios, and the file names no respondent, so a respondent can fall on both sides of the split, for every model alike"
+  },
+  {
+   "path": "data/covtype.data.gz",
+   "sha256": "614360d0257557dd1792834a85a1cdebfadc3c4f30b011d56afee7ffb5b15771",
+   "from": "https://archive.ics.uci.edu/static/public/31/covertype.zip → covtype.data.gz (byte for byte)",
+   "zipSha256": "89a975c2457cd48e824238ae43c5a3cb762e42c4b4078d9b44a4514055105f6d",
+   "dataset": "Covertype, UCI Machine Learning Repository, DOI 10.24432/C50K5N",
+   "licence": "CC BY 4.0",
+   "cite": "J. A. Blackard and D. J. Dean. Comparative accuracies of artificial neural networks and discriminant analysis in predicting forest cover types from cartographic variables. Computers and Electronics in Agriculture 24(3) (1999) 131–151",
+   "rows": 581012,
+   "note": "a stratified seeded sample of 59,999 cells is used (src/fresh3.mjs COVER_SAMPLE), drawn before the split; spruce/fir = 1"
+  },
+  {
+   "path": "data/covtype.info",
+   "sha256": "15f192a8cbebbf26af940301727d1795b8ca92a80dc1cc6b3bdad2af9546bc35",
+   "from": "the same zip → covtype.info (byte for byte)",
+   "zipSha256": "89a975c2457cd48e824238ae43c5a3cb762e42c4b4078d9b44a4514055105f6d",
+   "dataset": "Covertype, UCI Machine Learning Repository, DOI 10.24432/C50K5N",
+   "licence": "CC BY 4.0",
+   "cite": "as above",
+   "lines": 301,
+   "note": "the dataset's own notes: each soil type's USFS land-type code and description, which the departments and the frontier model's prompt read"
+  }
+ ]
+}
