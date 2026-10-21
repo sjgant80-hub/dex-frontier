@@ -1,0 +1,102 @@
+{
+ "kind": "dex-frontier.organ-2g.nobar",
+ "v": 1,
+ "when": "after organ 2g was judged; not sealed",
+ "domain": "hospital",
+ "departments": [
+  {
+   "department": "hospital-discharge",
+   "fielded": "six",
+   "gateAuc": 0.580203,
+   "testAuc": 0.5
+  },
+  {
+   "department": "hospital-clinical",
+   "fielded": "deep-quantile",
+   "gateAuc": 0.572347,
+   "testAuc": 0.562437
+  },
+  {
+   "department": "hospital-history",
+   "fielded": "deep-values",
+   "gateAuc": 0.555762,
+   "testAuc": 0.54932
+  },
+  {
+   "department": "hospital-admissions",
+   "fielded": "pairs-quantile",
+   "gateAuc": 0.542206,
+   "testAuc": 0.550575
+  },
+  {
+   "department": "hospital-pharmacy",
+   "fielded": "pairs-values",
+   "gateAuc": 0.540018,
+   "testAuc": 0.527821
+  }
+ ],
+ "chosen": "linear",
+ "composedAuc": 0.602656,
+ "best": {
+  "department": "hospital-clinical",
+  "fielded": "deep-quantile",
+  "gateAuc": 0.572347,
+  "testAuc": 0.562437
+ },
+ "vsBest": {
+  "a": 0.602656,
+  "b": 0.562437,
+  "lead": 0.040219,
+  "low95": 0.029462
+ },
+ "growth": [
+  {
+   "departments": 1,
+   "added": "hospital-discharge",
+   "chosen": "linear",
+   "testAuc": 0.5
+  },
+  {
+   "departments": 2,
+   "added": "hospital-clinical",
+   "chosen": "linear",
+   "testAuc": 0.562437
+  },
+  {
+   "departments": 3,
+   "added": "hospital-history",
+   "chosen": "linear",
+   "testAuc": 0.590693
+  },
+  {
+   "departments": 4,
+   "added": "hospital-admissions",
+   "chosen": "linear",
+   "testAuc": 0.602337
+  },
+  {
+   "departments": 5,
+   "added": "hospital-pharmacy",
+   "chosen": "linear",
+   "testAuc": 0.602656
+  }
+ ],
+ "fullVsFirst": {
+  "a": 0.602656,
+  "b": 0.5,
+  "lead": 0.102656,
+  "low95": 0.089325
+ },
+ "vsFrontier": {
+  "a": 0.595172,
+  "b": 0.631147,
+  "lead": -0.035975,
+  "low95": -0.064153
+ },
+ "vsPooled": {
+  "a": 0.602656,
+  "b": 0.659198,
+  "lead": -0.056542,
+  "low95": -0.067916
+ }
+}

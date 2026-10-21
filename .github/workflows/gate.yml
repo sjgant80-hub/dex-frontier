@@ -62,6 +62,9 @@ jobs:
       - name: organ 2g, the gate taken again with its measurement fixed (re-derived, re-judged, seal first, once it is measured)
         run: |
           if [ -f data/organ-2g/record.json ]; then node tools/measure-2g.mjs --check && node tools/judge-2g.mjs --check && node tools/order.mjs --organ 2g; elif [ -f data/organ-2g/prereg.json ]; then echo "organ 2g sealed, being measured"; else echo "organ 2g built, not yet sealed"; fi
+      - name: the check made after organ 2g was judged (the hospital with every department kept) is the run itself
+        run: |
+          if [ -f data/organ-2g/nobar.json ]; then node tools/nobar-2g.mjs --check; else echo "no check yet"; fi
       - name: the check made after organ 2f was judged (could any model here pass its frontier test?) is the run itself
         run: |
           if [ -f data/organ-2f/ceiling.json ]; then node tools/ceiling-2f.mjs --check; else echo "no check yet"; fi
