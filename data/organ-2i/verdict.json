@@ -1,0 +1,64 @@
+{
+ "kind": "dex-frontier.organ-2i.verdict",
+ "v": 1,
+ "prereg": "96abd59a09307fde",
+ "record": "e75b94280d2e2a61",
+ "verdicts": [
+  {
+   "id": "R1",
+   "kind": "property",
+   "claim": "the fresh files are the ones downloaded, byte for byte; in both fresh domains each department reads only its own columns and the scores of departments before it in the relay, TEST is never read (scrambling every TEST record leaves every department’s bodies, the body it fields, its join, the relay’s order and what each department was sent, and the mesh’s choice of coupling unchanged), a changed seed is refused before it is read, and the frontier model answered every batch of 300 to its sealed prompt (1,200 cases)",
+   "pass": true,
+   "saw": "files as downloaded: true; hotel: relay guests boosted 0.775179, sales←guests boosted 0.833343, reservations←guests+sales boosted 0.878369, stay←guests+sales+reservations boosted 0.90035 (cut: none), own columns and sent scores only true, TEST never read true, a changed seed refused true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓; news: relay keywords boosted 0.671594, desk←keywords boosted 0.705587, links←keywords+desk boosted 0.717612, topics←keywords+desk+links boosted 0.718581, writing←keywords+desk+links+topics boosted 0.721999, tone←keywords+desk+links+topics+writing boosted 0.722753 (cut: none), own columns and sent scores only true, TEST never read true, a changed seed refused true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓"
+  },
+  {
+   "id": "R2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: in both fresh domains at least two departments join, and the mesh beats its best single department alone on TEST (the best on TEST): bound above 0",
+   "pass": true,
+   "saw": "hotel: the mesh (trees) against its best department alone (hotel-guests): 0.898611 vs 0.774244, lead 0.124368, bound 0.118233; news: the mesh (linear) against its best department alone (news-keywords): 0.733271 vs 0.675707, lead 0.057565, bound 0.050853"
+  },
+  {
+   "id": "R3",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: in both fresh domains, on the 1,200, the mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "pass": true,
+   "saw": "hotel: on the 1,200, the mesh against claude-opus-5-5: 0.90932 vs 0.859241, lead 0.05008, bound 0.035945 against −0.02 (0 unreadable); the pooled model against it: 0.908042 vs 0.859241, lead 0.048802, bound 0.035595; news: on the 1,200, the mesh against claude-opus-5-5: 0.749831 vs 0.701023, lead 0.048808, bound 0.025859 against −0.02 (0 unreadable); the pooled model against it: 0.76485 vs 0.701023, lead 0.063827, bound 0.041991"
+  },
+  {
+   "id": "R4",
+   "kind": "prediction",
+   "claim": "GROWTH MEASURABLY RAISES IT: in both fresh domains, with at least two departments joined, adding them one at a time in relay order (the coupling chosen afresh at each size) never lowers the TEST AUC, and the full mesh beats its first department beyond the noise: bound above 0",
+   "pass": false,
+   "saw": "hotel: 1 0.774244 → 2 0.835626 → 3 0.875935 → 4 0.898611; the full mesh against its first department: 0.898611 vs 0.774244, lead 0.124368, bound 0.118233; news: 1 0.675707 → 2 0.713674 → 3 0.728686 → 4 0.731568 → 5 0.734351 → 6 0.733271; the full mesh against its first department: 0.733271 vs 0.675707, lead 0.057565, bound 0.050853"
+  },
+  {
+   "id": "R5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: in both fresh domains the mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: bound above −0.02",
+   "pass": true,
+   "saw": "hotel: against boosted trees on every column pooled: 0.898611 vs 0.89817, lead 0.000441, bound -0.001342 against −0.02; logistic regression pooled 0.879572; news: against boosted trees on every column pooled: 0.733271 vs 0.736079, lead -0.002808, bound -0.006371 against −0.02; logistic regression pooled 0.69934"
+  },
+  {
+   "id": "R6",
+   "kind": "prediction",
+   "claim": "NOT A SHAM: in both fresh domains the mesh beats a coupling taught shuffled outcomes and random routing (both bounds above 0), and grown on shuffled outcomes no department joins",
+   "pass": true,
+   "saw": "hotel: against a coupling taught shuffled outcomes: 0.898611 vs 0.465426, lead 0.433185, bound 0.423115; against random routing: 0.898611 vs 0.849247, lead 0.049364, bound 0.045531; live on shuffled outcomes: none; news: against a coupling taught shuffled outcomes: 0.733271 vs 0.49582, lead 0.237452, bound 0.224616; against random routing: 0.733271 vs 0.72147, lead 0.011802, bound 0.008333; live on shuffled outcomes: none"
+  },
+  {
+   "id": "R7",
+   "kind": "prediction",
+   "claim": "THE RELAY ADDS: in both fresh domains, with at least two departments joined, the mesh beats the same departments answering alone, one score each, coupled the same way: bound above 0",
+   "pass": true,
+   "saw": "hotel: the relay against organ 2h’s kind of mesh, the same departments alone, one score each (trees): 0.898611 vs 0.889247, lead 0.009364, bound 0.007408; news: the relay against organ 2h’s kind of mesh, the same departments alone, one score each (trees): 0.733271 vs 0.72691, lead 0.006361, bound 0.002678"
+  },
+  {
+   "id": "GATE",
+   "kind": "prediction",
+   "claim": "THE GATE, the spec’s WIN in full: R2, R3 and R4 all hold. Nothing below the gate (organs 3 to 7) is sealed unless it does",
+   "pass": false,
+   "saw": "composition > parts true, approaches the frontier true, growth measurably raises it false"
+  }
+ ]
+}
