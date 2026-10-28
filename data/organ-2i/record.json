@@ -1,0 +1,788 @@
+{
+ "kind": "dex-frontier.organ-2i.record",
+ "v": 1,
+ "settings": {
+  "join": "beats a coin on GATE beyond the noise: the bound of its lead over 0.5 above 0",
+  "relay": "strongest first on GATE; each is sent every stronger department’s score (a rule body reads its own columns first and the senders that fit 16); a FIT case’s score from a body that never grew on it (4 folds)",
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  },
+  "seed": 1,
+  "bodies": [
+   "deep-quantile",
+   "deep-values",
+   "pairs-quantile",
+   "pairs-values",
+   "boosted"
+  ],
+  "frontierCases": 1200,
+  "batch": 300
+ },
+ "filesMatchSources": true,
+ "hotel": {
+  "departments": [
+   {
+    "department": "hotel-reservations",
+    "columns": 8,
+    "gate": {
+     "deep-quantile": 0.707518,
+     "deep-values": 0.707137,
+     "pairs-quantile": 0.698147,
+     "pairs-values": 0.70717,
+     "boosted": 0.725562
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.725562,
+    "joinBound": 0.215828,
+    "state": "live"
+   },
+   {
+    "department": "hotel-guests",
+    "columns": 11,
+    "gate": {
+     "deep-quantile": 0.766899,
+     "deep-values": 0.76593,
+     "pairs-quantile": 0.767731,
+     "pairs-values": 0.769551,
+     "boosted": 0.775179
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.775179,
+    "joinBound": 0.26639,
+    "state": "live"
+   },
+   {
+    "department": "hotel-sales",
+    "columns": 13,
+    "gate": {
+     "deep-quantile": 0.744721,
+     "deep-values": 0.743521,
+     "pairs-quantile": 0.746465,
+     "pairs-values": 0.743239,
+     "boosted": 0.748489
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.748489,
+    "joinBound": 0.23904,
+    "state": "live"
+   },
+   {
+    "department": "hotel-stay",
+    "columns": 7,
+    "gate": {
+     "deep-quantile": 0.679854,
+     "deep-values": 0.68149,
+     "pairs-quantile": 0.690744,
+     "pairs-values": 0.689714,
+     "boosted": 0.707489
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.707489,
+    "joinBound": 0.197199,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "hotel-guests",
+   "hotel-sales",
+   "hotel-reservations",
+   "hotel-stay"
+  ],
+  "relay": [
+   {
+    "department": "hotel-guests",
+    "took": [],
+    "columns": 11,
+    "read": 11,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.766899,
+     "deep-values": 0.76593,
+     "pairs-quantile": 0.767731,
+     "pairs-values": 0.769551,
+     "boosted": 0.775179
+    },
+    "gateAuc": 0.775179,
+    "relayedGateAuc": 0.775179
+   },
+   {
+    "department": "hotel-sales",
+    "took": [
+     "hotel-guests"
+    ],
+    "columns": 14,
+    "read": 14,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.812291,
+     "deep-values": 0.815694,
+     "pairs-quantile": 0.830133,
+     "pairs-values": 0.828807,
+     "boosted": 0.833343
+    },
+    "gateAuc": 0.833343,
+    "relayedGateAuc": 0.833343
+   },
+   {
+    "department": "hotel-reservations",
+    "took": [
+     "hotel-guests",
+     "hotel-sales"
+    ],
+    "columns": 10,
+    "read": 10,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.866463,
+     "deep-values": 0.861041,
+     "pairs-quantile": 0.858939,
+     "pairs-values": 0.862751,
+     "boosted": 0.878369
+    },
+    "gateAuc": 0.878369,
+    "relayedGateAuc": 0.878369
+   },
+   {
+    "department": "hotel-stay",
+    "took": [
+     "hotel-guests",
+     "hotel-sales",
+     "hotel-reservations"
+    ],
+    "columns": 10,
+    "read": 10,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.890134,
+     "deep-values": 0.888956,
+     "pairs-quantile": 0.891933,
+     "pairs-values": 0.892881,
+     "boosted": 0.90035
+    },
+    "gateAuc": 0.90035,
+    "relayedGateAuc": 0.90035
+   }
+  ],
+  "chosen": "trees",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.900386
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.90054
+   }
+  ],
+  "cases": 17999,
+  "outcomes": 6667,
+  "composedAuc": 0.898611,
+  "singles": [
+   {
+    "department": "hotel-guests",
+    "fielded": "boosted",
+    "gateAuc": 0.775179,
+    "testAuc": 0.774244
+   },
+   {
+    "department": "hotel-sales",
+    "fielded": "boosted",
+    "gateAuc": 0.748489,
+    "testAuc": 0.75789
+   },
+   {
+    "department": "hotel-reservations",
+    "fielded": "boosted",
+    "gateAuc": 0.725562,
+    "testAuc": 0.715318
+   },
+   {
+    "department": "hotel-stay",
+    "fielded": "boosted",
+    "gateAuc": 0.707489,
+    "testAuc": 0.710442
+   }
+  ],
+  "best": {
+   "department": "hotel-guests",
+   "fielded": "boosted",
+   "gateAuc": 0.775179,
+   "testAuc": 0.774244
+  },
+  "vsBest": {
+   "a": 0.898611,
+   "b": 0.774244,
+   "lead": 0.124368,
+   "low95": 0.118233
+  },
+  "vsOneScore": {
+   "a": 0.898611,
+   "b": 0.889247,
+   "lead": 0.009364,
+   "low95": 0.007408
+  },
+  "oneScore": {
+   "chosen": "trees",
+   "testAuc": 0.889247
+  },
+  "vsShuffled": {
+   "a": 0.898611,
+   "b": 0.465426,
+   "lead": 0.433185,
+   "low95": 0.423115
+  },
+  "vsRoute": {
+   "a": 0.898611,
+   "b": 0.849247,
+   "lead": 0.049364,
+   "low95": 0.045531
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "hotel-guests",
+    "took": 0,
+    "chosen": "linear",
+    "testAuc": 0.774244
+   },
+   {
+    "departments": 2,
+    "added": "hotel-sales",
+    "took": 1,
+    "chosen": "linear",
+    "testAuc": 0.835626
+   },
+   {
+    "departments": 3,
+    "added": "hotel-reservations",
+    "took": 2,
+    "chosen": "linear",
+    "testAuc": 0.875935
+   },
+   {
+    "departments": 4,
+    "added": "hotel-stay",
+    "took": 3,
+    "chosen": "trees",
+    "testAuc": 0.898611
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.898611,
+   "b": 0.774244,
+   "lead": 0.124368,
+   "low95": 0.118233
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.898611,
+    "b": 0.89817,
+    "lead": 0.000441,
+    "low95": -0.001342
+   },
+   "logistic": {
+    "a": 0.898611,
+    "b": 0.879572,
+    "lead": 0.01904,
+    "low95": 0.016379
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "73402600a1153c77",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "vs": {
+    "a": 0.90932,
+    "b": 0.859241,
+    "lead": 0.05008,
+    "low95": 0.035945
+   },
+   "pooledVs": {
+    "a": 0.908042,
+    "b": 0.859241,
+    "lead": 0.048802,
+    "low95": 0.035595
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ },
+ "news": {
+  "departments": [
+   {
+    "department": "news-writing",
+    "columns": 8,
+    "gate": {
+     "deep-quantile": 0.563594,
+     "deep-values": 0.563594,
+     "pairs-quantile": 0.565266,
+     "pairs-values": 0.565266,
+     "boosted": 0.598375
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.598375,
+    "joinBound": 0.085162,
+    "state": "live"
+   },
+   {
+    "department": "news-links",
+    "columns": 5,
+    "gate": {
+     "deep-quantile": 0.620522,
+     "deep-values": 0.620522,
+     "pairs-quantile": 0.622907,
+     "pairs-values": 0.622907,
+     "boosted": 0.637543
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.637543,
+    "joinBound": 0.124362,
+    "state": "live"
+   },
+   {
+    "department": "news-keywords",
+    "columns": 10,
+    "gate": {
+     "deep-quantile": 0.644698,
+     "deep-values": 0.638441,
+     "pairs-quantile": 0.638874,
+     "pairs-values": 0.627293,
+     "boosted": 0.671594
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.671594,
+    "joinBound": 0.158181,
+    "state": "live"
+   },
+   {
+    "department": "news-desk",
+    "columns": 7,
+    "gate": {
+     "deep-quantile": 0.649075,
+     "deep-values": 0.64638,
+     "pairs-quantile": 0.645755,
+     "pairs-values": 0.648044,
+     "boosted": 0.652577
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.652577,
+    "joinBound": 0.140324,
+    "state": "live"
+   },
+   {
+    "department": "news-topics",
+    "columns": 9,
+    "gate": {
+     "deep-quantile": 0.612915,
+     "deep-values": 0.612915,
+     "pairs-quantile": 0.61062,
+     "pairs-values": 0.61062,
+     "boosted": 0.634247
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.634247,
+    "joinBound": 0.121983,
+    "state": "live"
+   },
+   {
+    "department": "news-tone",
+    "columns": 12,
+    "gate": {
+     "deep-quantile": 0.557608,
+     "deep-values": 0.557608,
+     "pairs-quantile": 0.560702,
+     "pairs-values": 0.560702,
+     "boosted": 0.594284
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.594284,
+    "joinBound": 0.080113,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "news-keywords",
+   "news-desk",
+   "news-links",
+   "news-topics",
+   "news-writing",
+   "news-tone"
+  ],
+  "relay": [
+   {
+    "department": "news-keywords",
+    "took": [],
+    "columns": 10,
+    "read": 10,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.644698,
+     "deep-values": 0.638441,
+     "pairs-quantile": 0.638874,
+     "pairs-values": 0.627293,
+     "boosted": 0.671594
+    },
+    "gateAuc": 0.671594,
+    "relayedGateAuc": 0.671594
+   },
+   {
+    "department": "news-desk",
+    "took": [
+     "news-keywords"
+    ],
+    "columns": 8,
+    "read": 8,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.694472,
+     "deep-values": 0.697703,
+     "pairs-quantile": 0.693983,
+     "pairs-values": 0.676183,
+     "boosted": 0.705587
+    },
+    "gateAuc": 0.705587,
+    "relayedGateAuc": 0.705587
+   },
+   {
+    "department": "news-links",
+    "took": [
+     "news-keywords",
+     "news-desk"
+    ],
+    "columns": 7,
+    "read": 7,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.710611,
+     "deep-values": 0.710611,
+     "pairs-quantile": 0.706307,
+     "pairs-values": 0.706307,
+     "boosted": 0.717612
+    },
+    "gateAuc": 0.717612,
+    "relayedGateAuc": 0.717612
+   },
+   {
+    "department": "news-topics",
+    "took": [
+     "news-keywords",
+     "news-desk",
+     "news-links"
+    ],
+    "columns": 12,
+    "read": 12,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.706249,
+     "deep-values": 0.706249,
+     "pairs-quantile": 0.710521,
+     "pairs-values": 0.710521,
+     "boosted": 0.718581
+    },
+    "gateAuc": 0.718581,
+    "relayedGateAuc": 0.718581
+   },
+   {
+    "department": "news-writing",
+    "took": [
+     "news-keywords",
+     "news-desk",
+     "news-links",
+     "news-topics"
+    ],
+    "columns": 12,
+    "read": 12,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.717681,
+     "deep-values": 0.717681,
+     "pairs-quantile": 0.711488,
+     "pairs-values": 0.711488,
+     "boosted": 0.721999
+    },
+    "gateAuc": 0.721999,
+    "relayedGateAuc": 0.721999
+   },
+   {
+    "department": "news-tone",
+    "took": [
+     "news-keywords",
+     "news-desk",
+     "news-links",
+     "news-topics",
+     "news-writing"
+    ],
+    "columns": 17,
+    "read": 17,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gate": {
+     "deep-quantile": 0.712712,
+     "deep-values": 0.712712,
+     "pairs-quantile": 0.713775,
+     "pairs-values": 0.713775,
+     "boosted": 0.722753
+    },
+    "gateAuc": 0.722753,
+    "relayedGateAuc": 0.722753
+   }
+  ],
+  "chosen": "linear",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.722137
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.719767
+   }
+  ],
+  "cases": 11893,
+  "outcomes": 6346,
+  "composedAuc": 0.733271,
+  "singles": [
+   {
+    "department": "news-keywords",
+    "fielded": "boosted",
+    "gateAuc": 0.671594,
+    "testAuc": 0.675707
+   },
+   {
+    "department": "news-desk",
+    "fielded": "boosted",
+    "gateAuc": 0.652577,
+    "testAuc": 0.665379
+   },
+   {
+    "department": "news-links",
+    "fielded": "boosted",
+    "gateAuc": 0.637543,
+    "testAuc": 0.645827
+   },
+   {
+    "department": "news-topics",
+    "fielded": "boosted",
+    "gateAuc": 0.634247,
+    "testAuc": 0.638532
+   },
+   {
+    "department": "news-writing",
+    "fielded": "boosted",
+    "gateAuc": 0.598375,
+    "testAuc": 0.608416
+   },
+   {
+    "department": "news-tone",
+    "fielded": "boosted",
+    "gateAuc": 0.594284,
+    "testAuc": 0.594459
+   }
+  ],
+  "best": {
+   "department": "news-keywords",
+   "fielded": "boosted",
+   "gateAuc": 0.671594,
+   "testAuc": 0.675707
+  },
+  "vsBest": {
+   "a": 0.733271,
+   "b": 0.675707,
+   "lead": 0.057565,
+   "low95": 0.050853
+  },
+  "vsOneScore": {
+   "a": 0.733271,
+   "b": 0.72691,
+   "lead": 0.006361,
+   "low95": 0.002678
+  },
+  "oneScore": {
+   "chosen": "trees",
+   "testAuc": 0.72691
+  },
+  "vsShuffled": {
+   "a": 0.733271,
+   "b": 0.49582,
+   "lead": 0.237452,
+   "low95": 0.224616
+  },
+  "vsRoute": {
+   "a": 0.733271,
+   "b": 0.72147,
+   "lead": 0.011802,
+   "low95": 0.008333
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "news-keywords",
+    "took": 0,
+    "chosen": "linear",
+    "testAuc": 0.675707
+   },
+   {
+    "departments": 2,
+    "added": "news-desk",
+    "took": 1,
+    "chosen": "linear",
+    "testAuc": 0.713674
+   },
+   {
+    "departments": 3,
+    "added": "news-links",
+    "took": 2,
+    "chosen": "linear",
+    "testAuc": 0.728686
+   },
+   {
+    "departments": 4,
+    "added": "news-topics",
+    "took": 3,
+    "chosen": "linear",
+    "testAuc": 0.731568
+   },
+   {
+    "departments": 5,
+    "added": "news-writing",
+    "took": 4,
+    "chosen": "linear",
+    "testAuc": 0.734351
+   },
+   {
+    "departments": 6,
+    "added": "news-tone",
+    "took": 5,
+    "chosen": "linear",
+    "testAuc": 0.733271
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.733271,
+   "b": 0.675707,
+   "lead": 0.057565,
+   "low95": 0.050853
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.733271,
+    "b": 0.736079,
+    "lead": -0.002808,
+    "low95": -0.006371
+   },
+   "logistic": {
+    "a": 0.733271,
+    "b": 0.69934,
+    "lead": 0.033931,
+    "low95": 0.027835
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "3aa259f03d5008e5",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "vs": {
+    "a": 0.749831,
+    "b": 0.701023,
+    "lead": 0.048808,
+    "low95": 0.025859
+   },
+   "pooledVs": {
+    "a": 0.76485,
+    "b": 0.701023,
+    "lead": 0.063827,
+    "low95": 0.041991
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ }
+}
