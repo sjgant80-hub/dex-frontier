@@ -43,10 +43,11 @@
   <dl class="gloss">
     <div><dt>Silo, department</dt> <dd>— the records one department keeps, and only those.</dd></div>
     <div><dt>Seed</dt> <dd>— a signed recipe of a few hundred bytes: which silo, and how hard to search. It carries no trained weights.</dd></div>
-    <div><dt>Node</dt> <dd>— what a seed grows on one silo’s records: a handful of readable rules, each a column, a cut and a weight.</dd></div>
+    <div><dt>Node</dt> <dd>— what a seed grows on one silo’s records: a handful of readable rules, each a column, a cut and a weight (from organ 2i, a few hundred two-level trees instead, where they do better on held-back cases).</dd></div>
     <div><dt>Bar, join</dt> <dd>— what a node must show on past cases it never trained on before it may answer at all. Up to organ 2g, a fixed score of 0.6; from organ 2h, beating a coin beyond the noise.</dd></div>
     <div><dt>Cut</dt> <dd>— a node that did not clear its bar. It answers nothing.</dd></div>
     <div><dt>The gate</dt> <dd>— the spec’s three tests, all of which must hold before anything scales: the mesh beats any single specialist, it comes close to a frontier model, and adding a specialist measurably raises it.</dd></div>
+    <div><dt>Relay</dt> <dd>— departments growing in turn, strongest first, each on its own columns and the scores the stronger ones send it, so a pattern across two departments can be learned while only scores cross (organ 2i).</dd></div>
     <div><dt>Mesh</dt> <dd>— the live nodes answering together, their scores weighed by the coupling.</dd></div>
     <div><dt>Coupling (κ)</dt> <dd>— how much each node’s word is worth, learned from outcomes on cases no node trained on.</dd></div>
     <div><dt>Composed</dt> <dd>— the mesh’s one answer: the nodes’ scores, weighed by the coupling.</dd></div>
@@ -118,7 +119,7 @@
   </div>
   <ol class="steps">
     <li><b>A silo stays where it is.</b> Each department’s records stay on its own machine. The data on this page is cut the same way: a telecom company’s 7,043 real customers into customer (4 columns), services (9) and account (7); a web shop’s 12,330 real sessions into browsing (6), analytics (3) and context (7).</li>
-    <li><b>A seed grows a node.</b> The contributor seals a seed for their silo. On their machine, the seed-library ribosome searches for the rules that predict best on part of the silo’s own records and fits every threshold to them. This is a search, not gradient training, and the result is a handful of readable rules.</li>
+    <li><b>A seed grows a node.</b> The contributor seals a seed for their silo. On their machine, the seed-library ribosome searches for the rules that predict best on part of the silo’s own records and fits every threshold to them. This is a search, not gradient training, and the result is a handful of readable rules. From organ 2i a department may instead field depth-2 boosted trees grown on the same records, when they do better on cases it never grew on: the same learner the pooled rival uses, so the comparison with every record pooled is like for like.</li>
     <li><b>The gate decides.</b> The node is scored on the silo’s GATE records, which it never grew on. Under the bar, it is cut and abstains on everything.</li>
     <li><b>The coupling learns.</b> On the same GATE records, a small logistic regression learns how much each live node’s score is worth. That is the κ-coupling, and it is learned from outcomes, not set by hand.</li>
     <li><b>The mesh answers.</b> A new case goes only to the live nodes whose silo it carries (routing by fit). Each returns a score, and the coupling weighs them into one answer, with every rule that fired. Records never move.</li>
@@ -151,7 +152,7 @@
 </section>
 
 <section id="fix" aria-labelledby="fix-h">
-  <h2 id="fix-h"><span class="n">06b</span>Organs 2b–2h · Fixing composition, sealed each time</h2>
+  <h2 id="fix-h"><span class="n">06b</span>Organs 2b–2i · Fixing composition, sealed each time</h2>
   <p class="lede">Taken only if organ 2 found that composition does not net. A node grown on its own finds what predicts best by itself, so a weaker silo can mostly repeat what the strongest already knows. Grown to complement the mesh instead, does it add?</p>
   <h3>2b · Count no node against its evidence; grow nodes to complement</h3>
   <!-- w:verdict2b --><!-- /w:verdict2b -->
@@ -177,6 +178,10 @@
   <p>On the hospital stays in organ 2g, every department was weak on its own and none cleared the fixed bar that every organ had used, so no mesh formed, though the signal was there between them. Organ 2h changes that one rule, sealed before it ran: a department joins when it beats a coin on cases it never grew on beyond the noise, not when it clears a fixed bar alone, and it fields only a body that answers every case. Two more datasets no attempt had touched: 12,684 answers to a driving survey (does the driver accept the coupon offered?) and 59,999 cells of forest in northern Colorado (spruce or fir?). Everything else is 2g’s, test for test: the frontier model on 1,200 cases a domain, growth that must be measurable.</p>
   <!-- w:verdict2h --><!-- /w:verdict2h -->
   <div id="r2h" role="status" aria-live="polite"></div>
+  <h3 id="retake4">2i · The gate taken again, with a relay</h3>
+  <p>In organ 2h the mesh beat its parts and grew in both domains, yet it trailed every record pooled in one place by about three hundredths, and on the coupon offers it trailed the frontier model. A check on held-back cases alone found why: one score per department cannot carry a pattern that needs one department’s columns crossed with another’s, such as the coupon offered crossed with the driver’s habits. Organ 2i, sealed before it ran, lets the departments <b>relay</b>: they grow in turn, strongest first, each on its own columns and on the scores the stronger ones send it, so that pattern can be learned while still nothing but a score crosses. A body of threshold rules keeps only a coarse step of a score it is sent, so a department may now also field boosted trees grown on its own records, the same learner the pooled rival uses. Two more datasets no attempt had touched: 59,999 hotel bookings (was it cancelled?) and 39,644 news articles (was it shared 1,400 times or more?). The frontier model on 1,200 cases a domain, growth that must be measurable, and one more test: the relay must beat the same departments answering alone.</p>
+  <!-- w:verdict2i --><!-- /w:verdict2i -->
+  <div id="r2i" role="status" aria-live="polite"></div>
 </section>
 
 <section id="breed" aria-labelledby="breed-h">

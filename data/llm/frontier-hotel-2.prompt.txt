@@ -1,0 +1,357 @@
+You are predicting whether a hotel booking is cancelled. The data are real bookings at two hotels in Portugal, a resort hotel and a city hotel, with arrivals from July 2015 to August 2017 (the hotel booking demand datasets of Antonio, Almeida and Nunes, 2019). Each booking is one line of values, in this order:
+1. Hotel: which hotel (Resort or City)
+2. LeadTime: days between booking and arrival
+3. ArrivalDateYear: arrival year
+4. ArrivalDateMonth: arrival month
+5. ArrivalDateWeekNumber: arrival week of the year
+6. ArrivalDateDayOfMonth: arrival day of the month
+7. StaysInWeekendNights: weekend nights booked
+8. StaysInWeekNights: week nights booked
+9. Adults: adults
+10. Children: children (NA = not recorded)
+11. Babies: babies
+12. Meal: meal plan (BB bed and breakfast, HB half board, FB full board, SC or Undefined no meals)
+13. Country: country of origin (ISO code; NULL = not recorded)
+14. MarketSegment: market segment (TA travel agent, TO tour operator)
+15. DistributionChannel: distribution channel
+16. IsRepeatedGuest: 1 = has stayed before
+17. PreviousCancellations: earlier bookings this guest cancelled
+18. PreviousBookingsNotCanceled: earlier bookings this guest kept
+19. ReservedRoomType: room type reserved (a code)
+20. DepositType: deposit
+21. Agent: booking agent (an anonymised id; NULL = none)
+22. Company: company paying (an anonymised id; NULL = none)
+23. DaysInWaitingList: days on the waiting list before confirmation
+24. CustomerType: customer type
+25. ADR: average daily rate (euros)
+26. TotalOfSpecialRequests: special requests made
+
+Here are 24 past cases and what happened:
+Resort, 191, 2016, July, 29, 15, 4, 8, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 142.88, 2 -> cancelled
+Resort, 2, 2016, June, 26, 25, 1, 1, 1, 0, 0, BB, AGO, Direct, Direct, 0, 0, 0, C, No Deposit, NULL, NULL, 0, Transient, 165, 0 -> not cancelled
+Resort, 78, 2015, July, 27, 4, 2, 5, 2, 0, 1, HB, PRT, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 139, 2 -> not cancelled
+City, 145, 2016, July, 28, 5, 0, 0, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 28, NULL, 0, Transient-Party, 0, 1 -> not cancelled
+Resort, 12, 2017, February, 8, 25, 2, 1, 1, 0, 0, HB, FRA, Direct, Direct, 0, 0, 0, A, No Deposit, 250, NULL, 0, Transient, 62.8, 1 -> cancelled
+Resort, 211, 2016, July, 28, 5, 0, 3, 2, 1, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 135, 3 -> cancelled
+City, 40, 2015, August, 33, 15, 2, 2, 2, 0, 0, BB, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 62, 0 -> not cancelled
+City, 98, 2015, November, 48, 23, 1, 3, 2, 0, 0, BB, JOR, Groups, TA/TO, 0, 0, 0, A, No Deposit, 37, NULL, 0, Transient-Party, 75, 0 -> not cancelled
+City, 24, 2017, May, 20, 15, 1, 1, 2, 0, 0, BB, CHN, Online TA, TA/TO, 0, 0, 0, F, No Deposit, 9, NULL, 0, Transient, 207, 0 -> cancelled
+Resort, 97, 2015, September, 36, 1, 2, 6, 2, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, E, No Deposit, 250, NULL, 0, Transient, 136, 0 -> cancelled
+City, 70, 2017, February, 7, 16, 0, 3, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 95.4, 2 -> cancelled
+Resort, 244, 2015, September, 36, 2, 2, 5, 2, 0, 0, BB, IRL, Groups, TA/TO, 0, 1, 0, A, No Deposit, 96, NULL, 0, Transient-Party, 8, 0 -> cancelled
+Resort, 3, 2016, September, 36, 1, 0, 1, 3, 0, 0, BB, ESP, Direct, TA/TO, 0, 0, 0, G, No Deposit, NULL, NULL, 0, Transient, 231, 2 -> not cancelled
+City, 31, 2017, February, 5, 2, 2, 4, 2, 0, 0, HB, ITA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 122.4, 3 -> cancelled
+City, 218, 2017, January, 1, 4, 2, 7, 2, 0, 0, SC, BRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 74.8, 1 -> cancelled
+City, 239, 2016, October, 44, 28, 0, 2, 3, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient-Party, 128.7, 1 -> not cancelled
+Resort, 58, 2015, August, 34, 16, 2, 4, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 183, 0 -> not cancelled
+City, 26, 2015, September, 36, 5, 1, 1, 1, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Contract, 95, 2 -> not cancelled
+Resort, 0, 2017, January, 4, 24, 0, 1, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 48, 1 -> not cancelled
+City, 132, 2015, July, 30, 23, 1, 3, 2, 0, 0, HB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 85, 0 -> cancelled
+City, 27, 2017, June, 24, 12, 1, 2, 1, 0, 0, BB, SWE, Direct, Direct, 1, 1, 1, A, No Deposit, NULL, NULL, 0, Transient, 95, 0 -> not cancelled
+City, 76, 2017, March, 12, 20, 1, 4, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 100.3, 2 -> cancelled
+Resort, 33, 2015, November, 45, 1, 1, 0, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, NULL, 94, 0, Transient, 25, 0 -> cancelled
+City, 164, 2015, October, 40, 2, 0, 2, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 19, NULL, 0, Transient-Party, 100, 0 -> not cancelled
+
+Now 300 new cases. For each, give the probability from 0 to 100 that the answer is cancelled.
+1. City, 194, 2016, July, 28, 9, 2, 1, 2, 0, 0, BB, SWE, Online TA, TA/TO, 0, 0, 0, B, No Deposit, 7, NULL, 0, Transient, 76.85, 1
+2. Resort, 99, 2016, August, 36, 30, 0, 4, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 151, 2
+3. City, 33, 2015, October, 43, 21, 0, 4, 1, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 1, 0, A, No Deposit, 6, NULL, 0, Transient, 17.6, 1
+4. City, 137, 2016, January, 5, 27, 0, 2, 1, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, Non Refund, 29, NULL, 45, Transient, 70, 0
+5. Resort, 3, 2016, December, 50, 7, 0, 1, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 65, 2
+6. City, 86, 2017, April, 15, 9, 2, 1, 3, 0, 0, BB, AUT, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 163.8, 0
+7. Resort, 8, 2015, September, 37, 9, 0, 1, 3, 0, 0, BB, PRT, Direct, Direct, 1, 0, 1, G, No Deposit, NULL, NULL, 0, Transient, 153, 2
+8. City, 147, 2017, April, 16, 18, 0, 3, 2, 0, 0, SC, DEU, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 15, NULL, 0, Transient, 79.2, 0
+9. Resort, 83, 2015, August, 36, 30, 2, 4, 2, 0, 0, BB, ROU, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 240, NULL, 0, Transient, 112.33, 1
+10. City, 88, 2016, October, 41, 8, 2, 2, 2, 0, 0, BB, IRL, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 132.3, 3
+11. City, 15, 2017, March, 10, 7, 0, 1, 1, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 106.2, 0
+12. Resort, 47, 2016, October, 43, 18, 0, 1, 2, 0, 0, HB, RUS, Groups, TA/TO, 0, 0, 0, A, No Deposit, 368, NULL, 0, Transient-Party, 72, 0
+13. City, 63, 2015, October, 41, 10, 1, 1, 2, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 89.25, 1
+14. City, 0, 2016, February, 7, 13, 0, 1, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 106, 0
+15. Resort, 65, 2017, April, 15, 10, 1, 5, 3, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 314, NULL, 0, Transient, 103.68, 0
+16. Resort, 25, 2017, April, 14, 3, 1, 3, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 241, NULL, 0, Transient, 77, 2
+17. City, 275, 2016, April, 17, 17, 2, 0, 2, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 12, NULL, 0, Transient, 110, 0
+18. City, 175, 2017, May, 20, 19, 1, 2, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 12, NULL, 0, Transient, 110, 0
+19. City, 4, 2016, November, 47, 19, 1, 1, 2, 0, 0, SC, RUS, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 91.5, 2
+20. Resort, 43, 2016, December, 50, 8, 2, 3, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 241, NULL, 0, Transient, 34.86, 2
+21. City, 123, 2017, June, 24, 17, 2, 1, 2, 0, 0, BB, CHN, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient-Party, 105.3, 1
+22. City, 154, 2017, April, 16, 17, 1, 3, 2, 1, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 134.5, 0
+23. City, 176, 2016, September, 37, 8, 0, 0, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 171, NULL, 0, Transient-Party, 0, 0
+24. Resort, 44, 2016, February, 10, 28, 2, 5, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, E, No Deposit, 115, NULL, 0, Transient, 42.5, 0
+25. City, 293, 2015, August, 32, 6, 0, 2, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, Non Refund, 1, NULL, 0, Contract, 62, 0
+26. Resort, 19, 2016, November, 45, 4, 3, 7, 2, 0, 0, HB, GBR, Direct, Direct, 0, 0, 0, E, No Deposit, 250, NULL, 0, Transient, 89.77, 0
+27. Resort, 3, 2016, January, 4, 18, 1, 4, 2, 0, 0, BB, GBR, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 314, NULL, 0, Transient, 29, 0
+28. Resort, 137, 2017, July, 29, 16, 2, 1, 2, 1, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 241, NULL, 0, Transient, 172, 1
+29. Resort, 21, 2015, October, 41, 7, 0, 2, 1, 0, 0, BB, IRL, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 47, 1
+30. City, 407, 2017, May, 18, 6, 2, 1, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 229, NULL, 0, Transient, 90, 0
+31. City, 1, 2016, April, 16, 14, 0, 2, 1, 0, 0, BB, AUT, Aviation, Corporate, 0, 0, 0, A, No Deposit, NULL, 153, 0, Transient, 95, 0
+32. Resort, 13, 2015, July, 29, 17, 1, 2, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 126.3, 2
+33. City, 0, 2016, February, 9, 26, 0, 1, 2, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 89, 0
+34. City, 170, 2015, October, 41, 9, 2, 2, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 10, NULL, 0, Transient, 119, 0
+35. Resort, 28, 2016, November, 45, 2, 1, 4, 1, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 242, NULL, 0, Transient, 33.3, 1
+36. City, 86, 2015, September, 39, 24, 0, 2, 2, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 12, NULL, 0, Transient-Party, 105, 0
+37. City, 223, 2017, June, 24, 15, 0, 3, 3, 0, 0, BB, ITA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 166.5, 1
+38. City, 0, 2016, February, 9, 27, 0, 1, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 134, NULL, 0, Transient-Party, 60, 0
+39. City, 117, 2016, October, 44, 28, 2, 2, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 104.4, 2
+40. Resort, 3, 2015, July, 31, 30, 0, 2, 2, 0, 0, BB, CHN, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 153, 3
+41. City, 2, 2015, September, 37, 10, 0, 1, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, 69, NULL, 0, Transient, 0, 1
+42. Resort, 39, 2017, July, 31, 31, 1, 3, 1, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 135, 0
+43. Resort, 6, 2016, May, 22, 23, 1, 0, 1, 0, 0, BB, PRT, Corporate, Direct, 1, 0, 4, A, No Deposit, NULL, 399, 0, Transient, 63, 1
+44. City, 124, 2016, August, 33, 8, 1, 4, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 114.3, 0
+45. City, 0, 2016, February, 7, 7, 1, 0, 2, 0, 0, SC, FRA, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 79, 0
+46. Resort, 34, 2016, March, 14, 27, 2, 4, 2, 2, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 240, NULL, 0, Transient, 95.5, 1
+47. City, 12, 2017, June, 23, 5, 1, 2, 1, 0, 0, BB, FRA, Corporate, Corporate, 1, 1, 1, E, No Deposit, NULL, 450, 0, Transient, 125, 0
+48. City, 27, 2016, January, 4, 18, 5, 10, 1, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 76.72, 0
+49. City, 119, 2017, January, 1, 2, 1, 5, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 96.9, 2
+50. City, 78, 2016, September, 37, 5, 2, 5, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 149.4, 3
+51. Resort, 14, 2015, November, 45, 3, 0, 3, 2, 0, 0, HB, BEL, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 78, 1
+52. City, 70, 2017, March, 11, 17, 1, 2, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 106.2, 0
+53. City, 96, 2016, August, 34, 14, 2, 2, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 120.15, 1
+54. City, 12, 2016, April, 16, 15, 0, 2, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 127, 1
+55. City, 169, 2017, June, 23, 8, 0, 3, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 19, NULL, 0, Transient, 170, 0
+56. City, 7, 2015, September, 39, 21, 1, 4, 2, 0, 0, BB, ISR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Contract, 143.2, 2
+57. City, 91, 2016, September, 38, 14, 0, 2, 1, 0, 0, BB, PRT, Corporate, Corporate, 1, 1, 9, A, No Deposit, NULL, 40, 0, Transient, 65, 0
+58. City, 0, 2016, June, 24, 11, 1, 1, 2, 0, 0, BB, SWE, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 108.57, 0
+59. City, 167, 2017, May, 20, 17, 0, 3, 2, 0, 0, HB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 177, 0
+60. City, 261, 2017, February, 8, 23, 0, 3, 3, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 88.01, 1
+61. City, 41, 2016, October, 41, 3, 1, 2, 1, 0, 0, BB, CHN, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 105.3, 0
+62. Resort, 292, 2016, November, 45, 3, 0, 1, 2, 0, 0, BB, UKR, Groups, TA/TO, 0, 0, 0, A, No Deposit, 368, NULL, 0, Transient-Party, 38, 1
+63. Resort, 10, 2016, February, 7, 12, 0, 2, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, D, No Deposit, 15, NULL, 0, Transient, 43, 0
+64. City, 24, 2016, October, 43, 16, 2, 3, 2, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 28, NULL, 0, Transient, 85, 0
+65. City, 27, 2017, June, 23, 6, 0, 1, 2, 0, 0, BB, BEL, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 190, 2
+66. Resort, 199, 2016, May, 19, 2, 1, 1, 2, 0, 0, HB, DEU, Groups, TA/TO, 0, 0, 0, A, No Deposit, 298, NULL, 0, Transient-Party, 85, 0
+67. Resort, 6, 2016, April, 18, 28, 0, 1, 1, 0, 0, BB, PRT, Online TA, TA/TO, 1, 0, 2, A, No Deposit, 240, NULL, 0, Transient, 56, 0
+68. City, 38, 2016, August, 34, 17, 0, 1, 3, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 168.3, 0
+69. Resort, 205, 2015, August, 33, 15, 4, 10, 2, 0, 0, HB, DEU, Offline TA/TO, TA/TO, 0, 0, 0, D, No Deposit, 69, NULL, 0, Contract, 123.74, 0
+70. City, 41, 2017, February, 8, 20, 2, 5, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 9, NULL, 0, Transient, 112.69, 1
+71. Resort, 112, 2017, May, 19, 8, 3, 6, 3, 0, 0, HB, IRL, Direct, Direct, 0, 0, 0, D, No Deposit, 250, NULL, 0, Transient, 143.89, 1
+72. City, 39, 2017, June, 24, 15, 0, 3, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 122.67, 1
+73. City, 60, 2017, April, 15, 10, 1, 2, 2, 0, 0, HB, ITA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 160.2, 0
+74. City, 8, 2016, March, 10, 1, 0, 3, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 159, NULL, 0, Transient-Party, 55, 0
+75. City, 56, 2015, September, 38, 17, 0, 2, 1, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 20, NULL, 0, Transient-Party, 58, 0
+76. Resort, 76, 2017, August, 31, 1, 0, 2, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 242, NULL, 0, Transient, 250, 2
+77. City, 0, 2016, April, 16, 15, 0, 2, 2, 0, 0, SC, AUS, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 89, 1
+78. City, 47, 2015, December, 49, 5, 2, 1, 2, 0, 0, BB, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 62, 0
+79. City, 314, 2016, October, 42, 12, 0, 3, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 21, NULL, 68, Transient, 75, 0
+80. City, 92, 2017, March, 11, 15, 0, 3, 2, 0, 0, BB, PRT, Groups, Direct, 0, 0, 0, A, Non Refund, NULL, NULL, 0, Transient, 85, 0
+81. City, 222, 2016, December, 49, 2, 1, 2, 3, 0, 0, BB, LTU, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 110.7, 2
+82. City, 188, 2016, June, 25, 15, 0, 2, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 119, NULL, 39, Transient, 130, 0
+83. City, 209, 2017, August, 34, 22, 0, 3, 2, 0, 0, SC, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 108, 1
+84. Resort, 0, 2015, October, 44, 26, 1, 0, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient-Party, 48, 1
+85. City, 151, 2017, February, 7, 17, 1, 2, 2, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 28, NULL, 0, Transient, 75, 0
+86. City, 211, 2016, August, 35, 22, 1, 4, 3, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 121.55, 2
+87. City, 29, 2015, October, 44, 27, 0, 3, 2, 0, 0, BB, GBR, Offline TA/TO, TA/TO, 0, 0, 0, D, No Deposit, 28, NULL, 0, Group, 75, 0
+88. City, 40, 2017, May, 20, 15, 1, 2, 1, 0, 0, BB, ESP, Corporate, Corporate, 0, 0, 0, A, No Deposit, NULL, 174, 0, Transient, 127.83, 0
+89. City, 46, 2016, September, 36, 3, 2, 1, 2, 2, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, F, No Deposit, 9, NULL, 0, Transient, 181.8, 0
+90. Resort, 0, 2017, February, 6, 8, 0, 1, 1, 0, 0, BB, PRT, Direct, Direct, 1, 0, 2, A, No Deposit, NULL, NULL, 0, Transient, 50, 0
+91. City, 65, 2016, August, 33, 12, 1, 2, 2, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 138, NULL, 0, Transient, 85, 1
+92. Resort, 6, 2016, September, 39, 20, 0, 1, 1, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 106, 1
+93. City, 36, 2016, May, 21, 21, 1, 1, 2, 0, 0, SC, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 116.1, 1
+94. City, 188, 2016, July, 29, 16, 2, 1, 2, 2, 0, BB, BEL, Online TA, TA/TO, 0, 0, 0, F, No Deposit, 9, NULL, 0, Transient, 186.3, 1
+95. City, 75, 2016, October, 45, 30, 2, 0, 2, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 20, NULL, 0, Transient, 105, 0
+96. Resort, 320, 2017, June, 23, 5, 1, 4, 2, 0, 0, BB, IRL, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 74.25, 1
+97. City, 18, 2016, December, 52, 23, 0, 2, 4, 0, 0, BB, USA, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 7, NULL, 0, Transient, 199.43, 2
+98. City, 67, 2016, December, 52, 20, 0, 5, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 64.67, 1
+99. Resort, 0, 2016, December, 52, 24, 1, 1, 2, 0, 0, HB, BEL, Direct, Direct, 0, 0, 0, F, No Deposit, 250, NULL, 0, Transient, 117, 0
+100. City, 170, 2017, August, 33, 15, 0, 1, 2, 0, 0, BB, HUN, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 139.5, 1
+101. Resort, 364, 2016, October, 42, 12, 1, 4, 2, 0, 0, BB, GBR, Groups, Corporate, 0, 0, 0, A, No Deposit, NULL, 223, 0, Transient-Party, 66, 0
+102. Resort, 44, 2016, December, 50, 8, 0, 3, 2, 0, 0, FB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 6, NULL, 0, Transient, 72, 0
+103. City, 4, 2017, July, 27, 4, 0, 1, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, NULL, 329, 0, Transient, 118, 0
+104. City, 175, 2016, July, 30, 23, 1, 1, 2, 0, 0, SC, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient-Party, 85.5, 2
+105. Resort, 25, 2017, August, 32, 6, 1, 0, 2, 1, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 241, NULL, 0, Transient, 224.9, 1
+106. City, 108, 2016, June, 25, 13, 1, 3, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 20, E, No Deposit, NULL, 51, 0, Transient, 106, 0
+107. City, 157, 2016, September, 39, 19, 1, 2, 1, 0, 0, BB, CHE, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 130.5, 0
+108. Resort, 1, 2016, June, 26, 24, 0, 0, 1, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 0, 0
+109. City, 20, 2016, November, 46, 6, 2, 2, 1, 0, 0, BB, EST, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 124.16, 1
+110. City, 1, 2015, November, 45, 5, 0, 2, 1, 0, 0, BB, PRT, Complementary, Direct, 0, 0, 0, A, No Deposit, NULL, 46, 0, Transient, 0, 0
+111. City, 290, 2016, June, 25, 17, 1, 2, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 3, NULL, 108, Transient-Party, 72, 0
+112. Resort, 3, 2016, December, 50, 5, 1, 2, 2, 0, 0, Undefined, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, 134, NULL, 0, Transient-Party, 42, 0
+113. City, 39, 2015, August, 33, 14, 0, 2, 2, 0, 0, HB, DEU, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 6, NULL, 0, Transient-Party, 109, 0
+114. Resort, 95, 2016, October, 45, 31, 2, 5, 2, 0, 0, BB, GBR, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 171, NULL, 0, Transient, 32.8, 0
+115. City, 62, 2016, April, 14, 1, 1, 2, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient-Party, 106.2, 0
+116. City, 81, 2016, May, 21, 15, 2, 0, 2, 0, 0, BB, CN, Groups, TA/TO, 0, 0, 0, A, No Deposit, 133, NULL, 0, Transient-Party, 90, 1
+117. City, 17, 2017, February, 9, 26, 2, 0, 1, 0, 0, BB, CHN, Groups, TA/TO, 0, 0, 0, D, No Deposit, 30, NULL, 0, Transient-Party, 75, 0
+118. City, 30, 2017, April, 15, 14, 1, 2, 3, 1, 0, BB, ITA, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 7, NULL, 0, Transient, 206.52, 1
+119. Resort, 12, 2016, July, 28, 7, 2, 5, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, F, No Deposit, 242, NULL, 0, Transient, 209.57, 1
+120. Resort, 151, 2016, May, 21, 17, 0, 4, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, NULL, NULL, 0, Transient, 46, 0
+121. Resort, 0, 2015, August, 36, 30, 1, 0, 3, 0, 0, BB, FRA, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 183, 0
+122. City, 196, 2016, May, 20, 12, 1, 3, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 128, NULL, 0, Transient-Party, 80.75, 0
+123. City, 0, 2017, January, 3, 19, 0, 3, 1, 0, 0, BB, GRC, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 88, 0
+124. Resort, 7, 2017, March, 9, 2, 1, 3, 2, 0, 0, BB, NLD, Groups, Corporate, 1, 0, 2, D, No Deposit, NULL, 223, 0, Transient-Party, 47, 0
+125. City, 11, 2016, July, 28, 5, 2, 6, 1, 0, 0, BB, USA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 145, 0
+126. Resort, 39, 2015, November, 46, 10, 0, 5, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, 281, NULL, 0, Transient-Party, 40, 0
+127. City, 172, 2017, March, 12, 24, 2, 6, 0, 2, 0, BB, ARE, Online TA, TA/TO, 0, 0, 0, B, No Deposit, 9, NULL, 0, Transient, 84.73, 0
+128. City, 105, 2017, June, 26, 27, 0, 1, 2, 0, 0, HB, GBR, Direct, Direct, 0, 0, 0, D, No Deposit, 14, NULL, 0, Transient, 185, 2
+129. City, 150, 2016, September, 39, 24, 2, 5, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 129.6, 2
+130. City, 316, 2016, May, 22, 26, 0, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 30, NULL, 0, Transient-Party, 110, 0
+131. City, 35, 2017, May, 19, 11, 0, 3, 2, 0, 0, SC, CHE, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 189, 1
+132. City, 86, 2015, September, 39, 24, 0, 2, 1, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 12, NULL, 0, Transient-Party, 87.5, 0
+133. Resort, 3, 2016, August, 33, 7, 1, 0, 2, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 177, 1
+134. Resort, 1, 2017, April, 16, 18, 0, 1, 2, 0, 0, BB, BRA, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 107.1, 1
+135. Resort, 80, 2016, April, 15, 7, 0, 3, 2, 0, 0, Undefined, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, 67, NULL, 0, Transient-Party, 68, 0
+136. City, 123, 2017, June, 26, 29, 2, 3, 2, 0, 0, BB, BEL, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 120.06, 0
+137. City, 11, 2016, November, 45, 2, 0, 4, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 119, 0
+138. Resort, 203, 2017, May, 21, 25, 1, 3, 2, 0, 0, BB, GBR, Groups, TA/TO, 0, 0, 0, A, No Deposit, NULL, 223, 0, Transient-Party, 60.13, 0
+139. Resort, 21, 2017, May, 19, 13, 2, 3, 2, 0, 0, BB, IRL, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 92, 1
+140. City, 166, 2017, March, 12, 25, 2, 2, 2, 0, 0, BB, AUT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 88.4, 1
+141. Resort, 186, 2015, September, 36, 4, 1, 2, 1, 0, 0, BB, GBR, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 5, NULL, 0, Transient-Party, 52.2, 1
+142. City, 5, 2015, August, 33, 15, 2, 2, 1, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 99.75, 0
+143. City, 219, 2017, June, 23, 9, 1, 2, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 20, NULL, 0, Transient, 105, 0
+144. City, 213, 2017, June, 26, 26, 1, 1, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 323, NULL, 0, Transient, 115, 0
+145. Resort, 386, 2016, October, 43, 20, 1, 3, 2, 0, 0, BB, GBR, Groups, Corporate, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient-Party, 49, 0
+146. Resort, 81, 2015, September, 37, 6, 2, 3, 3, 0, 0, BB, IRL, Direct, Direct, 0, 0, 0, E, No Deposit, NULL, NULL, 0, Transient-Party, 153, 2
+147. City, 156, 2017, August, 32, 11, 1, 2, 2, 1, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 157.5, 2
+148. City, 165, 2017, July, 29, 21, 0, 2, 2, 0, 0, BB, CHE, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 127.8, 0
+149. City, 187, 2017, August, 32, 8, 0, 2, 2, 0, 0, HB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 166.5, 0
+150. Resort, 96, 2015, July, 31, 27, 1, 2, 2, 0, 0, HB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 166, 2
+151. City, 1, 2016, February, 10, 28, 2, 1, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 134, NULL, 0, Transient-Party, 60, 0
+152. City, 7, 2015, October, 42, 15, 0, 1, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 135, 1
+153. Resort, 4, 2016, December, 50, 6, 0, 1, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 5, A, No Deposit, NULL, 154, 0, Transient, 27, 0
+154. Resort, 35, 2016, December, 50, 8, 0, 3, 1, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 43, 1
+155. City, 420, 2017, May, 20, 20, 2, 1, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 229, NULL, 0, Transient, 90, 0
+156. City, 178, 2016, April, 18, 28, 0, 3, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 1, 0, A, Non Refund, 19, NULL, 46, Transient, 120, 0
+157. City, 16, 2015, September, 39, 25, 2, 3, 1, 0, 0, BB, GBR, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 170, 0
+158. Resort, 210, 2016, May, 22, 28, 2, 6, 2, 0, 0, HB, GBR, Offline TA/TO, TA/TO, 0, 0, 0, D, No Deposit, 40, NULL, 0, Transient, 82.83, 0
+159. Resort, 1, 2017, March, 11, 14, 0, 2, 2, 0, 0, BB, AUT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 65, 1
+160. Resort, 40, 2016, February, 8, 17, 0, 1, 2, 0, 0, BB, GBR, Corporate, Corporate, 0, 0, 0, E, No Deposit, NULL, 360, 0, Transient, 61, 0
+161. City, 9, 2016, March, 10, 2, 0, 2, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, 210, NULL, 0, Transient-Party, 56, 0
+162. City, 164, 2015, October, 40, 2, 0, 2, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 19, NULL, 0, Transient-Party, 100, 0
+163. City, 96, 2016, October, 41, 8, 1, 1, 2, 0, 0, BB, BEL, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 118.8, 3
+164. Resort, 190, 2016, July, 31, 26, 0, 4, 2, 2, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 240, NULL, 0, Transient, 212, 0
+165. Resort, 14, 2016, June, 24, 8, 0, 4, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 124, 1
+166. City, 218, 2016, June, 24, 9, 0, 2, 2, 0, 0, HB, PRT, Groups, TA/TO, 0, 1, 0, A, Non Refund, 133, NULL, 0, Transient, 135, 0
+167. City, 9, 2017, March, 13, 30, 0, 1, 2, 0, 0, BB, UKR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 118, 1
+168. City, 76, 2015, September, 38, 16, 0, 2, 2, 0, 0, BB, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 62, 0
+169. Resort, 147, 2016, August, 33, 12, 0, 2, 2, 2, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 240, NULL, 0, Transient, 271, 0
+170. City, 49, 2015, December, 53, 30, 0, 4, 1, 1, 0, BB, PRT, Direct, Direct, 0, 1, 0, E, No Deposit, 14, NULL, 0, Transient, 134, 1
+171. City, 91, 2016, October, 43, 20, 0, 3, 2, 0, 0, BB, IRL, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 132.3, 2
+172. Resort, 82, 2017, May, 19, 13, 2, 2, 2, 0, 0, HB, ESP, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 147, 1
+173. City, 87, 2015, September, 39, 25, 2, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 1, NULL, 0, Transient, 170, 0
+174. City, 212, 2016, May, 21, 20, 2, 3, 2, 0, 0, BB, DEU, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 21, NULL, 0, Transient-Party, 78, 1
+175. Resort, 4, 2016, January, 4, 22, 2, 3, 1, 0, 0, BB, NLD, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 39, 1
+176. City, 23, 2016, January, 1, 2, 2, 1, 1, 1, 0, HB, ITA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 26, NULL, 0, Transient-Party, 102, 0
+177. Resort, 0, 2016, January, 2, 7, 0, 1, 2, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 48, 2
+178. City, 29, 2015, December, 49, 4, 1, 2, 2, 2, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, F, No Deposit, 9, NULL, 0, Contract, 183.67, 1
+179. Resort, 0, 2016, April, 16, 13, 0, 2, 1, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, G, No Deposit, NULL, 62, 0, Group, 62.75, 0
+180. City, 16, 2015, July, 30, 25, 2, 1, 2, 0, 0, HB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 86, 0
+181. City, 24, 2016, March, 10, 3, 0, 3, 2, 0, 0, HB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 28, NULL, 0, Transient, 117, 0
+182. City, 1, 2016, March, 11, 8, 0, 1, 1, 0, 0, SC, ZAF, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 80, 0
+183. City, 18, 2016, September, 38, 16, 1, 2, 2, 1, 0, SC, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 112.72, 1
+184. City, 11, 2016, May, 22, 24, 0, 3, 2, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 12, NULL, 3, Transient-Party, 160, 0
+185. Resort, 411, 2017, May, 22, 31, 2, 4, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, NULL, NULL, 0, Transient, 71.1, 0
+186. Resort, 57, 2016, March, 13, 24, 0, 3, 2, 2, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, C, No Deposit, 242, NULL, 0, Transient, 95, 1
+187. City, 93, 2016, April, 14, 1, 0, 2, 2, 0, 0, BB, ESP, Direct, Direct, 0, 0, 0, A, No Deposit, 14, NULL, 0, Transient, 76.5, 0
+188. City, 115, 2016, February, 9, 27, 2, 2, 1, 0, 0, BB, MOZ, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 134, NULL, 0, Transient-Party, 76, 0
+189. Resort, 213, 2016, May, 21, 16, 1, 1, 2, 0, 0, HB, DEU, Groups, TA/TO, 0, 0, 0, A, No Deposit, 298, NULL, 0, Transient-Party, 85, 0
+190. Resort, 12, 2016, May, 19, 4, 0, 1, 2, 0, 0, BB, FRA, Corporate, Corporate, 0, 0, 0, A, No Deposit, NULL, 110, 0, Transient, 68.74, 0
+191. City, 35, 2015, October, 42, 16, 1, 2, 2, 0, 0, BB, CHE, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Contract, 108.9, 0
+192. City, 5, 2017, January, 1, 2, 1, 2, 1, 0, 0, BB, PRT, Corporate, Corporate, 1, 0, 3, A, No Deposit, NULL, 40, 0, Transient, 67, 1
+193. Resort, 75, 2017, June, 25, 20, 0, 4, 3, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, H, No Deposit, 240, NULL, 0, Transient, 230, 2
+194. Resort, 2, 2016, August, 33, 9, 0, 3, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 197.67, 0
+195. City, 75, 2016, April, 15, 7, 2, 3, 2, 0, 0, BB, ITA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 90.95, 1
+196. City, 0, 2016, December, 50, 5, 1, 0, 2, 0, 0, SC, GBR, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 97, 0
+197. City, 227, 2017, August, 34, 26, 2, 5, 2, 0, 0, SC, DEU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 99, 0
+198. City, 48, 2016, May, 19, 7, 2, 4, 2, 0, 0, BB, CHN, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 119.85, 1
+199. Resort, 386, 2016, October, 43, 20, 2, 5, 3, 0, 0, BB, GBR, Groups, Corporate, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient-Party, 79, 1
+200. Resort, 9, 2017, January, 4, 27, 0, 1, 2, 0, 0, BB, NULL, Corporate, Direct, 0, 1, 5, A, No Deposit, NULL, NULL, 0, Transient, 47, 0
+201. Resort, 211, 2016, November, 45, 5, 2, 1, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 11, NULL, 0, Transient, 30, 0
+202. City, 102, 2016, July, 29, 13, 0, 2, 2, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 94.5, 1
+203. Resort, 49, 2015, December, 53, 28, 1, 1, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 48, 2
+204. Resort, 0, 2016, May, 22, 22, 2, 0, 2, 0, 0, BB, ITA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 89, 1
+205. City, 444, 2016, December, 49, 1, 0, 3, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 1, 0, A, Non Refund, 34, NULL, 39, Transient, 75, 0
+206. City, 12, 2015, July, 29, 18, 2, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient, 62, 0
+207. City, 109, 2016, February, 9, 21, 2, 1, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 1, 0, A, Non Refund, 19, NULL, 44, Transient, 75, 0
+208. City, 0, 2017, January, 3, 17, 0, 1, 1, 0, 0, BB, PRT, Corporate, Corporate, 1, 0, 1, A, No Deposit, NULL, 405, 0, Transient, 80, 1
+209. Resort, 4, 2017, January, 2, 9, 1, 0, 1, 0, 0, BB, PRT, Corporate, Direct, 0, 0, 1, A, No Deposit, NULL, 501, 0, Transient, 39, 0
+210. City, 29, 2016, September, 40, 26, 1, 2, 3, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 7, NULL, 0, Transient, 184.06, 1
+211. City, 120, 2015, December, 53, 29, 0, 3, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Contract, 72.25, 2
+212. Resort, 90, 2016, August, 32, 6, 2, 2, 2, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 179, 0
+213. City, 0, 2016, February, 10, 29, 1, 0, 1, 0, 0, BB, GBR, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 89, 0
+214. Resort, 3, 2016, May, 21, 16, 1, 0, 2, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, NULL, 323, 0, Transient, 50, 0
+215. City, 46, 2015, August, 34, 17, 1, 1, 2, 0, 0, BB, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, 1, NULL, 0, Transient-Party, 62, 1
+216. City, 11, 2015, November, 47, 20, 3, 7, 1, 0, 0, BB, AGO, Direct, Direct, 0, 0, 0, E, No Deposit, NULL, NULL, 0, Transient, 113, 1
+217. City, 19, 2016, December, 53, 31, 2, 2, 2, 0, 0, BB, BIH, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 119, 0
+218. City, 335, 2016, October, 42, 13, 0, 3, 1, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 56, NULL, 0, Transient-Party, 80, 0
+219. City, 2, 2017, June, 25, 22, 0, 2, 1, 0, 0, BB, DEU, Aviation, Corporate, 0, 0, 0, D, No Deposit, NULL, 153, 0, Transient, 110, 0
+220. Resort, 13, 2017, February, 8, 25, 1, 1, 2, 1, 1, BB, PRT, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 74, 3
+221. City, 0, 2016, August, 33, 7, 1, 0, 2, 0, 0, BB, ESP, Direct, Direct, 0, 0, 0, G, No Deposit, NULL, NULL, 0, Transient, 121, 0
+222. Resort, 0, 2016, October, 41, 5, 0, 1, 3, 0, 0, BB, ESP, Direct, Direct, 1, 0, 0, D, No Deposit, NULL, NULL, 0, Transient, 141, 0
+223. City, 87, 2016, February, 8, 14, 2, 1, 2, 1, 0, HB, GBR, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 83, NULL, 0, Contract, 117.79, 1
+224. Resort, 151, 2017, April, 14, 4, 0, 5, 1, 0, 0, BB, USA, Groups, TA/TO, 0, 0, 0, A, No Deposit, NULL, 223, 0, Transient-Party, 42, 0
+225. City, 4, 2016, March, 12, 16, 0, 1, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 118, NULL, 0, Transient, 64.4, 0
+226. City, 147, 2015, July, 30, 21, 0, 2, 3, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, No Deposit, 1, NULL, 0, Transient, 99.5, 0
+227. City, 405, 2017, July, 27, 4, 0, 2, 2, 0, 0, HB, DEU, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 6, NULL, 0, Transient-Party, 114.4, 0
+228. Resort, 7, 2015, December, 50, 9, 0, 1, 1, 0, 0, BB, PRT, Corporate, Corporate, 0, 0, 0, A, No Deposit, NULL, 154, 0, Transient, 25, 0
+229. Resort, 0, 2016, October, 41, 4, 0, 1, 3, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, E, No Deposit, 250, NULL, 0, Transient, 150, 1
+230. City, 7, 2016, August, 34, 16, 0, 2, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient-Party, 150, 1
+231. City, 52, 2017, February, 8, 19, 2, 3, 2, 0, 0, SC, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 74.8, 0
+232. Resort, 59, 2016, November, 46, 12, 0, 1, 3, 1, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, H, No Deposit, 240, NULL, 0, Transient, 87, 0
+233. Resort, 12, 2016, September, 38, 12, 1, 3, 2, 0, 0, BB, IRL, Online TA, TA/TO, 0, 0, 0, G, No Deposit, 240, NULL, 0, Transient, 199, 0
+234. City, 235, 2017, March, 9, 3, 0, 1, 2, 0, 0, SC, USA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 60.98, 1
+235. Resort, 1, 2015, July, 29, 17, 0, 2, 2, 0, 0, BB, ESP, Direct, Direct, 0, 0, 0, D, No Deposit, 250, NULL, 0, Transient, 144.5, 0
+236. Resort, 25, 2016, March, 12, 19, 2, 2, 2, 0, 0, BB, ESP, Offline TA/TO, TA/TO, 0, 0, 0, D, No Deposit, 115, NULL, 0, Transient, 33.3, 0
+237. Resort, 4, 2017, February, 8, 20, 1, 0, 1, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 184, NULL, 0, Transient, 38.7, 0
+238. City, 196, 2017, August, 33, 19, 2, 5, 2, 0, 0, HB, ROU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 149.79, 3
+239. City, 27, 2015, September, 40, 30, 0, 2, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 64, NULL, 21, Transient, 108, 0
+240. City, 95, 2015, December, 51, 18, 2, 3, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Contract, 76.5, 2
+241. City, 2, 2016, December, 49, 1, 0, 2, 2, 0, 0, HB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 142, 2
+242. Resort, 81, 2016, March, 11, 9, 0, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 115, NULL, 0, Transient-Party, 59, 0
+243. City, 144, 2017, August, 31, 3, 1, 3, 2, 1, 0, HB, DEU, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 7, NULL, 0, Transient, 167.76, 1
+244. City, 2, 2015, December, 53, 29, 0, 2, 2, 0, 0, BB, BEL, Direct, Direct, 0, 0, 0, A, No Deposit, 14, NULL, 0, Transient, 115, 0
+245. City, 88, 2017, April, 13, 1, 2, 5, 2, 0, 0, BB, DEU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 83, NULL, 0, Transient, 89.4, 2
+246. Resort, 165, 2015, December, 53, 30, 0, 4, 2, 0, 0, Undefined, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 308, NULL, 122, Transient-Party, 136.5, 0
+247. Resort, 66, 2016, May, 21, 20, 0, 1, 2, 0, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 240, NULL, 0, Transient, 86, 0
+248. City, 46, 2017, January, 1, 1, 2, 0, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient-Party, 65, 0
+249. City, 56, 2017, February, 5, 1, 0, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 29, NULL, 0, Transient, 60, 0
+250. City, 10, 2016, August, 33, 8, 1, 1, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 160, 1
+251. Resort, 18, 2016, April, 16, 13, 0, 3, 2, 0, 0, HB, ESP, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 6, NULL, 0, Transient, 64.8, 0
+252. City, 83, 2016, October, 43, 19, 0, 4, 2, 0, 0, BB, BEL, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 132.3, 2
+253. Resort, 2, 2016, November, 47, 17, 0, 1, 1, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 146, NULL, 0, Transient, 30, 0
+254. City, 147, 2015, July, 30, 21, 0, 2, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, No Deposit, 1, NULL, 0, Transient, 75, 0
+255. Resort, 222, 2016, April, 17, 23, 2, 5, 2, 0, 0, BB, IRL, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 156, NULL, 0, Transient, 41.33, 2
+256. City, 188, 2016, June, 23, 2, 0, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, Non Refund, 1, NULL, 0, Transient, 65, 0
+257. City, 29, 2016, December, 49, 2, 0, 2, 1, 0, 0, BB, GRC, Corporate, TA/TO, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient-Party, 66.18, 1
+258. Resort, 6, 2015, July, 30, 19, 1, 0, 2, 0, 0, BB, NLD, Direct, Direct, 0, 0, 0, D, No Deposit, 250, NULL, 0, Transient, 135, 0
+259. City, 57, 2017, March, 11, 12, 2, 4, 1, 0, 0, SC, ROU, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 7, NULL, 0, Transient, 51.05, 1
+260. Resort, 0, 2016, January, 5, 28, 0, 1, 1, 0, 0, BB, PRT, Direct, Direct, 1, 0, 1, A, No Deposit, NULL, NULL, 0, Transient, 39, 0
+261. City, 183, 2016, September, 37, 8, 0, 3, 2, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 44, NULL, 0, Transient-Party, 110, 1
+262. Resort, 133, 2017, June, 24, 17, 2, 5, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 314, NULL, 0, Transient, 92.29, 0
+263. City, 21, 2017, March, 9, 4, 2, 5, 2, 0, 0, BB, FRA, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 9, NULL, 0, Transient, 127.01, 0
+264. City, 89, 2016, April, 16, 12, 0, 3, 2, 0, 0, BB, ITA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient-Party, 96.3, 1
+265. City, 87, 2016, December, 52, 18, 2, 2, 2, 0, 0, BB, FRA, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 28, NULL, 0, Transient, 75, 0
+266. City, 67, 2017, February, 7, 12, 2, 0, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 3, NULL, 0, Transient, 80, 0
+267. City, 2, 2016, January, 3, 15, 0, 2, 2, 0, 0, BB, AUT, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 9, NULL, 0, Transient, 87.3, 0
+268. City, 26, 2017, May, 20, 17, 0, 2, 1, 0, 0, BB, ROU, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 474, NULL, 0, Transient-Party, 130, 0
+269. City, 114, 2017, February, 7, 15, 0, 4, 2, 0, 0, BB, ESP, Groups, TA/TO, 0, 0, 0, A, No Deposit, NULL, 242, 0, Transient-Party, 78, 0
+270. City, 89, 2017, July, 30, 27, 0, 2, 2, 0, 0, SC, DZA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 11, NULL, 0, Transient, 86.4, 0
+271. City, 1, 2016, May, 20, 11, 0, 1, 2, 0, 0, BB, ITA, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 109.65, 1
+272. City, 161, 2017, March, 13, 31, 1, 2, 2, 1, 0, BB, DNK, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 127.2, 0
+273. Resort, 19, 2016, March, 13, 21, 1, 1, 2, 0, 1, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 196, NULL, 0, Transient, 30, 0
+274. City, 11, 2017, April, 16, 17, 1, 2, 2, 0, 0, SC, LVA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 100, 0
+275. City, 22, 2016, May, 21, 20, 0, 2, 2, 0, 0, BB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, Non Refund, 34, NULL, 0, Transient, 140, 0
+276. City, 61, 2016, July, 30, 23, 1, 1, 1, 1, 0, BB, ESP, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 121.5, 0
+277. City, 69, 2015, October, 44, 25, 2, 1, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 37, NULL, 58, Transient-Party, 85.67, 0
+278. Resort, 13, 2016, March, 13, 24, 0, 0, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 242, NULL, 0, Transient, 0, 1
+279. Resort, 11, 2017, January, 1, 6, 0, 2, 2, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 177, NULL, 0, Transient, 60, 1
+280. City, 164, 2017, May, 20, 15, 1, 2, 1, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, NULL, NULL, 0, Transient, 160, 0
+281. City, 379, 2015, October, 44, 31, 1, 1, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, Non Refund, 1, NULL, 0, Transient, 62, 0
+282. City, 52, 2016, July, 28, 8, 1, 2, 2, 1, 0, BB, BRA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 132.9, 0
+283. City, 337, 2016, June, 24, 9, 0, 2, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 1, NULL, 0, Transient, 62, 0
+284. Resort, 17, 2016, November, 47, 17, 0, 3, 1, 0, 0, BB, FIN, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 240, NULL, 0, Transient-Party, 56, 2
+285. City, 1, 2017, May, 19, 13, 0, 1, 2, 1, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 200, 2
+286. Resort, 53, 2016, March, 14, 29, 0, 4, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 52, 0
+287. City, 210, 2015, October, 41, 8, 1, 3, 2, 0, 0, HB, PRT, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 12, NULL, 0, Transient-Party, 86, 0
+288. City, 340, 2017, July, 28, 9, 2, 2, 2, 0, 0, BB, NOR, Online TA, TA/TO, 0, 0, 0, B, No Deposit, 9, NULL, 0, Transient, 90.05, 2
+289. City, 56, 2017, February, 5, 1, 0, 3, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, Non Refund, 29, NULL, 0, Transient, 60, 0
+290. City, 13, 2015, December, 50, 6, 2, 0, 2, 1, 0, BB, ESP, Offline TA/TO, TA/TO, 0, 0, 0, A, No Deposit, 28, NULL, 0, Transient, 64, 1
+291. City, 29, 2017, April, 17, 27, 0, 2, 2, 0, 0, SC, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 83, NULL, 0, Transient, 91.2, 0
+292. City, 32, 2015, December, 53, 27, 2, 2, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, D, No Deposit, 8, NULL, 0, Transient, 65.55, 0
+293. City, 260, 2015, July, 27, 4, 2, 2, 2, 0, 0, BB, PRT, Groups, TA/TO, 0, 1, 0, A, Non Refund, 1, NULL, 0, Transient-Party, 62, 0
+294. City, 134, 2017, February, 8, 25, 0, 1, 1, 0, 0, BB, PRT, Groups, TA/TO, 0, 0, 0, A, No Deposit, 30, NULL, 0, Transient-Party, 75, 0
+295. City, 68, 2017, March, 11, 15, 0, 2, 1, 0, 0, BB, PRT, Direct, Direct, 0, 0, 0, A, No Deposit, NULL, NULL, 0, Transient, 65, 0
+296. Resort, 70, 2017, July, 28, 14, 2, 5, 2, 0, 0, BB, GBR, Online TA, TA/TO, 0, 0, 0, E, No Deposit, 240, NULL, 0, Transient, 240, 0
+297. City, 109, 2016, June, 27, 26, 2, 4, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 102.28, 1
+298. Resort, 44, 2015, August, 35, 26, 0, 4, 2, 0, 0, BB, PRT, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 240, NULL, 0, Transient, 129.15, 2
+299. Resort, 159, 2016, October, 44, 28, 1, 2, 2, 0, 0, BB, AUS, Direct, Direct, 0, 0, 0, E, No Deposit, 250, NULL, 0, Transient, 71.2, 0
+300. City, 45, 2017, August, 33, 19, 0, 1, 2, 0, 0, SC, USA, Online TA, TA/TO, 0, 0, 0, A, No Deposit, 9, NULL, 0, Transient, 140, 0
+
+Answer from this text alone: use no tools and read no files. Reply with exactly 300 lines and nothing else, one per case in order, each "<case number>: <probability>".
