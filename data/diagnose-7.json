@@ -1,0 +1,167 @@
+{
+ "kind": "dex-frontier.diagnose-7",
+ "v": 1,
+ "rule": "a department joins only if the mesh’s out-of-fold GATE score with it is at least the score without it (src/join.mjs); FIT and GATE only",
+ "folds": 4,
+ "hotel": {
+  "relay": [
+   "hotel-guests",
+   "hotel-sales",
+   "hotel-reservations",
+   "hotel-stay"
+  ],
+  "allJoin": [
+   {
+    "departments": 1,
+    "added": "hotel-guests",
+    "gateOof": 0.772922
+   },
+   {
+    "departments": 2,
+    "added": "hotel-sales",
+    "gateOof": 0.832039
+   },
+   {
+    "departments": 3,
+    "added": "hotel-reservations",
+    "gateOof": 0.878344
+   },
+   {
+    "departments": 4,
+    "added": "hotel-stay",
+    "gateOof": 0.90054
+   }
+  ],
+  "rule": {
+   "admitted": [
+    "hotel-guests",
+    "hotel-sales",
+    "hotel-reservations",
+    "hotel-stay"
+   ],
+   "keptOut": [],
+   "steps": [
+    {
+     "department": "hotel-guests",
+     "before": 0.5,
+     "with": 0.772922,
+     "joins": true
+    },
+    {
+     "department": "hotel-sales",
+     "before": 0.772922,
+     "with": 0.832039,
+     "joins": true
+    },
+    {
+     "department": "hotel-reservations",
+     "before": 0.832039,
+     "with": 0.878344,
+     "joins": true
+    },
+    {
+     "department": "hotel-stay",
+     "before": 0.878344,
+     "with": 0.90054,
+     "joins": true
+    }
+   ],
+   "gateOof": 0.90054
+  },
+  "changes": false
+ },
+ "news": {
+  "relay": [
+   "news-keywords",
+   "news-desk",
+   "news-links",
+   "news-topics",
+   "news-writing",
+   "news-tone"
+  ],
+  "allJoin": [
+   {
+    "departments": 1,
+    "added": "news-keywords",
+    "gateOof": 0.670949
+   },
+   {
+    "departments": 2,
+    "added": "news-desk",
+    "gateOof": 0.705094
+   },
+   {
+    "departments": 3,
+    "added": "news-links",
+    "gateOof": 0.717346
+   },
+   {
+    "departments": 4,
+    "added": "news-topics",
+    "gateOof": 0.718141
+   },
+   {
+    "departments": 5,
+    "added": "news-writing",
+    "gateOof": 0.720821
+   },
+   {
+    "departments": 6,
+    "added": "news-tone",
+    "gateOof": 0.722137
+   }
+  ],
+  "rule": {
+   "admitted": [
+    "news-keywords",
+    "news-desk",
+    "news-links",
+    "news-topics",
+    "news-writing",
+    "news-tone"
+   ],
+   "keptOut": [],
+   "steps": [
+    {
+     "department": "news-keywords",
+     "before": 0.5,
+     "with": 0.670949,
+     "joins": true
+    },
+    {
+     "department": "news-desk",
+     "before": 0.670949,
+     "with": 0.705094,
+     "joins": true
+    },
+    {
+     "department": "news-links",
+     "before": 0.705094,
+     "with": 0.717346,
+     "joins": true
+    },
+    {
+     "department": "news-topics",
+     "before": 0.717346,
+     "with": 0.718141,
+     "joins": true
+    },
+    {
+     "department": "news-writing",
+     "before": 0.718141,
+     "with": 0.720821,
+     "joins": true
+    },
+    {
+     "department": "news-tone",
+     "before": 0.720821,
+     "with": 0.722137,
+     "joins": true
+    }
+   ],
+   "gateOof": 0.722137
+  },
+  "changes": false
+ },
+ "testNeverRead": true
+}
