@@ -1,0 +1,15 @@
+{
+ "kind": "dex-frontier.fresh5-sources",
+ "why": "cases no organ has scored: downloaded 2026-10-29, after organ 2i was judged and diagnose-7 dropped 2j as first designed, with Simon's go-ahead (\"ok downld\")",
+ "files": [
+  {
+   "path": "data/fresh5/cdc-diabetes-health-indicators.csv",
+   "sha256": "9f71fda9d4ae5f4878c99b9233b6a16accfa9a17c194116a6b78100540934964",
+   "bytes": 13494568,
+   "rows": 253680,
+   "from": "https://archive.ics.uci.edu/static/public/891/data.csv (UCI dataset 891, the repository's own download)",
+   "dataset": "CDC Diabetes Health Indicators (UCI id 891, DOI 10.24432/C53919): 253,680 answers to the CDC's 2015 Behavioral Risk Factor Surveillance System survey, 21 columns, target Diabetes_binary",
+   "licence": "CC0 1.0 (public domain), as the dataset UCI links for licensing states (kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset); the underlying BRFSS data are a US government work"
+  }
+ ]
+}
