@@ -2,6 +2,7 @@
 // The README table, llms.txt and the white paper all read these same rows.
 import { format } from './format.mjs';
 
+const WON = (R) => ['2f', '2g', '2h', '2i', '2j'].some((k) => R[k] && R[k].v.find((v) => v.id === 'GATE').pass);
 const STATE = (R, k) => (R[k] ? R[k].v.filter((v) => v.pass).length + ' of ' + R[k].v.length + ' sealed rules held' : 'sealed, being measured');
 
 export function organRows(R) {
@@ -23,6 +24,6 @@ export function organRows(R) {
       ['5', 'The wisp', 'routing that learns from outcomes; a node gone bad is pruned', (r) => 'after a break, wisp ' + format(r.telco.broken.wispLate, 3) + ' / ' + format(r.shop.broken.wispLate, 3) + ' vs frozen ' + format(r.telco.broken.frozenLate, 3) + ' / ' + format(r.shop.broken.frozenLate, 3)],
       ['6', 'Scale', 'cut finer, more nodes: the composed answer keeps climbing', (r) => 'fine mesh ' + format(r.telco.fineAuc, 3) + ' / ' + format(r.shop.fineAuc, 3) + ' vs pooled ' + format(r.telco.vsMonolith.b, 3) + ' / ' + format(r.shop.vsMonolith.b, 3)],
       ['7', 'Sovereign spread', 'owned by contributors, carried by cards, revocable, scores only', (r) => 'cards round-trip; ' + r.telco.answer.bytes + ' / ' + r.shop.answer.bytes + ' bytes an answer']]
-      .map(([k, name, what, said]) => [k, name, what, R[k] ? STATE(R, k) : /^2[f-j]$/.test(k) ? 'sealed, being measured' : /^2[b-e]$/.test(k) ? 'not taken unless needed' : 'built and held until composition wins the gate', R[k] ? said(R[k].r) : '—']),
+      .map(([k, name, what, said]) => [k, name, what, R[k] ? STATE(R, k) : /^2[f-j]$/.test(k) ? 'sealed, being measured' : /^2[b-e]$/.test(k) ? 'not taken unless needed' : WON(R) ? 'built; sealed next, one at a time in order' : 'built and held until composition wins the gate', R[k] ? said(R[k].r) : '—']),
   ];
 }
