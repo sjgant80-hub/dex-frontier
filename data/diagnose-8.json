@@ -1,0 +1,186 @@
+{
+ "kind": "dex-frontier.diagnose-8",
+ "v": 1,
+ "rule": "the relay and the join as one step: a department joins only if the mesh’s out-of-fold GATE predictions with it lead those without it (at first, a coin) beyond the noise, the paired bootstrap’s 95% lower bound above 0 (src/grow.mjs); a department refused sends no score and holds no seat; FIT and GATE only",
+ "folds": 4,
+ "relayFolds": 4,
+ "hotel": {
+  "offered": [
+   "hotel-guests",
+   "hotel-sales",
+   "hotel-reservations",
+   "hotel-stay"
+  ],
+  "steps": [
+   {
+    "department": "hotel-guests",
+    "took": [],
+    "fielded": "boosted",
+    "gateAlone": 0.775179,
+    "before": 0.5,
+    "with": 0.772922,
+    "lead": 0.272922,
+    "bound": 0.263953,
+    "joins": true
+   },
+   {
+    "department": "hotel-sales",
+    "took": [
+     "hotel-guests"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.833343,
+    "before": 0.772922,
+    "with": 0.832039,
+    "lead": 0.059117,
+    "bound": 0.053015,
+    "joins": true
+   },
+   {
+    "department": "hotel-reservations",
+    "took": [
+     "hotel-guests",
+     "hotel-sales"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.878369,
+    "before": 0.832039,
+    "with": 0.878344,
+    "lead": 0.046305,
+    "bound": 0.041039,
+    "joins": true
+   },
+   {
+    "department": "hotel-stay",
+    "took": [
+     "hotel-guests",
+     "hotel-sales",
+     "hotel-reservations"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.90035,
+    "before": 0.878344,
+    "with": 0.90054,
+    "lead": 0.022196,
+    "bound": 0.018901,
+    "joins": true
+   }
+  ],
+  "admitted": [
+   "hotel-guests",
+   "hotel-sales",
+   "hotel-reservations",
+   "hotel-stay"
+  ],
+  "refused": [],
+  "changes": false
+ },
+ "news": {
+  "offered": [
+   "news-keywords",
+   "news-desk",
+   "news-links",
+   "news-topics",
+   "news-writing",
+   "news-tone"
+  ],
+  "steps": [
+   {
+    "department": "news-keywords",
+    "took": [],
+    "fielded": "boosted",
+    "gateAlone": 0.671594,
+    "before": 0.5,
+    "with": 0.670949,
+    "lead": 0.170949,
+    "bound": 0.157498,
+    "joins": true
+   },
+   {
+    "department": "news-desk",
+    "took": [
+     "news-keywords"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.705587,
+    "before": 0.670949,
+    "with": 0.705094,
+    "lead": 0.034145,
+    "bound": 0.026762,
+    "joins": true
+   },
+   {
+    "department": "news-links",
+    "took": [
+     "news-keywords",
+     "news-desk"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.717612,
+    "before": 0.705094,
+    "with": 0.717346,
+    "lead": 0.012252,
+    "bound": 0.007986,
+    "joins": true
+   },
+   {
+    "department": "news-topics",
+    "took": [
+     "news-keywords",
+     "news-desk",
+     "news-links"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.718581,
+    "before": 0.717346,
+    "with": 0.718141,
+    "lead": 0.000795,
+    "bound": -0.00105,
+    "joins": false
+   },
+   {
+    "department": "news-writing",
+    "took": [
+     "news-keywords",
+     "news-desk",
+     "news-links"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.721004,
+    "before": 0.717346,
+    "with": 0.720539,
+    "lead": 0.003193,
+    "bound": 0.001045,
+    "joins": true
+   },
+   {
+    "department": "news-tone",
+    "took": [
+     "news-keywords",
+     "news-desk",
+     "news-links",
+     "news-writing"
+    ],
+    "fielded": "boosted",
+    "gateAlone": 0.721951,
+    "before": 0.720539,
+    "with": 0.721921,
+    "lead": 0.001382,
+    "bound": -0.000327,
+    "joins": false
+   }
+  ],
+  "admitted": [
+   "news-keywords",
+   "news-desk",
+   "news-links",
+   "news-writing"
+  ],
+  "refused": [
+   "news-topics",
+   "news-tone"
+  ],
+  "changes": true
+ },
+ "testNeverRead": true
+}

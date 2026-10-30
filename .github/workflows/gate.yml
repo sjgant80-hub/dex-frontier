@@ -68,6 +68,9 @@ jobs:
       - name: organ 2i, the gate taken again with a relay (re-derived, re-judged, seal first, once it is measured)
         run: |
           if [ -f data/organ-2i/record.json ]; then node tools/measure-2i.mjs --check && node tools/judge-2i.mjs --check && node tools/order.mjs --organ 2i; elif [ -f data/organ-2i/prereg.json ]; then echo "organ 2i sealed, being measured"; else echo "organ 2i built, not yet sealed"; fi
+      - name: organ 2j, the gate taken again with the mesh growing only by what beats the noise (re-derived, re-judged, seal first, once it is measured)
+        run: |
+          if [ -f data/organ-2j/record.json ]; then node tools/measure-2j.mjs --check && node tools/judge-2j.mjs --check && node tools/order.mjs --organ 2j; elif [ -f data/organ-2j/prereg.json ]; then echo "organ 2j sealed, being measured"; else echo "organ 2j built, not yet sealed"; fi
       - name: the check made after organ 2g was judged (the hospital with every department kept) is the run itself
         run: |
           if [ -f data/organ-2g/nobar.json ]; then node tools/nobar-2g.mjs --check; else echo "no check yet"; fi
@@ -105,3 +108,9 @@ jobs:
       - name: the relay with wider bodies, a department fielding boosted trees where they beat its rule bodies on GATE (FIT and GATE only, TEST never read) is the run itself
         run: |
           if [ -f data/diagnose-6.json ]; then node tools/diagnose-6.mjs --check; else echo "no diagnosis yet"; fi
+      - name: the join on any gain at all, on organ 2i's domains (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-7.json ]; then node tools/diagnose-7.mjs --check; else echo "no diagnosis yet"; fi
+      - name: the join only on a lead beyond the noise, on organ 2i's domains (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-8.json ]; then node tools/diagnose-8.mjs --check; else echo "no diagnosis yet"; fi
