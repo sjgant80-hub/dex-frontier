@@ -1,0 +1,487 @@
+{
+ "kind": "dex-frontier.organ-2k.record",
+ "v": 1,
+ "settings": {
+  "live": "beats a coin on GATE beyond the noise: the bound of its lead over 0.5 above 0",
+  "join": "offered strongest first on GATE; joins only if the mesh’s out-of-fold GATE predictions with it lead those without it beyond the noise (the bound above 0); a department refused sends no score and holds no seat",
+  "relay": "each department is sent the scores of the departments admitted before it (a rule body reads its own columns first and the senders that fit 16); a FIT case’s score from a body that never grew on it (4 folds)",
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  },
+  "seed": 1,
+  "bodies": [
+   "deep-quantile",
+   "deep-values",
+   "pairs-quantile",
+   "pairs-values",
+   "boosted"
+  ],
+  "frontierCases": 1200,
+  "batch": 300
+ },
+ "filesMatchSources": true,
+ "dropout": {
+  "departments": [
+   {
+    "department": "dropout-person",
+    "columns": 7,
+    "gate": {
+     "deep-quantile": 0.663729,
+     "deep-values": 0.663756,
+     "pairs-quantile": 0.684612,
+     "pairs-values": 0.671425,
+     "boosted": 0.690661
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.690661,
+    "joinBound": 0.150047,
+    "state": "live"
+   },
+   {
+    "department": "dropout-family",
+    "columns": 4,
+    "gate": {
+     "deep-quantile": 0.590972,
+     "deep-values": 0.590972,
+     "pairs-quantile": 0.61745,
+     "pairs-values": 0.61745,
+     "boosted": 0.610326
+    },
+    "fielded": "pairs-quantile",
+    "size": "2 stages",
+    "gateAuc": 0.61745,
+    "joinBound": 0.074763,
+    "state": "live"
+   },
+   {
+    "department": "dropout-finance",
+    "columns": 3,
+    "gate": {
+     "deep-quantile": 0.729973,
+     "deep-values": 0.730326,
+     "pairs-quantile": 0.730081,
+     "pairs-values": 0.729816,
+     "boosted": 0.727569
+    },
+    "fielded": "deep-values",
+    "size": "1 stages",
+    "gateAuc": 0.730326,
+    "joinBound": 0.197793,
+    "state": "live"
+   },
+   {
+    "department": "dropout-admission",
+    "columns": 7,
+    "gate": {
+     "deep-quantile": 0.633395,
+     "deep-values": 0.604524,
+     "pairs-quantile": 0.622358,
+     "pairs-values": 0.63159,
+     "boosted": 0.714128
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.714128,
+    "joinBound": 0.173637,
+    "state": "live"
+   },
+   {
+    "department": "dropout-semester1",
+    "columns": 6,
+    "gate": {
+     "deep-quantile": 0.816229,
+     "deep-values": 0.819094,
+     "pairs-quantile": 0.804044,
+     "pairs-values": 0.824451,
+     "boosted": 0.845073
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.845073,
+    "joinBound": 0.311724,
+    "state": "live"
+   },
+   {
+    "department": "dropout-semester2",
+    "columns": 6,
+    "gate": {
+     "deep-quantile": 0.852181,
+     "deep-values": 0.826736,
+     "pairs-quantile": 0.845369,
+     "pairs-values": 0.84033,
+     "boosted": 0.87571
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.87571,
+    "joinBound": 0.348555,
+    "state": "live"
+   },
+   {
+    "department": "dropout-economy",
+    "columns": 3,
+    "gate": {
+     "deep-quantile": 0.507293,
+     "deep-values": 0.518744,
+     "pairs-quantile": 0.508495,
+     "pairs-values": 0.517746,
+     "boosted": 0.517903
+    },
+    "fielded": "deep-values",
+    "size": "1 stages",
+    "gateAuc": 0.518744,
+    "joinBound": -0.023368,
+    "state": "cut"
+   }
+  ],
+  "live": [
+   "dropout-semester2",
+   "dropout-semester1",
+   "dropout-finance",
+   "dropout-admission",
+   "dropout-person",
+   "dropout-family"
+  ],
+  "steps": [
+   {
+    "department": "dropout-semester2",
+    "took": [],
+    "columns": 6,
+    "read": 6,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.87571,
+    "before": 0.5,
+    "with": 0.8724,
+    "lead": 0.3724,
+    "bound": 0.344536,
+    "joins": true
+   },
+   {
+    "department": "dropout-semester1",
+    "took": [
+     "dropout-semester2"
+    ],
+    "columns": 7,
+    "read": 7,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.878556,
+    "before": 0.8724,
+    "with": 0.87548,
+    "lead": 0.00308,
+    "bound": -0.002592,
+    "joins": false
+   },
+   {
+    "department": "dropout-finance",
+    "took": [
+     "dropout-semester2"
+    ],
+    "columns": 4,
+    "read": 4,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.901475,
+    "before": 0.8724,
+    "with": 0.896659,
+    "lead": 0.024259,
+    "bound": 0.009765,
+    "joins": true
+   },
+   {
+    "department": "dropout-admission",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance"
+    ],
+    "columns": 9,
+    "read": 9,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.908737,
+    "before": 0.896659,
+    "with": 0.904724,
+    "lead": 0.008065,
+    "bound": 0.002211,
+    "joins": true
+   },
+   {
+    "department": "dropout-person",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance",
+     "dropout-admission"
+    ],
+    "columns": 10,
+    "read": 10,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.904482,
+    "before": 0.904724,
+    "with": 0.905361,
+    "lead": 0.000637,
+    "bound": -0.003659,
+    "joins": false
+   },
+   {
+    "department": "dropout-family",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance",
+     "dropout-admission"
+    ],
+    "columns": 7,
+    "read": 7,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.896179,
+    "before": 0.904724,
+    "with": 0.903856,
+    "lead": -0.000868,
+    "bound": -0.002931,
+    "joins": false
+   }
+  ],
+  "admitted": [
+   "dropout-semester2",
+   "dropout-finance",
+   "dropout-admission"
+  ],
+  "refused": [
+   "dropout-semester1",
+   "dropout-person",
+   "dropout-family"
+  ],
+  "chosen": "linear",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.904724
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.890422
+   }
+  ],
+  "cases": 1326,
+  "outcomes": 426,
+  "composedAuc": 0.908632,
+  "singles": [
+   {
+    "department": "dropout-semester2",
+    "fielded": "boosted",
+    "gateAuc": 0.87571,
+    "testAuc": 0.88127
+   },
+   {
+    "department": "dropout-semester1",
+    "fielded": "boosted",
+    "gateAuc": 0.845073,
+    "testAuc": 0.843714
+   },
+   {
+    "department": "dropout-finance",
+    "fielded": "deep-values",
+    "gateAuc": 0.730326,
+    "testAuc": 0.723108
+   },
+   {
+    "department": "dropout-admission",
+    "fielded": "boosted",
+    "gateAuc": 0.714128,
+    "testAuc": 0.7166
+   },
+   {
+    "department": "dropout-person",
+    "fielded": "boosted",
+    "gateAuc": 0.690661,
+    "testAuc": 0.682993
+   },
+   {
+    "department": "dropout-family",
+    "fielded": "pairs-quantile",
+    "gateAuc": 0.61745,
+    "testAuc": 0.546808
+   }
+  ],
+  "best": {
+   "department": "dropout-semester2",
+   "fielded": "boosted",
+   "gateAuc": 0.87571,
+   "testAuc": 0.88127
+  },
+  "vsBest": {
+   "a": 0.908632,
+   "b": 0.88127,
+   "lead": 0.027362,
+   "low95": 0.016776
+  },
+  "vsOneScore": {
+   "a": 0.908632,
+   "b": 0.907242,
+   "lead": 0.00139,
+   "low95": -0.005177
+  },
+  "oneScore": {
+   "chosen": "linear",
+   "testAuc": 0.907242
+  },
+  "vsShuffled": {
+   "a": 0.908632,
+   "b": 0.857025,
+   "lead": 0.051607,
+   "low95": 0.036206
+  },
+  "vsRoute": {
+   "a": 0.908632,
+   "b": 0.898995,
+   "lead": 0.009637,
+   "low95": 0.002158
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "dropout-semester2",
+    "took": 0,
+    "chosen": "linear",
+    "testAuc": 0.88127
+   },
+   {
+    "departments": 2,
+    "added": "dropout-finance",
+    "took": 1,
+    "chosen": "linear",
+    "testAuc": 0.901881
+   },
+   {
+    "departments": 3,
+    "added": "dropout-admission",
+    "took": 2,
+    "chosen": "linear",
+    "testAuc": 0.908632
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.908632,
+   "b": 0.88127,
+   "lead": 0.027362,
+   "low95": 0.016776
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.908632,
+    "b": 0.918584,
+    "lead": -0.009952,
+    "low95": -0.018552
+   },
+   "logistic": {
+    "a": 0.908632,
+    "b": 0.908542,
+    "lead": 0.00009,
+    "low95": -0.010851
+   }
+  },
+  "asIn2i": {
+   "note": "recorded beside the rule, not sealed: the mesh of organ 2i’s rule, every live department joined, in the same relay order",
+   "growth": [
+    {
+     "departments": 1,
+     "added": "dropout-semester2",
+     "testAuc": 0.88127
+    },
+    {
+     "departments": 2,
+     "added": "dropout-semester1",
+     "testAuc": 0.882105
+    },
+    {
+     "departments": 3,
+     "added": "dropout-finance",
+     "testAuc": 0.898852
+    },
+    {
+     "departments": 4,
+     "added": "dropout-admission",
+     "testAuc": 0.905569
+    },
+    {
+     "departments": 5,
+     "added": "dropout-person",
+     "testAuc": 0.906827
+    },
+    {
+     "departments": 6,
+     "added": "dropout-family",
+     "testAuc": 0.907432
+    }
+   ],
+   "chosen": "linear",
+   "composedAuc": 0.907432,
+   "vs": {
+    "a": 0.908632,
+    "b": 0.907432,
+    "lead": 0.0012,
+    "low95": -0.004518
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "23a98a801886de39",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "sameColumns": true,
+   "vs": {
+    "a": 0.907361,
+    "b": 0.910252,
+    "lead": -0.002891,
+    "low95": -0.013785
+   },
+   "pooledVs": {
+    "a": 0.917894,
+    "b": 0.910252,
+    "lead": 0.007642,
+    "low95": -0.000137
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ }
+}
