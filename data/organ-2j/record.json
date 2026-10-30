@@ -1,0 +1,426 @@
+{
+ "kind": "dex-frontier.organ-2j.record",
+ "v": 1,
+ "settings": {
+  "live": "beats a coin on GATE beyond the noise: the bound of its lead over 0.5 above 0",
+  "join": "offered strongest first on GATE; joins only if the mesh’s out-of-fold GATE predictions with it lead those without it beyond the noise (the bound above 0); a department refused sends no score and holds no seat",
+  "relay": "each department is sent the scores of the departments admitted before it (a rule body reads its own columns first and the senders that fit 16); a FIT case’s score from a body that never grew on it (4 folds)",
+  "folds": 4,
+  "trees": {
+   "rounds": 100,
+   "rate": 0.1,
+   "bins": 16,
+   "lambda": 1,
+   "minHess": 1
+  },
+  "seed": 1,
+  "bodies": [
+   "deep-quantile",
+   "deep-values",
+   "pairs-quantile",
+   "pairs-values",
+   "boosted"
+  ],
+  "frontierCases": 1200,
+  "batch": 300
+ },
+ "filesMatchSources": true,
+ "health": {
+  "departments": [
+   {
+    "department": "health-conditions",
+    "columns": 6,
+    "gate": {
+     "deep-quantile": 0.772583,
+     "deep-values": 0.773908,
+     "pairs-quantile": 0.768781,
+     "pairs-values": 0.773268,
+     "boosted": 0.77914
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.77914,
+    "joinBound": 0.267516,
+    "state": "live"
+   },
+   {
+    "department": "health-habits",
+    "columns": 5,
+    "gate": {
+     "deep-quantile": 0.620492,
+     "deep-values": 0.616737,
+     "pairs-quantile": 0.619407,
+     "pairs-values": 0.619289,
+     "boosted": 0.619789
+    },
+    "fielded": "deep-quantile",
+    "size": "2 stages",
+    "gateAuc": 0.620492,
+    "joinBound": 0.105394,
+    "state": "live"
+   },
+   {
+    "department": "health-access",
+    "columns": 2,
+    "gate": {
+     "deep-quantile": 0.519972,
+     "deep-values": 0.526078,
+     "pairs-quantile": 0.519972,
+     "pairs-values": 0.526078,
+     "boosted": 0.526078
+    },
+    "fielded": "deep-values",
+    "size": "1 stages",
+    "gateAuc": 0.526078,
+    "joinBound": 0.016482,
+    "state": "live"
+   },
+   {
+    "department": "health-wellbeing",
+    "columns": 4,
+    "gate": {
+     "deep-quantile": 0.748133,
+     "deep-values": 0.749082,
+     "pairs-quantile": 0.748302,
+     "pairs-values": 0.748846,
+     "boosted": 0.750195
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.750195,
+    "joinBound": 0.23809,
+    "state": "live"
+   },
+   {
+    "department": "health-person",
+    "columns": 4,
+    "gate": {
+     "deep-quantile": 0.71092,
+     "deep-values": 0.706982,
+     "pairs-quantile": 0.707143,
+     "pairs-values": 0.711292,
+     "boosted": 0.719296
+    },
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.719296,
+    "joinBound": 0.206352,
+    "state": "live"
+   }
+  ],
+  "live": [
+   "health-conditions",
+   "health-wellbeing",
+   "health-person",
+   "health-habits",
+   "health-access"
+  ],
+  "steps": [
+   {
+    "department": "health-conditions",
+    "took": [],
+    "columns": 6,
+    "read": 6,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.77914,
+    "before": 0.5,
+    "with": 0.778956,
+    "lead": 0.278956,
+    "bound": 0.267172,
+    "joins": true
+   },
+   {
+    "department": "health-wellbeing",
+    "took": [
+     "health-conditions"
+    ],
+    "columns": 5,
+    "read": 5,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.812658,
+    "before": 0.778956,
+    "with": 0.812117,
+    "lead": 0.033161,
+    "bound": 0.026647,
+    "joins": true
+   },
+   {
+    "department": "health-person",
+    "took": [
+     "health-conditions",
+     "health-wellbeing"
+    ],
+    "columns": 6,
+    "read": 6,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.825358,
+    "before": 0.812117,
+    "with": 0.824029,
+    "lead": 0.011912,
+    "bound": 0.008055,
+    "joins": true
+   },
+   {
+    "department": "health-habits",
+    "took": [
+     "health-conditions",
+     "health-wellbeing",
+     "health-person"
+    ],
+    "columns": 8,
+    "read": 8,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.824459,
+    "before": 0.824029,
+    "with": 0.824134,
+    "lead": 0.000105,
+    "bound": -0.000728,
+    "joins": false
+   },
+   {
+    "department": "health-access",
+    "took": [
+     "health-conditions",
+     "health-wellbeing",
+     "health-person"
+    ],
+    "columns": 5,
+    "read": 5,
+    "fielded": "boosted",
+    "size": "200 trees",
+    "gateAuc": 0.823647,
+    "before": 0.824029,
+    "with": 0.823862,
+    "lead": -0.000167,
+    "bound": -0.000366,
+    "joins": false
+   }
+  ],
+  "admitted": [
+   "health-conditions",
+   "health-wellbeing",
+   "health-person"
+  ],
+  "refused": [
+   "health-habits",
+   "health-access"
+  ],
+  "chosen": "linear",
+  "outOfFold": [
+   {
+    "coupling": "linear",
+    "gateAuc": 0.824029
+   },
+   {
+    "coupling": "trees",
+    "gateAuc": 0.821311
+   }
+  ],
+  "cases": 17999,
+  "outcomes": 2507,
+  "composedAuc": 0.82356,
+  "singles": [
+   {
+    "department": "health-conditions",
+    "fielded": "boosted",
+    "gateAuc": 0.77914,
+    "testAuc": 0.779128
+   },
+   {
+    "department": "health-wellbeing",
+    "fielded": "boosted",
+    "gateAuc": 0.750195,
+    "testAuc": 0.752206
+   },
+   {
+    "department": "health-person",
+    "fielded": "boosted",
+    "gateAuc": 0.719296,
+    "testAuc": 0.711023
+   },
+   {
+    "department": "health-habits",
+    "fielded": "deep-quantile",
+    "gateAuc": 0.620492,
+    "testAuc": 0.617524
+   },
+   {
+    "department": "health-access",
+    "fielded": "deep-values",
+    "gateAuc": 0.526078,
+    "testAuc": 0.514664
+   }
+  ],
+  "best": {
+   "department": "health-conditions",
+   "fielded": "boosted",
+   "gateAuc": 0.77914,
+   "testAuc": 0.779128
+  },
+  "vsBest": {
+   "a": 0.82356,
+   "b": 0.779128,
+   "lead": 0.044431,
+   "low95": 0.038937
+  },
+  "vsOneScore": {
+   "a": 0.82356,
+   "b": 0.822681,
+   "lead": 0.000879,
+   "low95": -0.000923
+  },
+  "oneScore": {
+   "chosen": "linear",
+   "testAuc": 0.822681
+  },
+  "vsShuffled": {
+   "a": 0.82356,
+   "b": 0.76626,
+   "lead": 0.0573,
+   "low95": 0.051263
+  },
+  "vsRoute": {
+   "a": 0.82356,
+   "b": 0.807302,
+   "lead": 0.016258,
+   "low95": 0.012709
+  },
+  "growth": [
+   {
+    "departments": 1,
+    "added": "health-conditions",
+    "took": 0,
+    "chosen": "linear",
+    "testAuc": 0.779128
+   },
+   {
+    "departments": 2,
+    "added": "health-wellbeing",
+    "took": 1,
+    "chosen": "linear",
+    "testAuc": 0.811262
+   },
+   {
+    "departments": 3,
+    "added": "health-person",
+    "took": 2,
+    "chosen": "linear",
+    "testAuc": 0.82356
+   }
+  ],
+  "fullVsFirst": {
+   "a": 0.82356,
+   "b": 0.779128,
+   "lead": 0.044431,
+   "low95": 0.038937
+  },
+  "monolith": {
+   "boosted": {
+    "a": 0.82356,
+    "b": 0.825813,
+    "lead": -0.002253,
+    "low95": -0.004611
+   },
+   "logistic": {
+    "a": 0.82356,
+    "b": 0.822422,
+    "lead": 0.001138,
+    "low95": -0.00162
+   }
+  },
+  "asIn2i": {
+   "note": "recorded beside the rule, not sealed: the mesh of organ 2i’s rule, every live department joined, in the same relay order",
+   "growth": [
+    {
+     "departments": 1,
+     "added": "health-conditions",
+     "testAuc": 0.779128
+    },
+    {
+     "departments": 2,
+     "added": "health-wellbeing",
+     "testAuc": 0.811262
+    },
+    {
+     "departments": 3,
+     "added": "health-person",
+     "testAuc": 0.82356
+    },
+    {
+     "departments": 4,
+     "added": "health-habits",
+     "testAuc": 0.82473
+    },
+    {
+     "departments": 5,
+     "added": "health-access",
+     "testAuc": 0.823582
+    }
+   ],
+   "chosen": "trees",
+   "composedAuc": 0.823582,
+   "vs": {
+    "a": 0.82356,
+    "b": 0.823582,
+    "lead": -0.000022,
+    "low95": -0.001708
+   }
+  },
+  "frontier": {
+   "model": {
+    "name": "claude-opus-5-5",
+    "asked": "a fresh Claude Code subagent, cold: this prompt only, no tools"
+   },
+   "cases": 1200,
+   "outcomes": 400,
+   "sha": "b009ad033d3e7bbf",
+   "batches": [
+    {
+     "batch": 1,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 2,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 3,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    },
+    {
+     "batch": 4,
+     "promptMatches": true,
+     "answered": 300,
+     "unreadable": 0
+    }
+   ],
+   "sameColumns": true,
+   "vs": {
+    "a": 0.826069,
+    "b": 0.822395,
+    "lead": 0.003673,
+    "low95": -0.005521
+   },
+   "pooledVs": {
+    "a": 0.825875,
+    "b": 0.822395,
+    "lead": 0.00348,
+    "low95": -0.004213
+   }
+  },
+  "ownColumnsOnly": true,
+  "testNeverRead": true,
+  "noiseLive": [],
+  "tamperRefused": true
+ }
+}
