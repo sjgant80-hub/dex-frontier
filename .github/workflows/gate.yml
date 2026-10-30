@@ -71,6 +71,9 @@ jobs:
       - name: organ 2j, the gate taken again with the mesh growing only by what beats the noise (re-derived, re-judged, seal first, once it is measured)
         run: |
           if [ -f data/organ-2j/record.json ]; then node tools/measure-2j.mjs --check && node tools/judge-2j.mjs --check && node tools/order.mjs --organ 2j; elif [ -f data/organ-2j/prereg.json ]; then echo "organ 2j sealed, being measured"; else echo "organ 2j built, not yet sealed"; fi
+      - name: organ 2k, organ 2j's mechanism taken again unchanged on a second fresh domain (re-derived, re-judged, seal first, once it is measured)
+        run: |
+          if [ -f data/organ-2k/record.json ]; then node tools/measure-2k.mjs --check && node tools/judge-2k.mjs --check && node tools/order.mjs --organ 2k; elif [ -f data/organ-2k/prereg.json ]; then echo "organ 2k sealed, being measured"; else echo "organ 2k built, not yet sealed"; fi
       - name: the check made after organ 2g was judged (the hospital with every department kept) is the run itself
         run: |
           if [ -f data/organ-2g/nobar.json ]; then node tools/nobar-2g.mjs --check; else echo "no check yet"; fi

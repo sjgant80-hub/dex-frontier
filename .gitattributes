@@ -15,3 +15,4 @@ data/hotel-H1.csv -text
 data/hotel-H2.csv -text
 data/OnlineNewsPopularity.csv -text
 data/fresh5/*.csv -text
+data/fresh6/*.csv -text

@@ -1,0 +1,18 @@
+{
+ "kind": "dex-frontier.fresh6-sources",
+ "why": "cases no organ has scored, for repeating organ 2j's mechanism unchanged on a second fresh domain: downloaded 2026-10-30, after organ 2j was judged and the buyer walk asked for it, with Simon's go-ahead (\"ok downld both\"). The second file Simon approved, UCI SUPPORT2, is not used and not kept here: it comes from ICPSR study 2957, whose policy asks for approval before redistribution and bars giving its data to a language model that keeps it.",
+ "files": [
+  {
+   "path": "data/fresh6/students-dropout.csv",
+   "sha256": "3ef126de5cefff26eb11fbb4237f1a1401cb64b488e2f1d598c23cedeb4c45ae",
+   "bytes": 533230,
+   "rows": 4424,
+   "from": "https://archive.ics.uci.edu/static/public/697/predict+students+dropout+and+academic+success.zip → data.csv (byte for byte: a UTF-8 byte-order mark, semicolons, CRLF kept), UCI's own download",
+   "zipSha256": "e90e55fd65ec462ae283ebeb2cca409319e3460ed898d8754f62fb35cc83a65d",
+   "dataset": "Predict Students' Dropout and Academic Success (UCI id 697, DOI 10.24432/C5MC89): 4,424 students of a Portuguese higher-education institution, 36 columns known at enrolment and at the end of the first two semesters, target Dropout / Enrolled / Graduate at the end of the course's normal duration",
+   "licence": "CC BY 4.0, as the UCI page states",
+   "cite": "V. Realinho, M. Vieira Martins, J. Machado and L. Baptista. Predict Students' Dropout and Academic Success [Dataset]. UCI Machine Learning Repository (2021), https://doi.org/10.24432/C5MC89",
+   "note": "dropped out = 1; enrolled and graduated = 0. Codes for course, application mode, nationality, qualifications and occupations are numbers in the file; their meanings are UCI's own variable table, kept verbatim in data/fresh6-codebook.json"
+  }
+ ]
+}

@@ -25,6 +25,7 @@ export const ORGANS = {
   '2h': { seal: 'data/organ-2h/prereg.json', later: ['data/llm/frontier-coupon-1.json', 'data/llm/frontier-coupon-2.json', 'data/llm/frontier-coupon-3.json', 'data/llm/frontier-coupon-4.json', 'data/llm/frontier-cover-1.json', 'data/llm/frontier-cover-2.json', 'data/llm/frontier-cover-3.json', 'data/llm/frontier-cover-4.json', 'data/organ-2h/record.json'] },
   '2i': { seal: 'data/organ-2i/prereg.json', later: ['data/llm/frontier-hotel-1.json', 'data/llm/frontier-hotel-2.json', 'data/llm/frontier-hotel-3.json', 'data/llm/frontier-hotel-4.json', 'data/llm/frontier-news-1.json', 'data/llm/frontier-news-2.json', 'data/llm/frontier-news-3.json', 'data/llm/frontier-news-4.json', 'data/organ-2i/record.json'] },
   '2j': { seal: 'data/organ-2j/prereg.json', later: ['data/llm/frontier-health-1.json', 'data/llm/frontier-health-2.json', 'data/llm/frontier-health-3.json', 'data/llm/frontier-health-4.json', 'data/organ-2j/record.json'] },
+  '2k': { seal: 'data/organ-2k/prereg.json', later: ['data/llm/frontier-dropout-1.json', 'data/llm/frontier-dropout-2.json', 'data/llm/frontier-dropout-3.json', 'data/llm/frontier-dropout-4.json', 'data/organ-2k/record.json'] },
   3: { seal: 'data/organ-3/prereg.json', later: ['data/organ-3/record.json'] },
   4: { seal: 'data/organ-4/prereg.json', later: ['data/organ-4/record.json'] },
   5: { seal: 'data/organ-5/prereg.json', later: ['data/organ-5/record.json'] },

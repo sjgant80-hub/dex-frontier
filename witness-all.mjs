@@ -48,6 +48,7 @@ export const PAIRS = [
   ['src/fresh3.mjs', ['test/fresh3.test.mjs']],
   ['src/fresh4.mjs', ['test/fresh4.test.mjs']],
   ['src/fresh5.mjs', ['test/fresh5.test.mjs']],
+  ['src/fresh6.mjs', ['test/fresh6.test.mjs']],
   ['src/relay.mjs', ['test/relay.test.mjs']],
   ['src/bodies.mjs', ['test/bodies.test.mjs']],
   ['src/join.mjs', ['test/join.test.mjs']],
