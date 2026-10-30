@@ -158,8 +158,8 @@ function later(R) {
 export function render(html, R = records()) {
   const t = tally(R);
   for (const [k, v] of Object.entries(t)) html = html.replace(new RegExp('(data-tally="' + k + '">)[^<]*(<)', 'g'), '$1' + v + '$2');
-  html = html.replace(/(data-r="([0-9]+):([^"|]+)(?:\|([a-z0-9]+))?">)[^<]*(<)/g, (m, open, k, path, f, close) => open + (R[k] ? format(at(R[k].r, path), f) : '…') + close);
-  html = html.replace(/(data-v="([0-9]+):([A-Z][0-9]+)">)[^<]*(<)/g, (m, open, k, id, close) => open + (pass(R, k, id) === null ? '…' : pass(R, k, id) ? 'held' : 'failed') + close);
+  html = html.replace(/(data-r="([0-9]+[a-z]?):([^"|]+)(?:\|([a-z0-9]+))?">)[^<]*(<)/g, (m, open, k, path, f, close) => open + (R[k] ? format(at(R[k].r, path), f) : '…') + close);
+  html = html.replace(/(data-v="([0-9]+[a-z]?):([A-Z][A-Z0-9]*)">)[^<]*(<)/g, (m, open, k, id, close) => open + (pass(R, k, id) === null ? '…' : pass(R, k, id) ? 'held' : 'failed') + close);
   for (const [k, v] of Object.entries(blocks(R))) html = html.replace(new RegExp('(<!-- w:' + k + ' -->)[\\s\\S]*?(<!-- /w:' + k + ' -->)'), '$1' + v + '$2');
   return html.replace(/(<meta name="description" content="[^"]*?)[0-9]+ of [0-9]+( sealed rules held)/, '$1' + t.held + '$2');
 }
