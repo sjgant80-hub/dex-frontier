@@ -1,0 +1,64 @@
+{
+ "kind": "dex-frontier.organ-2k.verdict",
+ "v": 1,
+ "prereg": "d433cb8d4859eb35",
+ "record": "8e5ef82c54e23ee0",
+ "verdicts": [
+  {
+   "id": "R1",
+   "kind": "property",
+   "claim": "the fresh file is the one downloaded, byte for byte; each department reads only its own columns and the scores of departments admitted before it, TEST is never read (scrambling every TEST record leaves every department’s bodies, the body it fields, whether it is offered, the order, each join with its lead and bound, what each department was sent, and the mesh’s choice of coupling unchanged), a changed seed is refused before it is read, the frontier model is shown exactly the columns the departments hold, each found in the codebook, and it answered every batch of 300 to its sealed prompt (1,200 cases)",
+   "pass": true,
+   "saw": "files as downloaded: true; dropout: offered semester2 boosted joined (bound 0.344536), semester1←semester2 boosted refused (bound -0.002592), finance←semester2 boosted joined (bound 0.009765), admission←semester2+finance boosted joined (bound 0.002211), person←semester2+finance+admission boosted refused (bound -0.003659), family←semester2+finance+admission boosted refused (bound -0.002931) (cut before offering: economy), own columns and admitted senders’ scores only true, TEST never read true, a changed seed refused true, the frontier shown the same columns true, frontier batches answered to their sealed prompts 300✓/300✓/300✓/300✓"
+  },
+  {
+   "id": "R2",
+   "kind": "prediction",
+   "claim": "COMPOSITION > PARTS: at least two departments join, and the mesh beats its best single department alone on TEST (the best on TEST of those offered): bound above 0",
+   "pass": true,
+   "saw": "dropout: 3 joined; the mesh (linear) against its best department alone (dropout-semester2): 0.908632 vs 0.88127, lead 0.027362, bound 0.016776"
+  },
+  {
+   "id": "R3",
+   "kind": "prediction",
+   "claim": "APPROACHES THE FRONTIER: on the 1,200, the mesh is not worse than the frontier model by more than 0.02 AUC: bound above −0.02",
+   "pass": true,
+   "saw": "dropout: on the 1,200, the mesh against claude-opus-5-5: 0.907361 vs 0.910252, lead -0.002891, bound -0.013785 against −0.02 (0 unreadable); the pooled model against it: 0.917894 vs 0.910252, lead 0.007642, bound -0.000137"
+  },
+  {
+   "id": "R4",
+   "kind": "prediction",
+   "claim": "GROWTH MEASURABLY RAISES IT: with at least two departments joined, adding them one at a time in the order they joined (the coupling chosen afresh at each size) never lowers the TEST AUC, and the full mesh beats its first department beyond the noise: bound above 0",
+   "pass": true,
+   "saw": "dropout: 1 0.88127 → 2 0.901881 → 3 0.908632; the full mesh against its first department: 0.908632 vs 0.88127, lead 0.027362, bound 0.016776"
+  },
+  {
+   "id": "R5",
+   "kind": "prediction",
+   "claim": "APPROACHES THE POURED MONOLITH: the mesh is not worse than boosted trees on every column pooled in one place by more than 0.02 AUC: bound above −0.02",
+   "pass": true,
+   "saw": "dropout: against boosted trees on every column pooled: 0.908632 vs 0.918584, lead -0.009952, bound -0.018552 against −0.02; logistic regression pooled 0.908542"
+  },
+  {
+   "id": "R6",
+   "kind": "prediction",
+   "claim": "NOT A SHAM: the mesh beats a coupling taught shuffled outcomes and random routing (both bounds above 0), and grown on shuffled outcomes no department is offered",
+   "pass": true,
+   "saw": "dropout: against a coupling taught shuffled outcomes: 0.908632 vs 0.857025, lead 0.051607, bound 0.036206; against random routing: 0.908632 vs 0.898995, lead 0.009637, bound 0.002158; live on shuffled outcomes: none"
+  },
+  {
+   "id": "R7",
+   "kind": "prediction",
+   "claim": "THE RELAY ADDS: with at least two departments joined, the mesh beats the same departments answering alone, one score each, coupled the same way: bound above 0",
+   "pass": false,
+   "saw": "dropout: the relay against the same departments alone, one score each (linear): 0.908632 vs 0.907242, lead 0.00139, bound -0.005177"
+  },
+  {
+   "id": "GATE",
+   "kind": "prediction",
+   "claim": "THE GATE REPEATED: R2, R3 and R4 all hold on this second fresh domain. With organ 2j, that is the gate held on two fresh domains by one mechanism, each sealed before it ran. Nothing below the gate (organs 3 to 7) is sealed unless it does",
+   "pass": true,
+   "saw": "composition > parts true, approaches the frontier true, growth measurably raises it true"
+  }
+ ]
+}

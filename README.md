@@ -27,12 +27,12 @@ more than the sum?** That is organ 2, sealed before it ran and allowed to fail.
 | 2h | **The gate taken again, the join rule fixed** | a department joins when it beats a coin beyond the noise; two more fresh datasets | 4 of 7 sealed rules held | mesh 0.729 / 0.840 vs best department 0.666 / 0.814 vs the frontier 0.738 / 0.823 (coupon / forest) |
 | 2i | **The gate taken again, with a relay** | departments grow in turn, each on the scores the stronger ones send it; two more fresh datasets | 6 of 8 sealed rules held | mesh 0.899 / 0.733 vs best department 0.774 / 0.676 vs the same departments alone 0.889 / 0.727 vs the frontier 0.859 / 0.701 (hotel / news) |
 | 2j | **The gate taken again, growth beyond the noise** | a department takes a seat only if the mesh with it beats the mesh without it beyond the noise; one more fresh dataset | 7 of 8 sealed rules held | 3 of 5 offered joined; mesh 0.824 vs best department 0.779 vs the same departments alone 0.823 vs the frontier 0.822 (health survey) |
-| 2k | **The gate’s pass repeated** | organ 2j’s mechanism taken again, unchanged, on a second fresh dataset | sealed, being measured | — |
-| 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built; waits until the gate’s pass is repeated on a second fresh domain | — |
-| 4 | **Growing by working** | each node sharpens as its records arrive | built; waits until the gate’s pass is repeated on a second fresh domain | — |
-| 5 | **The wisp** | routing that learns from outcomes; a node gone bad is pruned | built; waits until the gate’s pass is repeated on a second fresh domain | — |
-| 6 | **Scale** | cut finer, more nodes: the composed answer keeps climbing | built; waits until the gate’s pass is repeated on a second fresh domain | — |
-| 7 | **Sovereign spread** | owned by contributors, carried by cards, revocable, scores only | built; waits until the gate’s pass is repeated on a second fresh domain | — |
+| 2k | **The gate’s pass repeated** | organ 2j’s mechanism taken again, unchanged, on a second fresh dataset | 7 of 8 sealed rules held | 3 of 6 offered joined; mesh 0.909 vs best department 0.881 vs the same departments alone 0.907 vs the frontier 0.910 (students) |
+| 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built; sealed next, one at a time in order | — |
+| 4 | **Growing by working** | each node sharpens as its records arrive | built; sealed next, one at a time in order | — |
+| 5 | **The wisp** | routing that learns from outcomes; a node gone bad is pruned | built; sealed next, one at a time in order | — |
+| 6 | **Scale** | cut finer, more nodes: the composed answer keeps climbing | built; sealed next, one at a time in order | — |
+| 7 | **Sovereign spread** | owned by contributors, carried by cards, revocable, scores only | built; sealed next, one at a time in order | — |
 <!-- /geo:organs -->
 
 ## Run it yourself
