@@ -26,6 +26,7 @@ more than the sum?** That is organ 2, sealed before it ran and allowed to fail.
 | 2g | **The gate taken again** | all three tests on two more fresh datasets, the frontier test on 1,200 cases, growth beyond the noise | 1 of 7 sealed rules held | mesh 0.500 / 0.767 vs best department 0.500 / 0.748 vs the frontier 0.631 / 0.746 (hospital / credit) |
 | 2h | **The gate taken again, the join rule fixed** | a department joins when it beats a coin beyond the noise; two more fresh datasets | 4 of 7 sealed rules held | mesh 0.729 / 0.840 vs best department 0.666 / 0.814 vs the frontier 0.738 / 0.823 (coupon / forest) |
 | 2i | **The gate taken again, with a relay** | departments grow in turn, each on the scores the stronger ones send it; two more fresh datasets | 6 of 8 sealed rules held | mesh 0.899 / 0.733 vs best department 0.774 / 0.676 vs the same departments alone 0.889 / 0.727 vs the frontier 0.859 / 0.701 (hotel / news) |
+| 2j | **The gate taken again, growth beyond the noise** | a department takes a seat only if the mesh with it beats the mesh without it beyond the noise; one more fresh dataset | sealed, being measured | — |
 | 3 | **Breeding** | a bred child beats both parents on cases neither saw; the population grows a better mesh | built and held until composition wins the gate | — |
 | 4 | **Growing by working** | each node sharpens as its records arrive | built and held until composition wins the gate | — |
 | 5 | **The wisp** | routing that learns from outcomes; a node gone bad is pruned | built and held until composition wins the gate | — |
