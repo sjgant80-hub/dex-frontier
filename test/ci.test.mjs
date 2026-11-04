@@ -10,5 +10,6 @@ test('the CI workflow loads: no plain step name or command holds ": " or " #", a
   assert.ok(plain.length > 10);
   for (const [n, m] of plain) assert.ok(!/: | #/.test(m[2]), 'gate.yml line ' + n + ': a plain ' + m[1] + ' holds ": " or " #"');
   for (const k of ['1', '2', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j', '2k', '3', '4', '5', '6', '7']) assert.ok(text.includes('node tools/measure-' + k + '.mjs --check'), 'organ ' + k + ' is re-derived in CI');
+  assert.ok(text.includes('--branch v0.6 https://github.com/sjgant80-hub/witness.git') && text.includes('cmp "$RUNNER_TEMP/witness/witness.mjs" .witness/witness.mjs'), 'the mutation gate is pinned to witness v0.6');
   for (const step of ['node witness-all.mjs', 'node tools/vendor-check.mjs', 'node tools/words.mjs --check', 'node tools/geo.mjs --check', 'node tools/csp.mjs --check']) assert.ok(text.includes(step), step);
 });

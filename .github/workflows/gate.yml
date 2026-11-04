@@ -10,6 +10,10 @@ jobs:
         with: { node-version: '22' }
       - name: unit tests of every kernel and tool
         run: node --test test/*.test.mjs
+      - name: the mutation gate is witness v0.6, byte for byte (cloned at its tag, compared with the vendored copy)
+        run: |
+          git clone -q --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git "$RUNNER_TEMP/witness"
+          cmp "$RUNNER_TEMP/witness/witness.mjs" .witness/witness.mjs && cmp "$RUNNER_TEMP/witness/runner.mjs" .witness/runner.mjs && echo "witness v0.6, byte for byte"
       - name: mutation gate over the kernels (no unreviewed survivors)
         run: node witness-all.mjs
       - name: the vendored kernels are byte-identical to living-seed's

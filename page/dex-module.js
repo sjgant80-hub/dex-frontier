@@ -8,6 +8,7 @@ import { caseOf } from './vendor/living-seed/src/germinate.mjs';
 import { auc } from './vendor/living-seed/vendor/seed-library/seedlib.mjs';
 import { member, breed } from './src/population.mjs';
 import { order, run, breakAt } from './src/wisp.mjs';
+import { meshCase, sourcesOf } from './src/meshcase.mjs';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -213,12 +214,43 @@ async function records() {
     const el = $('r' + k);
     if (S['rec' + k] && S['ver' + k]) el.innerHTML = LATER[k](S['rec' + k]) + '<details><summary>Organ ' + k + ' — sealed rules and verdict</summary>' + rulesTable(S['pre' + k], S['ver' + k]) + '</details>';
     else if (S['pre' + k]) el.innerHTML = '<details><summary>Organ ' + k + ' — the rules sealed before it was measured</summary>' + rulesTable(S['pre' + k], { verdicts: [] }) + '</details>';
-    else el.innerHTML = '<p class="dim">' + (/^2[f-k]$/.test(k) ? 'Sealed before it was measured: the verdict fills in from the record.' : /^2[b-e]$/.test(k) ? 'Not taken: it runs only if the attempt before it finds that composition does not net.' : (REP() ? 'Built, and next: the gate has held on two fresh domains by one mechanism (organs 2j and 2k), so the organs below it are sealed one at a time in the spec’s order, organ 3 first.' : WON() && S.ver2k ? 'Built and held: the gate held in organ 2j but not again in organ 2k, so the organs below it stay held.' : WON() ? 'Built, and waiting: the gate held once, in organ 2j, on one fresh domain. The organs below it are sealed one at a time in the spec’s order, organ 3 first, once that pass is repeated on a second fresh domain.' : 'Built and held: by the spec’s order it is sealed only once composition wins the gate.')) + '</p>';
+    else el.innerHTML = '<p class="dim">' + (/^2[f-k]$/.test(k) ? 'Sealed before it was measured: the verdict fills in from the record.' : /^2[b-e]$/.test(k) ? 'Not taken: it runs only if the attempt before it finds that composition does not net.' : (REP() ? (k === '3' ? 'Next, by the spec. Organ 3 was built for the first two datasets (telecom and shop), whose test cases have been scored many times since, so it is redesigned on the mechanism that held the gate, on FIT and GATE alone, and sealed only on a dataset no organ has touched, before anything of it is measured.' : 'Built for the first two datasets, and waiting its turn: after organ 3, the organs below the gate are redesigned on the mechanism that held it and sealed one at a time, in the spec’s order.') : WON() && S.ver2k ? 'Built and held: the gate held in organ 2j but not again in organ 2k, so the organs below it stay held.' : WON() ? 'Built, and waiting: the gate held once, in organ 2j, on one fresh domain. The organs below it are sealed one at a time in the spec’s order, organ 3 first, once that pass is repeated on a second fresh domain.' : 'Built and held: by the spec’s order it is sealed only once composition wins the gate.')) + '</p>';
   }
   const names = { '2b': 'Composition fix: no node counted against its evidence; co-growth', '2c': 'Composition fix: co-growth coupled as the mesh is', '2d': 'Composition fix: a nonlinear coupling', '2e': 'Composition fix: the mesh chooses its coupling', '2f': 'The gate retaken in full, on fresh cases: all three tests at once', '2g': 'The gate taken again, its measurement fixed, on two more fresh datasets', '2h': 'The gate taken again, the join rule fixed, on two more fresh datasets', '2i': 'The gate taken again, with a relay, on two more fresh datasets', '2j': 'The gate taken again, the mesh growing only by what beats the noise, on one more fresh dataset', '2k': 'The gate’s pass repeated: organ 2j’s mechanism, unchanged, on a second fresh dataset', 3: 'Breeding: a bred child must beat both parents on cases neither saw', 4: 'Self-growing: each node sharpens as real work arrives', 5: 'Routing that learns from outcomes', 6: 'Scale: more silos, more nodes, the composed score climbing', 7: 'Sovereign spread: each node owned by its contributor, carried by cards' };
-  const state = (k) => (st[k] === 'measured' && S['ver' + k] ? S['ver' + k].verdicts.filter((v) => v.pass).length + ' of ' + S['ver' + k].verdicts.length + ' sealed rules held' : st[k] === 'sealed' ? 'sealed, being measured' : REP() ? 'built; sealed next, one at a time in order' : WON() && S.ver2k ? 'built and held: the gate’s pass was not repeated' : WON() ? 'built; waits until the gate’s pass is repeated on a second fresh domain' : 'built and held until composition wins the gate');
+  const state = (k) => (st[k] === 'measured' && S['ver' + k] ? S['ver' + k].verdicts.filter((v) => v.pass).length + ' of ' + S['ver' + k].verdicts.length + ' sealed rules held' : st[k] === 'sealed' ? 'sealed, being measured' : REP() ? (k === '3' ? 'next: redesigned on the mechanism that held the gate; sealed on a fresh dataset' : 'built; waits for organ 3, then sealed in order') : WON() && S.ver2k ? 'built and held: the gate’s pass was not repeated' : WON() ? 'built; waits until the gate’s pass is repeated on a second fresh domain' : 'built and held until composition wins the gate');
   $('r-next').innerHTML = T(['Organ', 'What it must show', 'State'], ['2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j', '2k', '3', '4', '5', '6', '7'].map((k) => ['<a href="#' + { '2b': 'fix', '2c': 'fix', '2d': 'fix', '2e': 'fix', '2f': 'retake', '2g': 'retake2', '2h': 'retake3', '2i': 'retake4', '2j': 'retake5', '2k': 'retake6', 3: 'breed', 4: 'grow', 5: 'wisp', 6: 'scale', 7: 'spread' }[k] + '">' + k + '</a>', names[k], esc(state(k))]));
 }
+
+// ══ For your business · the cost case, worked out by src/meshcase.mjs from the vendored, sourced basis ══
+const BASIS_PATH = 'vendor/sovereign-enterprise/data/basis.json';
+const gbp = (n) => '£' + Math.round(n).toLocaleString('en-GB');
+let BASIS = null;
+function renderCost() {
+  if (!BASIS) { $('c-head').textContent = 'The sourced figures could not be loaded: reconnect and reload the page.'; return; }
+  const v = (id) => Number($(id).value);
+  const r = meshCase(BASIS, { hoursPerWeek: v('c-hours'), share: v('c-share') / 100, departments: v('c-depts'), seats: v('c-seats'), casesPerWeek: v('c-cases'), tokensIn: v('c-tin'), tokensOut: v('c-tout'), years: v('c-years') });
+  if (!r.ok) { $('c-head').textContent = 'Check the inputs: ' + r.why + '.'; return; }
+  const i = r.inputs, L = r.lines, yrs = i.years + (i.years === 1 ? ' year' : ' years'), pct = Math.round(i.share * 100) + '%';
+  $('c-overh').textContent = 'Over ' + yrs;
+  $('c-head').innerHTML = 'This question costs you <b>' + gbp(r.perYear.today) + '</b> a year in staff time today. With the mesh taking ' + pct + ' of that work off: <b>' + gbp(r.perYear.mesh) + '</b> a year, <b>' + gbp(r.savingPerYear) + ' a year back</b>, ' + gbp(r.savingOver) + ' over ' + yrs + '.';
+  const rows = [
+    ['Today', 'Your people gather each case from the departments and judge it.', 'today'],
+    ['Rent AI assistant seats', 'Microsoft 365 Copilot for ' + gb(i.seats) + ' people (' + gbp(L.seats) + ' a year). It helps each person; the work, and the staff time, stay.', 'rentSeats'],
+    ['A frontier model on every case', 'Takes the same share off, billed per case at Claude Sonnet 5 API rates (' + gbp(L.frontier) + ' a year at your volume). Every case’s records, from every department, go to the provider.', 'cloudFrontier'],
+    ['An open model hosted in London', 'Takes the same share off, billed per case at Amazon Bedrock rates for gpt-oss-120b (' + gbp(L.open) + ' a year). Every case’s records go to the cloud.', 'cloudOpen'],
+    ['The mesh, on your machines', 'Takes the same share off on machines the departments already have: about ' + gbp(L.power) + ' a year of extra electricity for ' + gb(i.departments) + ' machine' + (i.departments === 1 ? '' : 's') + ', priced as if always on. No seats, no meter, and no record leaves its department.', 'mesh'],
+  ];
+  $('c-table').querySelector('tbody').innerHTML = rows.map(([route, what, k]) => '<tr><td><b>' + esc(route) + '</b></td><td>' + esc(what) + '</td><td class="num">' + gbp(r.perYear[k]) + '</td><td class="num">' + gbp(r.over[k]) + '</td></tr>').join('');
+  $('c-note').textContent = (r.versusFrontierOver >= 0 && r.versusOpenOver >= 0 ? 'Over ' + yrs + ' the mesh also costs less to run than either cloud route (' + gbp(r.versusFrontierOver) + ' less than the frontier route, ' + gbp(r.versusOpenOver) + ' less than the open model).'
+    : 'At this volume a cloud model’s per-case bill (' + gbp(L.frontier) + ' a year for the frontier model, ' + gbp(L.open) + ' for the open one) is close to, or below, the mesh’s electricity priced as always on (' + gbp(L.power) + '): the running costs are small either way, and the difference that counts is where each case’s records go.')
+    + ' The cloud routes assume ' + gb(i.tokensIn) + ' tokens in and ' + gb(i.tokensOut) + ' out per case; change them to yours.';
+  $('c-board').innerHTML = 'Pick one question across two or three departments. Today it costs <b>' + gbp(r.perYear.today) + '</b> a year in staff time, a floor at the UK median wage. If the mesh takes off the ' + pct + ' you estimate, that is <b>' + gbp(r.savingPerYear) + '</b> a year back, ' + gbp(r.savingOver) + ' over ' + yrs + ' with inflation, for about ' + gbp(L.power) + ' a year of electricity. Renting assistant seats instead adds ' + gbp(L.seats) + ' a year and leaves the work where it is; a frontier model on every case runs at ' + gbp(r.perYear.cloudFrontier) + ' a year against the mesh’s ' + gbp(r.perYear.mesh) + ', and sends every case’s records out of the building. The board is asked to approve one question run beside today’s process, not to believe a vendor.';
+}
+for (const id of ['c-hours', 'c-share', 'c-depts', 'c-seats', 'c-cases', 'c-tin', 'c-tout', 'c-years']) $(id).addEventListener('input', renderCost);
+get(BASIS_PATH).then((b) => {
+  BASIS = b;
+  $('c-src').innerHTML = sourcesOf(b).map((x) => '<li>' + esc(x.what) + (x.source ? ' — <a href="' + esc(x.source) + '" target="_blank" rel="noopener">' + esc(new URL(x.source).hostname) + '</a>' : '') + '</li>').join('');
+}).catch(() => {}).finally(renderCost);
 
 $('b2-go').addEventListener('click', growAll);
 $('b3-go').addEventListener('click', ask);

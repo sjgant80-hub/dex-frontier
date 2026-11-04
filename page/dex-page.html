@@ -63,7 +63,7 @@
     <div><dt>Bound, beyond the noise</dt> <dd>— a lead is real only if it survives resampling the cases two thousand times: the bound is the lead the worst one in forty of those resamples still shows.</dd></div>
     <div><dt>Stacked generalisation</dt> <dd>— the known technique the coupling is: a small model learns how to weigh other models’ answers (Wolpert, 1992).</dd></div>
     <div><dt>Living Seed</dt> <dd>— the earlier build whose code grows each node: a signed seed that germinates into a working, checked set of rules on the records it finds.</dd></div>
-    <div><dt>Breeding</dt> <dd>— two nodes of one silo crossed into a child, kept only if it beats both parents on cases neither trained on (organ 3, built; by the spec’s order sealed only after the gate is won).</dd></div>
+    <div><dt>Breeding</dt> <dd>— two nodes of one department crossed into a child, kept only if it beats both parents on cases neither trained on (organ 3, the next organ by the spec: built for the first two datasets, redesigned on the mechanism that held the gate, and sealed only on a dataset no organ has touched).</dd></div>
   </dl>
 </section>
 
@@ -127,6 +127,9 @@
   </ol>
   <h3 id="traced">Traced from a real run</h3>
   <!-- w:trace --><!-- /w:trace -->
+  <h3 id="grown">How the mesh that held the gate grows, traced from its sealed records</h3>
+  <p>The boxes above grow organ 1 and 2’s mesh in your browser. The mesh that held the gate, on two datasets no earlier attempt had touched, is grown by <code>src/grow.mjs</code>: departments are offered one at a time, strongest first; each grows on its own columns plus the scores of the departments already seated, fields whichever of five bodies does best on cases it never grew on, and takes a seat only if the mesh with it leads the mesh without it beyond the noise. Below is each run exactly as its record holds it, step by step.</p>
+  <!-- w:grown --><!-- /w:grown -->
 </section>
 
 <section id="one" aria-labelledby="one-h">
@@ -149,6 +152,7 @@
 <section id="next" aria-labelledby="next-h">
   <h2 id="next-h"><span class="n">06</span>What scales next, and only after the gate</h2>
   <p>The spec’s order is fixed: one body, then the composition proof, then breeding, self-growing, routing that learns, scale, and sovereign spread. Each later organ is sealed only once composition wins all three of the gate’s tests. Until it does, the next organ fixes composition first.</p>
+  <!-- w:nextstate --><!-- /w:nextstate -->
   <div id="r-next" role="status" aria-live="polite"></div>
 </section>
 
@@ -231,15 +235,18 @@
 
 <section id="blueprint" aria-labelledby="bp-h">
   <h2 id="bp-h"><span class="n">07</span>Blueprint</h2>
-  <div class="tw"><table><thead><tr><th>Part</th><th>File</th><th>What it does</th><th>Gate</th></tr></thead><tbody>
-    <tr><td>Silos</td><td><code>src/silos.mjs</code></td><td>Reads the two real datasets, encodes every column one fixed way, cuts each into its silos, and splits FIT / GATE / TEST (seeded)</td><td>witness, 22 of 22 mutants killed</td></tr>
-    <tr><td>Node</td><td><code>src/node.mjs</code></td><td>Seals a contributor’s grow-seed for one silo, grows it there, cuts it under its bar, reads its scores and advert, routes by fit</td><td>witness, 8 of 8</td></tr>
-    <tr><td>Coupling κ</td><td><code>src/compose.mjs</code></td><td>Learns each node’s weight from GATE outcomes and answers with the weighted sum; the shams it must beat</td><td>witness, 13 of 13</td></tr>
-    <tr><td>Bounds</td><td><code>src/stats.mjs</code></td><td>The paired bootstrap every sealed lead is judged by</td><td>witness, 6 of 6</td></tr>
-    <tr><td>Genome, germination, baselines, breeding, card, gate</td><td><code>vendor/living-seed/</code></td><td>The Living Seed’s kernels, byte-identical to their source (vendor/SOURCES.json)</td><td>gated in living-seed; checked byte for byte here</td></tr>
-    <tr><td>Contest</td><td><code>tools/contest.mjs</code>, <code>ask-llm.mjs</code>, <code>frontier.mjs</code></td><td>Which test cases the models are asked, the examples, the exact prompts, how a reply is read</td><td>pinned by the seals</td></tr>
+  <p>Every organ of the build, file by file. The kernels first: each one’s purpose is its own first line, and its gate is the mutation gate CI runs over it on every push.</p>
+  <!-- w:blueprint --><!-- /w:blueprint -->
+  <h3>Around the kernels</h3>
+  <div class="tw"><table><thead><tr><th>Part</th><th>Files</th><th>What it does</th><th>Gate</th></tr></thead><tbody>
+    <tr><td>Genome, germination, baselines, card, gate</td><td><code>vendor/living-seed/</code></td><td>The Living Seed’s kernels: the seed format, the ribosome that grows rules, boosted trees, Ed25519 signing</td><td>gated in living-seed; CI checks them here byte for byte against <code>vendor/SOURCES.json</code></td></tr>
+    <tr><td>The mutation gate</td><td><code>.witness/witness.mjs</code>, <code>.witness/runner.mjs</code>, <code>witness-all.mjs</code></td><td>Breaks every kernel line by line; the tests must notice each break</td><td>witness v0.6, cloned at its tag in CI and compared byte for byte</td></tr>
+    <tr><td>The cost basis</td><td><code>vendor/sovereign-enterprise/data/basis.json</code></td><td>Every public figure the cost case reads, each with its source</td><td>byte for byte the source’s; its hash is tested</td></tr>
+    <tr><td>Datasets</td><td><code>data/</code>, <code>data/fresh*-sources.json</code></td><td>Every real public dataset the organs use, kept byte for byte as downloaded, each with its hash, licence and citation; the loaders are the <code>src/fresh*.mjs</code> kernels above</td><td>a measurement refuses a file whose hash differs</td></tr>
+    <tr><td>Contest</td><td><code>tools/contest*.mjs</code>, <code>ask-llm.mjs</code>, <code>frontier.mjs</code></td><td>Which test cases the frontier model is asked, the exact prompts, how a reply is read</td><td>pinned by the seals</td></tr>
     <tr><td>Seal, measure, judge, order</td><td><code>tools/seal-*.mjs</code>, <code>measure-*.mjs</code>, <code>judge-*.mjs</code>, <code>order.mjs</code></td><td>Rules committed first, a deterministic record, the verdict, and git proof that the seal came first</td><td>CI re-derives every record on every push</td></tr>
-    <tr><td>This page</td><td><code>index.html</code>, <code>tools/words.mjs</code></td><td>Runs the kernels in your browser; every number in its prose is written from a record</td><td>page tests; CI refuses a page that drifts from its records</td></tr>
+    <tr><td>Design checks</td><td><code>tools/diagnose*.mjs</code>, <code>study-body*.mjs</code></td><td>The checks that shaped each next attempt, on FIT and GATE alone, never TEST</td><td>CI re-runs every one and compares it byte for byte</td></tr>
+    <tr><td>This page</td><td><code>page/</code>, <code>index.html</code>, <code>tools/words.mjs</code>, <code>copy.mjs</code>, <code>explain.mjs</code>, <code>geo.mjs</code>, <code>csp.mjs</code></td><td>Runs the kernels in your browser; every number in its prose is written from a record; its security policy pins its scripts</td><td>page tests; CI refuses a page that drifts from its records</td></tr>
   </tbody></table></div>
 </section>
 
