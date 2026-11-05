@@ -43,6 +43,8 @@ node witness-all.mjs             # the mutation gate: break every kernel line by
 node tools/measure-1.mjs --check # re-derive organ 1's sealed record byte for byte
 node tools/measure-2.mjs --check # re-derive organ 2's sealed record byte for byte
 node tools/order.mjs --organ 2   # prove from git that the seal came before the measurement
+node tools/diagnose-9.mjs --check # organ 3's redesign, asked on FIT and GATE before any seal (CI re-runs it;
+                                  # the study workflow runs a design check on GitHub's runner and uploads its record)
 ```
 
 Planned by Kar (the estate's resident mind, on its own local model: [docs/kar-plan.md](docs/kar-plan.md)) and Claude,

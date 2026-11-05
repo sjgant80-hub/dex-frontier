@@ -1,0 +1,680 @@
+{
+ "kind": "dex-frontier.diagnose-9",
+ "v": 1,
+ "rule": "organ 2j’s mechanism (src/grow.mjs, a seat only if the mesh leads beyond the noise, bound above 0), each department also breeding at its turn (src/breed.mjs): 4 founders of its best rule kind on GATE, grown on 75% of FIT; 3 generations of 4 breedings; a child born only if it leads its better parent beyond the noise (bound above 0, 2000 resamples) on the other 25% of FIT; the champion, re-expressed on all of FIT, fielded only if it beats the five bodies on GATE; FIT and GATE only",
+ "breed": {
+  "founders": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "generations": 3,
+  "attempts": 4,
+  "check": 0.25,
+  "resamples": 2000,
+  "splitSeed": 9
+ },
+ "folds": 4,
+ "relayFolds": 4,
+ "health": {
+  "offered": [
+   "health-conditions",
+   "health-wellbeing",
+   "health-person",
+   "health-habits",
+   "health-access"
+  ],
+  "steps": [
+   {
+    "department": "health-conditions",
+    "took": [],
+    "bred": "deep-values",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.776873
+     },
+     {
+      "id": "f2",
+      "check": 0.774791
+     },
+     {
+      "id": "f3",
+      "check": 0.781286
+     },
+     {
+      "id": "f4",
+      "check": 0.778615
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.781286,
+     0.781286,
+     0.781286,
+     0.781286
+    ],
+    "lineage": [],
+    "champion": "f3",
+    "bestFounder": "f3",
+    "championGate": 0.774316,
+    "bestFounderGate": 0.774316,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.772583,
+     "deep-values": 0.773908,
+     "pairs-quantile": 0.768781,
+     "pairs-values": 0.773268,
+     "boosted": 0.77914
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.77914,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.5,
+    "with": 0.778956,
+    "bound": 0.267172,
+    "joins": true
+   },
+   {
+    "department": "health-wellbeing",
+    "took": [
+     "health-conditions"
+    ],
+    "bred": "pairs-values",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.806779
+     },
+     {
+      "id": "f2",
+      "check": 0.800776
+     },
+     {
+      "id": "f3",
+      "check": 0.804148
+     },
+     {
+      "id": "f4",
+      "check": 0.80547
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.806779,
+     0.806779,
+     0.806779,
+     0.806779
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "bestFounder": "f1",
+    "championGate": 0.80524,
+    "bestFounderGate": 0.80524,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.804582,
+     "deep-values": 0.804082,
+     "pairs-quantile": 0.803716,
+     "pairs-values": 0.804806,
+     "boosted": 0.812658
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.812658,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.778956,
+    "with": 0.812117,
+    "bound": 0.026647,
+    "joins": true
+   },
+   {
+    "department": "health-person",
+    "took": [
+     "health-conditions",
+     "health-wellbeing"
+    ],
+    "bred": "pairs-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.81503
+     },
+     {
+      "id": "f2",
+      "check": 0.808858
+     },
+     {
+      "id": "f3",
+      "check": 0.810927
+     },
+     {
+      "id": "f4",
+      "check": 0.81253
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.81503,
+     0.81503,
+     0.81503,
+     0.81503
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "bestFounder": "f1",
+    "championGate": 0.815283,
+    "bestFounderGate": 0.815283,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.812902,
+     "deep-values": 0.804765,
+     "pairs-quantile": 0.816482,
+     "pairs-values": 0.814468,
+     "boosted": 0.825358
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.825358,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.812117,
+    "with": 0.824029,
+    "bound": 0.008055,
+    "joins": true
+   },
+   {
+    "department": "health-habits",
+    "took": [
+     "health-conditions",
+     "health-wellbeing",
+     "health-person"
+    ],
+    "bred": "deep-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.817712
+     },
+     {
+      "id": "f2",
+      "check": 0.816495
+     },
+     {
+      "id": "f3",
+      "check": 0.815646
+     },
+     {
+      "id": "f4",
+      "check": 0.816346
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.817712,
+     0.817712,
+     0.817712,
+     0.817712
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "bestFounder": "f1",
+    "championGate": 0.821114,
+    "bestFounderGate": 0.821114,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.819229,
+     "deep-values": 0.817269,
+     "pairs-quantile": 0.819102,
+     "pairs-values": 0.816606,
+     "boosted": 0.824459
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.824459,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.824029,
+    "with": 0.824134,
+    "bound": -0.000728,
+    "joins": false
+   },
+   {
+    "department": "health-access",
+    "took": [
+     "health-conditions",
+     "health-wellbeing",
+     "health-person"
+    ],
+    "bred": "deep-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.816399
+     },
+     {
+      "id": "f2",
+      "check": 0.814921
+     },
+     {
+      "id": "f3",
+      "check": 0.812989
+     },
+     {
+      "id": "f4",
+      "check": 0.816452
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.816452,
+     0.816452,
+     0.816452,
+     0.816452
+    ],
+    "lineage": [],
+    "champion": "f4",
+    "bestFounder": "f4",
+    "championGate": 0.822192,
+    "bestFounderGate": 0.822192,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.822443,
+     "deep-values": 0.820945,
+     "pairs-quantile": 0.820751,
+     "pairs-values": 0.820901,
+     "boosted": 0.823647
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.823647,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.824029,
+    "with": 0.823862,
+    "bound": -0.000366,
+    "joins": false
+   }
+  ],
+  "admitted": {
+   "bred": [
+    "health-conditions",
+    "health-wellbeing",
+    "health-person"
+   ],
+   "asIn2j": [
+    "health-conditions",
+    "health-wellbeing",
+    "health-person"
+   ]
+  },
+  "meshOnGate": {
+   "bred": 0.824029,
+   "asIn2j": 0.824029,
+   "identical": true,
+   "lead": null
+  }
+ },
+ "dropout": {
+  "offered": [
+   "dropout-semester2",
+   "dropout-semester1",
+   "dropout-finance",
+   "dropout-admission",
+   "dropout-person",
+   "dropout-family"
+  ],
+  "steps": [
+   {
+    "department": "dropout-semester2",
+    "took": [],
+    "bred": "deep-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.825098
+     },
+     {
+      "id": "f2",
+      "check": 0.870722
+     },
+     {
+      "id": "f3",
+      "check": 0.857158
+     },
+     {
+      "id": "f4",
+      "check": 0.861211
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.870722,
+     0.870722,
+     0.870722,
+     0.870722
+    ],
+    "lineage": [],
+    "champion": "f2",
+    "bestFounder": "f2",
+    "championGate": 0.843598,
+    "bestFounderGate": 0.843598,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.852181,
+     "deep-values": 0.826736,
+     "pairs-quantile": 0.845369,
+     "pairs-values": 0.84033,
+     "boosted": 0.87571
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.87571,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.5,
+    "with": 0.8724,
+    "bound": 0.344536,
+    "joins": true
+   },
+   {
+    "department": "dropout-semester1",
+    "took": [
+     "dropout-semester2"
+    ],
+    "bred": "pairs-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.868375
+     },
+     {
+      "id": "f2",
+      "check": 0.88389
+     },
+     {
+      "id": "f3",
+      "check": 0.862992
+     },
+     {
+      "id": "f4",
+      "check": 0.857302
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.88389,
+     0.88389,
+     0.88389,
+     0.88389
+    ],
+    "lineage": [],
+    "champion": "f2",
+    "bestFounder": "f2",
+    "championGate": 0.858107,
+    "bestFounderGate": 0.858107,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.81548,
+     "deep-values": 0.827865,
+     "pairs-quantile": 0.850215,
+     "pairs-values": 0.839904,
+     "boosted": 0.878556
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.878556,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.8724,
+    "with": 0.87548,
+    "bound": -0.002592,
+    "joins": false
+   },
+   {
+    "department": "dropout-finance",
+    "took": [
+     "dropout-semester2"
+    ],
+    "bred": "deep-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.890713
+     },
+     {
+      "id": "f2",
+      "check": 0.887499
+     },
+     {
+      "id": "f3",
+      "check": 0.880649
+     },
+     {
+      "id": "f4",
+      "check": 0.888495
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.890713,
+     0.890713,
+     0.890713,
+     0.890713
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "bestFounder": "f1",
+    "championGate": 0.891094,
+    "bestFounderGate": 0.891094,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.896394,
+     "deep-values": 0.895227,
+     "pairs-quantile": 0.885622,
+     "pairs-values": 0.891805,
+     "boosted": 0.901475
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.901475,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.8724,
+    "with": 0.896659,
+    "bound": 0.009765,
+    "joins": true
+   },
+   {
+    "department": "dropout-admission",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance"
+    ],
+    "bred": "deep-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.863094
+     },
+     {
+      "id": "f2",
+      "check": 0.872018
+     },
+     {
+      "id": "f3",
+      "check": 0.883767
+     },
+     {
+      "id": "f4",
+      "check": 0.854504
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.883767,
+     0.883767,
+     0.883767,
+     0.883767
+    ],
+    "lineage": [],
+    "champion": "f3",
+    "bestFounder": "f3",
+    "championGate": 0.89389,
+    "bestFounderGate": 0.89389,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.885949,
+     "deep-values": 0.874128,
+     "pairs-quantile": 0.849758,
+     "pairs-values": 0.848748,
+     "boosted": 0.908737
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.908737,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.896659,
+    "with": 0.904724,
+    "bound": 0.002211,
+    "joins": true
+   },
+   {
+    "department": "dropout-person",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance",
+     "dropout-admission"
+    ],
+    "bred": "pairs-values",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.859137
+     },
+     {
+      "id": "f2",
+      "check": 0.880772
+     },
+     {
+      "id": "f3",
+      "check": 0.891607
+     },
+     {
+      "id": "f4",
+      "check": 0.88245
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.891607,
+     0.891607,
+     0.891607,
+     0.891607
+    ],
+    "lineage": [],
+    "champion": "f3",
+    "bestFounder": "f3",
+    "championGate": 0.89538,
+    "bestFounderGate": 0.89538,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.878418,
+     "deep-values": 0.88952,
+     "pairs-quantile": 0.877104,
+     "pairs-values": 0.889616,
+     "boosted": 0.904482
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.904482,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.904724,
+    "with": 0.905361,
+    "bound": -0.003659,
+    "joins": false
+   },
+   {
+    "department": "dropout-family",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance",
+     "dropout-admission"
+    ],
+    "bred": "pairs-quantile",
+    "founders": [
+     {
+      "id": "f1",
+      "check": 0.873547
+     },
+     {
+      "id": "f2",
+      "check": 0.883999
+     },
+     {
+      "id": "f3",
+      "check": 0.89319
+     },
+     {
+      "id": "f4",
+      "check": 0.883754
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.89319,
+     0.89319,
+     0.89319,
+     0.89319
+    ],
+    "lineage": [],
+    "champion": "f3",
+    "bestFounder": "f3",
+    "championGate": 0.901114,
+    "bestFounderGate": 0.901114,
+    "championVsFounderOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.885684,
+     "deep-values": 0.885684,
+     "pairs-quantile": 0.8928,
+     "pairs-values": 0.8928,
+     "boosted": 0.896179
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.896179,
+    "fieldsBred": true,
+    "fielded": "bred pairs-quantile",
+    "before": 0.904724,
+    "with": 0.9053,
+    "bound": -0.001929,
+    "joins": false
+   }
+  ],
+  "admitted": {
+   "bred": [
+    "dropout-semester2",
+    "dropout-finance",
+    "dropout-admission"
+   ],
+   "asIn2j": [
+    "dropout-semester2",
+    "dropout-finance",
+    "dropout-admission"
+   ]
+  },
+  "meshOnGate": {
+   "bred": 0.904724,
+   "asIn2j": 0.904724,
+   "identical": true,
+   "lead": null
+  }
+ },
+ "testNeverRead": true
+}
