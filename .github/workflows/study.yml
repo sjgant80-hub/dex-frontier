@@ -1,0 +1,27 @@
+name: study
+# Run by hand, on GitHub's runner: one design check (tools/diagnose-N.mjs), on FIT and GATE alone, its record uploaded to
+# be committed as it is. Every push then re-runs that check in the gate's design job and compares it byte for byte, so a
+# record made here is checked like any other.
+on:
+  workflow_dispatch:
+    inputs:
+      tool: { description: 'a design check, e.g. diagnose-9', required: true }
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      TOOL: ${{ inputs.tool }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: the input is a design check, nothing else
+        run: |
+          case "$TOOL" in diagnose-[0-9]|diagnose-[0-9][0-9]) ;; *) echo "not a design check: $TOOL"; exit 1;; esac
+          test -f "tools/$TOOL.mjs"
+      - name: the check, on FIT and GATE alone
+        run: node "tools/$TOOL.mjs"
+      - name: the record, to be committed as it is
+        uses: actions/upload-artifact@v4
+        with: { name: record, path: 'data/${{ env.TOOL }}.json' }

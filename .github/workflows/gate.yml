@@ -121,3 +121,14 @@ jobs:
       - name: the join only on a lead beyond the noise, on organ 2i's domains (FIT and GATE only, TEST never read) is the run itself
         run: |
           if [ -f data/diagnose-8.json ]; then node tools/diagnose-8.mjs --check; else echo "no diagnosis yet"; fi
+  breed-design:
+    # its own job, beside the others: the longest design check, so it runs in parallel rather than after them
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: organ 3 redesigned on the mechanism that held the gate, each department breeding at its turn (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-9.json ]; then node tools/diagnose-9.mjs --check; else echo "no diagnosis yet"; fi
