@@ -1,0 +1,1262 @@
+{
+ "kind": "dex-frontier.diagnose-10",
+ "v": 1,
+ "rule": "organ 2j’s mechanism (src/grow.mjs, a seat only if the mesh leads beyond the noise, bound above 0), each department also breeding the body the mesh fields at its turn (src/breedtrees.mjs): boosted trees bred by their recipe, 4 founders (today’s recipe, then 3 from contributors’ seeds) grown on 75% of FIT; 3 generations of 4 breedings; a child born only if it leads its better parent beyond the noise (bound above 0, 2000 resamples) on the other 25% of FIT; the champion, regrown on all of FIT, fielded only if it beats the five bodies on GATE; FIT and GATE only",
+ "breed": {
+  "founders": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "generations": 3,
+  "attempts": 4,
+  "check": 0.25,
+  "resamples": 2000,
+  "splitSeed": 9
+ },
+ "folds": 4,
+ "relayFolds": 4,
+ "health": {
+  "offered": [
+   "health-conditions",
+   "health-wellbeing",
+   "health-person",
+   "health-habits",
+   "health-access"
+  ],
+  "steps": [
+   {
+    "department": "health-conditions",
+    "took": [],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.782639
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.754603
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0
+       ]
+      },
+      "check": 0.75666
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.783491
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.783491,
+     0.783491,
+     0.783491,
+     0.783491
+    ],
+    "lineage": [],
+    "champion": "f4",
+    "championRecipe": {
+     "rounds": 100,
+     "rate": 0.2,
+     "bins": 32,
+     "lambda": 10,
+     "minHess": 20,
+     "drop": []
+    },
+    "championIsToday": false,
+    "championGate": 0.778201,
+    "todayGate": 0.77914,
+    "championVsTodayOnGate": {
+     "a": 0.778201,
+     "b": 0.77914,
+     "lead": -0.000939,
+     "low95": -0.001568
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.772583,
+     "deep-values": 0.773908,
+     "pairs-quantile": 0.768781,
+     "pairs-values": 0.773268,
+     "boosted": 0.77914
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.77914,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.5,
+    "with": 0.778956,
+    "bound": 0.267172,
+    "joins": true
+   },
+   {
+    "department": "health-wellbeing",
+    "took": [
+     "health-conditions"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.809623
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4
+       ]
+      },
+      "check": 0.738957
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0
+       ]
+      },
+      "check": 0.792247
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.809554
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.809623,
+     0.809623,
+     0.809623,
+     0.809623
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "championRecipe": {
+     "rounds": 200,
+     "rate": 0.1,
+     "bins": 32,
+     "lambda": 1,
+     "minHess": 1,
+     "drop": []
+    },
+    "championIsToday": true,
+    "championGate": 0.812658,
+    "todayGate": 0.812658,
+    "championVsTodayOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.804582,
+     "deep-values": 0.804082,
+     "pairs-quantile": 0.803716,
+     "pairs-values": 0.804806,
+     "boosted": 0.812658
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.812658,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.778956,
+    "with": 0.812117,
+    "bound": 0.026647,
+    "joins": true
+   },
+   {
+    "department": "health-person",
+    "took": [
+     "health-conditions",
+     "health-wellbeing"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.821457
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.652044
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0
+       ]
+      },
+      "check": 0.819994
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.821358
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.821457,
+     0.821457,
+     0.821457,
+     0.821457
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "championRecipe": {
+     "rounds": 200,
+     "rate": 0.1,
+     "bins": 32,
+     "lambda": 1,
+     "minHess": 1,
+     "drop": []
+    },
+    "championIsToday": true,
+    "championGate": 0.825358,
+    "todayGate": 0.825358,
+    "championVsTodayOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.812902,
+     "deep-values": 0.804765,
+     "pairs-quantile": 0.816482,
+     "pairs-values": 0.814468,
+     "boosted": 0.825358
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.825358,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.812117,
+    "with": 0.824029,
+    "bound": 0.008055,
+    "joins": true
+   },
+   {
+    "department": "health-habits",
+    "took": [
+     "health-conditions",
+     "health-wellbeing",
+     "health-person"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.820275
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.820436
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0,
+        6
+       ]
+      },
+      "check": 0.822664
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": [
+        7
+       ]
+      },
+      "check": 0.808613
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.822664,
+     0.822664,
+     0.822664,
+     0.822664
+    ],
+    "lineage": [],
+    "champion": "f3",
+    "championRecipe": {
+     "rounds": 400,
+     "rate": 0.03,
+     "bins": 16,
+     "lambda": 1,
+     "minHess": 20,
+     "drop": [
+      0,
+      6
+     ]
+    },
+    "championIsToday": false,
+    "championGate": 0.824533,
+    "todayGate": 0.824459,
+    "championVsTodayOnGate": {
+     "a": 0.824533,
+     "b": 0.824459,
+     "lead": 0.000074,
+     "low95": -0.001046
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.819229,
+     "deep-values": 0.817269,
+     "pairs-quantile": 0.819102,
+     "pairs-values": 0.816606,
+     "boosted": 0.824459
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.824459,
+    "fieldsBred": true,
+    "fielded": "bred boosted trees",
+    "before": 0.824029,
+    "with": 0.823937,
+    "bound": -0.001159,
+    "joins": false
+   },
+   {
+    "department": "health-access",
+    "took": [
+     "health-conditions",
+     "health-wellbeing",
+     "health-person"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.818387
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4
+       ]
+      },
+      "check": 0.807439
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0
+       ]
+      },
+      "check": 0.819174
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.818714
+     }
+    ],
+    "born": 1,
+    "refused": 11,
+    "checkHistory": [
+     0.819174,
+     0.819174,
+     0.819174,
+     0.819561
+    ],
+    "lineage": [
+     {
+      "child": "c9",
+      "parents": [
+       "f1",
+       "f4"
+      ],
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.819561,
+      "bound": 0.000008
+     }
+    ],
+    "champion": "c9",
+    "championRecipe": {
+     "rounds": 100,
+     "rate": 0.1,
+     "bins": 32,
+     "lambda": 1,
+     "minHess": 20,
+     "drop": []
+    },
+    "championIsToday": false,
+    "championGate": 0.824215,
+    "todayGate": 0.823647,
+    "championVsTodayOnGate": {
+     "a": 0.824215,
+     "b": 0.823647,
+     "lead": 0.000569,
+     "low95": -0.000016
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.822443,
+     "deep-values": 0.820945,
+     "pairs-quantile": 0.820751,
+     "pairs-values": 0.820901,
+     "boosted": 0.823647
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.823647,
+    "fieldsBred": true,
+    "fielded": "bred boosted trees",
+    "before": 0.824029,
+    "with": 0.823859,
+    "bound": -0.000343,
+    "joins": false
+   }
+  ],
+  "admitted": {
+   "bred": [
+    "health-conditions",
+    "health-wellbeing",
+    "health-person"
+   ],
+   "asIn2j": [
+    "health-conditions",
+    "health-wellbeing",
+    "health-person"
+   ]
+  },
+  "meshOnGate": {
+   "bred": 0.824029,
+   "asIn2j": 0.824029,
+   "identical": true,
+   "lead": null
+  }
+ },
+ "dropout": {
+  "offered": [
+   "dropout-semester2",
+   "dropout-semester1",
+   "dropout-finance",
+   "dropout-admission",
+   "dropout-person",
+   "dropout-family"
+  ],
+  "steps": [
+   {
+    "department": "dropout-semester2",
+    "took": [],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.885964
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.875198
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0
+       ]
+      },
+      "check": 0.889041
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.890024
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.890024,
+     0.890024,
+     0.890024,
+     0.890024
+    ],
+    "lineage": [],
+    "champion": "f4",
+    "championRecipe": {
+     "rounds": 100,
+     "rate": 0.2,
+     "bins": 32,
+     "lambda": 10,
+     "minHess": 20,
+     "drop": []
+    },
+    "championIsToday": false,
+    "championGate": 0.868959,
+    "todayGate": 0.87571,
+    "championVsTodayOnGate": {
+     "a": 0.868959,
+     "b": 0.87571,
+     "lead": -0.006751,
+     "low95": -0.012794
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.852181,
+     "deep-values": 0.826736,
+     "pairs-quantile": 0.845369,
+     "pairs-values": 0.84033,
+     "boosted": 0.87571
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.87571,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.5,
+    "with": 0.8724,
+    "bound": 0.344536,
+    "joins": true
+   },
+   {
+    "department": "dropout-semester1",
+    "took": [
+     "dropout-semester2"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.890863
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.885609
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0,
+        6
+       ]
+      },
+      "check": 0.862078
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.885998
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.890863,
+     0.890863,
+     0.890863,
+     0.890863
+    ],
+    "lineage": [],
+    "champion": "f1",
+    "championRecipe": {
+     "rounds": 200,
+     "rate": 0.1,
+     "bins": 32,
+     "lambda": 1,
+     "minHess": 1,
+     "drop": []
+    },
+    "championIsToday": true,
+    "championGate": 0.878556,
+    "todayGate": 0.878556,
+    "championVsTodayOnGate": null,
+    "fiveBodies": {
+     "deep-quantile": 0.81548,
+     "deep-values": 0.827865,
+     "pairs-quantile": 0.850215,
+     "pairs-values": 0.839904,
+     "boosted": 0.878556
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.878556,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.8724,
+    "with": 0.87548,
+    "bound": -0.002592,
+    "joins": false
+   },
+   {
+    "department": "dropout-finance",
+    "took": [
+     "dropout-semester2"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.902284
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1
+       ]
+      },
+      "check": 0.895728
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0
+       ]
+      },
+      "check": 0.901152
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.90532
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.90532,
+     0.90532,
+     0.90532,
+     0.90532
+    ],
+    "lineage": [],
+    "champion": "f4",
+    "championRecipe": {
+     "rounds": 100,
+     "rate": 0.2,
+     "bins": 32,
+     "lambda": 10,
+     "minHess": 20,
+     "drop": []
+    },
+    "championIsToday": false,
+    "championGate": 0.901544,
+    "todayGate": 0.901475,
+    "championVsTodayOnGate": {
+     "a": 0.901544,
+     "b": 0.901475,
+     "lead": 0.000069,
+     "low95": -0.002825
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.896394,
+     "deep-values": 0.895227,
+     "pairs-quantile": 0.885622,
+     "pairs-values": 0.891805,
+     "boosted": 0.901475
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.901475,
+    "fieldsBred": true,
+    "fielded": "bred boosted trees",
+    "before": 0.8724,
+    "with": 0.896551,
+    "bound": 0.010506,
+    "joins": true
+   },
+   {
+    "department": "dropout-admission",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.889819
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.900954
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0,
+        6,
+        8
+       ]
+      },
+      "check": 0.884654
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": [
+        7
+       ]
+      },
+      "check": 0.896662
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.900954,
+     0.900954,
+     0.900954,
+     0.900954
+    ],
+    "lineage": [],
+    "champion": "f2",
+    "championRecipe": {
+     "rounds": 50,
+     "rate": 0.05,
+     "bins": 64,
+     "lambda": 1,
+     "minHess": 20,
+     "drop": [
+      1,
+      4,
+      5
+     ]
+    },
+    "championIsToday": false,
+    "championGate": 0.90515,
+    "todayGate": 0.910584,
+    "championVsTodayOnGate": {
+     "a": 0.90515,
+     "b": 0.910584,
+     "lead": -0.005434,
+     "low95": -0.01465
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.874812,
+     "deep-values": 0.879578,
+     "pairs-quantile": 0.888118,
+     "pairs-values": 0.85119,
+     "boosted": 0.910584
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.910584,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.896551,
+    "with": 0.904973,
+    "bound": 0.002045,
+    "joins": true
+   },
+   {
+    "department": "dropout-person",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance",
+     "dropout-admission"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.898914
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.899596
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0,
+        6,
+        8
+       ]
+      },
+      "check": 0.905737
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": [
+        7
+       ]
+      },
+      "check": 0.903785
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.905737,
+     0.905737,
+     0.905737,
+     0.905737
+    ],
+    "lineage": [],
+    "champion": "f3",
+    "championRecipe": {
+     "rounds": 400,
+     "rate": 0.03,
+     "bins": 16,
+     "lambda": 1,
+     "minHess": 20,
+     "drop": [
+      0,
+      6,
+      8
+     ]
+    },
+    "championIsToday": false,
+    "championGate": 0.901306,
+    "todayGate": 0.9076,
+    "championVsTodayOnGate": {
+     "a": 0.901306,
+     "b": 0.9076,
+     "lead": -0.006294,
+     "low95": -0.012765
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.883329,
+     "deep-values": 0.879942,
+     "pairs-quantile": 0.880684,
+     "pairs-values": 0.87687,
+     "boosted": 0.9076
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.9076,
+    "fieldsBred": false,
+    "fielded": "boosted",
+    "before": 0.904973,
+    "with": 0.905814,
+    "bound": -0.003533,
+    "joins": false
+   },
+   {
+    "department": "dropout-family",
+    "took": [
+     "dropout-semester2",
+     "dropout-finance",
+     "dropout-admission"
+    ],
+    "founders": [
+     {
+      "id": "f1",
+      "recipe": {
+       "rounds": 200,
+       "rate": 0.1,
+       "bins": 32,
+       "lambda": 1,
+       "minHess": 1,
+       "drop": []
+      },
+      "check": 0.887629
+     },
+     {
+      "id": "f2",
+      "recipe": {
+       "rounds": 50,
+       "rate": 0.05,
+       "bins": 64,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        1,
+        4,
+        5
+       ]
+      },
+      "check": 0.895496
+     },
+     {
+      "id": "f3",
+      "recipe": {
+       "rounds": 400,
+       "rate": 0.03,
+       "bins": 16,
+       "lambda": 1,
+       "minHess": 20,
+       "drop": [
+        0,
+        6
+       ]
+      },
+      "check": 0.883685
+     },
+     {
+      "id": "f4",
+      "recipe": {
+       "rounds": 100,
+       "rate": 0.2,
+       "bins": 32,
+       "lambda": 10,
+       "minHess": 20,
+       "drop": []
+      },
+      "check": 0.889962
+     }
+    ],
+    "born": 0,
+    "refused": 12,
+    "checkHistory": [
+     0.895496,
+     0.895496,
+     0.895496,
+     0.895496
+    ],
+    "lineage": [],
+    "champion": "f2",
+    "championRecipe": {
+     "rounds": 50,
+     "rate": 0.05,
+     "bins": 64,
+     "lambda": 1,
+     "minHess": 20,
+     "drop": [
+      1,
+      4,
+      5
+     ]
+    },
+    "championIsToday": false,
+    "championGate": 0.908621,
+    "todayGate": 0.899747,
+    "championVsTodayOnGate": {
+     "a": 0.908621,
+     "b": 0.899747,
+     "lead": 0.008875,
+     "low95": -0.00159
+    },
+    "fiveBodies": {
+     "deep-quantile": 0.880349,
+     "deep-values": 0.880349,
+     "pairs-quantile": 0.888906,
+     "pairs-values": 0.888906,
+     "boosted": 0.899747
+    },
+    "fieldedAlone": "boosted",
+    "fieldedAloneGate": 0.899747,
+    "fieldsBred": true,
+    "fielded": "bred boosted trees",
+    "before": 0.904973,
+    "with": 0.904224,
+    "bound": -0.001611,
+    "joins": false
+   }
+  ],
+  "admitted": {
+   "bred": [
+    "dropout-semester2",
+    "dropout-finance",
+    "dropout-admission"
+   ],
+   "asIn2j": [
+    "dropout-semester2",
+    "dropout-finance",
+    "dropout-admission"
+   ]
+  },
+  "meshOnGate": {
+   "bred": 0.904973,
+   "asIn2j": 0.904724,
+   "identical": false,
+   "lead": {
+    "a": 0.904973,
+    "b": 0.904724,
+    "lead": 0.00025,
+    "low95": -0.003809
+   }
+  }
+ },
+ "testNeverRead": true
+}

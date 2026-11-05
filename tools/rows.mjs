@@ -1,6 +1,16 @@
 // tools/rows.mjs — one line per organ (what it had to show, its sealed rules, what happened), written from the records.
 // The README table, llms.txt and the white paper all read these same rows.
 import { format } from './format.mjs';
+import { readFileSync, existsSync } from 'node:fs';
+
+const ROOT = new URL('../', import.meta.url);
+/** organ 3's design checks, if made (data/diagnose-9.json, data/diagnose-10.json; FIT and GATE only): how many, and
+ *  whether any grew a mesh that leads organ 2j's beyond the noise on either domain */
+export function breedChecks() {
+  const got = ['data/diagnose-9.json', 'data/diagnose-10.json'].filter((p) => existsSync(new URL(p, ROOT))).map((p) => JSON.parse(readFileSync(new URL(p, ROOT), 'utf8')));
+  return { n: got.length, lifted: got.some((d) => ['health', 'dropout'].some((k) => d[k] && d[k].meshOnGate.lead && d[k].meshOnGate.lead.low95 > 0)) };
+}
+const BRED = () => { const b = breedChecks(); return !b.n ? 'next: redesigned on the mechanism that held the gate, sealed on a fresh dataset' : b.lifted ? 'redesigned; a design check on FIT and GATE grew a better mesh; sealed next, on a fresh dataset' : (b.n === 1 ? 'redesigned on FIT and GATE; the design grew no better mesh' : 'redesigned twice on FIT and GATE; neither design grew a better mesh') + ', so not sealed'; };
 
 const WON = (R) => ['2f', '2g', '2h', '2i', '2j', '2k'].some((k) => R[k] && R[k].v.find((v) => v.id === 'GATE').pass);
 const REP = (R) => ['2j', '2k'].every((k) => R[k] && R[k].v.find((v) => v.id === 'GATE').pass);
@@ -26,6 +36,6 @@ export function organRows(R) {
       ['5', 'The wisp', 'routing that learns from outcomes; a node gone bad is pruned', (r) => 'after a break, wisp ' + format(r.telco.broken.wispLate, 3) + ' / ' + format(r.shop.broken.wispLate, 3) + ' vs frozen ' + format(r.telco.broken.frozenLate, 3) + ' / ' + format(r.shop.broken.frozenLate, 3)],
       ['6', 'Scale', 'cut finer, more nodes: the composed answer keeps climbing', (r) => 'fine mesh ' + format(r.telco.fineAuc, 3) + ' / ' + format(r.shop.fineAuc, 3) + ' vs pooled ' + format(r.telco.vsMonolith.b, 3) + ' / ' + format(r.shop.vsMonolith.b, 3)],
       ['7', 'Sovereign spread', 'owned by contributors, carried by cards, revocable, scores only', (r) => 'cards round-trip; ' + r.telco.answer.bytes + ' / ' + r.shop.answer.bytes + ' bytes an answer']]
-      .map(([k, name, what, said]) => [k, name, what, R[k] ? STATE(R, k) : /^2[f-k]$/.test(k) ? 'sealed, being measured' : /^2[b-e]$/.test(k) ? 'not taken unless needed' : REP(R) ? (k === '3' ? 'next: redesigned on the mechanism that held the gate, sealed on a fresh dataset' : 'built; waits for organ 3, then sealed in order') : WON(R) && R['2k'] ? 'built and held: the gate’s pass was not repeated' : WON(R) ? 'built; waits until the gate’s pass is repeated on a second fresh domain' : 'built and held until composition wins the gate', R[k] ? said(R[k].r) : '—']),
+      .map(([k, name, what, said]) => [k, name, what, R[k] ? STATE(R, k) : /^2[f-k]$/.test(k) ? 'sealed, being measured' : /^2[b-e]$/.test(k) ? 'not taken unless needed' : REP(R) ? (k === '3' ? BRED() : 'built; waits for organ 3, then sealed in order') : WON(R) && R['2k'] ? 'built and held: the gate’s pass was not repeated' : WON(R) ? 'built; waits until the gate’s pass is repeated on a second fresh domain' : 'built and held until composition wins the gate', R[k] ? said(R[k].r) : '—']),
   ];
 }
