@@ -55,6 +55,7 @@ export const PAIRS = [
   ['src/grow.mjs', ['test/grow.test.mjs']],
   ['src/meshcase.mjs', ['test/meshcase.test.mjs']],
   ['src/breed.mjs', ['test/breed.test.mjs']],
+  ['src/breedtrees.mjs', ['test/breedtrees.test.mjs']],
 ];
 // imported (by the tests) it only lends hiddenSpans and PAIRS; run directly, it is the gate
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) main();

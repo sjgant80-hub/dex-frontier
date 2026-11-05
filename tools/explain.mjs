@@ -93,3 +93,24 @@ export function breedDesign(d) {
         : 'Breeding changed the mesh, but not beyond the noise on GATE. By the rule the mechanism keeps, a change that cannot be told from noise is not a gain, so organ 3 is not sealed in this form; what it breeds next has to be what the mesh fields.')
     + ' Every dataset in the repository has been scored by an earlier organ, so organ 3’s sealed test also waits for a fresh one.</p>';
 }
+
+/** organ 3's second redesign, breeding the body the mesh fields (data/diagnose-10.json, FIT and GATE only): every number
+ *  is the check's, and the conclusion follows from them whichever way they fall */
+export function breedTreesDesign(d) {
+  if (!d) return '';
+  const doms = [['health', 'the CDC health survey answers'], ['dropout', 'the student records']].filter(([k]) => d[k]);
+  const steps = doms.flatMap(([k]) => d[k].steps), born = steps.reduce((a, s) => a + s.born, 0), refused = steps.reduce((a, s) => a + s.refused, 0);
+  const past = steps.filter((s) => !s.championIsToday), held = past.filter((s) => s.championVsTodayOnGate.low95 > 0), fields = steps.filter((s) => s.fieldsBred);
+  const mesh = doms.map(([k, name]) => { const m = d[k].meshOnGate; return name + ': ' + (m.identical ? 'the same mesh as organ 2j’s rule grows, case for case (' + f3(m.bred) + ' on GATE out of fold)' : f3(m.bred) + ' against ' + f3(m.asIn2j) + ' on GATE out of fold, bound ' + sg(m.lead.low95)); }).join('; ');
+  const lifted = doms.filter(([k]) => d[k].meshOnGate.lead && d[k].meshOnGate.lead.low95 > 0), same = doms.every(([k]) => d[k].meshOnGate.identical);
+  return '<p class="answer"><b>Redesigned again: breeding what the mesh fields.</b> In <code>tools/diagnose-10.mjs</code> each department, at its turn, bred boosted trees by their recipe (<code>src/breedtrees.mjs</code>: rounds, rate, how finely each column is cut, how hard a leaf is held back, which columns it reads), from ' + d.breed.founders.length + ' founders: the recipe it fields today and ' + (d.breed.founders.length - 1) + ' from contributors’ seeds, with the same split, generations and bound as the first redesign. '
+    + 'Across ' + steps.length + ' department turns, ' + born + ' child' + (born === 1 ? ' was' : 'ren were') + ' born and ' + refused + ' refused. '
+    + (past.length ? 'In ' + past.length + ' turn' + (past.length === 1 ? '' : 's') + ' the population’s champion was not today’s recipe' + (past.every((s) => /^f/.test(s.champion)) ? ' but a founder from another contributor’s seed, not a child' : '') + '; on GATE, which birth never saw, it led today’s recipe beyond the noise in ' + held.length + ' (' + past.map((s) => short(s.department) + ' ' + f3(s.championGate) + ' against ' + f3(s.todayGate) + ', bound ' + sg(s.championVsTodayOnGate.low95)).join('; ') + '). ' : 'In every turn the population’s champion was today’s recipe. ')
+    + (fields.length ? fields.length + ' department turn' + (fields.length === 1 ? '' : 's') + ' fielded it over the five bodies (' + fields.map((s) => short(s.department) + ', ' + (s.joins ? 'which took a seat' : 'which was refused a seat')).join('; ') + '). ' : 'No department fielded it over its five bodies. ')
+    + 'The mesh: ' + mesh + '. '
+    + (lifted.length ? 'Breeding what the mesh fields raised the mesh beyond the noise on ' + lifted.map(([, n]) => n).join(' and ') + '. These domains’ test cases were scored in organs 2j and 2k, so this is a design check, not a result; it is the form organ 3 is sealed in, on a dataset no organ has touched, before any of it is measured.'
+      : same ? 'So breeding what the mesh fields, as designed here, also changes nothing the mesh answers with. Two designs of breeding, asked on the two domains where the gate held, leave the mesh exactly as organ 2j’s rule grows it, so by the spec’s own question (does a breeding population grow a better mesh?) the answer here is no, and organ 3 is not sealed in either form.'
+        : (born ? 'Breeding changed the mesh' : 'The mesh changed, by a founder’s recipe and not by any child') + ', but not beyond the noise on GATE; by the rule the mechanism keeps, that is not a gain. Neither design grows a better mesh on the two domains where the gate held, so by the spec’s own question (does a breeding population grow a better mesh?) the answer here is no, and organ 3 is not sealed in either form.')
+    + (lifted.length ? '' : ' A third design is not tried on these domains, because each look at the same GATE cases makes the next one less telling. What comes next is decided before any fresh dataset is opened: organ 3 sealed in one of these forms, so the spec’s question meets a test that can fail, or set aside so that organ 4 goes next.')
+    + '</p>';
+}

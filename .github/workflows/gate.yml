@@ -132,3 +132,14 @@ jobs:
       - name: organ 3 redesigned on the mechanism that held the gate, each department breeding at its turn (FIT and GATE only, TEST never read) is the run itself
         run: |
           if [ -f data/diagnose-9.json ]; then node tools/diagnose-9.mjs --check; else echo "no diagnosis yet"; fi
+  breed-trees-design:
+    # organ 3's second redesign, beside the first: breeding the body the mesh fields
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: organ 3 redesigned again, each department breeding the boosted trees the mesh fields (FIT and GATE only, TEST never read) is the run itself
+        run: |
+          if [ -f data/diagnose-10.json ]; then node tools/diagnose-10.mjs --check; else echo "no diagnosis yet"; fi

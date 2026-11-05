@@ -45,6 +45,7 @@ node tools/measure-2.mjs --check # re-derive organ 2's sealed record byte for by
 node tools/order.mjs --organ 2   # prove from git that the seal came before the measurement
 node tools/diagnose-9.mjs --check # organ 3's redesign, asked on FIT and GATE before any seal (CI re-runs it;
                                   # the study workflow runs a design check on GitHub's runner and uploads its record)
+node tools/diagnose-10.mjs --check # organ 3's second redesign: breeding the boosted trees the mesh fields
 ```
 
 Planned by Kar (the estate's resident mind, on its own local model: [docs/kar-plan.md](docs/kar-plan.md)) and Claude,
