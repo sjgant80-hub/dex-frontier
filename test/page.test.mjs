@@ -57,6 +57,25 @@ test('the structured data’s FAQ is the visible FAQ, word for word, and both co
 test('the page may connect to nothing but its own site, and credits what it stands on', () => {
   const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)[1];
   assert.match(csp, /connect-src 'self'/); assert.match(csp, /object-src 'none'/); assert.ok(!/unsafe-eval/.test(csp));
-  for (const credit of ['Thomas Frumkin', 'AI Native Solutions', 'Apache-2.0', 'CC BY 4.0', 'MIT — no licence fee', 'Kar']) assert.ok(html.includes(credit), credit);
+  for (const credit of ['Powered by the Konomi architecture, created by Thomas Frumkin', 'Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC', 'AI Native Solutions', 'Apache-2.0', 'CC BY 4.0', 'MIT — no licence fee', 'Kar']) assert.ok(html.includes(credit), credit);
   assert.ok(!/£\s?\d|\$\s?\d|per month|per seat price/i.test(html.replace(/<script[\s\S]*?<\/script>/g, '')), 'no price on a product page');
+});
+
+test('the brochure says what is built but not proven, and names the model each cloud route is priced at', () => {
+  const R = records();
+  const waiting = ['3', '4', '5', '6', '7'].filter((k) => !R[k]);
+  if (waiting.length) {
+    const row = html.match(/<summary>What is built but not yet proven\?<\/summary><p>([^<]+)<\/p>/);
+    assert.ok(row, 'a risk names what is built and not measured while any organ after the gate waits');
+    for (const k of waiting) assert.ok(row[1].includes('(organ ' + k + ')'), 'it names organ ' + k);
+    assert.match(row[1], /none is sealed or measured/);
+  }
+  // the frontier route is billed at the basis's frontier model; the page must not let that pass for the model measured
+  const basis = JSON.parse(read('vendor/sovereign-enterprise/data/basis.json'));
+  const priced = basis.frontier.product.replace(/\s*\(API\)$/, '');
+  const measured = ['2j', '2k'].filter((k) => R[k]).map((k) => Object.values(R[k].r).find((d) => d && d.frontier).frontier.model.name);
+  if (measured.length && measured.every((m) => m === 'claude-opus-5-5') && priced !== 'Claude Opus 5.5') {
+    assert.ok(html.includes('The frontier route is billed at ' + priced + '’s API rates'), 'the priced model is named');
+    assert.ok(html.includes('priced at a different model’s rates than the one measured'), 'and said to differ from the one measured');
+  }
 });
